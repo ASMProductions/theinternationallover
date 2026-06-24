@@ -2744,13 +2744,12 @@ export default function InternationalLover() {
           </div>
         </div>
         <div style={{ maxWidth:"900px", margin:"0 auto", padding:"2rem 1.5rem" }}>
-          <div style={{ display:"flex", gap:12, marginBottom:"1.75rem", flexWrap:"wrap" }}>
-            <div style={{ flex:1, minWidth:200, background:C.navyDeep, border:`1px solid ${C.gold}`, padding:"1rem 1.25rem", cursor:"pointer" }} onClick={() => window.location.href = "/course"}>
-              <div style={{ fontSize:9, letterSpacing:"0.2em", color:C.goldDim, fontFamily:"sans-serif", marginBottom:4 }}>THE COURSE</div>
-              <div style={{ fontSize:15, color:C.goldLight, fontFamily:"Georgia,serif", marginBottom:4 }}>Find Her. Meet Her. Vet Her.</div>
-              <div style={{ fontSize:11, color:C.muted, fontFamily:"sans-serif", marginBottom:10 }}>Five regions · Fifteen virtual women · Branching scenarios</div>
-              <div style={{ fontSize:11, color:C.gold, fontFamily:"sans-serif" }}>Enter the Course →</div>
-            </div>
+          <div onClick={() => window.location.href = "/course"} style={{ background:`linear-gradient(135deg, ${C.navyDeep}, ${C.navy})`, border:`2px solid ${C.gold}`, padding:"2rem", marginBottom:"2rem", cursor:"pointer", position:"relative", boxShadow:`0 4px 24px rgba(184,150,62,0.2)` }}>
+            <div style={{ position:"absolute", top:12, right:16, fontSize:20, color:C.gold, opacity:0.4 }}>✦</div>
+            <div style={{ fontSize:9, letterSpacing:"0.3em", color:C.gold, fontFamily:"sans-serif", marginBottom:8 }}>THE COURSE</div>
+            <div style={{ fontSize:"clamp(20px,3vw,26px)", color:C.goldLight, fontFamily:"Georgia,serif", marginBottom:8 }}>Find Her. Meet Her. Vet Her.</div>
+            <div style={{ fontSize:12, color:C.creamDim, fontFamily:"sans-serif", marginBottom:16, lineHeight:1.65 }}>Five regions · Fifteen virtual women representing a broad demographic of potential mates · Branching scenarios · All five possible endings · Certificate of Commission</div>
+            <div style={{ display:"inline-block", padding:"10px 28px", background:C.gold, color:C.navyDeep, fontSize:13, fontWeight:700, letterSpacing:"0.1em", fontFamily:"sans-serif" }}>Enter the Course →</div>
           </div>
           <h2 style={{ color:C.goldLight, fontSize:"1rem", letterSpacing:"0.1em", textTransform:"uppercase", marginBottom:"1.25rem", fontWeight:"normal", fontFamily:"sans-serif" }}>The Book</h2>
           <div style={{ background:C.navyDeep, border:`1px solid ${C.border}`, borderRadius:"12px", overflow:"hidden", marginBottom:"2.5rem" }}>
