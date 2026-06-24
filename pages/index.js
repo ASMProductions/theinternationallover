@@ -75,8 +75,8 @@ Western hemisphere. The decadence of the Western world has ruined
 women, and consequently ruined the family structure of the entire
 society. And then like an epiphany, it hit me; that I had a choice. I
 could find the type of wife that I desired abroad. I had never even
-considered the possibility of a virgin wife, because none existed in
-America. I determined to find a virgin wife abroad. When I
+considered the possibility of a virtuous wife, because none existed in
+America. I determined to find a virtuous wife abroad. When I
 succeeded, I knew immediately that I had done something incredible.
 All the men I knew began congratulating me and saying, “You did it;
 I’m so proud of you”. They said, “I want a pretty Moroccan wife
@@ -108,12 +108,12 @@ Learning the language, customs, folkways and morays of the societies
 you plan to visit and take a wife from is essential. This will not only
 help accomplish initial goals, but it will also help in dealing with the
 family members and issues that will inevitably arise in marital affairs.
-In the West, men say that virgins seldom exist among women of
+In the West, men say that virtuous women seldom exist among women of
 marrying age. In fact, statistically less than 5% of American women
-marry as virgins. When contrasting this against countries where
-virginity is highly regarded, a man who travels to those countries
+marry as virtuous women. When contrasting this against countries where
+virtue is highly regarded, a man who travels to those countries
 must be aware that how he conducts himself is crucial. Although
-virginity is extremely important in choosing a wife; it is only one of
+virtue is extremely important in choosing a wife; it is only one of
 many facets a man must consider in making a wise selection for the
 future of his life and family.
 This book will help men understand that a tangible connection
@@ -128,7 +128,7 @@ finding the very best options available. Under the best of
 circumstances, there are still best practices that will assist in finding
 someone that won’t leave you discouraged. This book will help you
 learn and practice the right steps in vetting every potential candidate.
-Men who have determined that finding a virgin wife abroad is
+Men who have determined that finding a virtuous wife abroad is
 their best option to living the fulfilling life that they envision, are
 committed to self-improvement. These men are pursuing a happy
 outcome that transcends borders. The common denominator they
@@ -216,7 +216,7 @@ will it flourish into a wonderful family that we dream of ? This
 understanding will help to propel us across borders, and help us
 confront inevitable misunderstandings. This book will help us
 distinguish our own motivations for seeking a wife abroad.
-For a man coming from America, the desire for a virgin wife is a
+For a man coming from America, the desire for a virtuous wife is a
 completely new phenomena. However in many parts of the world, it
 is intrinsic to their cultural identity. This is a part of many people that
 cannot be stripped away. It must be acknowledged and given the
@@ -227,7 +227,7 @@ the pretentious notions of pretended superiority.
 
 Many nations outside of Europe and America hold the chastity of
 their girls in high regard. Most of Africa and the Middle-East not
-only expect their daughters to be virgins, but defiling them is a great
+only expect their daughters to be virtuous, but defiling them is a great
 calumny against the girl and their entire families. In some cultures,
 both men and women are harshly punished and exiled from their
 people, for violating the chastity of a girl. The men of their culture
@@ -235,30 +235,30 @@ also adhere to this code of conduct as well. The result of their
 adherence to the laws of chastity is evident upon their smiling face
 and beautiful dispositions. Even among the impoverished, you will
 find people of the most beautiful and noble character.
-The desire to take a virgin wife can come as an epiphany to
+The desire to take a virtuous wife can come as an epiphany to
 American men. We may realize that we never had a choice. And once
 we are able to see that we in deed have that choice, it behooves us to
 do so. The American cultural landscape may have become rather
 bleak, in the eyes of most. The American Dream of yesteryear may
 seem to exist is the stuff of vintage movies. And in light of this
-reality, the lure of an exotic virgin bride can be a powerful
+reality, the lure of an exotic virtuous bride can be a powerful
 aphrodisiac. One that no other remedy will suffice.
 The power dynamic of the relatively rich American man seeking
 love abroad, may inflate the ego of men, and result in a distorted
 view of reality. In fact, most American men who take foreign women,
-are really seeking prostitutes. This is owing to the fact that virginity
+are really seeking prostitutes. This is owing to the fact that virtue
 amongst women is so disregarded in America, that it is almost
 nonexistent. It is not common to see an honorable American man,
-taking the correct traditional path to finding a virgin bride in foreign
+taking the correct traditional path to finding a virtuous bride in foreign
 lands. He must be able to communicate his intentions clearly, leaving
 no room for doubt.
 In America, natural manhood is no longer a standard that is taught
 or openly practiced. But a man cannot carry an effeminate demeanor
-onto the global marketplace, when looking for a virgin bride. He
+onto the global marketplace, when looking for a virtuous bride. He
 must be able to confidently present himself as one that her father
 would feel comfortable turning his daughter over to, for protection
 and maintenance. A real man. Therefore, a man must know the
-expectations of foreign virgin brides. When a woman has only known
+expectations of foreign virtuous brides. When a woman has only known
 real men in her life; an American man must be a real man to take her
 hand.
 
@@ -270,7 +270,7 @@ foreign wives, who either deceived them, or became Americanized
 after arriving; leaving them in a dire condition. If not handled
 correctly, the experience can be fraught with danger.
 This reality must remain uppermost in the mind of a man, seeking
-to travel abroad for a virgin bride. It will lay the base for all actions
+to travel abroad for a virtuous bride. It will lay the base for all actions
 that transpire. This mindset will allow the man to act in confidence
 and security at all times. It will neither diminish him, nor the lady he
 pursues.
@@ -280,7 +280,7 @@ that we hope will span the remainder of our lives.
 
 4 MOTIVES & VALUES` },
   { id:4, title:"Motives & Values", section:"Departure",
-    content:`When did you begin to desire to find a foreign virgin wife from
+    content:`When did you begin to desire to find a foreign virtuous wife from
 abroad? What were the factors that resulted in cultivating your
 desires? When you envision yourself with a foreign bride, what do
 you imagine? You should learn to answer these kinds of introspective
@@ -293,7 +293,7 @@ Section 1: Unveiling Motives
 mo·tive | ˈmōdiv |
 noun
 1 a reason for doing something, especially one that is hidden or not obvious: a
-motive for his wanting a foreign virgin bride.
+motive for his wanting a foreign virtuous bride.
 2 (in art, literature, or music) a motif: the entire work grows organically from the
 opening horn motive.
 adjective [attributive]
@@ -305,22 +305,22 @@ work.
 When you understand what motivates you, you can shape and
 control your path, better than when you don’t. A firm understanding
 will allow you to remain focused and purposeful, when circumstances
-could leave you in derision. It is the same with the virgin girl; she
+could leave you in derision. It is the same with the virtuous woman; she
 must also examine herself. And she must be able to find peace and
 happiness in her decision to marry you. She is trusting that you will
 protect and uphold her virtue.
 Although we could site personal preferences for seeking a foreign
-virgin bride; America has no culture in any sector which promotes
+virtuous bride; America has no culture in any sector which promotes
 this as a cultural norm. And so we must assume that a man is
 dissatisfied with the quality of American women, who have
 numerous sex partners and are extremely poor wife material. But a
 man must also acknowledge the role of the men who made them that
 way. And he must rise to the level of a good husband, to qualify for
 such a wife.
-For a man to bring a virgin wife into this society, he must be
+For a man to bring a virtuous wife into this society, he must be
 dissatisfied enough with the promiscuous culture of America, to not
 only improve his standards; but also to protect his wife and children
-from being victims of it. And the virgin wife may not know the
+from being victims of it. And the virtuous wife may not know the
 extent of sexual promiscuity in America. She may have no idea of
 your sexual experiences.
 Reflect on your own relationships; good and not so good. Would a
@@ -501,12 +501,12 @@ important to be in agreement on how you proceed.
 approach to obtain the hand of a lady, through her family and
 culture, we can agree that proper steps were taken to gain their
 permission. Legally, morally and ethically, we must always be able to
-stand on a firm foundation; when traveling abroad to marry a virgin
-girl of another culture. Let me stipulate that a virgin girl is viewed as
+stand on a firm foundation; when traveling abroad to marry virtuous
+girl of another culture. Let me stipulate that a virtuous woman is viewed as
 such (a girl), because she has not yet consummated her marriage to
 her husband. And it is her husband that makes her into a woman, by
-virtue of taking her virginity. I want to make this abundantly clear for
-the reading audience. We are virulently against pedophilia. A virgin is
+virtue of taking her virtue. I want to make this abundantly clear for
+the reading audience. We are virulently against pedophilia. Virtuous is
 considered a girl, until she is married.
 2. **Respect for Cultural Differences:**In all things there is the
 dominant and the submissive. In the West, a deliberate effort has
@@ -686,7 +686,7 @@ with both feet. Immerse yourself in her culture. I have found that
 tracing my family roots and traveling to that original geographical
 area of people than I descended from, has caused me to learn more
 about my own lineage than I could have imagined.
-2. **Religion and Spirituality:** Finding a virgin wife from your
+2. **Religion and Spirituality:** Finding a virtuous wife from your
 own religious tradition can greatly improve the quality of your
 experiences. Even if you are not of the same ethnicity, a shared
 spiritual and religious view can help to bring you together and shape
@@ -1063,13 +1063,13 @@ making yourself very unattractive to someone who might have
 otherwise responded.
 
 **4. Handling of Sensitive Information**: The subject of a
-woman’s virginity is not something that is spoken of in a nonchalant
+woman’s virtue is not something that is spoken of in a nonchalant
 manner. Her virtue is sacred to her and her people; and it should be
 regarded as such by you. It is not a small thing that you casually toss
 into a conversation. It is a deliberate and well calculated point of
 vetting a woman. Some matrimony platforms allow women to state
-their virginity status in their profiles. This is something that you can
-also filter on for results that are all virgins. Handle the subject with
+their virtue status in their profiles. This is something that you can
+also filter on for results that are all virtuous women. Handle the subject with
 the utmost great care.
 **5. Language**: Most matrimony sites will be in your language
 preference. This is determined by your phone preferences and your
@@ -1194,7 +1194,7 @@ would then be required to prove your innocence in a foreign court of
 law, and in a foreign language. I’m sure you can extrapolate the
 importance of being in compliance with foreign marriage laws, while
 abroad.
-**9. Religious vs Civil Ceremonies**: For a virgin bride, her
+**9. Religious vs Civil Ceremonies**: For a virtuous bride, her
 wedding is her crowning event. You want to ensure that you meet the
 requirements of both the religious and the civil authorities of her
 nation. To marry her in the sight of her family and countrymen, will
@@ -1281,7 +1281,7 @@ agreed on terms prior to marriage.
 want to plan for visits during the interim period of your courtship.
 Seeing one another will certainly help to relieve your longing to see
 one another. However, it will also be a very difficult thing, if you
-travel expecting sex from a virgin girl. This could very well end badly
+travel expecting sex from a virtuous woman. This could very well end badly
 for you, in a foreign country. And I would strongly advise against it.
 In some countries, it could cost you your lives. I don’t mean to
 frighten you. But you’ve been warned. Don’t do that. Keep your
@@ -1398,7 +1398,7 @@ divorce paperwork, if you were also formerly married. You must
 submit police certificates for all prior addresses and criminal history,
 or no criminal history certification. You must both submit to full
 medical examinations and disclosures (in many countries, this includes a
-medical examination of her hymen, to prove that she is indeed a true virgin); and
+medical examination of her hymen, to prove that she is indeed a truly virtuous); and
 you must provide full documentation for your results. You must
 submit full evidence of finances, the ability and the will, to fully
 support your fiancé(e) as your wife (Form I-134, Affidavit of Support).
@@ -1433,7 +1433,7 @@ will be coming to marry you in the United States of America.
 Now you must begin the preparations for her departure from her
 homeland. You will make reservations for travel. If you want to fly
 abroad to accompany her to the US, it is advisable. Solo international
-travel for a naive virgin girl is terrifying. You can fly to meet her and
+travel for a naive virtuous woman is terrifying. You can fly to meet her and
 return with her, or you can make reservations for her to fly alone. She
 will be bringing her whole life with her. But since you will be her sole
 provider, you have the option of telling her to pack light. And that
@@ -1442,14 +1442,14 @@ you will provide shopping for a new wardrobe upon her arrival.
 **8. Get Married**
 I would advise that you set your wedding date to coincide with her
 arrival date. Don’t put it off, thinking the you can “shack up” until
-you marry. A virgin girl will want to be married to even live with you.
+you marry. A virtuous woman will want to be married to even live with you.
 She may request that you provide separate housing for her until you
 are legally married. You should offer this for her without hesitation.
 The sooner you marry her, the less you need to spend on separate
 housing for her. I will let you in on an aspect of my marriage process.
 I set our wedding date for the day after her arrival. There was no
 waiting period for us. Don’t give yourself a chance to ruin your hard
-work by trying to take her virginity before you marry her. If you have
+work by trying to take her virtue before you marry her. If you have
 been a noble man thus far, then it will be a great reward to
 consummate your wedding vows afterward. And believe me… it is
 such a reward that you will always treasure the experience of having
@@ -1625,14 +1625,14 @@ that dirty water. But if you were given an alternative of a clean glass to drink
 from, then you would choose the clean glass every time.” ~ The Most Honorable
 Elijah Muhammad
 
-American men do not have any virgins for wives to choose from.
-Sadly, most American girls lose their virginity at a very young age.
+American men do not have any virtuous women for wives to choose from.
+Sadly, most American girls lose their virtue at a very young age.
 They become cold and callous to the idea of sex. It becomes a
 meaningless act to them. Less than 5% of American girls marry as
-virgins. If American men knew there was a class of virgin girls to
+If American men knew there was a class of virtuous women to
 marry from; girls that no man had ever touched; they would choose a
-virgin wife every time. Mind you, I am not talking about stealing the
-virginity of girls and traipsing off back to the United States, leaving a
+virtuous wife every time. Mind you, I am not talking about stealing the
+virtue of girls and traipsing off back to the United States, leaving a
 pregnant single-mother behind. No… a man should be killed for
 doing that. I am talking about finding a girl to marry and produce a
 loving and nurturing family for American men. Families that can
@@ -1798,7 +1798,7 @@ any respect the women and their children should have for a man that
 sacrifices to provide a stabile home for all of them.
 
 As for the men of marrying age, I would not advise becoming
-step-fathers. I would advise them to find a virgin wife abroad and
+step-fathers. I would advise them to find a virtuous wife abroad and
 create a loving family for themselves, while they are young and
 strong. Repopulate America, with strong and loving families. Protect
 your wives and daughters from becoming corrupted by the women
@@ -1904,7 +1904,7 @@ along; giving them false hopes in return. Only to ghost them, like they
 deserve to be left; alone. Men may tell them to “… report to The Wall”
 because “Winter is here”. And there is no warm place for these women to
 settle with any man today.
-A far better strategy is to find a virgin wife abroad. Don’t settle for a
+A far better strategy is to find a virtuous wife abroad. Don’t settle for a
 disease ladened whore, that gave her virtue away to some low life; and now
 she has nothing of value left for a good man. She has nothing left to offer a
 man that wants a faithful wife, and a loving family. She is for the streets. She
@@ -1925,11 +1925,11 @@ life and future.
 16 THE VIRTUOUS WOMAN` },
   { id:16, title:"The Virtuous Woman", section:"Baggage",
     content:`In the West, the respect and protection of the virtuous woman
-has been completely destroyed. It is almost impossible to find a virgin
+has been completely destroyed. It is almost impossible to find virtuous
 past grade school, in America. This is a sad reality facing Men that
 wish to have a wife and a family. A Man cannot have a wife that has
 been with other men, and expect her to give what is in her nature to
-him. Once she has given away her virginity, she cannot be to a Man,
+him. Once she has given away her virtue, she cannot be to a Man,
 as she should be. She will be laying with one, and comparing him to
 all the others she has been with. It is a sad reality.
 Now that all the women in the West have been completely used
@@ -1953,7 +1953,7 @@ from growing up to become like the very women he disdains.
 
 I am for the respect and protection of virtuous women and girls.
 After going through the tremendous challenges of having to travel
-abroad, to find a virgin wife that honors, respects, and upholds my
+abroad, to find a virtuous wife that honors, respects, and upholds my
 name before my daughters; I would defend them from any man who
 sought to corrupt them. Foreigners love their daughters like you love
 your daughters. And they want a good life for their families like you
@@ -2865,7 +2865,7 @@ export default function InternationalLover() {
           <GoldDivider />
           <div style={{ margin:"2.5rem 0" }}>
             <p style={{ fontSize:"clamp(13px,1.8vw,15px)", color:C.creamDim, lineHeight:2, marginBottom:"1.25rem", fontFamily:"sans-serif" }}>In 2015, he flew to North Africa alone. Prepared — the culture, the language, the family structure, the legal process. Six months after meeting her, she was in America. Married within 48 hours of her arrival.</p>
-            <p style={{ fontSize:"clamp(13px,1.8vw,15px)", color:C.creamDim, lineHeight:2, marginBottom:"1.25rem", fontFamily:"sans-serif" }}>She was half his age. She was a virgin. She was traditional. She was everything the American culture said did not exist.</p>
+            <p style={{ fontSize:"clamp(13px,1.8vw,15px)", color:C.creamDim, lineHeight:2, marginBottom:"1.25rem", fontFamily:"sans-serif" }}>She was half his age. She was virtuous. She was traditional. She was everything the American culture said did not exist.</p>
             <p style={{ fontSize:"clamp(13px,1.8vw,15px)", color:C.cream, lineHeight:2, fontStyle:"italic" }}>He wrote the book on how he did it. Now he has built the platform that teaches what the book could not show.</p>
           </div>
           <GoldDivider />
@@ -2925,7 +2925,120 @@ export default function InternationalLover() {
         </div>
       </section>
 
-      <section style={{ background:C.navy, padding:"5rem 1.5rem", borderBottom:`1px solid ${C.border}` }}>
+      <section style={{ background:C.dark, padding:"5rem 1.5rem", borderBottom:`1px solid ${C.border}` }}>
+        <div style={{ maxWidth:1000, margin:"0 auto" }}>
+          <div style={{ textAlign:"center", marginBottom:"2.5rem" }}>
+            <Eyebrow>The Roster</Eyebrow>
+            <h2 style={{ fontSize:"clamp(20px,3vw,28px)", color:C.goldLight, fontWeight:"normal", marginBottom:12 }}>Fifteen virtual women. Five regions of the world.</h2>
+            <p style={{ fontSize:"clamp(12px,1.7vw,14px)", color:C.creamDim, lineHeight:1.85, maxWidth:580, margin:"0 auto", fontFamily:"sans-serif" }}>Each represents a broad demographic of potential mates. Some are genuine. Some are not. Some are genuine and still wrong for you.</p>
+          </div>
+
+          <div style={{ marginBottom:"2rem" }}>
+            <div style={{ fontSize:9, letterSpacing:"0.25em", color:C.gold, fontFamily:"sans-serif", marginBottom:14, textAlign:"center" }}>SUB-SAHARAN AFRICA</div>
+            <div style={{ display:"grid", gridTemplateColumns:"repeat(3, 1fr)", gap:12, marginBottom:28 }}>
+              {[
+                { id:"fatou", name:"Fatou", age:26, city:"Dakar, Senegal" },
+                { id:"abena", name:"Abena", age:24, city:"Accra, Ghana" },
+                { id:"tigist", name:"Tigist", age:28, city:"Addis Ababa, Ethiopia" },
+              ].map(w => (
+                <div key={w.id} style={{ background:C.navyDeep, border:`1px solid ${C.border}`, overflow:"hidden" }}>
+                  <div style={{ height:200, overflow:"hidden" }}>
+                    <img src={"/women/" + w.id + ".jpg"} alt={w.name} style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center top", display:"block" }} />
+                  </div>
+                  <div style={{ padding:"0.75rem" }}>
+                    <div style={{ fontSize:13, color:C.goldLight, fontFamily:"Georgia,serif", marginBottom:2 }}>{w.name}</div>
+                    <div style={{ fontSize:9, color:C.muted, fontFamily:"sans-serif" }}>{w.age} · {w.city}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div style={{ fontSize:9, letterSpacing:"0.25em", color:C.gold, fontFamily:"sans-serif", marginBottom:14, textAlign:"center" }}>NORTH AFRICA</div>
+            <div style={{ display:"grid", gridTemplateColumns:"repeat(3, 1fr)", gap:12, marginBottom:28 }}>
+              {[
+                { id:"nadia", name:"Nadia", age:24, city:"Fez, Morocco" },
+                { id:"yasmine", name:"Yasmine", age:22, city:"Casablanca, Morocco" },
+                { id:"fatima", name:"Fatima-Zahra", age:27, city:"Meknes, Morocco" },
+              ].map(w => (
+                <div key={w.id} style={{ background:C.navyDeep, border:`1px solid ${C.border}`, overflow:"hidden" }}>
+                  <div style={{ height:200, overflow:"hidden" }}>
+                    <img src={"/women/" + w.id + ".jpg"} alt={w.name} style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center top", display:"block" }} />
+                  </div>
+                  <div style={{ padding:"0.75rem" }}>
+                    <div style={{ fontSize:13, color:C.goldLight, fontFamily:"Georgia,serif", marginBottom:2 }}>{w.name}</div>
+                    <div style={{ fontSize:9, color:C.muted, fontFamily:"sans-serif" }}>{w.age} · {w.city}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div style={{ fontSize:9, letterSpacing:"0.25em", color:C.gold, fontFamily:"sans-serif", marginBottom:14, textAlign:"center" }}>MIDDLE EAST</div>
+            <div style={{ display:"grid", gridTemplateColumns:"repeat(3, 1fr)", gap:12, marginBottom:28 }}>
+              {[
+                { id:"sara", name:"Sara", age:26, city:"Amman, Jordan" },
+                { id:"hessa", name:"Hessa", age:23, city:"Beirut, Lebanon" },
+                { id:"maryam", name:"Maryam", age:29, city:"Irbid, Jordan" },
+              ].map(w => (
+                <div key={w.id} style={{ background:C.navyDeep, border:`1px solid ${C.border}`, overflow:"hidden" }}>
+                  <div style={{ height:200, overflow:"hidden" }}>
+                    <img src={"/women/" + w.id + ".jpg"} alt={w.name} style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center top", display:"block" }} />
+                  </div>
+                  <div style={{ padding:"0.75rem" }}>
+                    <div style={{ fontSize:13, color:C.goldLight, fontFamily:"Georgia,serif", marginBottom:2 }}>{w.name}</div>
+                    <div style={{ fontSize:9, color:C.muted, fontFamily:"sans-serif" }}>{w.age} · {w.city}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div style={{ fontSize:9, letterSpacing:"0.25em", color:C.gold, fontFamily:"sans-serif", marginBottom:14, textAlign:"center" }}>ASIA</div>
+            <div style={{ display:"grid", gridTemplateColumns:"repeat(3, 1fr)", gap:12, marginBottom:28 }}>
+              {[
+                { id:"amira", name:"Amira", age:25, city:"Yogyakarta, Indonesia" },
+                { id:"jasmine", name:"Jasmine", age:24, city:"Cebu, Philippines" },
+                { id:"nurul", name:"Nurul", age:28, city:"Dhaka, Bangladesh" },
+              ].map(w => (
+                <div key={w.id} style={{ background:C.navyDeep, border:`1px solid ${C.border}`, overflow:"hidden" }}>
+                  <div style={{ height:200, overflow:"hidden" }}>
+                    <img src={"/women/" + w.id + ".jpg"} alt={w.name} style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center top", display:"block" }} />
+                  </div>
+                  <div style={{ padding:"0.75rem" }}>
+                    <div style={{ fontSize:13, color:C.goldLight, fontFamily:"Georgia,serif", marginBottom:2 }}>{w.name}</div>
+                    <div style={{ fontSize:9, color:C.muted, fontFamily:"sans-serif" }}>{w.age} · {w.city}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div style={{ fontSize:9, letterSpacing:"0.25em", color:C.gold, fontFamily:"sans-serif", marginBottom:14, textAlign:"center" }}>LATIN AMERICA</div>
+            <div style={{ display:"grid", gridTemplateColumns:"repeat(3, 1fr)", gap:12 }}>
+              {[
+                { id:"valentina", name:"Valentina", age:27, city:"Medellin, Colombia" },
+                { id:"diana", name:"Diana", age:22, city:"Santo Domingo, D.R." },
+                { id:"elena", name:"Elena", age:30, city:"Lima, Peru" },
+              ].map(w => (
+                <div key={w.id} style={{ background:C.navyDeep, border:`1px solid ${C.border}`, overflow:"hidden" }}>
+                  <div style={{ height:200, overflow:"hidden" }}>
+                    <img src={"/women/" + w.id + ".jpg"} alt={w.name} style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center top", display:"block" }} />
+                  </div>
+                  <div style={{ padding:"0.75rem" }}>
+                    <div style={{ fontSize:13, color:C.goldLight, fontFamily:"Georgia,serif", marginBottom:2 }}>{w.name}</div>
+                    <div style={{ fontSize:9, color:C.muted, fontFamily:"sans-serif" }}>{w.age} · {w.city}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div style={{ textAlign:"center" }}>
+            <button onClick={() => setPaywallOpen(true)} style={{ padding:"12px 32px", background:C.gold, color:C.navyDeep, border:"none", cursor:"pointer", fontSize:12, fontWeight:700, letterSpacing:"0.15em", textTransform:"uppercase", fontFamily:"sans-serif" }}>
+              Meet Them Inside →
+            </button>
+          </div>
+        </div>
+      </section>
+
+            <section style={{ background:C.navy, padding:"5rem 1.5rem", borderBottom:`1px solid ${C.border}` }}>
         <div style={{ maxWidth:740, margin:"0 auto", textAlign:"center" }}>
           <Eyebrow>What Is At Stake</Eyebrow>
           <h2 style={{ fontSize:"clamp(18px,3vw,26px)", color:C.goldLight, fontWeight:"normal", marginBottom:"2rem" }}>Every arc has five possible endings.</h2>

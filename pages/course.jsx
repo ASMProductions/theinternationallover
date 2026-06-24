@@ -17,45 +17,16 @@ const COURSE_OPENING = [
   "— The International Lover™",
 ];
 
-function Portrait({ id, size=80 }) {
-  const portraits = {
-    nadia: { skin:"#c8956c", hair:"#1a0a00", hijab:"#2a4a7a", hijabAccent:"#3a6a9a", eye:"#3a2000", lips:"#b06050" },
-    yasmine: { skin:"#d4a070", hair:"#0a0500", hijab:"#8a3a2a", hijabAccent:"#c05040", eye:"#2a1500", lips:"#c06050" },
-    fatima: { skin:"#c09060", hair:"#0a0800", hijab:"#1a3a1a", hijabAccent:"#2a5a2a", eye:"#1a1000", lips:"#905050" },
-    sara: { skin:"#c8956c", hair:"#150800", hijab:"#4a2a5a", hijabAccent:"#6a4a7a", eye:"#2a1500", lips:"#a05060" },
-    hessa: { skin:"#d4a878", hair:"#0f0800", hijab:null, eye:"#2a1800", lips:"#b86060" },
-    maryam: { skin:"#b87848", hair:"#080500", hijab:"#1a1a3a", hijabAccent:"#2a2a5a", eye:"#180f00", lips:"#885048" },
-    amira: { skin:"#c8906a", hair:"#0a0600", hijab:"#2a5a3a", hijabAccent:"#3a7a5a", eye:"#1a0e00", lips:"#985058" },
-    jasmine: { skin:"#d4a870", hair:"#100800", hijab:null, eye:"#1a1200", lips:"#c06870" },
-    nurul: { skin:"#c07858", hair:"#0a0600", hijab:"#3a1a4a", hijabAccent:"#5a3a6a", eye:"#180e00", lips:"#905055" },
-    valentina: { skin:"#d4a878", hair:"#180800", hijab:null, eye:"#1a1000", lips:"#c05860" },
-    diana: { skin:"#c88050", hair:"#120600", hijab:null, eye:"#1a0e00", lips:"#b05058" },
-    elena: { skin:"#c89060", hair:"#0f0800", hijab:null, eye:"#161000", lips:"#a05055" },
-    fatou: { skin:"#6a3818", hair:"#050300", hijab:"#c89040", hijabAccent:"#e0b060", eye:"#100800", lips:"#7a3830" },
-    abena: { skin:"#5a3010", hair:"#050200", hijab:null, eye:"#0e0600", lips:"#6a3028" },
-    tigist: { skin:"#7a4820", hair:"#060400", hijab:null, eye:"#120800", lips:"#8a4035" },
-  };
-  const p = portraits[id] || portraits.nadia;
-  const w = size; const h = size * 1.25;
+function Portrait({ id, name }) {
   return (
-    <svg viewBox="0 0 80 100" width={w} height={h} style={{ display:"block", borderRadius:"4px 4px 0 0" }}>
-      <rect width="80" height="100" fill="#1a3a6b"/>
-      {p.hijab && <ellipse cx="40" cy="52" rx="30" ry="36" fill={p.hijab}/>}
-      {p.hijab && <ellipse cx="40" cy="38" rx="22" ry="24" fill={p.hijabAccent}/>}
-      <ellipse cx="40" cy="38" rx="16" ry="18" fill={p.skin}/>
-      {!p.hijab && <ellipse cx="40" cy="22" rx="16" ry="14" fill={p.hair}/>}
-      {!p.hijab && <rect x="24" y="20" width="32" height="18" rx="2" fill={p.hair}/>}
-      <ellipse cx="34" cy="36" rx="3" ry="2.5" fill="white"/>
-      <ellipse cx="46" cy="36" rx="3" ry="2.5" fill="white"/>
-      <ellipse cx="34" cy="36.5" rx="2" ry="2" fill={p.eye}/>
-      <ellipse cx="46" cy="36.5" rx="2" ry="2" fill={p.eye}/>
-      <ellipse cx="34.5" cy="36" rx="0.7" ry="0.7" fill="white"/>
-      <ellipse cx="46.5" cy="36" rx="0.7" ry="0.7" fill="white"/>
-      <path d="M36 44 Q40 47 44 44" fill="none" stroke={p.lips} strokeWidth="1.2" strokeLinecap="round"/>
-      <ellipse cx="40" cy="44" rx="4" ry="1.5" fill={p.lips} opacity="0.4"/>
-      <path d="M24 60 Q40 52 56 60 L60 100 L20 100 Z" fill={p.hijab || p.skin} opacity="0.7"/>
-      <rect x="0" y="85" width="80" height="15" fill="#0f2347" opacity="0.7"/>
-    </svg>
+    <div style={{ width:"100%", height:180, overflow:"hidden", background:"#0f2347", position:"relative" }}>
+      <img
+        src={"/women/" + id + ".jpg"}
+        alt={name}
+        style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center top", display:"block" }}
+        onError={e => { e.target.style.display="none"; }}
+      />
+    </div>
   );
 }
 
@@ -403,7 +374,7 @@ function ProfileCard({ woman, selected, onSelect, revealed }) {
   return (
     <div onClick={onSelect} style={{ cursor:"pointer", border:`2px solid ${selected?"#b8963e":"#1e3a6e"}`, background:selected?"rgba(184,150,62,0.08)":"#0f2347", transition:"all 0.3s", boxShadow:selected?"0 0 20px rgba(184,150,62,0.25)":"none", position:"relative", overflow:"hidden" }}>
       {selected && <div style={{ position:"absolute", top:0, left:0, right:0, background:"#b8963e", color:"#0f2347", fontSize:8, fontWeight:700, letterSpacing:"0.15em", padding:"3px 0", fontFamily:"sans-serif", textAlign:"center", zIndex:2 }}>ACTIVE</div>}
-      <Portrait id={woman.id} size={80} />
+      <Portrait id={woman.id} name={woman.name} />
       <div style={{ padding:"0.75rem" }}>
         <div style={{ fontSize:13, color:"#d4af6a", fontFamily:"Georgia,serif", marginBottom:2 }}>{woman.name}</div>
         <div style={{ fontSize:9, color:"#8a7a5a", fontFamily:"sans-serif" }}>{woman.age} · {woman.city}</div>
