@@ -11,6 +11,29 @@ const C = {
 
 const FREE_CODES = { "ILACCESS": true, "ADMINTEST": true };
 
+const TIMED_CODES = {
+  "BUDDYPASS": 24,
+  "24HRPASS": 24,
+  "WEEKENDPASS": 72,
+};
+
+function checkTimedCode(code) {
+  const upper = code.trim().toUpperCase();
+  if (!TIMED_CODES[upper]) return false;
+  const key = "il_timed_" + upper;
+  const hours = TIMED_CODES[upper];
+  const stored = typeof window !== "undefined" ? localStorage.getItem(key) : null;
+  if (stored) {
+    const expiry = parseInt(stored);
+    if (Date.now() < expiry) return true;
+    localStorage.removeItem(key);
+    return false;
+  }
+  const expiry = Date.now() + (hours * 60 * 60 * 1000);
+  localStorage.setItem(key, expiry.toString());
+  return true;
+}
+
 const TIERS = [
   { id:"course", label:"The Course", sublabel:"Course + Full Resource Library", price:"$497", cycle:"one time · lifetime access", stripe:"https://buy.stripe.com/placeholder1",
     features:["Complete simulation course — all five regions","Fifteen virtual women — broad demographic of potential mates","Branching scenarios — visual novel format","Full cultural obstacle modules","Complete resource library — 14 modules","Certificate of The International Lover™"], highlight:false },
@@ -2658,8 +2681,17 @@ export default function InternationalLover() {
 
   const handleCodeSubmit = () => {
     const upper = code.trim().toUpperCase();
-    if (FREE_CODES[upper]) { grantAccess(); }
-    else setMsg("Invalid access code. Please try again.");
+    if (FREE_CODES[upper]) { grantAccess(); return; }
+    if (typeof window !== "undefined" && checkTimedCode(upper)) {
+      const hours = TIMED_CODES[upper];
+      sessionStorage.setItem("il_access", "true");
+      sessionStorage.setItem("il_access_note", upper + " — expires in " + hours + " hours");
+      setHasAccess(true);
+      setPaywallOpen(false);
+      setView("library");
+      return;
+    }
+    setMsg("Invalid access code. Please try again.");
   };
 
   const stopSpeech = () => {
