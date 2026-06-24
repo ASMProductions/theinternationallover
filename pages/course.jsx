@@ -515,8 +515,7 @@ export default function CoursePage() {
           <div style={{ display:"flex", justifyContent:"center", gap:12, flexWrap:"wrap", marginBottom:12 }}>
             {REGIONS_COURSE.map(r => (
               <div key={r.id} style={{ display:"inline-flex", flexDirection:"column", alignItems:"center", justifyContent:"center", width:64, height:64, borderRadius:"50%", border:`1.5px ${stampedRegions.includes(r.id)?"solid":"dashed"} #b8963e`, background:stampedRegions.includes(r.id)?"rgba(184,150,62,0.12)":"transparent", opacity:stampedRegions.includes(r.id)?1:0.3 }}>
-                <div style={{ fontSize:6.5, color:C.gold, fontFamily:"sans-serif", textAlign:"center", lineHeight:1.35, whiteSpace:"pre-line" }}>{r.label.toUpperCase().replace(" ", "
-")}</div>
+                <div style={{ fontSize:6.5, color:C.gold, fontFamily:"sans-serif", textAlign:"center", lineHeight:1.35, whiteSpace:"pre-line" }}>{r.label.toUpperCase().replace(" ", " ")}</div>
               </div>
             ))}
           </div>
