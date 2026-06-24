@@ -9,15 +9,13 @@ const C = {
   scarlet:"#8b1a1a",
 };
 
-const COURSE_OPENING = `Before you meet anyone, you need to meet yourself.
-
-What you are about to encounter is not a game. It is a mirror. Every decision you make inside these scenarios reflects a decision you are capable of making in real life — and the consequences that follow are the consequences real men have lived.
-
-Some of these women are genuine. Some are not. Some are genuine and still wrong for you. You will not be told which is which. You will have to determine that yourself — the same way you will have to determine it in the real world.
-
-What you discover about the women is secondary. What you discover about yourself is the point.
-
-— The International Lover™`;
+const COURSE_OPENING = [
+  "Before you meet anyone, you need to meet yourself.",
+  "What you are about to encounter is not a game. It is a mirror. Every decision you make inside these scenarios reflects a decision you are capable of making in real life — and the consequences that follow are the consequences real men have lived.",
+  "Some of these women are genuine. Some are not. Some are genuine and still wrong for you. You will not be told which is which. You will have to determine that yourself — the same way you will have to determine it in the real world.",
+  "What you discover about the women is secondary. What you discover about yourself is the point.",
+  "— The International Lover™",
+];
 
 const REGIONS_COURSE = [
   {
@@ -329,7 +327,7 @@ export default function CoursePage() {
           {COURSE_OPENING.split("
 
 ").map((p, i, arr) => (
-            <p key={i} style={{ fontSize:"clamp(13px,1.8vw,15px)", color: i === arr.length-1 ? C.gold : C.creamDim, lineHeight:1.9, marginBottom:"1.25rem", fontFamily:"sans-serif", fontStyle: i === arr.length-1 ? "italic" : "normal" }}>{p}</p>
+            <p key={i} style={{ fontSize:"clamp(13px,1.8vw,15px)", color: i === COURSE_OPENING.length-1 ? C.gold : C.creamDim, lineHeight:1.9, marginBottom:"1.25rem", fontFamily:"sans-serif", fontStyle: i === COURSE_OPENING.length-1 ? "italic" : "normal" }}>{p}</p>
           ))}
         </div>
         <button onClick={() => setPhase("map")} style={{ padding:"14px 40px", background:C.gold, color:C.navyDeep, border:"none", cursor:"pointer", fontSize:13, fontWeight:700, letterSpacing:"0.15em", textTransform:"uppercase", fontFamily:"sans-serif" }}>
