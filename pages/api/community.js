@@ -104,6 +104,7 @@ export default async function handler(req, res) {
         type: "member",
         author: (body.author || "Member").slice(0, 40),
         token: body.token || "",
+        isAmbassador: body.isAmbassador === true,
         comments: [],
         createdAt: Date.now(),
       };
