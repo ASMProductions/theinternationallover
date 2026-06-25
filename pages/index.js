@@ -35,19 +35,19 @@ function checkTimedCode(code) {
 }
 
 const TIERS = [
-  { id:"course", label:"The Course", sublabel:"Course + Full Resource Library", price:"$497", cycle:"one time · lifetime access", stripe:"https://buy.stripe.com/placeholder1",
+  { id:"course", label:"The Course", sublabel:"Course + Full Resource Library", price:"$497", cycle:"one time · lifetime access", stripe:"https://buy.stripe.com/00w00j1Rrd1s1eEcei77O0k",
     features:["Complete simulation course — all five regions","Fifteen virtual women — broad demographic of potential mates","Branching scenarios — visual novel format","Full cultural obstacle modules","Complete resource library — 14 modules","Certificate of The International Lover™"], highlight:false },
-  { id:"complete", label:"Complete Platform", sublabel:"Everything. Active membership.", price:"$49.99", cycle:"per month · or $397/year", stripe:"https://buy.stripe.com/placeholder2",
+  { id:"complete", label:"Complete Platform", sublabel:"Everything. Active membership.", price:"$49.99", cycle:"per month · or $397/year", stripe:"https://buy.stripe.com/fZu6oH3Zz8LccXm5PU77O0l", stripeYear:"https://buy.stripe.com/14A8wP9jT2mO8H64LQ77O0m",
     features:["Full book — 17 chapters with read-aloud","Complete simulation course","Full resource library — 14 modules","Certificate of The International Lover™","The Consulate — community forum","All five regional subgroups","Member consultation rates","All future content included"], highlight:true },
-  { id:"lifetime", label:"Lifetime Commission", sublabel:"Everything. Permanently.", price:"$997", cycle:"one time · never pay again", stripe:"https://buy.stripe.com/placeholder3",
+  { id:"lifetime", label:"Lifetime Commission", sublabel:"Everything. Permanently.", price:"$997", cycle:"one time · never pay again", stripe:"https://buy.stripe.com/28E5kD3ZzaTke1q0vA77O0n",
     features:["Everything in Complete Platform","Permanent access — no recurring billing","One complimentary 60-min consultation","Discounted consultation rates forever","Priority access to all new content","Early access to all new titles"], highlight:false },
 ];
 
 const CONSULTATIONS = [
-  { label:"Email Consultation",   duration:"Written response within 48hrs", pub:97,  mem:75,  stripe:"https://buy.stripe.com/placeholder4" },
-  { label:"30-Min Phone Session", duration:"30 minutes",                    pub:175, mem:125, stripe:"https://buy.stripe.com/placeholder5" },
-  { label:"60-Min Phone Session", duration:"60 minutes",                    pub:297, mem:197, stripe:"https://buy.stripe.com/placeholder6" },
-  { label:"60-Min Video Session", duration:"60 minutes via video",          pub:397, mem:297, stripe:"https://buy.stripe.com/placeholder7" },
+  { label:"Email Consultation",   duration:"Written response within 48hrs", pub:97,  mem:75,  stripe:"https://buy.stripe.com/7sYaEXanX5z0f5u1zE77O0o" },
+  { label:"30-Min Phone Session", duration:"30 minutes",                    pub:175, mem:125, stripe:"https://buy.stripe.com/4gM3cv2Vv3qS9La6TY77O0p" },
+  { label:"60-Min Phone Session", duration:"60 minutes",                    pub:297, mem:197, stripe:"https://buy.stripe.com/aFa8wPcw59Pg9Labae77O0q" },
+  { label:"60-Min Video Session", duration:"60 minutes via video",          pub:397, mem:297, stripe:"https://buy.stripe.com/eVq8wPcw5gdE5uU5PU77O0r" },
 ];
 
 const REGIONS = [
