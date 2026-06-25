@@ -3037,7 +3037,7 @@ export default function InternationalLover() {
     finally { setSending(false); }
   };
 
-  const handleCodeSubmit = () => {
+  const handleCodeSubmit = async () => {
     const upper = code.trim().toUpperCase();
     if (FREE_CODES[upper]) { grantAccess(); return; }
     if (typeof window !== "undefined" && checkTimedCode(upper)) {
@@ -3048,6 +3048,22 @@ export default function InternationalLover() {
       setPaywallOpen(false);
       setView("library");
       return;
+    }
+    // Check ambassador codes
+    if (upper.startsWith("AMB_")) {
+      try {
+        const res = await fetch("/api/ambassadors?action=check&code=" + upper);
+        const data = await res.json();
+        if (data.valid) {
+          sessionStorage.setItem("il_access", "true");
+          sessionStorage.setItem("il_ambassador", "true");
+          sessionStorage.setItem("il_ambassador_name", data.name || "");
+          setHasAccess(true);
+          setPaywallOpen(false);
+          setView("library");
+          return;
+        }
+      } catch(e) {}
     }
     setMsg("Invalid access code. Please try again.");
   };
@@ -3165,7 +3181,12 @@ export default function InternationalLover() {
         <div style={{ background:C.navyDeep, borderBottom:`1px solid ${C.border}`, padding:"1rem 1.5rem", display:"flex", alignItems:"center", justifyContent:"space-between", flexWrap:"wrap", gap:"0.5rem" }}>
           <div>
             <div style={{ fontSize:"11px", color:C.muted, letterSpacing:"0.2em", textTransform:"uppercase", fontFamily:"sans-serif" }}>The International Lover™</div>
-            <div style={{ color:C.goldLight, fontSize:"16px" }}>Your Library</div>
+            <div style={{ display:"flex", alignItems:"center", gap:8 }}>
+              <div style={{ color:C.goldLight, fontSize:"16px" }}>Your Library</div>
+              {typeof window !== "undefined" && sessionStorage.getItem("il_ambassador") === "true" && (
+                <div style={{ background:C.gold, color:C.navyDeep, fontSize:8, fontWeight:700, padding:"2px 10px", fontFamily:"sans-serif", letterSpacing:"0.12em" }}>AMBASSADOR</div>
+              )}
+            </div>
           </div>
           <div style={{ display:"flex", gap:"0.75rem" }}>
             <button onClick={() => setView("landing")} style={{ background:"none", border:`1px solid ${C.border}`, color:C.muted, padding:"6px 14px", borderRadius:"20px", cursor:"pointer", fontSize:"12px", fontFamily:"sans-serif" }}>Home</button>
