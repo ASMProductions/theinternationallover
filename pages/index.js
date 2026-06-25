@@ -2047,6 +2047,363 @@ What you discover about the women is secondary. What you discover about yourself
 
 — The International Lover™`;
 
+const RESOURCE_MODULES = [
+  {
+    id: "travel-safety",
+    title: "Travel & Safety",
+    intro: "I have traveled to three continents looking for what America could not offer me. I have been in markets where no one spoke English, in cities where the infrastructure was nothing like home, and in situations where the wrong decision could have ended the journey entirely. I am still here. Not because I was lucky — because I was prepared. Preparation is the only form of courage that actually works when you are alone in a foreign country with a mission.",
+    sections: [
+      {
+        heading: "Before You Leave",
+        body: "Register your trip with the U.S. State Department at travel.state.gov using the Smart Traveler Enrollment Program (STEP). This is free and ensures the nearest U.S. embassy knows you are in the country. In the event of an emergency — natural disaster, civil unrest, or a personal crisis — they can reach you and assist you.\n\nCheck the State Department's travel advisory for your destination country before booking anything. Advisories range from Level 1 (Exercise Normal Precaution) to Level 4 (Do Not Travel). Most countries where you will be searching for a wife are Level 1 or 2. Know the current level before you go.\n\nMake two copies of every document you are carrying — passport, visa, hotel confirmation, flight information, emergency contacts. Leave one set with a trusted person at home. Carry the other set separately from the originals.",
+      },
+      {
+        heading: "At The Destination",
+        body: "Do not display wealth. Leave expensive jewelry at home. Keep your phone in your pocket in crowded areas. Use a money belt or hidden pouch for your passport and large amounts of cash.\n\nUse reputable transportation. Research the standard taxi fare before you arrive so you are not overcharged. In many countries, ride-share apps like Uber or Careem operate and are safer than hailing a random cab.\n\nStay in established hotels or reputable guesthouses for your first visit. Do not stay in someone's private home until the relationship and the family have been thoroughly vetted.\n\nKnow the location of the nearest U.S. embassy or consulate before you need it. Save the number in your phone the day you arrive.",
+      },
+      {
+        heading: "Meeting Her Family",
+        body: "The first in-person meeting should always be in a public place — a restaurant, a family gathering space, a community setting. Never meet at a private residence on the first visit.\n\nTell someone at home exactly where you are going, who you are meeting, and when you expect to return. Check in with them at regular intervals.\n\nTrust your instincts. If something feels wrong — the location has changed, new people have appeared, the story is shifting — it is acceptable to excuse yourself. Your safety is not negotiable.",
+      },
+      {
+        heading: "Emergency Contacts",
+        body: "U.S. State Department Overseas Citizens Services: +1-888-407-4747 (from the U.S.) or +1-202-501-4444 (from abroad)\n\nSmart Traveler Enrollment Program: travel.state.gov/step\n\nU.S. Embassy locator: usembassy.gov\n\nInternational SOS (medical and security assistance): internationalsos.com",
+      },
+    ],
+  },
+  {
+    id: "platform-reviews",
+    title: "Matrimonial Platform Reviews",
+    intro: "I used Muslima.com. I found my wife there. That is my personal testimony. But I want to be clear — no platform is clean. Every platform has fraud operating on it at some level. The platform is a tool. The vetting is yours. What I can do is give you an honest assessment of the major platforms so you choose the right tool for your specific search.",
+    sections: [
+      {
+        heading: "Muslima.com",
+        body: "Best for: Muslim women across North Africa, the Middle East, Southeast Asia, and South Asia.\n\nStrengths: Large global database, serious marriage intent filtering, virtue status option on profiles, family involvement features.\n\nWeaknesses: Fraud is present — particularly from West Africa and some South Asian profiles. Profiles using stolen photos are not uncommon. Reverse image search every photo before investing time.\n\nRecommendation: Pay for the premium membership. Free profiles signal to quality women that you are not serious. Use the filtering tools aggressively — religion, location, age, and virtue status.",
+      },
+      {
+        heading: "SimplyMarry.com",
+        body: "Best for: South Asian communities — Indian, Pakistani, Bangladeshi, Sri Lankan.\n\nStrengths: Large verified database, family profile features, regional filtering.\n\nWeaknesses: Caste and ethnic preferences are deeply embedded in the platform culture. As a non-South-Asian man, you will face resistance on some profiles regardless of your qualifications.\n\nRecommendation: Use this platform specifically for Bangladesh and some Pakistani searches. For Indian women, understand that caste will be a factor in many families regardless of what the profile says.",
+      },
+      {
+        heading: "ChristianMingle / CatholicMatch",
+        body: "Best for: Christian women — particularly effective for Filipina, Latin American, and some African searches when filtered by region.\n\nStrengths: Faith-based filtering, serious marriage intent, established platform with fraud monitoring.\n\nWeaknesses: Heavily American-skewed in its default results. You will need to actively filter by country to find international profiles.\n\nRecommendation: Use the location filter aggressively. These platforms work well for the Philippines and Latin America when used correctly.",
+      },
+      {
+        heading: "Platform Safety Rules — Universal",
+        body: "1. Never send money to anyone on any platform for any reason before you have met them in person, their family has agreed to the marriage, and the legal process has begun.\n\n2. Reverse image search every profile photo using Google Images or TinEye before investing more than one conversation.\n\n3. Keep all early communication on the platform's messaging system. Moving to WhatsApp too early removes a layer of protection.\n\n4. If she initiates contact within the first 24 hours of you joining with unusually warm and specific language — slow down. This is the most common fraud opening.\n\n5. Six months of vetting before any travel. This is the minimum.",
+      },
+    ],
+  },
+  {
+    id: "cultural-intelligence",
+    title: "Cultural Intelligence by Region",
+    intro: "I have said this in the book and I will say it again here: cultural ignorance is expensive. It costs you the relationship, the trip, the time, and sometimes the money. The man who arrives in Morocco behaving like he is in Miami has already failed before he knocked on the door. Cultural intelligence is not about performing respect — it is about actually understanding what you are walking into. Here is the foundation for each region.",
+    sections: [
+      {
+        heading: "North Africa — Morocco, Tunisia, Algeria, Egypt",
+        body: "Islam structures daily life — prayer times, dietary laws, family honor, and gender interaction are all shaped by it. Friday is the holy day. Ramadan changes the entire rhythm of the country for a month.\n\nFamily honor is not sentimental — it is structural. A woman's reputation affects her father's standing in the community, her sisters' marriage prospects, and her family's social position. Treat this with the gravity it deserves.\n\nHigh-context communication: what is not said carries as much weight as what is said. Silence from a father is not indifference — it is evaluation.\n\nDress modestly when visiting. Learn basic Arabic or Darija phrases. Greet the father formally. Do not touch the woman in public.",
+      },
+      {
+        heading: "Middle East — Jordan, Lebanon, Yemen",
+        body: "Family is the primary social unit. You are not courting a woman — you are petitioning a family. A man who bypasses the family has disqualified himself regardless of his other qualities.\n\nReligion is communal, not private. Your religious practice will be evaluated as part of your qualification as a husband. Misrepresenting your faith is one of the most serious mistakes you can make in this region.\n\nLebanon is more cosmopolitan than Jordan or Yemen and the cultural expectations reflect that. Know which country you are in and calibrate accordingly.\n\nPhysical contact before marriage is not acceptable in most family contexts. Eye contact with women who are not your immediate family should be measured.",
+      },
+      {
+        heading: "Asia — Indonesia, Philippines, Bangladesh",
+        body: "Indonesia: Javanese culture specifically operates on a concept called rukun — social harmony. Confrontation is avoided. Disagreement is expressed indirectly. A 'yes' does not always mean yes — learn to read the room.\n\nPhilippines: Catholic family values, strong family embeddedness, and a culture of hospitality that can mask discomfort. The family's financial situation may be significant and remittances are a normal part of many marriages. Know what you are agreeing to before you agree.\n\nBangladesh: Education and professional accomplishment are highly valued. An educated Bangladeshi woman has often overcome significant social pressure to achieve her position. Respect this rather than being threatened by it.",
+      },
+      {
+        heading: "Latin America — Colombia, Dominican Republic, Peru",
+        body: "The greatest danger in Latin America is false familiarity. Shared cultural references — music, food, some history — create an illusion of understanding that does not exist at the level of family structure, gender expectations, and social obligation.\n\nMachismo culture means the man's role as provider and protector is non-negotiable in most traditional families. This is not a burden — it is the expectation you are signing up for.\n\nFamily gatherings are evaluations. How you treat the grandmother, whether you help clear the table, how you speak about people who are not in the room — all of it is being assessed.\n\nLearn Spanish. There is no substitute.",
+      },
+      {
+        heading: "Sub-Saharan Africa — Senegal, Ghana, Ethiopia, Kenya",
+        body: "Community is the primary unit of reality. You are entering a lineage, not just a relationship. The bride price negotiation is a covenant between two families — treat it as such.\n\nSenegal: The Tijaniyya Sufi order has significant presence. Understanding Sufi Islam versus orthodox Islam is essential if you are pursuing a Senegalese woman from this tradition.\n\nGhana: Pentecostal Christianity is deeply embedded in family life in many communities. Attending a church service during your visit is not optional — it is a statement of who you are.\n\nEthiopia: Ethiopian Orthodox Christianity has over 250 fasting days and its own liturgical calendar. This is a daily, weekly, and annual practice. A secular man will not successfully integrate into this family structure.",
+      },
+    ],
+  },
+  {
+    id: "family-meeting",
+    title: "The Family Meeting",
+    intro: "The family meeting is where most men lose what they have spent months building. They arrive unprepared, they perform rather than present themselves, and the family sees through it in the first twenty minutes. I have sat across from fathers and brothers and uncles on two continents. I know what they are looking for. They are not looking for wealth — they are looking for character. And character cannot be performed. It can only be demonstrated over time and in unguarded moments. Here is how to prepare.",
+    sections: [
+      {
+        heading: "Before The Meeting",
+        body: "Know the family's religion and practice it respectfully during your visit. If they pray five times a day, do not be on your phone during prayer time. If they fast during Ramadan, do not eat in front of them.\n\nLearn the correct greeting in their language. A simple, correctly pronounced greeting in Arabic, French, Wolof, or Amharic carries more weight than an hour of conversation in English.\n\nResearch the appropriate gift for the family. In most cultures, arriving empty-handed is considered disrespectful. Sweets, dates, high-quality tea, or a book appropriate to the father's interests are safe choices across most regions.\n\nDress modestly and formally. The standard should be: what would a serious man wear to meet the family of the woman he intends to marry? Dress above that standard.",
+      },
+      {
+        heading: "During The Meeting",
+        body: "Greet the eldest person in the room first. This is universally recognized as respect across cultures.\n\nListen more than you speak. In high-context cultures especially, a man who speaks less is regarded as more serious than one who speaks constantly.\n\nSpeak about your family — your parents, your siblings, your lineage. In every culture where family is the primary social unit, a man's relationship with his own family is the primary indicator of how he will treat theirs.\n\nDo not look at your phone. Not once. Not briefly. Not to check the time. This is the single most commonly cited failure point that families report about American men.\n\nWhen you disagree with something said, receive it calmly. You are not there to debate. You are there to be assessed.",
+      },
+      {
+        heading: "What The Father Is Actually Asking",
+        body: "Every question a father asks is a version of one of three questions:\n\n1. Can you provide for and protect my daughter?\n2. Will you respect the values she was raised with?\n3. Are you the same man in this room as you are when no one is watching?\n\nAnswer these three questions with everything you say and do during the visit — not just when you are directly asked.",
+      },
+      {
+        heading: "After The Meeting",
+        body: "Send a formal message of thanks within 24 hours. Address it to the father or the family head. Keep it brief, respectful, and sincere.\n\nDo not pressure for an answer. In most traditional cultures, the family will deliberate privately and communicate their decision through the woman or through a designated family representative. Patience after the meeting is as important as preparation before it.",
+      },
+    ],
+  },
+  {
+    id: "bride-price-dowry",
+    title: "Bride Price & Dowry",
+    intro: "The bride price is the moment that reveals who you are more clearly than any conversation will. The man who treats it as a fee to be minimized has already told the family everything they need to know about how he will value their daughter. The man who asks what each item represents — before asking what it costs — has done the same, in the opposite direction. I have been through this negotiation. I know what it requires.",
+    sections: [
+      {
+        heading: "What Bride Price Is — And Is Not",
+        body: "Bride price is a gift from the groom's family to the bride's family — it is not a purchase price. It is a public declaration that you understand the value of what you are receiving and that you are capable of honoring it.\n\nIn Islamic tradition, the mahr is a mandatory gift from the groom directly to the bride — not to her family. It is her property alone. The amount is agreed upon before the nikah and becomes part of the marriage contract.\n\nIn many African traditions, the bride price involves specific items that carry cultural meaning — livestock, fabric, kola nuts, palm wine, or monetary equivalents. Each item represents something. Ask what it represents before you discuss amounts.\n\nDowry — which moves in the opposite direction, from the bride's family to the groom — is practiced in some South Asian communities. Understand which tradition applies to your situation.",
+      },
+      {
+        heading: "How To Approach The Negotiation",
+        body: "Enter the conversation as a covenant, not a transaction. The family is watching how you engage with the process as much as they are watching the outcome.\n\nAsk about the tradition before anything else. 'Can you help me understand what is customary and what each element represents?' This question signals respect and seriousness simultaneously.\n\nDo not lowball. Do not perform generosity you cannot sustain. Be honest about your capacity and negotiate from a position of genuine respect.\n\nIn Islamic contexts, the mahr amount is private between you and the bride. Do not discuss it publicly. It is her security — a guaranteed amount she receives regardless of what happens in the marriage.",
+      },
+      {
+        heading: "Common Bride Price Items by Region",
+        body: "Morocco/North Africa: The mahr (Islamic marriage gift) is central. Amount varies widely by family and agreement. Traditional items may include gold jewelry, fabric, and perfume.\n\nWest Africa (Senegal, Ghana): May include kola nuts, schnapps or palm wine, fabric, livestock (or monetary equivalent), and cash. Each item is ceremonially significant.\n\nEthiopia: Ethiopian Orthodox tradition involves gifts to the family and a formal betrothal ceremony. The process involves multiple family meetings before any formal agreement.\n\nLatin America: Formal bride price is less common. The expectation is demonstrated financial stability, ability to provide housing, and family approval of your character.",
+      },
+      {
+        heading: "Legal Considerations",
+        body: "The mahr in Islamic marriage is legally enforceable in the countries where Islamic family law governs. Understand that it is a contractual obligation — not a symbolic gesture.\n\nIn the United States, prenuptial agreements can reference the mahr and other traditional financial obligations. Consult an attorney familiar with international family law if you want these elements formalized in a U.S. legal document.",
+      },
+    ],
+  },
+  {
+    id: "marriage-laws",
+    title: "International Marriage Laws",
+    intro: "The legal architecture of international marriage is the part that breaks men who were otherwise doing everything right. They found the right woman. They navigated the family. They were serious about the commitment. And then the bureaucracy broke them. Do not let that happen to you. The law is not your enemy — ignorance of the law is. Study this section as carefully as you studied her.",
+    sections: [
+      {
+        heading: "Legal Age Requirements",
+        body: "Most countries require both parties to be at least 18 years old to marry without parental consent. Some countries permit marriage at 16 or 17 with parental consent. Research the specific requirements for the country you are marrying in.\n\nThe United States will not issue a K-1 visa to a fiancée under the age of 18. This is a hard legal requirement with no exceptions.",
+      },
+      {
+        heading: "Required Documentation — U.S. Side",
+        body: "Valid U.S. passport\nBirth certificate (certified copy)\nProof of single status — if previously married, certified divorce decree or death certificate of former spouse\nCriminal background check\nProof of financial ability to support a spouse (typically demonstrated through recent tax returns and pay stubs)\nEvidence of bona fide relationship — photos together, communication records, travel receipts",
+      },
+      {
+        heading: "Required Documentation — Her Side",
+        body: "Valid passport from her country\nBirth certificate\nPolice clearance certificate for all countries she has lived in\nMedical examination by a USCIS-approved physician\nProof of single status\nDS-160 nonimmigrant visa application\nEvidence of relationship with you",
+      },
+      {
+        heading: "Residency Requirements",
+        body: "Many countries require that you have physically met your fiancée in person within the two years prior to filing the K-1 petition. Virtual meetings do not satisfy this requirement.\n\nSome countries require a minimum residency period — meaning you must have lived in the country for a specified time before being permitted to marry one of their citizens. Research this for your specific destination country before planning travel.",
+      },
+      {
+        heading: "Religious vs. Civil Ceremonies",
+        body: "In most countries you will need both a religious ceremony (if applicable) AND a civil registration to have a legally recognized marriage.\n\nA religious ceremony alone — nikah, church wedding, traditional ceremony — is not recognized by the U.S. government for immigration purposes. The civil registration is what creates the legal marriage.\n\nIn some countries, civil registration must happen before the religious ceremony. In others, after. Know the order required in your specific country.",
+      },
+      {
+        heading: "Legal Resources",
+        body: "U.S. Citizenship and Immigration Services: uscis.gov\nU.S. State Department — International Marriage: travel.state.gov\nInternational Marriage Broker Regulation Act (IMBRA): Read this before using any matchmaking service\nRapid Visa (K-1 visa preparation service): rapidvisa.com\nBoundless Immigration: boundless.com",
+      },
+    ],
+  },
+  {
+    id: "k1-visa",
+    title: "K-1 Visa Complete Walkthrough",
+    intro: "I used the K-1 visa. I recommend it. It is the most straightforward legal path to bringing your fiancée to the United States for the purpose of marriage. It is also the most demanding administrative process you will undertake outside of having a child. I am going to walk you through every step the way I wish someone had walked me through it — plainly, sequentially, and without minimizing how difficult it is.",
+    sections: [
+      {
+        heading: "What The K-1 Visa Is",
+        body: "The K-1 visa — also called the fiancé(e) visa — allows your foreign national fiancée to enter the United States for the sole purpose of marrying you. The marriage must be performed within 90 days of her arrival. If the marriage does not occur within 90 days, she must leave the country.\n\nAfter the marriage, she applies for Adjustment of Status to receive her Green Card. This is a separate process that begins after the wedding.",
+      },
+      {
+        heading: "Step 1 — File Form I-129F",
+        body: "You file the Petition for Alien Fiancé(e) with USCIS. This is your formal declaration that you intend to marry a specific foreign national.\n\nRequired with the I-129F:\n— Proof you are a U.S. citizen (passport copy, birth certificate, or naturalization certificate)\n— Proof you have met in person within the past two years (photos together with dates and locations visible, flight receipts, hotel receipts)\n— Proof you are both legally free to marry (divorce decrees if applicable)\n— Photos of both of you\n— Filing fee (check current fee at uscis.gov)\n\nMake a complete copy of everything you submit. USCIS will request it again.",
+      },
+      {
+        heading: "Step 2 — USCIS Reviews and Approves",
+        body: "Processing time currently averages 6-12 months depending on caseload. You will receive a receipt notice confirming USCIS has your petition. Then you wait.\n\nUSCIS may issue a Request for Evidence (RFE) asking for additional documentation. Respond completely and promptly. Incomplete responses extend the process significantly.\n\nOnce approved, USCIS forwards the petition to the National Visa Center (NVC), which then forwards it to the U.S. embassy or consulate in her country.",
+      },
+      {
+        heading: "Step 3 — The Embassy Interview",
+        body: "She will be scheduled for an interview at the U.S. embassy or consulate in her country. This is the most critical moment in the entire process.\n\nShe must bring:\n— Valid passport\n— Birth certificate\n— Police clearance certificate\n— Medical examination results (from a USCIS-approved physician)\n— DS-160 application\n— Photos\n— All relationship evidence\n— Proof of your financial support (Form I-134)\n\nDrill the interview questions together every day until the appointment. She may or may not have a translator. Prepare for both scenarios.\n\nIf she fails the interview, there is a process to reapply but it extends the timeline significantly. Preparation is not optional.",
+      },
+      {
+        heading: "Step 4 — She Arrives, You Marry",
+        body: "Once the K-1 is approved at the embassy, she has a single-entry visa valid for 6 months. She must enter the U.S. within that window.\n\nSet the wedding date before she arrives. Do not wait. The 90-day clock begins the moment she lands.\n\nI set our wedding date for the day after her arrival. There is no reason to delay once she is here.",
+      },
+      {
+        heading: "Step 5 — Adjustment of Status",
+        body: "After the wedding, file Form I-485 (Application to Register Permanent Residence) to begin the Green Card process.\n\nThis process includes biometrics appointment, medical examination, and an in-person interview with USCIS. Processing time is typically 12-24 months.\n\nDuring this period she will receive an Employment Authorization Document (EAD) allowing her to work legally in the U.S.\n\nOnce the Green Card is issued she is a Lawful Permanent Resident. After three years of marriage she may apply for U.S. citizenship.",
+      },
+      {
+        heading: "Timeline Summary",
+        body: "I-129F filing to USCIS approval: 6-12 months\nNVC processing to embassy interview: 2-4 months\nVisa issued to her arrival: days to weeks\nMarriage: within 90 days of arrival\nAdjustment of Status to Green Card: 12-24 months\nGreen Card to citizenship eligibility: 3 years\n\nTotal from first filing to citizenship: approximately 4-6 years\n\nPlan accordingly. The process is long. It is worth it.",
+      },
+      {
+        heading: "Recommended Services",
+        body: "Rapid Visa: rapidvisa.com — I used this service personally\nBoundless: boundless.com\nVisa Journey (community forums with case timelines): visajourney.com\nUSCIS official site: uscis.gov\nState Department Visa information: travel.state.gov",
+      },
+    ],
+  },
+  {
+    id: "long-distance",
+    title: "Long-Distance Relationship Management",
+    intro: "The long-distance period is your courtship. It is not a waiting room — it is the vetting process. Everything you need to know about whether this woman is the right woman can be discovered during the months between first contact and your first flight. The man who treats this period as a formality to get through is the man who boards the plane unprepared. The man who treats it as the most important phase of the entire process arrives knowing exactly who he is walking toward.",
+    sections: [
+      {
+        heading: "Communication Discipline",
+        body: "Establish a consistent communication schedule early. Same days, same times where possible. Consistency demonstrates seriousness and allows her to plan her life around your conversations — which is what a serious woman will do.\n\nWhatsApp is the primary tool. Use video calls, not just voice. Seeing each other — unfiltered, in different moods, during different circumstances — is essential vetting data.\n\nKeep records. WhatsApp timestamps every message. If her story shifts over time — details about her life, her family, her history — the record will show you.\n\nCall spontaneously occasionally. Not as surveillance — as a man who genuinely thinks of her. Also as a man who notices whether the person who answers the spontaneous call is the same as the person who answers the scheduled one.",
+      },
+      {
+        heading: "What To Cover In Six Months",
+        body: "Month 1-2: Family structure, faith practice, daily life, her expectations for marriage, her father's expectations.\n\nMonth 2-3: Her views on children, how many, how they will be raised, where you will live, how she envisions the first year after arrival.\n\nMonth 3-4: Financial expectations — remittances to her family, her work intentions after arrival, her understanding of your financial situation.\n\nMonth 4-5: Harder conversations — prior relationships if any, health history if relevant, what ended those relationships.\n\nMonth 5-6: Planning — the visit, the family meeting, the timeline for the process if things go well.\n\nIf any of these conversations produce evasion, inconsistency, or pressure — that is data.",
+      },
+      {
+        heading: "Video Call Vetting",
+        body: "Ask for spontaneous video calls at unscheduled times. The background of her calls should be consistent with the life she has described.\n\nAsk her to show you her home — not as an invasion of privacy, as a natural extension of intimacy. A woman who wants to marry you will show you where she lives.\n\nListen to what is happening around her. Is she alone? Is there a man's voice in the background she does not explain? Does she step outside for the call every time?\n\nThese observations are not paranoia. They are the same vetting tools a wise woman would use on you.",
+      },
+      {
+        heading: "Managing The Emotional Distance",
+        body: "Long-distance relationships produce real emotional intimacy and real longing. Both are appropriate. Neither should accelerate your decision-making timeline.\n\nDo not let longing override observation. Do not let emotional investment prevent you from seeing red flags clearly. The emotional weight of the relationship is real — and fraudsters understand this and use it deliberately.\n\nSet a firm internal timeline: six months of consistent communication before planning travel. Hold that line regardless of how the relationship feels.",
+      },
+    ],
+  },
+  {
+    id: "fraud-detection",
+    title: "Fraud Detection — Complete Guide",
+    intro: "I will not soften this. There are women on every matrimonial platform whose purpose is to extract money, citizenship, or both from American men. Some are operating alone. Some are operating with partners — a boyfriend who planned the scheme, a family that designed it together. The fraud is not always malicious in the way Americans think of malice. Sometimes it is desperation given a direction. That does not make it less costly to you. Learn the patterns. They are consistent enough to be taught.",
+    sections: [
+      {
+        heading: "The Twelve Warning Signs",
+        body: "1. She initiated contact within hours of you joining the platform with unusually warm, specific language.\n\n2. Her English is perfect and her availability is constant regardless of claimed time zone.\n\n3. Small financial crises begin appearing within the first 2-4 weeks — phone repair, medical bill, transportation, family emergency.\n\n4. She expresses deep emotional attachment faster than the relationship's length warrants.\n\n5. She declines spontaneous video calls or is always 'just about to go somewhere' when you call unannounced.\n\n6. Her social media accounts are new — created around the same time she appeared on the platform.\n\n7. Reverse image search of her photos returns results under a different name.\n\n8. Her story contains inconsistencies across conversations — details about her family, city, or history that shift.\n\n9. She is reluctant to involve her family in the process or provides vague explanations for why they cannot be part of the conversation.\n\n10. She pushes to move communication off the platform to WhatsApp before any real vetting has occurred.\n\n11. When you slow down or become less available, a new crisis appears to re-engage you.\n\n12. She has an answer for everything — every concern you raise is immediately and smoothly resolved.",
+      },
+      {
+        heading: "Vetting Tools",
+        body: "Reverse image search: Go to images.google.com, click the camera icon, upload her photo. If the same face appears under a different name on a different platform, you have your answer.\n\nTinEye (tineye.com): A dedicated reverse image search engine. Use it in addition to Google Images.\n\nSocial media audit: Ask for her Facebook, Instagram, or TikTok. Check when the accounts were created. Look at who comments on her posts and what they say. Check whether the account history is consistent with the life she has described.\n\nWhatsApp verification: Her WhatsApp profile photo, display name, and status should be consistent with everything else you know about her. Ask to see her contacts screen when you are on a video call together.\n\nAddress verification: If she has given you her home address, use Google Street View to verify that the address exists and that the description she has given of her neighborhood is consistent.",
+      },
+      {
+        heading: "The Money Rule",
+        body: "No money. Not a small amount. Not for a phone. Not for a sick cousin. Not for a visa fee she says she cannot afford.\n\nNo money before you have physically met her, physically met her family, and the legal process of marriage has formally begun.\n\nIf you send money and it was fraud, you have financed the fraud and taught the fraudster that it works. If you send money and it was not fraud, you have set a precedent that will follow you through the entire relationship.\n\nThe only financial transaction that belongs in the pre-marriage period is the cost of your travel to meet her.",
+      },
+      {
+        heading: "If You Suspect Fraud",
+        body: "Stop sending money immediately if you have been sending any.\n\nDo not confront her before you have documented everything — screenshots of conversations, records of any financial transactions.\n\nReport the profile to the platform. Most platforms have fraud reporting systems and will investigate and remove confirmed fraud profiles.\n\nIf you have sent money, contact your bank immediately. Depending on how it was sent, some transactions can be reversed.\n\nIf you believe you have been the victim of an international romance fraud scheme, report it to the FBI's Internet Crime Complaint Center at ic3.gov.",
+      },
+    ],
+  },
+  {
+    id: "her-arrival",
+    title: "Her Arrival & The First Year",
+    intro: "Everything you prepared for led to this. She is here. She is in your country, your city, your home. Everything that was theoretical is now real — the language barrier, the cultural adjustment, the distance from her family, the newness of your dynamic as a married couple. The first year will test everything you built. I want to prepare you for what is coming so that what is coming does not break what you built.",
+    sections: [
+      {
+        heading: "The First Week",
+        body: "She has left everything she knows. Her country, her language, her family, her community, her food, her climate, her sense of herself within a social context she understood. She is in a country where she may know no one except you.\n\nDo not leave her alone in the first week unless absolutely necessary. Your presence is her anchor.\n\nTake her to the grocery store. Let her see what is available. Let her find the ingredients that remind her of home. This is not a small thing — food is one of the primary ways humans maintain connection to their origin.\n\nDo not introduce her to too many people in the first week. Let her stabilize before you make her perform for your social circle.",
+      },
+      {
+        heading: "Language",
+        body: "If she does not speak fluent English, enroll her in English language classes within the first month. Many community colleges offer ESL programs at low or no cost.\n\nDo not use her language limitations against her in disagreements. Do not speak too fast, use too much slang, or become frustrated when she misunderstands. You chose a cross-cultural marriage. The language gap is your responsibility to bridge together.\n\nEncourage her to maintain and use her own language — with family back home, in her community here, with any children you have. Bilingual children are a gift, not a complication.",
+      },
+      {
+        heading: "Her Family Connection",
+        body: "Budget for regular communication with her family — video calls, WhatsApp, whatever they use. This is not a luxury. It is a necessity for her mental health and the stability of your marriage.\n\nBudget for one trip home in the first two years if at all possible. Returning briefly to her people — as a married woman, visibly well — reassures her family and reassures her.\n\nUnderstand that her family will call. Often. At times that are inconvenient for you. This is the life you chose. Receive it with grace.",
+      },
+      {
+        heading: "Managing Cultural Adjustment",
+        body: "She will be disoriented by American social norms. The directness of American communication, the individualism, the pace, the food, the scale of everything — all of it is different from what she knows.\n\nProtect her from becoming who she is not. The pressure to Americanize is constant and subtle. It comes from television, from social media, from other women she may meet. Your job is to protect the woman you chose — not to let the culture replace her with someone you did not choose.\n\nThis does not mean isolation. It means intentional community — finding other families with similar values, maintaining her religious practice, keeping her connected to her culture.",
+      },
+      {
+        heading: "The First Year's Hard Conversations",
+        body: "The conversations you did not finish before she arrived will surface in the first year. The financial expectations you were vague about. The family obligation questions you deferred. The disagreements about child-rearing you postponed.\n\nHave them now. Have them early. Have them with patience and without contempt. A marriage counselor with cross-cultural experience is not a sign of failure — it is a resource available to wise men.",
+      },
+    ],
+  },
+  {
+    id: "children-family",
+    title: "Children & Family Structure",
+    intro: "The reason for all of this is the children. Everything I have done — the travel, the legal process, the work of building a cross-cultural marriage — has been in service of producing children who are connected to something older and more real than what America currently offers. Children who speak more than one language. Children who have a father and a mother in the same home. Children who know where they come from. That is the return on the investment.",
+    sections: [
+      {
+        heading: "Discussing Children Before Marriage",
+        body: "How many children do you want? How many does she want? This conversation must happen before the wedding. A man who wants four children and a woman who wants one are not compatible on a fundamental level, regardless of how real the love is.\n\nHow will the children be raised religiously? If you are of different faiths or different levels of practice, this requires specific agreement — not a general intention to 'figure it out.' Figure it out before the children arrive.\n\nWhere will the children attend school? Will they attend a religious school, a public school, a private school? Will they be homeschooled? These decisions shape the entire child.",
+      },
+      {
+        heading: "Bilingual and Bicultural Children",
+        body: "Your children should speak her language. This is non-negotiable for the long-term health of the family. A child who cannot speak to their grandmother in her language has been severed from half of their heritage.\n\nSpeak her language in the home alongside English from birth. Children acquire multiple languages simultaneously with remarkable ease when both are present from the beginning.\n\nCelebrate both cultural traditions. Her holidays and yours. Her food and yours. Her music and yours. The children who grow up in this richness are equipped for a world that is increasingly global.",
+      },
+      {
+        heading: "Dual Citizenship",
+        body: "Depending on her country of origin, your children may qualify for dual citizenship — citizenship in both the United States and her home country.\n\nThis is one of the most significant gifts you can give them. The ability to live and work in two countries, to hold two passports, to belong to two nations — this is a form of inheritance that no financial gift matches.\n\nResearch the citizenship laws of her country before the children are born. Some countries require registration of the birth within a specific timeframe to preserve the child's claim to citizenship.",
+      },
+      {
+        heading: "The Father's Role",
+        body: "You chose a traditional wife because you believe in traditional family structure. That structure requires you to be present, consistent, and engaged as a father.\n\nPresence means physical presence — in the home, at meals, at bedtimes, at school events.\n\nConsistency means your children know what you stand for and what you expect because you demonstrate it every day without exception.\n\nEngagement means knowing your children — their personalities, their struggles, their friendships, their inner lives.",
+      },
+    ],
+  },
+  {
+    id: "legal-protection",
+    title: "Legal Protection",
+    intro: "I do not raise this subject to create fear. I raise it because too many men have arrived at this point — after everything they built — and lost it through legal exposure they did not anticipate. A prenuptial agreement is not a statement of distrust. It is a statement of clarity. Clarity protects both of you. Here is what you need to know.",
+    sections: [
+      {
+        heading: "The Prenuptial Agreement",
+        body: "A prenuptial agreement — drafted by an attorney before the wedding — establishes what each party brings into the marriage and what happens to those assets if the marriage ends.\n\nThis is especially important in your situation because:\n1. You have likely spent significant resources on the immigration process\n2. The financial power dynamic between you and your fiancée may be significant\n3. U.S. divorce law is heavily influenced by state-specific rules that may not reflect what you agreed to in conversation\n\nA prenuptial agreement does not prevent love. It prevents misunderstanding.",
+      },
+      {
+        heading: "What To Include",
+        body: "Assets you bring into the marriage — property, savings, investments, business interests.\n\nDebts you bring into the marriage — student loans, mortgages, credit card debt.\n\nWhat constitutes marital property versus individual property during the marriage.\n\nSpousal support provisions — if the marriage ends, what financial obligation do you carry?\n\nIf you are incorporating the mahr from an Islamic marriage contract, this can be referenced in the prenuptial agreement and may be enforceable in U.S. courts depending on the state.",
+      },
+      {
+        heading: "Immigration-Specific Legal Protections",
+        body: "The I-864 Affidavit of Support — which you file as part of the Adjustment of Status process — creates a legal obligation to financially support your spouse at 125% of the federal poverty level. This obligation continues even if the marriage ends, until she becomes a U.S. citizen, works for 40 qualifying quarters, or dies.\n\nUnderstand this obligation fully before you sign it. Consult an immigration attorney.\n\nDo not co-sign loans or credit cards for your spouse until the marriage is stable and trust is established. Financial entanglement with someone you do not fully know yet is a legal risk.",
+      },
+      {
+        heading: "Finding The Right Attorney",
+        body: "You need two attorneys for this process — an immigration attorney and a family law attorney. They have different specializations and you need both.\n\nAmerican Immigration Lawyers Association attorney finder: ailf.org\nState bar association referrals for family law attorneys in your state\n\nConsult with an attorney before the wedding — not after a problem arises.",
+      },
+    ],
+  },
+  {
+    id: "stepfather",
+    title: "The Step-Father Question",
+    intro: "I wrote about this in the book. I lived it. My father was a step-father. I was a step-father. I watched a man I knew give everything he had to children that were not his, and die alone while they divided his possessions. This is a subject I take seriously because the consequences of getting it wrong are serious — not just for you, but for the child. Here is what I know.",
+    sections: [
+      {
+        heading: "The Decision",
+        body: "If the woman you are pursuing has a child from a previous relationship, the question is not whether you can love the child. The question is whether you have decided to be that child's father — not in the warm feeling of early love, but in the 3am illness, the school meeting, the discipline conversation, the year when the child tests every limit you have.\n\nDeciding in the warmth of early love is not deciding. Deciding after you have thought through the specific shape of the responsibility — that is deciding.\n\nIf you cannot honestly say you have decided, the honest conversation with her is: I care about you deeply and I am not yet ready to be a father to your child. That conversation, however painful, is more respectful than a false yes.",
+      },
+      {
+        heading: "What The Child Needs",
+        body: "Consistency above all else. A child who has already experienced loss — the absence of their biological father — needs to know that the man in their life will not disappear. Every promise you make to that child is a contract.\n\nDo not try to replace the biological father. You are not replacing anyone — you are adding something. Be clear about your role without undermining whatever healthy connection the child has to their biological parent.\n\nBe patient with the adjustment period. Children test new authority figures. This is not rejection — it is the appropriate behavior of a child who has learned that adults leave. Prove them wrong. Consistently. Over time.",
+      },
+      {
+        heading: "Legal Considerations",
+        body: "If you intend to adopt the child, begin the legal process with an adoption attorney. This formalizes your parental rights and responsibilities in a way that protects both of you.\n\nIf you do not adopt, understand your legal standing in relation to the child in your state. In most states, a step-parent has no automatic legal rights regarding a step-child, which can create complications in medical, educational, and emergency situations.\n\nIn the event the marriage ends, custody of the child will revert to the biological mother unless you have adopted. Understand this before you form a deep bond with the child.",
+      },
+    ],
+  },
+  {
+    id: "community-resources",
+    title: "Community Resources",
+    intro: "You are not doing this alone. There are men who have done this before you, men doing it alongside you right now, and resources built specifically for this journey. Use them. The man who refuses help because he thinks he should figure it out alone is the man who makes expensive and avoidable mistakes. Here is where to find support at every stage.",
+    sections: [
+      {
+        heading: "Immigration Resources",
+        body: "USCIS — U.S. Citizenship and Immigration Services: uscis.gov\nU.S. State Department Visas: travel.state.gov\nVisa Journey (community forums, case timelines, real user experiences): visajourney.com\nRapid Visa (K-1 visa preparation service): rapidvisa.com\nBoundless Immigration: boundless.com\nAmerican Immigration Lawyers Association: aila.org",
+      },
+      {
+        heading: "Legal Resources",
+        body: "American Immigration Lawyers Association attorney finder: aila.org\nState bar association referral services — search '[your state] bar association attorney referral'\nNational Family Law Advisory Council: nflac.net\nLaw Help (free and low-cost legal aid): lawhelp.org",
+      },
+      {
+        heading: "Cultural and Language Resources",
+        body: "Duolingo: Free language learning for Arabic, French, Spanish, Indonesian, and many others\nRosetta Stone: More comprehensive paid language learning\nPimsleur: Audio-based language learning — excellent for pronunciation\nCultural Atlas (cultureatlas.sbs.com.au): Country-specific cultural guides covering family, communication, values, and etiquette",
+      },
+      {
+        heading: "Fraud Prevention",
+        body: "FBI Internet Crime Complaint Center: ic3.gov\nFederal Trade Commission Romance Scam reporting: reportfraud.ftc.gov\nReverse image search: images.google.com and tineye.com\nSocial Catfish (identity verification service): socialcatfish.com",
+      },
+      {
+        heading: "The Consulate",
+        body: "The community forum built into this platform — The Consulate — is your most immediate resource. Men at every stage of this process are in that space. Men who have completed the journey. Men in the middle of it. Men just beginning.\n\nAsk your questions there. Share what you learn. Hold each other to the standard. That is the purpose of the space.",
+      },
+    ],
+  },
+];
+
 const REGIONS_COURSE = [
   { id:"na", label:"North Africa", color:"#c8963e", desc:"Morocco · Tunisia · Algeria · Egypt",
     context:"North Africa operates on a high-context cultural framework. What is not said carries as much weight as what is. Family honor is structural, not sentimental. A father's silence is not indifference — it is evaluation. Islam governs the rhythm of daily life.",
@@ -2649,6 +3006,7 @@ export default function InternationalLover() {
   const [activeChapter, setActiveChapter] = useState(0);
   const [speaking, setSpeaking] = useState(false);
   const [progress, setProgress] = useState({});
+  const [activeResource, setActiveResource] = useState(null);
 
   useEffect(() => {
     setTimeout(() => setHeroVisible(true), 100);
@@ -2759,6 +3117,45 @@ export default function InternationalLover() {
     );
   }
 
+  // ── RESOURCE READER ──
+  if (view === "resource" && activeResource) {
+    const mod = activeResource;
+    return (
+      <div style={{ minHeight:"100vh", background:C.dark, color:C.cream, fontFamily:"Georgia,serif" }}>
+        <div style={{ background:C.navyDeep, borderBottom:"1px solid " + C.border, padding:"1rem 1.5rem", display:"flex", alignItems:"center", gap:"1rem", flexWrap:"wrap" }}>
+          <button onClick={() => { stopSpeech(); setView("library"); }} style={{ background:"none", border:"1px solid " + C.gold, color:C.gold, padding:"6px 14px", borderRadius:"20px", cursor:"pointer", fontSize:"13px", fontFamily:"sans-serif" }}>← Library</button>
+          <div style={{ flex:1 }}>
+            <div style={{ fontSize:"11px", color:C.muted, letterSpacing:"0.15em", textTransform:"uppercase", fontFamily:"sans-serif" }}>Resource Library</div>
+            <div style={{ fontSize:"15px", color:C.goldLight }}>{mod.title}</div>
+          </div>
+          <button onClick={() => { const text = mod.intro + " " + mod.sections.map(s => s.heading + ". " + s.body).join(" "); speaking ? stopSpeech() : speak(text); }} style={{ background:speaking?C.gold:"transparent", border:"1px solid " + C.gold, color:speaking?C.dark:C.gold, padding:"6px 16px", borderRadius:"20px", cursor:"pointer", fontSize:"13px", fontFamily:"sans-serif" }}>{speaking ? "⏹ Stop" : "▶ Read Aloud"}</button>
+        </div>
+        <div style={{ maxWidth:"720px", margin:"0 auto", padding:"3rem 1.5rem" }}>
+          <div style={{ background:C.navyDeep, border:"1px solid " + C.border, borderLeft:"3px solid " + C.gold, padding:"1.5rem", marginBottom:"2.5rem" }}>
+            <div style={{ fontSize:9, letterSpacing:"0.2em", color:C.gold, fontFamily:"sans-serif", marginBottom:10 }}>FROM THE AUTHOR</div>
+            <p style={{ fontSize:"clamp(14px,2vw,16px)", color:C.cream, lineHeight:1.9, fontFamily:"Georgia,serif", margin:0 }}>{mod.intro}</p>
+          </div>
+          {mod.sections.map((s, i) => (
+            <div key={i} style={{ marginBottom:"2.5rem" }}>
+              <div style={{ fontSize:13, color:C.gold, fontFamily:"sans-serif", fontWeight:700, letterSpacing:"0.08em", textTransform:"uppercase", marginBottom:12, paddingBottom:8, borderBottom:"1px solid " + C.border }}>{s.heading}</div>
+              {s.body.split("\n\n").map((para, j) => (
+                <p key={j} style={{ fontSize:"clamp(13px,1.8vw,15px)", color:C.creamDim, lineHeight:1.9, marginBottom:"1rem", fontFamily:"sans-serif" }}>{para}</p>
+              ))}
+            </div>
+          ))}
+          <div style={{ display:"flex", gap:10, marginTop:"3rem", paddingTop:"2rem", borderTop:"1px solid " + C.border }}>
+            {RESOURCE_MODULES.findIndex(m => m.id === mod.id) > 0 && (
+              <button onClick={() => { stopSpeech(); const idx = RESOURCE_MODULES.findIndex(m => m.id === mod.id); setActiveResource(RESOURCE_MODULES[idx-1]); window.scrollTo({top:0,behavior:"instant"}); }} style={{ background:"none", border:"1px solid " + C.gold, color:C.gold, padding:"10px 20px", borderRadius:"20px", cursor:"pointer", fontSize:"14px", fontFamily:"sans-serif" }}>← Previous</button>
+            )}
+            {RESOURCE_MODULES.findIndex(m => m.id === mod.id) < RESOURCE_MODULES.length - 1 && (
+              <button onClick={() => { stopSpeech(); const idx = RESOURCE_MODULES.findIndex(m => m.id === mod.id); setActiveResource(RESOURCE_MODULES[idx+1]); window.scrollTo({top:0,behavior:"instant"}); }} style={{ background:C.gold, border:"none", color:C.dark, padding:"10px 24px", borderRadius:"20px", cursor:"pointer", fontSize:"14px", fontWeight:"bold", fontFamily:"sans-serif" }}>Next Module →</button>
+            )}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   // ── LIBRARY ──
   if (view === "library") {
     const lastChapter = progress.book || 0;
@@ -2829,6 +3226,16 @@ export default function InternationalLover() {
               ))}
             </div>
           </div>
+          <h2 style={{ color:C.goldLight, fontSize:"1rem", letterSpacing:"0.1em", textTransform:"uppercase", marginBottom:"1.25rem", fontWeight:"normal", fontFamily:"sans-serif" }}>Resource Library</h2>
+          <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit, minmax(220px,1fr))", gap:10, marginBottom:"2.5rem" }}>
+            {RESOURCE_MODULES.map((mod, i) => (
+              <div key={mod.id} onClick={() => { setActiveResource(mod); setView("resource"); }} style={{ background:C.navyDeep, border:"1px solid " + C.border, padding:"1rem", cursor:"pointer" }}>
+                <div style={{ fontSize:9, color:C.goldDim, fontFamily:"sans-serif", letterSpacing:"0.1em", marginBottom:4 }}>MODULE {String(i+1).padStart(2,"0")}</div>
+                <div style={{ fontSize:13, color:C.goldLight, fontFamily:"Georgia,serif" }}>{mod.title}</div>
+              </div>
+            ))}
+          </div>
+
           <h2 style={{ color:C.goldLight, fontSize:"1rem", letterSpacing:"0.1em", textTransform:"uppercase", marginBottom:"1.25rem", fontWeight:"normal", fontFamily:"sans-serif" }}>Request a Briefing</h2>
           <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit, minmax(200px,1fr))", gap:"1rem" }}>
             {CONSULTATIONS.map(c => (
