@@ -19,7 +19,7 @@ const COURSE_OPENING = [
 
 function Portrait({ id, name }) {
   return (
-    <div style={{ width:"100%", height:180, overflow:"hidden", background:"#0f2347", position:"relative" }}>
+    <div style={{ width:"100%", height:220, overflow:"hidden", background:"#0f2347", position:"relative" }}>
       <img
         src={"/women/" + id + ".jpg"}
         alt={name}
@@ -1284,14 +1284,27 @@ export default function CoursePage() {
       <div style={{ minHeight:"100vh", background:C.dark, color:C.cream, fontFamily:"Georgia,serif" }}>
         <NavBar left={<button onClick={() => setPhase("roster")} style={{ background:"none", border:"1px solid #b8963e", color:"#b8963e", padding:"6px 14px", borderRadius:"20px", cursor:"pointer", fontSize:"13px", fontFamily:"sans-serif" }}>← Roster</button>} title={region.label + " · " + woman.name + " · Scene " + (sceneIndex+1) + " of " + ((DEEP_SCENARIOS[woman.id] || {}).scenes || []).length} right={<div style={{ fontSize:9, color:C.mutedDark, fontFamily:"sans-serif" }}>Pursuing {woman.name}</div>} />
         <div style={{ maxWidth:680, margin:"0 auto", padding:"2rem 1.5rem" }}>
-          <div style={{ display:"flex", gap:8, marginBottom:"1.5rem", flexWrap:"wrap", alignItems:"center" }}>
-            {region.women.map(w => (
-              <div key={w.id} style={{ padding:"4px 10px", background:w.id===selectedWomanId?"rgba(184,150,62,0.15)":C.navyDeep, border:`1px solid ${w.id===selectedWomanId?C.gold:"#1e3a6e"}`, fontSize:9, fontFamily:"sans-serif", cursor:w.id!==selectedWomanId?"pointer":"default" }}
-                onClick={() => { if (w.id !== selectedWomanId) { setSelectedWomanId(w.id); setSceneIndex(0); setChoiceHistory([]); setLastConsequence(null); }}}>
-                <span style={{ color:w.id===selectedWomanId?C.goldLight:C.mutedDark }}>{w.name}</span>
-                <span style={{ color:w.id===selectedWomanId?C.gold:"#2a3a5e", marginLeft:6 }}>{w.id===selectedWomanId?"● ACTIVE":"○"}</span>
+          <div style={{ display:"flex", gap:16, alignItems:"flex-start", marginBottom:"1.5rem" }}>
+            <div style={{ width:80, height:100, flexShrink:0, overflow:"hidden", border:"2px solid #b8963e" }}>
+              <img src={"/women/" + woman.id + ".jpg"} alt={woman.name} style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center top" }} />
+            </div>
+            <div style={{ flex:1 }}>
+              <div style={{ fontSize:9, letterSpacing:"0.2em", color:C.gold, fontFamily:"sans-serif", marginBottom:4 }}>PURSUING</div>
+              <div style={{ fontSize:17, color:C.goldLight, fontFamily:"Georgia,serif", marginBottom:2 }}>{woman.name}</div>
+              <div style={{ fontSize:10, color:C.muted, fontFamily:"sans-serif", marginBottom:10 }}>{woman.age} · {woman.city}</div>
+              <div style={{ display:"flex", gap:6, flexWrap:"wrap" }}>
+                {region.women.map(w => (
+                  <div key={w.id} onClick={() => { if (w.id !== selectedWomanId) { setSelectedWomanId(w.id); setSceneIndex(0); setChoiceHistory([]); setLastConsequence(null); }}}
+                    style={{ display:"flex", alignItems:"center", gap:5, padding:"3px 8px", background:w.id===selectedWomanId?"rgba(184,150,62,0.15)":C.navyDeep, border:"1px solid " + (w.id===selectedWomanId?C.gold:"#1e3a6e"), fontSize:9, fontFamily:"sans-serif", cursor:w.id!==selectedWomanId?"pointer":"default" }}>
+                    <div style={{ width:18, height:18, overflow:"hidden", flexShrink:0 }}>
+                      <img src={"/women/" + w.id + ".jpg"} alt={w.name} style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center top" }} />
+                    </div>
+                    <span style={{ color:w.id===selectedWomanId?C.goldLight:C.mutedDark }}>{w.name}</span>
+                    <span style={{ color:w.id===selectedWomanId?C.gold:"#2a3a5e" }}>{w.id===selectedWomanId?"●":"○"}</span>
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
           </div>
 
           {lastConsequence && (
@@ -1327,11 +1340,17 @@ export default function CoursePage() {
       <div style={{ minHeight:"100vh", background:C.dark, color:C.cream, fontFamily:"Georgia,serif" }}>
         <NavBar title={region.label + " — Outcome"} />
         <div style={{ maxWidth:640, margin:"0 auto", padding:"3rem 1.5rem" }}>
-          <div style={{ textAlign:"center", marginBottom:"2rem" }}>
-            <div style={{ fontSize:9, letterSpacing:"0.3em", color, fontFamily:"sans-serif", marginBottom:8 }}>ENDING</div>
-            <div style={{ fontSize:"clamp(16px,2.5vw,22px)", color, fontFamily:"Georgia,serif", marginBottom:16 }}>{ENDING_LABELS[outcome] || outcome}</div>
-            <div style={{ width:48, height:2, background:color, margin:"0 auto" }} />
+          <div style={{ display:"flex", gap:16, alignItems:"flex-start", marginBottom:"2rem" }}>
+            <div style={{ width:80, height:100, flexShrink:0, overflow:"hidden", border:`2px solid ${color}` }}>
+              <img src={"/women/" + woman.id + ".jpg"} alt={woman.name} style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center top" }} />
+            </div>
+            <div style={{ flex:1 }}>
+              <div style={{ fontSize:9, letterSpacing:"0.3em", color, fontFamily:"sans-serif", marginBottom:6 }}>ENDING</div>
+              <div style={{ fontSize:"clamp(16px,2.5vw,20px)", color, fontFamily:"Georgia,serif", marginBottom:6 }}>{ENDING_LABELS[outcome] || outcome}</div>
+              <div style={{ fontSize:10, color:C.muted, fontFamily:"sans-serif" }}>{woman.name} · {woman.city}</div>
+            </div>
           </div>
+          <div style={{ width:48, height:2, background:color, margin:"0 0 1.5rem" }} />
           {lastConsequence && (
             <div style={{ background:"rgba(184,150,62,0.06)", border:"0.5px solid #b8963e", padding:"1rem 1.25rem", marginBottom:"1.5rem" }}>
               <div style={{ fontSize:9, letterSpacing:"0.15em", color:C.goldDim, fontFamily:"sans-serif", marginBottom:6 }}>YOUR FINAL DECISION LED TO</div>
