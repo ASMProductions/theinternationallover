@@ -2337,8 +2337,8 @@ function CourseView({ onBack }) {
             <text x="30" y="10" textAnchor="middle" fill="#b8963e" fontSize="10">✦</text>
           </svg>
           <div style={{ marginBottom:"2.5rem" }}>
-            {COURSE_OPENING.split("\n\n").map((p, i) => (
-              <p key={i} style={{ fontSize:"clamp(13px,1.8vw,15px)", color: i === COURSE_OPENING.split("\n\n").length-1 ? "#b8963e" : "#c8b890", lineHeight:1.9, marginBottom:"1.25rem", fontFamily:"sans-serif", fontStyle: i === COURSE_OPENING.split("\n\n").length-1 ? "italic" : "normal" }}>{p}</p>
+            {COURSE_OPENING.map((p, i) => (
+              <p key={i} style={{ fontSize:"clamp(13px,1.8vw,15px)", color: i === COURSE_OPENING.length-1 ? "#b8963e" : "#c8b890", lineHeight:1.9, marginBottom:"1.25rem", fontFamily:"sans-serif", fontStyle: i === COURSE_OPENING.length-1 ? "italic" : "normal" }}>{p}</p>
             ))}
           </div>
           <button onClick={() => setPhase("map")} style={{ padding:"14px 40px", background:"#b8963e", color:"#0f2347", border:"none", cursor:"pointer", fontSize:13, fontWeight:700, letterSpacing:"0.15em", textTransform:"uppercase", fontFamily:"sans-serif" }}>
@@ -2370,7 +2370,7 @@ function CourseView({ onBack }) {
             <div style={{ display:"flex", justifyContent:"center", gap:12, flexWrap:"wrap" }}>
               {REGIONS_COURSE.map(r => (
                 <div key={r.id} style={{ display:"inline-flex", flexDirection:"column", alignItems:"center", justifyContent:"center", width:64, height:64, borderRadius:"50%", border:`1.5px ${stampedRegions.includes(r.id)?"solid":"dashed"} #b8963e`, background:stampedRegions.includes(r.id)?"rgba(184,150,62,0.12)":"transparent", opacity:stampedRegions.includes(r.id)?1:0.3 }}>
-                  <div style={{ fontSize:6.5, color:"#b8963e", fontFamily:"sans-serif", letterSpacing:"0.06em", textAlign:"center", lineHeight:1.35 }}>{r.label.toUpperCase().split(" ").join("\n")}</div>
+                  <div style={{ fontSize:6.5, color:"#b8963e", fontFamily:"sans-serif", letterSpacing:"0.06em", textAlign:"center", lineHeight:1.35 }}>{r.label.toUpperCase().split(" ").join(" ")}</div>
                 </div>
               ))}
             </div>
@@ -2573,7 +2573,7 @@ function CourseView({ onBack }) {
             <div style={{ display:"flex", justifyContent:"center", gap:8, marginBottom:16, flexWrap:"wrap" }}>
               {REGIONS_COURSE.map(r => (
                 <div key={r.id} style={{ display:"inline-flex", flexDirection:"column", alignItems:"center", justifyContent:"center", width:44, height:44, borderRadius:"50%", border:"1.5px solid #b8963e", background:"rgba(184,150,62,0.12)" }}>
-                  <div style={{ fontSize:5.5, color:"#b8963e", fontFamily:"sans-serif", textAlign:"center", lineHeight:1.3 }}>{r.label.split(" ").map(w=>w.slice(0,3).toUpperCase()).join("\n")}</div>
+                  <div style={{ fontSize:5.5, color:"#b8963e", fontFamily:"sans-serif", textAlign:"center", lineHeight:1.3 }}>{r.label.split(" ").map(w=>w.slice(0,3).toUpperCase()).join(" ")}</div>
                 </div>
               ))}
             </div>
@@ -2743,7 +2743,7 @@ export default function InternationalLover() {
         <div style={{ maxWidth:"720px", margin:"0 auto", padding:"3rem 1.5rem" }}>
           <div style={{ fontSize:"11px", color:C.muted, letterSpacing:"0.2em", textTransform:"uppercase", marginBottom:"0.5rem", fontFamily:"sans-serif" }}>Chapter {activeChapter + 1} of {BOOK_CHAPTERS.length}</div>
           <h1 style={{ color:C.goldLight, fontSize:"clamp(1.4rem, 3vw, 2rem)", marginBottom:"2.5rem", fontWeight:"normal" }}>{chapter.title}</h1>
-          {chapter.content.split("\n\n").map((para, i) => (
+          {chapter.content.split("  ").map((para, i) => (
             <p key={i} style={{ lineHeight:1.9, marginBottom:"1.5rem", color:C.creamDim, fontSize:"clamp(15px, 2vw, 17px)", fontFamily:"sans-serif" }}>{para}</p>
           ))}
           <div style={{ display:"flex", justifyContent:"space-between", marginTop:"4rem", paddingTop:"2rem", borderTop:`1px solid ${C.border}` }}>
@@ -2776,12 +2776,30 @@ export default function InternationalLover() {
           </div>
         </div>
         <div style={{ maxWidth:"900px", margin:"0 auto", padding:"2rem 1.5rem" }}>
-          <div onClick={() => window.location.href = "/course"} style={{ background:`linear-gradient(135deg, ${C.navyDeep}, ${C.navy})`, border:`2px solid ${C.gold}`, padding:"2rem", marginBottom:"2rem", cursor:"pointer", position:"relative", boxShadow:`0 4px 24px rgba(184,150,62,0.2)` }}>
+          <div onClick={() => window.location.href = "/community"} style={{ background:C.navyDeep, border:"1px solid #1e3a6e", padding:"1.5rem", marginBottom:"1rem", cursor:"pointer", display:"flex", justifyContent:"space-between", alignItems:"center", flexWrap:"wrap", gap:12 }}>
+            <div>
+              <div style={{ fontSize:9, letterSpacing:"0.2em", color:C.gold, fontFamily:"sans-serif", marginBottom:4 }}>THE CONSULATE</div>
+              <div style={{ fontSize:16, color:C.goldLight, fontFamily:"Georgia,serif", marginBottom:4 }}>Community Forum</div>
+              <div style={{ fontSize:12, color:C.creamDim, fontFamily:"sans-serif" }}>Author posts · Member threads · Discussion behind the paywall</div>
+            </div>
+            <div style={{ padding:"10px 20px", background:"transparent", border:"1px solid #b8963e", color:C.gold, fontSize:12, fontWeight:700, fontFamily:"sans-serif" }}>Enter →</div>
+          </div>
+
+                    <div onClick={() => window.location.href = "/course"} style={{ background:`linear-gradient(135deg, ${C.navyDeep}, ${C.navy})`, border:`2px solid ${C.gold}`, padding:"2rem", marginBottom:"1rem", cursor:"pointer", position:"relative", boxShadow:`0 4px 24px rgba(184,150,62,0.2)` }}>
             <div style={{ position:"absolute", top:12, right:16, fontSize:20, color:C.gold, opacity:0.4 }}>✦</div>
             <div style={{ fontSize:9, letterSpacing:"0.3em", color:C.gold, fontFamily:"sans-serif", marginBottom:8 }}>THE COURSE</div>
             <div style={{ fontSize:"clamp(20px,3vw,26px)", color:C.goldLight, fontFamily:"Georgia,serif", marginBottom:8 }}>Find Her. Meet Her. Vet Her.</div>
             <div style={{ fontSize:12, color:C.creamDim, fontFamily:"sans-serif", marginBottom:16, lineHeight:1.65 }}>Five regions · Fifteen virtual women representing a broad demographic of potential mates · Branching scenarios · All five possible endings · Certificate of Commission</div>
             <div style={{ display:"inline-block", padding:"10px 28px", background:C.gold, color:C.navyDeep, fontSize:13, fontWeight:700, letterSpacing:"0.1em", fontFamily:"sans-serif" }}>Enter the Course →</div>
+          </div>
+
+          <div onClick={() => window.location.href = "/community"} style={{ background:C.navyDeep, border:"1px solid #1e3a6e", padding:"1.5rem", marginBottom:"2rem", cursor:"pointer", display:"flex", justifyContent:"space-between", alignItems:"center", flexWrap:"wrap", gap:12 }}>
+            <div>
+              <div style={{ fontSize:9, letterSpacing:"0.2em", color:C.gold, fontFamily:"sans-serif", marginBottom:4 }}>THE CONSULATE</div>
+              <div style={{ fontSize:16, color:C.goldLight, fontFamily:"Georgia,serif", marginBottom:4 }}>Community Forum</div>
+              <div style={{ fontSize:12, color:C.creamDim, fontFamily:"sans-serif" }}>Author posts · Member threads · Discussion behind the paywall</div>
+            </div>
+            <div style={{ padding:"10px 20px", background:"transparent", border:"1px solid #b8963e", color:C.gold, fontSize:12, fontWeight:700, fontFamily:"sans-serif" }}>Enter →</div>
           </div>
           <h2 style={{ color:C.goldLight, fontSize:"1rem", letterSpacing:"0.1em", textTransform:"uppercase", marginBottom:"1.25rem", fontWeight:"normal", fontFamily:"sans-serif" }}>The Book</h2>
           <div style={{ background:C.navyDeep, border:`1px solid ${C.border}`, borderRadius:"12px", overflow:"hidden", marginBottom:"2.5rem" }}>
@@ -2907,7 +2925,7 @@ export default function InternationalLover() {
           <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit, minmax(150px,1fr))", gap:12, marginBottom:"2rem" }}>
             {REGIONS.map(r => (
               <div key={r.id} onClick={() => stampRegion(r.id)} style={{ background:stampedRegions.includes(r.id)?C.navyMid:C.navy, border:`1px solid ${stampedRegions.includes(r.id)?C.gold:C.border}`, padding:"1.25rem 1rem", textAlign:"center", cursor:"pointer", transition:"all 0.3s", boxShadow:stampedRegions.includes(r.id)?`0 0 16px rgba(184,150,62,0.2)`:"none" }}>
-                <StampRing label={r.label.toUpperCase().split(" ").join("\n")} size={64} active={stampedRegions.includes(r.id)} />
+                <StampRing label={r.label.toUpperCase().split(" ").join(" ")} size={64} active={stampedRegions.includes(r.id)} />
                 <div style={{ fontSize:11, color:stampedRegions.includes(r.id)?C.goldLight:C.cream, marginTop:10, marginBottom:4, fontFamily:"sans-serif" }}>{r.label}</div>
                 <div style={{ fontSize:9, color:C.muted, fontFamily:"sans-serif", lineHeight:1.5 }}>{r.desc}</div>
               </div>
@@ -2916,7 +2934,7 @@ export default function InternationalLover() {
           <div style={{ background:C.navy, border:`1px solid ${C.border}`, padding:"1.5rem", textAlign:"center" }}>
             <div style={{ fontSize:9, letterSpacing:"0.2em", color:C.mutedDark, fontFamily:"sans-serif", marginBottom:12 }}>YOUR PASSPORT STAMP PAGE</div>
             <div style={{ display:"flex", justifyContent:"center", gap:14, flexWrap:"wrap" }}>
-              {REGIONS.map(r => <StampRing key={r.id} label={r.label.split(" ").map(w=>w.slice(0,3).toUpperCase()).join("\n")} size={56} active={stampedRegions.includes(r.id)} />)}
+              {REGIONS.map(r => <StampRing key={r.id} label={r.label.split(" ").map(w=>w.slice(0,3).toUpperCase()).join(" ")} size={56} active={stampedRegions.includes(r.id)} />)}
             </div>
             <div style={{ fontSize:10, color:C.mutedDark, marginTop:10, fontFamily:"sans-serif" }}>
               {stampedRegions.length === 5 ? "All five regions certified — certificate unlocked ✦" : stampedRegions.length > 0 ? `${stampedRegions.length} of 5 regions stamped` : "Click a region above to preview your stamp page"}
@@ -3098,7 +3116,7 @@ export default function InternationalLover() {
               <div style={{ fontSize:9, letterSpacing:"0.3em", color:C.muted, fontFamily:"sans-serif", marginBottom:16 }}>THE INTERNATIONAL LOVER™</div>
               <div style={{ display:"flex", justifyContent:"center", margin:"0 auto 16px" }}><ILShield size={56} /></div>
               <div style={{ display:"flex", justifyContent:"center", gap:8, marginBottom:16, flexWrap:"wrap" }}>
-                {REGIONS.map(r => <StampRing key={r.id} label={r.label.split(" ").map(w=>w.slice(0,3).toUpperCase()).join("\n")} size={44} active={true} />)}
+                {REGIONS.map(r => <StampRing key={r.id} label={r.label.split(" ").map(w=>w.slice(0,3).toUpperCase()).join(" ")} size={44} active={true} />)}
               </div>
               <GoldDivider />
               <div style={{ marginTop:"1.25rem", fontSize:10, letterSpacing:"0.2em", color:C.muted, fontFamily:"sans-serif", marginBottom:10 }}>CERTIFICATE OF COMMISSION</div>
