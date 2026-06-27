@@ -3200,6 +3200,7 @@ export default function InternationalLover() {
           </div>
           <div style={{ display:"flex", gap:"0.75rem" }}>
             <button onClick={() => setView("landing")} style={{ background:"none", border:`1px solid ${C.border}`, color:C.muted, padding:"6px 14px", borderRadius:"20px", cursor:"pointer", fontSize:"12px", fontFamily:"sans-serif" }}>Home</button>
+            <a href="/matrimonial" style={{ background:C.gold, color:C.navyDeep, padding:"6px 16px", borderRadius:"20px", cursor:"pointer", fontSize:"12px", fontWeight:700, fontFamily:"sans-serif", textDecoration:"none" }}>Matrimonial</a>
             <button onClick={() => { sessionStorage.clear(); setHasAccess(false); setView("landing"); }} style={{ background:"none", border:`1px solid ${C.border}`, color:C.muted, padding:"6px 14px", borderRadius:"20px", cursor:"pointer", fontSize:"12px", fontFamily:"sans-serif" }}>Sign Out</button>
           </div>
         </div>
@@ -3221,14 +3222,6 @@ export default function InternationalLover() {
             <div style={{ display:"inline-block", padding:"10px 28px", background:C.gold, color:C.navyDeep, fontSize:13, fontWeight:700, letterSpacing:"0.1em", fontFamily:"sans-serif" }}>Enter the Course →</div>
           </div>
 
-          <div onClick={() => window.location.href = "/community"} style={{ background:C.navyDeep, border:"1px solid #1e3a6e", padding:"1.5rem", marginBottom:"2rem", cursor:"pointer", display:"flex", justifyContent:"space-between", alignItems:"center", flexWrap:"wrap", gap:12 }}>
-            <div>
-              <div style={{ fontSize:9, letterSpacing:"0.2em", color:C.gold, fontFamily:"sans-serif", marginBottom:4 }}>THE CONSULATE</div>
-              <div style={{ fontSize:16, color:C.goldLight, fontFamily:"Georgia,serif", marginBottom:4 }}>Community Forum</div>
-              <div style={{ fontSize:12, color:C.creamDim, fontFamily:"sans-serif" }}>Author posts · Member threads · Discussion behind the paywall</div>
-            </div>
-            <div style={{ padding:"10px 20px", background:"transparent", border:"1px solid #b8963e", color:C.gold, fontSize:12, fontWeight:700, fontFamily:"sans-serif" }}>Enter →</div>
-          </div>
           <h2 style={{ color:C.goldLight, fontSize:"1rem", letterSpacing:"0.1em", textTransform:"uppercase", marginBottom:"1.25rem", fontWeight:"normal", fontFamily:"sans-serif" }}>The Book</h2>
           <div style={{ background:C.navyDeep, border:`1px solid ${C.border}`, borderRadius:"12px", overflow:"hidden", marginBottom:"2.5rem" }}>
             <div style={{ display:"flex", gap:"1.5rem", padding:"1.5rem", flexWrap:"wrap" }}>

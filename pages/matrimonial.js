@@ -109,7 +109,7 @@ export default function MatrimonialPlatform({ userEmail, isAmbassador, isCertifi
       const res = await fetch("/api/matrimonial", {
         method:"POST",
         headers:{"Content-Type":"application/json"},
-        body: JSON.stringify({ action:"createProfile", email:userEmail, gender, ...createForm })
+        body: JSON.stringify({ action:"createProfile", email:userEmail, gender, ...createForm, photoBase64: createForm.photoBase64 || null })
       });
       const data = await res.json();
       if (data.ok) {
@@ -404,6 +404,38 @@ export default function MatrimonialPlatform({ userEmail, isAmbassador, isCertifi
               </select>
             </div>
           )}
+          <div style={{ marginBottom:20 }}>
+            <div style={{ fontSize:10, color:C.muted, fontFamily:"sans-serif", letterSpacing:"0.1em", marginBottom:6 }}>PROFILE PHOTO (optional)</div>
+            <div style={{ border:"1px dashed " + C.border, padding:"1.5rem", textAlign:"center", position:"relative" }}>
+              {createForm.photoPreview ? (
+                <div>
+                  <img src={createForm.photoPreview} alt="Preview" style={{ width:120, height:150, objectFit:"cover", objectPosition:"center top", marginBottom:10 }} />
+                  <div>
+                    <button onClick={() => setCreateForm({...createForm, photoPreview:null, photoBase64:null})} style={{ background:"none", border:"1px solid " + C.border, color:C.muted, padding:"4px 12px", cursor:"pointer", fontSize:11, fontFamily:"sans-serif" }}>Remove</button>
+                  </div>
+                </div>
+              ) : (
+                <div>
+                  <div style={{ fontSize:28, marginBottom:8, color:C.border }}>◈</div>
+                  <div style={{ fontSize:12, color:C.muted, fontFamily:"sans-serif", marginBottom:10 }}>Upload a photo for your profile</div>
+                  <label style={{ background:C.navyDeep, border:"1px solid " + C.border, color:C.gold, padding:"8px 18px", cursor:"pointer", fontSize:12, fontFamily:"sans-serif", display:"inline-block" }}>
+                    Choose Photo
+                    <input type="file" accept="image/*" style={{ display:"none" }} onChange={e => {
+                      const file = e.target.files[0];
+                      if (!file) return;
+                      if (file.size > 5 * 1024 * 1024) { alert("Photo must be under 5MB."); return; }
+                      const reader = new FileReader();
+                      reader.onload = ev => {
+                        setCreateForm(f => ({...f, photoPreview: ev.target.result, photoBase64: ev.target.result}));
+                      };
+                      reader.readAsDataURL(file);
+                    }} />
+                  </label>
+                  <div style={{ fontSize:10, color:C.muted, fontFamily:"sans-serif", marginTop:8 }}>JPG or PNG · Max 5MB</div>
+                </div>
+              )}
+            </div>
+          </div>
           <button onClick={submitProfile} disabled={loading} style={{ width:"100%", padding:"14px", background:loading ? C.border : C.gold, color:C.navyDeep, border:"none", cursor:loading ? "default" : "pointer", fontSize:13, fontWeight:700, fontFamily:"sans-serif" }}>
             {loading ? "Submitting..." : gender === "woman" ? "Submit Profile for Review →" : "Create Profile →"}
           </button>
