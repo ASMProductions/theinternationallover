@@ -3604,7 +3604,7 @@ export default function InternationalLover() {
             <a href="/matrimonial" style={{ display:"inline-block", background:C.gold, color:C.navyDeep, padding:"14px 36px", fontSize:14, fontWeight:700, fontFamily:"sans-serif", textDecoration:"none", cursor:"pointer" }}>
               Enter the Matrimonial Platform →
             </a>
-            <div style={{ color:C.muted, fontSize:11, fontFamily:"sans-serif", marginTop:12 }}>Available to all platform members · Women join free</div>
+            <div style={{ color:C.muted, fontSize:11, fontFamily:"sans-serif", marginTop:12 }}>Available to all platform members · <a href="/for-women" style={{ color:C.gold, textDecoration:"none" }}>Women join free →</a></div>
           </div>
         </div>
       </section>
