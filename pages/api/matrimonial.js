@@ -93,7 +93,7 @@ export default async function handler(req, res) {
     if (action === "createProfile") {
       const { email, gender, displayName, age, city, country, region, religion, bio,
               familyInvolvement, virtueStatus, maritalStatus, hasChildren,
-              education, languages, height, seeking } = body;
+              education, languages, height, seeking, photoBase64 } = body;
       if (!email || !displayName || !age || !city || !bio) {
         return res.status(400).json({ error: "Required fields missing" });
       }
@@ -110,7 +110,7 @@ export default async function handler(req, res) {
         isCertified: false,
         isAmbassador: false,
         createdAt: Date.now(),
-        photoUrl: null,
+        photoUrl: body.photoBase64 || null,
       };
       await redis.set(profileKey(email), JSON.stringify(profile));
       return res.status(200).json({ ok: true });
