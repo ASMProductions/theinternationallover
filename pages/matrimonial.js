@@ -30,6 +30,30 @@ function CertifiedBadge() {
   return <span style={{ background:C.green, color:"white", fontSize:8, fontWeight:700, padding:"2px 8px", fontFamily:"sans-serif", letterSpacing:"0.1em", verticalAlign:"middle", marginLeft:6 }}>CERTIFIED</span>;
 }
 
+const Input = ({ label, value, onChange, type="text", placeholder="" }) => (
+  <div style={{ marginBottom:14 }}>
+    <div style={{ fontSize:10, color:C.muted, fontFamily:"sans-serif", letterSpacing:"0.1em", marginBottom:6 }}>{label}</div>
+    <input type={type} value={value} onChange={onChange} placeholder={placeholder} style={{ width:"100%", padding:"10px 12px", background:C.dark, border:"1px solid " + C.border, color:C.cream, fontSize:13, fontFamily:"sans-serif", boxSizing:"border-box", outline:"none" }} />
+  </div>
+);
+
+const Select = ({ label, value, onChange, options }) => (
+  <div style={{ marginBottom:14 }}>
+    <div style={{ fontSize:10, color:C.muted, fontFamily:"sans-serif", letterSpacing:"0.1em", marginBottom:6 }}>{label}</div>
+    <select value={value} onChange={onChange} style={{ width:"100%", padding:"10px 12px", background:C.dark, border:"1px solid " + C.border, color:C.cream, fontSize:13, fontFamily:"sans-serif", boxSizing:"border-box" }}>
+      {options.map(o => <option key={o} value={o}>{o}</option>)}
+    </select>
+  </div>
+);
+
+const Textarea = ({ label, value, onChange, rows=4, placeholder="" }) => (
+  <div style={{ marginBottom:14 }}>
+    <div style={{ fontSize:10, color:C.muted, fontFamily:"sans-serif", letterSpacing:"0.1em", marginBottom:6 }}>{label}</div>
+    <textarea value={value} onChange={onChange} rows={rows} placeholder={placeholder} style={{ width:"100%", padding:"10px 12px", background:C.dark, border:"1px solid " + C.border, color:C.cream, fontSize:13, fontFamily:"sans-serif", boxSizing:"border-box", resize:"vertical", outline:"none" }} />
+  </div>
+);
+
+
 export default function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isAdmin }) {
   const [profiles, setProfiles] = useState([]);
   const [filtered, setFiltered] = useState([]);
@@ -202,28 +226,6 @@ export default function MatrimonialPlatform({ userEmail, isAmbassador, isCertifi
     } catch(e) {}
   };
 
-  const Input = ({ label, value, onChange, type="text", placeholder="" }) => (
-    <div style={{ marginBottom:14 }}>
-      <div style={{ fontSize:10, color:C.muted, fontFamily:"sans-serif", letterSpacing:"0.1em", marginBottom:6 }}>{label}</div>
-      <input type={type} value={value} onChange={onChange} placeholder={placeholder} style={{ width:"100%", padding:"10px 12px", background:C.dark, border:"1px solid " + C.border, color:C.cream, fontSize:13, fontFamily:"sans-serif", boxSizing:"border-box", outline:"none" }} />
-    </div>
-  );
-
-  const Select = ({ label, value, onChange, options }) => (
-    <div style={{ marginBottom:14 }}>
-      <div style={{ fontSize:10, color:C.muted, fontFamily:"sans-serif", letterSpacing:"0.1em", marginBottom:6 }}>{label}</div>
-      <select value={value} onChange={onChange} style={{ width:"100%", padding:"10px 12px", background:C.dark, border:"1px solid " + C.border, color:C.cream, fontSize:13, fontFamily:"sans-serif", boxSizing:"border-box" }}>
-        {options.map(o => <option key={o} value={o}>{o}</option>)}
-      </select>
-    </div>
-  );
-
-  const Textarea = ({ label, value, onChange, rows=4, placeholder="" }) => (
-    <div style={{ marginBottom:14 }}>
-      <div style={{ fontSize:10, color:C.muted, fontFamily:"sans-serif", letterSpacing:"0.1em", marginBottom:6 }}>{label}</div>
-      <textarea value={value} onChange={onChange} rows={rows} placeholder={placeholder} style={{ width:"100%", padding:"10px 12px", background:C.dark, border:"1px solid " + C.border, color:C.cream, fontSize:13, fontFamily:"sans-serif", boxSizing:"border-box", resize:"vertical", outline:"none" }} />
-    </div>
-  );
 
   // PROFILE VIEW
   if (view === "profile" && activeProfile) {
