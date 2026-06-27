@@ -66,6 +66,13 @@ const RESOURCES = [
   "Children & Family Structure","Legal Protection","The Step-Father Question","Community Resources",
 ];
 
+const FREE_PREVIEW_CHAPTER = {
+  id: 10,
+  title: "The Kevin Samuels Effect",
+  section: "Baggage",
+  teaser: "Mr. Kevin Samuels performed an incredible service for all men. He launched a movement that will be to his credit long into the future. But he left before he could show men where to go. That is what this platform exists to do.",
+};
+
 const BOOK_CHAPTERS = [
   { id:1, title:"Introduction", section:"Departure",
     content:`In 2010, I knew I would have to take drastic measures to
@@ -1983,7 +1990,7 @@ for a resurgence of the global family. I am grateful that I was finally able to
 write this book. The photo above is of me an my Moroccan wife, two
 weeks before the birth of our first child in 2016. I brought her to America,
 a little overt eight months before that, in 2015.
-You can reach me at; contact@asmproductions.co
+You can reach me at; info@theinternationallover.com
 Thank you.
 
 ABOUT THE AUTHOR
@@ -2029,7 +2036,7 @@ An influential figure in modern literature, Amin Shabazz
 Muhammad tells a unique tale of love, imparting a global perspective
 that truly sets him apart. His journey, like his writings, is an
 intertwined tapestry of diverse cultures, languages, and experiences a testament to the rich life of the International Lover.
-You can reach him at; contact@asmproductions.co
+You can reach him at; info@theinternationallover.com
 
 93` },
 ];
@@ -2997,6 +3004,9 @@ export default function InternationalLover() {
   const [view, setView] = useState("landing");
   const [hasAccess, setHasAccess] = useState(false);
   const [paywallOpen, setPaywallOpen] = useState(false);
+  const [leadEmail, setLeadEmail] = useState("");
+  const [leadSubmitted, setLeadSubmitted] = useState(false);
+  const [freePreviewOpen, setFreePreviewOpen] = useState(false);
   const [email, setEmail] = useState("");
   const [code, setCode] = useState("");
   const [msg, setMsg] = useState("");
@@ -3248,6 +3258,15 @@ export default function InternationalLover() {
             </div>
           </div>
           <h2 style={{ color:C.goldLight, fontSize:"1rem", letterSpacing:"0.1em", textTransform:"uppercase", marginBottom:"1.25rem", fontWeight:"normal", fontFamily:"sans-serif" }}>Resource Library</h2>
+          {/* Matrimonial Platform Card */}
+          <div style={{ background:"linear-gradient(135deg, #0f2347, #1a3a6b)", border:"2px solid " + C.gold, padding:"1.25rem 1.5rem", marginBottom:"1.5rem", display:"flex", alignItems:"center", justifyContent:"space-between", flexWrap:"wrap", gap:12 }}>
+            <div>
+              <div style={{ fontSize:9, letterSpacing:"0.2em", color:C.gold, fontFamily:"sans-serif", marginBottom:4 }}>✦ NOW LIVE</div>
+              <div style={{ fontSize:15, color:C.goldLight, marginBottom:4 }}>Matrimonial Platform</div>
+              <div style={{ fontSize:12, color:C.muted, fontFamily:"sans-serif" }}>Browse real profiles · Create your listing · Connect with serious partners</div>
+            </div>
+            <a href="/matrimonial" style={{ background:C.gold, color:C.navyDeep, padding:"10px 20px", cursor:"pointer", fontSize:12, fontWeight:700, fontFamily:"sans-serif", textDecoration:"none", whiteSpace:"nowrap" }}>Enter Platform →</a>
+          </div>
           <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit, minmax(220px,1fr))", gap:10, marginBottom:"2.5rem" }}>
             {RESOURCE_MODULES.map((mod, i) => (
               <div key={mod.id} onClick={() => { setActiveResource(mod); setView("resource"); }} style={{ background:C.navyDeep, border:"1px solid " + C.border, padding:"1rem", cursor:"pointer" }}>
@@ -3327,7 +3346,7 @@ export default function InternationalLover() {
           </div>
           {[
             { num:"01", title:"The Book", sub:"17 Chapters · Read-Aloud · Full Text", icon:"📖", body:"The complete text of The International Lover — every chapter available with read-aloud. Your orientation. Your briefing. Your first pages. Every man reads it before the course unlocks." },
-            { num:"02", title:"The Course", sub:"Five Regions · Fifteen Virtual Women · Branching Scenarios", icon:"🗺", body:"A video game style simulation set on a real world map. Five regions. Fifteen virtual women representing a broad demographic of potential mates. Every decision branches the story — first contact, the family meeting, fraud detection, the immigration process, life after she arrives. Complete all five regions and earn your certificate." },
+            { num:"02", title:"The Course", sub:"Five Regions · Fifteen Virtual Women · Branching Scenarios", icon:"🗺", body:"A virtual simulation set on a real world map. Five regions. Fifteen virtual women representing a broad demographic of potential mates. Every decision branches the story — first contact, the family meeting, fraud detection, the immigration process, life after she arrives. Complete all five regions and earn your certificate." },
             { num:"03", title:"The Consulate", sub:"Community · Regional Subgroups · Intelligence", icon:"🏛", body:"A private community of men on the same path. Five regional subgroups. Matrimonial site reviews. Country-specific intelligence. Fraud warning threads. Success story archives." },
           ].map((l,i) => (
             <div key={l.num} style={{ display:"flex", gap:24, padding:"2rem", background:C.navyDeep, border:`1px solid ${C.border}`, borderLeft:`3px solid ${C.gold}`, flexWrap:"wrap", marginBottom:i<2?16:0 }}>
@@ -3557,6 +3576,39 @@ export default function InternationalLover() {
         </div>
       </section>
 
+      {/* Matrimonial Platform Section */}
+      <section style={{ background:C.dark, padding:"5rem 1.5rem", borderBottom:`1px solid ${C.border}` }}>
+        <div style={{ maxWidth:940, margin:"0 auto" }}>
+          <div style={{ textAlign:"center", marginBottom:"3rem" }}>
+            <Eyebrow>Now Live</Eyebrow>
+            <h2 style={{ fontSize:"clamp(20px,3vw,30px)", color:C.goldLight, fontWeight:"normal", marginBottom:12 }}>Matrimonial Platform</h2>
+            <p style={{ fontSize:"clamp(13px,1.8vw,15px)", color:C.muted, maxWidth:560, margin:"0 auto", lineHeight:1.8, fontFamily:"sans-serif" }}>
+              A private platform built for serious men who have done the work. Browse profiles from women across five regions. Create your own listing. Connect through verified channels.
+            </p>
+          </div>
+          <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit, minmax(220px,1fr))", gap:16, marginBottom:"3rem" }}>
+            {[
+              { icon:"🌍", title:"Five Regions", desc:"North Africa, Middle East, Asia, Latin America, Sub-Saharan Africa. Real women. Real profiles." },
+              { icon:"🔒", title:"Verified Access", desc:"Men must complete the course or hold Ambassador status to contact women. No casual browsers." },
+              { icon:"👁", title:"Mutual Browsing", desc:"Men see women. Women see men. Filtering by region, religion, age, and family involvement." },
+              { icon:"✦", title:"Ambassador Priority", desc:"Ambassadors have full contact privileges and their status is visible on every profile." },
+            ].map(f => (
+              <div key={f.title} style={{ background:C.navyDeep, border:`1px solid ${C.border}`, padding:"1.5rem" }}>
+                <div style={{ fontSize:28, marginBottom:10 }}>{f.icon}</div>
+                <div style={{ color:C.goldLight, fontWeight:"bold", marginBottom:6, fontFamily:"sans-serif", fontSize:14 }}>{f.title}</div>
+                <div style={{ color:C.muted, fontSize:12, lineHeight:1.65, fontFamily:"sans-serif" }}>{f.desc}</div>
+              </div>
+            ))}
+          </div>
+          <div style={{ textAlign:"center" }}>
+            <a href="/matrimonial" style={{ display:"inline-block", background:C.gold, color:C.navyDeep, padding:"14px 36px", fontSize:14, fontWeight:700, fontFamily:"sans-serif", textDecoration:"none", cursor:"pointer" }}>
+              Enter the Matrimonial Platform →
+            </a>
+            <div style={{ color:C.muted, fontSize:11, fontFamily:"sans-serif", marginTop:12 }}>Available to all platform members · Women join free</div>
+          </div>
+        </div>
+      </section>
+
       <section style={{ background:C.navyDeep, padding:"5rem 1.5rem", borderBottom:`1px solid ${C.border}` }}>
         <div style={{ maxWidth:940, margin:"0 auto" }}>
           <div style={{ textAlign:"center", marginBottom:"3rem" }}>
@@ -3617,6 +3669,31 @@ export default function InternationalLover() {
         </div>
       </section>
 
+      <section style={{ background:C.dark, padding:"5rem 1.5rem", borderBottom:`1px solid ${C.border}` }}>
+        <div style={{ maxWidth:680, margin:"0 auto", textAlign:"center" }}>
+          <Eyebrow>Free Preview</Eyebrow>
+          <h2 style={{ fontSize:"clamp(18px,3vw,26px)", color:C.goldLight, fontWeight:"normal", marginBottom:12 }}>Read Chapter 10 — Free.</h2>
+          <p style={{ fontSize:"clamp(12px,1.7vw,14px)", color:C.creamDim, lineHeight:1.85, maxWidth:480, margin:"0 auto 2rem", fontFamily:"sans-serif" }}>Mr. Kevin Samuels launched a movement. He left before he could show men where to go. This chapter picks up exactly where he left off.</p>
+          <button onClick={() => setFreePreviewOpen(true)} style={{ padding:"14px 36px", background:C.gold, color:C.navyDeep, border:"none", cursor:"pointer", fontSize:13, fontWeight:700, letterSpacing:"0.15em", textTransform:"uppercase", fontFamily:"sans-serif" }}>Read The Kevin Samuels Effect →</button>
+        </div>
+      </section>
+
+      <section style={{ background:C.navyDeep, padding:"4rem 1.5rem", borderBottom:`1px solid ${C.border}` }}>
+        <div style={{ maxWidth:560, margin:"0 auto", textAlign:"center" }}>
+          <Eyebrow>Stay Connected</Eyebrow>
+          <h2 style={{ fontSize:"clamp(17px,2.8vw,22px)", color:C.goldLight, fontWeight:"normal", marginBottom:12 }}>Not ready yet?</h2>
+          <p style={{ fontSize:"clamp(12px,1.7vw,13px)", color:C.creamDim, lineHeight:1.85, marginBottom:"1.75rem", fontFamily:"sans-serif" }}>Enter your email and we will notify you when new content, the matrimonial platform, and community events become available.</p>
+          {!leadSubmitted ? (
+            <div style={{ display:"flex", gap:8, maxWidth:440, margin:"0 auto", flexWrap:"wrap", justifyContent:"center" }}>
+              <input type="email" value={leadEmail} onChange={e => setLeadEmail(e.target.value)} onKeyDown={e => { if (e.key==="Enter" && leadEmail.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) { fetch("/api/lead-capture",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:leadEmail.trim().toLowerCase()})}).catch(()=>{}); setLeadSubmitted(true); }}} placeholder="Enter your email address" style={{ flex:1, minWidth:200, padding:"12px 16px", background:C.dark, border:`1px solid ${C.border}`, color:C.cream, fontSize:13, fontFamily:"sans-serif", outline:"none" }} />
+              <button onClick={() => { if (!leadEmail.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) return; fetch("/api/lead-capture",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:leadEmail.trim().toLowerCase()})}).catch(()=>{}); setLeadSubmitted(true); }} style={{ padding:"12px 22px", background:C.gold, color:C.navyDeep, border:"none", cursor:"pointer", fontSize:12, fontWeight:700, letterSpacing:"0.1em", textTransform:"uppercase", fontFamily:"sans-serif" }}>Notify Me</button>
+            </div>
+          ) : (
+            <div style={{ color:C.green, fontSize:14, fontFamily:"sans-serif" }}>✓ You are on the list. We will be in touch.</div>
+          )}
+        </div>
+      </section>
+
       <section style={{ background:C.navyDeep, padding:"4rem 1.5rem", borderTop:`1px solid ${C.border}` }}>
         <div style={{ maxWidth:660, margin:"0 auto", textAlign:"center" }}>
           <Eyebrow>Matrimonial Platform Partners</Eyebrow>
@@ -3643,6 +3720,32 @@ export default function InternationalLover() {
         <div style={{ fontSize:10, color:C.mutedDark, fontFamily:"sans-serif", marginBottom:6 }}>info@theinternationallover.com</div>
         <div style={{ fontSize:9, color:"#2a3a5a", fontFamily:"sans-serif" }}>© 2025 The International Lover™ · ASM Productions LLC · All rights reserved</div>
       </footer>
+
+      {freePreviewOpen && (
+        <div style={{ position:"fixed", inset:0, background:"rgba(9,26,53,0.97)", zIndex:1000, overflowY:"auto", padding:"2rem 1rem" }}>
+          <div style={{ maxWidth:720, margin:"0 auto", background:C.navyDeep, border:`1px solid ${C.gold}`, position:"relative" }}>
+            <button onClick={() => setFreePreviewOpen(false)} style={{ position:"absolute", top:12, right:14, background:"none", border:"none", color:C.muted, fontSize:22, cursor:"pointer", zIndex:2 }}>×</button>
+            <div style={{ padding:"2.5rem 2rem 1.5rem", borderBottom:`1px solid ${C.border}` }}>
+              <div style={{ fontSize:9, letterSpacing:"0.2em", color:C.gold, fontFamily:"sans-serif", marginBottom:6 }}>FREE PREVIEW · CHAPTER 10</div>
+              <div style={{ fontSize:"clamp(18px,3vw,24px)", color:C.goldLight, fontFamily:"Georgia,serif", marginBottom:4 }}>The Kevin Samuels Effect</div>
+              <div style={{ fontSize:11, color:C.muted, fontFamily:"sans-serif" }}>From The International Lover™</div>
+            </div>
+            <div style={{ padding:"2rem", maxHeight:"60vh", overflowY:"auto", position:"relative" }}>
+              {BOOK_CHAPTERS.find(c => c.id === 10)?.content.split("\n\n").slice(0, 10).map((para, i) => (
+                <p key={i} style={{ fontSize:"clamp(13px,1.8vw,15px)", color:C.creamDim, lineHeight:1.9, marginBottom:"1.25rem", fontFamily:"Georgia,serif" }}>{para}</p>
+              ))}
+              <div style={{ position:"sticky", bottom:0, left:0, right:0, height:100, background:`linear-gradient(to bottom, transparent, ${C.navyDeep})`, pointerEvents:"none" }} />
+            </div>
+            <div style={{ padding:"1.75rem 2rem", borderTop:`1px solid ${C.border}`, textAlign:"center" }}>
+              <div style={{ fontSize:13, color:C.creamDim, fontFamily:"sans-serif", marginBottom:"1.25rem" }}>This is one chapter of seventeen. The full book — and the complete virtual simulation — are inside the platform.</div>
+              <div style={{ display:"flex", gap:10, justifyContent:"center", flexWrap:"wrap" }}>
+                <button onClick={() => { setFreePreviewOpen(false); setPaywallOpen(true); }} style={{ padding:"12px 28px", background:C.gold, color:C.navyDeep, border:"none", cursor:"pointer", fontSize:12, fontWeight:700, letterSpacing:"0.15em", textTransform:"uppercase", fontFamily:"sans-serif" }}>Access the Full Platform →</button>
+                <button onClick={() => setFreePreviewOpen(false)} style={{ padding:"12px 20px", background:"transparent", color:C.muted, border:`1px solid ${C.border}`, cursor:"pointer", fontSize:12, fontFamily:"sans-serif" }}>Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {paywallOpen && (
         <div style={{ position:"fixed", inset:0, background:"rgba(9,26,53,0.96)", display:"flex", alignItems:"center", justifyContent:"center", zIndex:999, padding:"1rem", backdropFilter:"blur(4px)" }}>
