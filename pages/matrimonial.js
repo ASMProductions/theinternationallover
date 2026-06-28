@@ -599,7 +599,6 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
 
   // ADMIN VIEW
   if (view === "admin" && isAdmin) {
-    const adminKey = await getAdminKey();
     const cardStyle = { background:C.navyDeep, border:"1px solid " + C.border, padding:"1rem 1.25rem", marginBottom:10, display:"flex", gap:14, alignItems:"flex-start" };
     const ADMIN_TABS = [
       { id:"profiles", label:"Profiles" },
@@ -698,7 +697,7 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
                     <div style={{ display:"flex", gap:6 }}>
                       {!p.approved && (
                         <button onClick={async () => {
-                          await fetch("/api/community", { method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({ action:"approve", adminKey, postId:p.id }) });
+                          const key = await getAdminKey(); await fetch("/api/community", { method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({ action:"approve", adminKey: key, postId:p.id }) });
                           setConsulatePosts(prev => prev.map(x => x.id === p.id ? {...x, approved:true} : x));
                         }} style={{ padding:"4px 10px", background:C.green, color:"white", border:"none", cursor:"pointer", fontFamily:"sans-serif", fontSize:10 }}>Approve</button>
                       )}
