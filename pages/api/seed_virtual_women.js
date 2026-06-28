@@ -534,7 +534,8 @@ const VIRTUAL_WOMEN = [
 ];
 
 export default async function handler(req, res) {
-  const { key } = req.query;
+  // Support both GET (with key param) and POST (with adminKey in body)
+  const key = req.method === "POST" ? req.body?.adminKey : req.query.key;
   if (key !== process.env.IL_ADMIN_KEY) return res.status(403).json({ error: "Forbidden" });
 
   const results = [];
