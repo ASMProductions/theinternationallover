@@ -90,9 +90,13 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
 
   const canContact = isAmbassador || isCertified;
   const showMen = gender === "woman";
-  const showWomen = gender === "man";
+  const showWomen = gender !== "woman"; // default to showing women (men + unset sessions)
 
-  useEffect(() => { loadProfiles(); loadMyProfile(); }, []);
+  useEffect(() => { 
+    // Re-load whenever email or gender arrives from session
+    loadProfiles(); 
+    if (userEmail) loadMyProfile(); 
+  }, [userEmail, gender]);
 
   useEffect(() => {
     if (autoAdmin && isAdmin) {
@@ -121,7 +125,8 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
   const loadProfiles = async () => {
     setLoading(true);
     try {
-      const res = await fetch("/api/matrimonial?action=list&gender=" + (showWomen ? "woman" : "man") + "&email=" + encodeURIComponent(userEmail));
+      const browseGender = showWomen ? "woman" : "man";
+      const res = await fetch("/api/matrimonial?action=list&gender=" + browseGender + "&email=" + encodeURIComponent(userEmail || ""));
       const data = await res.json();
       setProfiles(data.profiles || []);
     } catch(e) { setMsg("Could not load profiles."); }
@@ -222,7 +227,27 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
       } else {
         alert(data.error || "Seed failed. Check that the deploy includes the updated seed-virtual-women.js");
       }
-    } catch(e) { alert("Error running seed."); }
+    } catch(e) { 
+      alert("Seed route not found. Make sure seed-virtual-women.js (with hyphens) is uploaded to pages/api/ in GitHub, then redeploy.");
+    }
+  };
+
+  const seedFounderProfile = async () => {
+    try {
+      const res = await fetch("/api/seed-founder", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ adminCode: "ADMINTEST" })
+      });
+      const data = await res.json();
+      if (data.ok) {
+        alert("Founder profile seeded successfully.");
+        loadAllProfiles();
+        loadMyProfile();
+      } else {
+        alert(data.error || "Seed failed.");
+      }
+    } catch(e) { alert("Error seeding founder profile."); }
   };
 
   const loadPendingApprovals = async () => {
@@ -235,6 +260,8 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
   };
 
   const submitProfile = async () => {
+    const emailToUse = profileEmail || userEmail;
+    if (!emailToUse) { setMsg("Please enter your email address."); return; }
     if (!createForm.displayName || !createForm.age || !createForm.city || !createForm.bio) {
       setMsg("Please fill in all required fields."); return;
     }
@@ -243,15 +270,17 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
       const res = await fetch("/api/matrimonial", {
         method:"POST",
         headers:{"Content-Type":"application/json"},
-        body: JSON.stringify({ action:"createProfile", email:userEmail, gender, ...createForm, photoBase64: createForm.photoBase64 || null })
+        body: JSON.stringify({ action:"createProfile", email:emailToUse, gender, ...createForm, photoBase64: createForm.photoBase64 || null })
       });
       const data = await res.json();
       if (data.ok) {
         setMsg("Profile submitted for review. You will be notified once approved.");
         setView("browse");
         loadMyProfile();
-      } else { setMsg(data.error || "Failed to submit."); }
-    } catch(e) { setMsg("Error submitting profile."); }
+      } else { 
+        setMsg("Failed: " + (data.error || "Unknown error. Check all required fields."));
+      }
+    } catch(e) { setMsg("Error submitting profile: " + String(e)); }
     setLoading(false);
   };
 
@@ -461,6 +490,7 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
             </div>
           )}
           {msg && <div style={{ color:C.red, fontFamily:"sans-serif", fontSize:12, marginBottom:12, padding:"8px 12px", background:"rgba(139,26,26,0.1)", border:"1px solid " + C.red }}>{msg}</div>}
+          <Input label="EMAIL ADDRESS *" type="email" value={profileEmail} onChange={e => setProfileEmail(e.target.value)} placeholder="Your email address — this is your account key" />
           <Input label="DISPLAY NAME *" value={createForm.displayName} onChange={e => setCreateForm({...createForm, displayName:e.target.value})} placeholder="How you will appear on the platform" />
           <Input label="AGE *" type="number" value={createForm.age} onChange={e => setCreateForm({...createForm, age:e.target.value})} />
           <Input label="CITY *" value={createForm.city} onChange={e => setCreateForm({...createForm, city:e.target.value})} />
@@ -634,6 +664,7 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
               <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between", marginBottom:12, flexWrap:"wrap", gap:8 }}>
                 <div style={{ fontSize:9, letterSpacing:"0.2em", color:C.muted, fontFamily:"sans-serif" }}>ALL PROFILES — {allProfiles.length} total in Redis</div>
                 <button onClick={seedVirtualWomen} style={{ padding:"6px 14px", background:"transparent", border:"1px solid #4a6fa5", color:"#7aa0d0", cursor:"pointer", fontSize:11, fontFamily:"sans-serif" }}>＋ Seed Virtual Women</button>
+                <button onClick={seedFounderProfile} style={{ padding:"6px 14px", background:"transparent", border:"1px solid " + C.gold, color:C.gold, cursor:"pointer", fontSize:11, fontFamily:"sans-serif" }}>✦ Seed Founder Profile</button>
               </div>
               {allProfiles.length === 0 && <div style={{ color:C.muted, textAlign:"center", padding:"2rem", fontFamily:"sans-serif" }}>No profiles found. Click "Seed Virtual Women" above to add the 22 course women.</div>}
               {allProfiles.map(p => (
@@ -735,7 +766,7 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
                 <div style={{ color:C.muted, textAlign:"center", padding:"3rem", fontFamily:"sans-serif" }}>
                   No profile found for {userEmail || "this session"}.
                   <div style={{ marginTop:16 }}>
-                    <button onClick={() => setView("create")} style={{ background:C.gold, color:C.navyDeep, border:"none", padding:"8px 18px", cursor:"pointer", fontFamily:"sans-serif", fontSize:12, fontWeight:700 }}>Create Profile</button>
+                    <button onClick={() => { setProfileEmail(userEmail); setView("create"); }} style={{ background:C.gold, color:C.navyDeep, border:"none", padding:"8px 18px", cursor:"pointer", fontFamily:"sans-serif", fontSize:12, fontWeight:700 }}>Create Profile</button>
                   </div>
                 </div>
               ) : (
@@ -774,7 +805,7 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
           {isAdmin && <button onClick={() => { setAdminTab("profiles"); loadAllProfiles(); loadPendingApprovals(); setView("admin"); }} style={{ background:"none", border:"1px solid " + C.gold, color:C.gold, padding:"6px 12px", cursor:"pointer", fontSize:11, fontFamily:"sans-serif" }}>Admin</button>}
           <button onClick={() => setView("messages")} style={{ background:"none", border:"1px solid " + C.border, color:C.muted, padding:"6px 12px", cursor:"pointer", fontSize:11, fontFamily:"sans-serif" }}>Messages</button>
           {!myProfile ? (
-            <button onClick={() => setView("create")} style={{ background:C.gold, color:C.navyDeep, border:"none", padding:"6px 14px", cursor:"pointer", fontSize:11, fontWeight:700, fontFamily:"sans-serif" }}>Create Profile</button>
+            <button onClick={() => { setProfileEmail(userEmail); setView("create"); }} style={{ background:C.gold, color:C.navyDeep, border:"none", padding:"6px 14px", cursor:"pointer", fontSize:11, fontWeight:700, fontFamily:"sans-serif" }}>Create Profile</button>
           ) : (
             <button onClick={toggleHideProfile} style={{ background:"none", border:"1px solid " + C.border, color:hidden ? C.gold : C.muted, padding:"6px 12px", cursor:"pointer", fontSize:11, fontFamily:"sans-serif" }}>{hidden ? "Show Profile" : "Hide Profile"}</button>
           )}
