@@ -125,8 +125,9 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
   const loadProfiles = async () => {
     setLoading(true);
     try {
-      const browseGender = showWomen ? "woman" : "man";
-      const res = await fetch("/api/matrimonial?action=list&gender=" + browseGender + "&email=" + encodeURIComponent(userEmail || ""));
+      // Send viewer's gender — API returns profiles of the opposite gender
+      const viewerGender = gender || "man";
+      const res = await fetch("/api/matrimonial?action=list&gender=" + viewerGender + "&email=" + encodeURIComponent(userEmail || ""));
       const data = await res.json();
       setProfiles(data.profiles || []);
     } catch(e) { setMsg("Could not load profiles."); }
