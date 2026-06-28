@@ -215,11 +215,7 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
 
   const seedVirtualWomen = async () => {
     try {
-      const res = await fetch("/api/seed-virtual-women", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ adminCode: "ADMINTEST" })
-      });
+      const res = await fetch("/api/seed-virtual-women?code=ADMINTEST");
       const data = await res.json();
       if (data.seeded) {
         alert("Success — " + data.seeded + " virtual women added to the platform.");
@@ -234,11 +230,7 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
 
   const seedFounderProfile = async () => {
     try {
-      const res = await fetch("/api/seed-founder", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ adminCode: "ADMINTEST" })
-      });
+      const res = await fetch("/api/seed-founder?code=ADMINTEST");
       const data = await res.json();
       if (data.ok) {
         alert("Founder profile seeded successfully.");
