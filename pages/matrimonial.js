@@ -19,7 +19,7 @@ const REGIONS = [
   { id:"ss", label:"Sub-Saharan Africa" },
 ];
 
-const RELIGIONS = ["All", "Islam", "Christianity", "Orthodox Christianity", "Catholicism", "Other"];
+const RELIGIONS = ["All", "Muslim", "Christian", "Catholic", "Hebrew Israelite", "Other"];
 const AGE_RANGES = ["All Ages", "18-24", "25-30", "31-35", "36+"];
 const FAMILY_PREFS = ["All", "Direct contact", "Through family", "Family must be involved"];
 
@@ -110,7 +110,15 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
   useEffect(() => {
     let result = profiles;
     if (filters.region !== "all") result = result.filter(p => p.region === filters.region);
-    if (filters.religion !== "All") result = result.filter(p => p.religion === filters.religion);
+    if (filters.religion !== "All") result = result.filter(p => {
+      const rel = (p.religion || "").toLowerCase();
+      const f = filters.religion.toLowerCase();
+      if (f === "muslim") return rel.includes("muslim") || rel.includes("islam");
+      if (f === "christian") return rel.includes("christian") && !rel.includes("catholic") && !rel.includes("orthodox");
+      if (f === "catholic") return rel.includes("catholic");
+      if (f === "hebrew israelite") return rel.includes("hebrew");
+      return rel.includes(f);
+    });
     if (filters.age !== "All Ages") {
       const [min, max] = filters.age === "36+" ? [36, 200] : filters.age.split("-").map(Number);
       result = result.filter(p => {
