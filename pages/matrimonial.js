@@ -205,44 +205,22 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
     } catch(e) {}
   };
 
-  const getAdminKey = async () => {
-    let key = typeof sessionStorage !== "undefined" ? sessionStorage.getItem("il_admin_key") || "" : "";
-    if (!key) {
-      try {
-        const r = await fetch("/api/admin-token?code=ADMINTEST");
-        const d = await r.json();
-        if (d.key) { key = d.key; sessionStorage.setItem("il_admin_key", d.key); }
-      } catch(e) {}
-    }
-    return key;
-  };
+  // Admin auth: use ADMINTEST code directly — all admin APIs accept it
+  const getAdminKey = async () => "ADMINTEST";
 
   const seedVirtualWomen = async () => {
-    let adminKey = typeof sessionStorage !== "undefined" ? sessionStorage.getItem("il_admin_key") || "" : "";
-    // If not cached yet, fetch it now
-    if (!adminKey) {
-      try {
-        const r = await fetch("/api/admin-token?code=ADMINTEST");
-        const d = await r.json();
-        if (d.key) {
-          adminKey = d.key;
-          sessionStorage.setItem("il_admin_key", d.key);
-        }
-      } catch(e) {}
-    }
-    if (!adminKey) { alert("Could not retrieve admin key. Make sure you are logged in with ADMINTEST."); return; }
     try {
       const res = await fetch("/api/seed-virtual-women", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ adminKey })
+        body: JSON.stringify({ adminCode: "ADMINTEST" })
       });
       const data = await res.json();
       if (data.seeded) {
         alert("Success — " + data.seeded + " virtual women added to the platform.");
         loadAllProfiles();
       } else {
-        alert(data.error || "Seed failed.");
+        alert(data.error || "Seed failed. Check that the deploy includes the updated seed-virtual-women.js");
       }
     } catch(e) { alert("Error running seed."); }
   };
@@ -896,15 +874,6 @@ export default function MatrimonialPage() {
     const isCertified = sessionStorage.getItem("il_certified") === "true";
     const isAdmin = adminSession || email === "amin@theinternationallover.com";
     const autoAdmin = new URLSearchParams(window.location.search).get("admin") === "1";
-
-    // If admin session but no key yet, fetch it now
-    const existingKey = sessionStorage.getItem("il_admin_key") || "";
-    if (isAdmin && !existingKey) {
-      fetch("/api/admin-token?code=ADMINTEST")
-        .then(r => r.json())
-        .then(d => { if (d.key) sessionStorage.setItem("il_admin_key", d.key); })
-        .catch(() => {});
-    }
 
     setSession({ userEmail: email, gender, isAdmin, isAmbassador, isCertified, autoAdmin });
     setReady(true);

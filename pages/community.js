@@ -101,7 +101,7 @@ export default function CommunityPage() {
       const res = await fetch("/api/community", {
         method: "POST",
         headers: {"Content-Type":"application/json"},
-        body: JSON.stringify({ action:"createThread", author:nickname, token:sessionToken, title:newThreadTitle.trim(), body:newThreadBody.trim() })
+        body: JSON.stringify({ action:"createThread", author:nickname, token:sessionToken, title:newThreadTitle.trim(), body:newThreadBody.trim(), isAmbassador: typeof window !== "undefined" && sessionStorage.getItem("il_ambassador") === "true" })
       });
       const data = await res.json();
       if (data.banned) { setBanned(true); return; }
@@ -170,6 +170,7 @@ export default function CommunityPage() {
                 <div style={{ fontSize:9, color:C.mutedDark, fontFamily:"sans-serif" }}>{activePost.type==="author" ? "The International Lover" : "Member"} - {new Date(activePost.createdAt).toLocaleDateString("en-US",{month:"long",day:"numeric",year:"numeric"})}</div>
               </div>
               {activePost.type==="author" && <div style={{ marginLeft:"auto", background:C.gold, color:C.navyDeep, fontSize:8, fontWeight:700, padding:"2px 8px", fontFamily:"sans-serif", letterSpacing:"0.1em" }}>AUTHOR</div>}
+              {activePost.isAmbassador && activePost.type!=="author" && <div style={{ marginLeft:"auto", background:"#1a3a6b", border:"1px solid #b8963e", color:"#b8963e", fontSize:8, fontWeight:700, padding:"2px 8px", fontFamily:"sans-serif", letterSpacing:"0.1em" }}>AMBASSADOR</div>}
             </div>
             <p style={{ fontSize:"clamp(14px,2vw,16px)", color:C.cream, lineHeight:1.9, fontFamily:"Georgia,serif", whiteSpace:"pre-wrap" }}>{activePost.body}</p>
           </div>
