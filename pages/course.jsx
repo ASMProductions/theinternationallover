@@ -3284,7 +3284,7 @@ export default function CoursePage() {
   const region = activeRegionId ? REGIONS_COURSE.find(r => r.id === activeRegionId) : null;
   const woman = region && selectedWomanId ? region.women.find(w => w.id === selectedWomanId) : null;
 
-  const goBack = () => { window.location.href = "/library"; };
+  const goBack = () => { window.location.href = "/"; };
 
   const selectRegion = (id) => {
     setActiveRegionId(id); setSelectedWomanId(null); setRevealedCards([]);
@@ -3380,7 +3380,7 @@ export default function CoursePage() {
 
   if (phase === "map") return (
     <div style={{ minHeight:"100vh", background:C.dark, color:C.cream, fontFamily:"Georgia,serif" }}>
-      <NavBar left={<button onClick={goBack} style={{ background:"none", border:"1px solid #b8963e", color:"#b8963e", padding:"6px 14px", borderRadius:"20px", cursor:"pointer", fontSize:"13px", fontFamily:"sans-serif" }}>← Library</button>} title="Select Your Destination" right={<div style={{ fontSize:10, color:C.muted, fontFamily:"sans-serif" }}>{stampedRegions.length} / 5 stamped</div>} />
+      <NavBar left={<button onClick={goBack} style={{ background:"none", border:"1px solid #b8963e", color:"#b8963e", padding:"6px 14px", borderRadius:"20px", cursor:"pointer", fontSize:"13px", fontFamily:"sans-serif" }}>← Library</button>} title="Select Your Destination" right={<div style={{ fontSize:10, color:C.muted, fontFamily:"sans-serif" }}>{stampedRegions.length} / 6 stamped</div>} />
       <div style={{ maxWidth:860, margin:"0 auto", padding:"2.5rem 1.5rem" }}>
         <div style={{ background:C.navyDeep, border:"1px solid #1e3a6e", padding:"1.25rem", marginBottom:"2rem", textAlign:"center" }}>
           <div style={{ fontSize:9, letterSpacing:"0.2em", color:C.mutedDark, fontFamily:"sans-serif", marginBottom:10 }}>YOUR PASSPORT</div>
@@ -3391,7 +3391,7 @@ export default function CoursePage() {
               </div>
             ))}
           </div>
-          {stampedRegions.length === 5 && <button onClick={() => setPhase("certificate")} style={{ padding:"10px 24px", background:C.gold, color:C.navyDeep, border:"none", cursor:"pointer", fontSize:12, fontWeight:700, fontFamily:"sans-serif", letterSpacing:"0.1em" }}>Claim Your Certificate →</button>}
+          {stampedRegions.length === 6 && <button onClick={() => setPhase("certificate")} style={{ padding:"10px 24px", background:C.gold, color:C.navyDeep, border:"none", cursor:"pointer", fontSize:12, fontWeight:700, fontFamily:"sans-serif", letterSpacing:"0.1em" }}>Claim Your Certificate →</button>}
         </div>
         <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit, minmax(240px,1fr))", gap:16 }}>
           {REGIONS_COURSE.map(r => (
@@ -3444,7 +3444,7 @@ export default function CoursePage() {
         <div style={{ maxWidth:680, margin:"0 auto", padding:"2rem 1.5rem" }}>
           <div style={{ display:"flex", gap:16, alignItems:"flex-start", marginBottom:"1.5rem" }}>
             <div style={{ width:80, height:100, flexShrink:0, overflow:"hidden", border:"2px solid #b8963e" }}>
-              <img src={"/women/" + woman.id + ".jpg"} alt={woman.name} style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center top" }} />
+              <img src={"/women/" + woman.id.replace(/_/g, "-") + ".jpg"} alt={woman.name} style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center top" }} />
             </div>
             <div style={{ flex:1 }}>
               <div style={{ fontSize:9, letterSpacing:"0.2em", color:C.gold, fontFamily:"sans-serif", marginBottom:4 }}>PURSUING</div>
@@ -3455,7 +3455,7 @@ export default function CoursePage() {
                   <div key={w.id} onClick={() => { if (w.id !== selectedWomanId) { setSelectedWomanId(w.id); setSceneIndex(0); setChoiceHistory([]); setLastConsequence(null); }}}
                     style={{ display:"flex", alignItems:"center", gap:5, padding:"3px 8px", background:w.id===selectedWomanId?"rgba(184,150,62,0.15)":C.navyDeep, border:"1px solid " + (w.id===selectedWomanId?C.gold:"#1e3a6e"), fontSize:9, fontFamily:"sans-serif", cursor:w.id!==selectedWomanId?"pointer":"default" }}>
                     <div style={{ width:18, height:18, overflow:"hidden", flexShrink:0 }}>
-                      <img src={"/women/" + w.id + ".jpg"} alt={w.name} style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center top" }} />
+                      <img src={"/women/" + w.id.replace(/_/g, "-") + ".jpg"} alt={w.name} style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center top" }} />
                     </div>
                     <span style={{ color:w.id===selectedWomanId?C.goldLight:C.mutedDark }}>{w.name}</span>
                     <span style={{ color:w.id===selectedWomanId?C.gold:"#2a3a5e" }}>{w.id===selectedWomanId?"●":"○"}</span>
@@ -3491,7 +3491,7 @@ export default function CoursePage() {
     );
   }
 
-  if (phase === "outcome" && region && outcome) {
+  if (phase === "outcome" && region && outcome && woman) {
     const color = ENDING_COLORS[outcome] || "#b8963e";
     const endingText = outcomeText || (region.endings && region.endings[outcome]) || "Your arc is complete.";
     return (
@@ -3500,7 +3500,7 @@ export default function CoursePage() {
         <div style={{ maxWidth:640, margin:"0 auto", padding:"3rem 1.5rem" }}>
           <div style={{ display:"flex", gap:16, alignItems:"flex-start", marginBottom:"2rem" }}>
             <div style={{ width:80, height:100, flexShrink:0, overflow:"hidden", border:`2px solid ${color}` }}>
-              <img src={"/women/" + woman.id + ".jpg"} alt={woman.name} style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center top" }} />
+              <img src={"/women/" + woman.id.replace(/_/g, "-") + ".jpg"} alt={woman.name} style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center top" }} />
             </div>
             <div style={{ flex:1 }}>
               <div style={{ fontSize:9, letterSpacing:"0.3em", color, fontFamily:"sans-serif", marginBottom:6 }}>ENDING</div>
