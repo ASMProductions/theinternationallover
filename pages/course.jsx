@@ -3241,6 +3241,10 @@ function NavBar({ left, title, right }) {
         <div style={{ fontSize:15, color:"#d4af6a" }}>{title}</div>
       </div>
       {right}
+      <div style={{ display:"flex", gap:8, marginLeft:"auto" }}>
+        <button onClick={() => window.location.href = "/"} style={{ background:"none", border:"1px solid #1e3a6e", color:"#8a7a5a", padding:"5px 12px", borderRadius:20, cursor:"pointer", fontSize:11, fontFamily:"sans-serif" }}>Home</button>
+        <a href="/matrimonial" style={{ background:"none", border:"1px solid #1e3a6e", color:"#8a7a5a", padding:"5px 12px", borderRadius:20, cursor:"pointer", fontSize:11, fontFamily:"sans-serif", textDecoration:"none" }}>Matrimonial</a>
+      </div>
     </div>
   );
 }
@@ -3359,7 +3363,7 @@ export default function CoursePage() {
 
   if (phase === "intro") return (
     <div style={{ minHeight:"100vh", background:C.dark, color:C.cream, fontFamily:"Georgia,serif" }}>
-      <NavBar left={<button onClick={goBack} style={{ background:"none", border:"1px solid #b8963e", color:"#b8963e", padding:"6px 14px", borderRadius:"20px", cursor:"pointer", fontSize:"13px", fontFamily:"sans-serif" }}>← Library</button>} title="Course Opening" />
+      <NavBar left={<button onClick={goBack} style={{ background:"none", border:"1px solid #b8963e", color:"#b8963e", padding:"6px 14px", borderRadius:"20px", cursor:"pointer", fontSize:"13px", fontFamily:"sans-serif" }}>← Home</button>} title="Course Opening" />
       <div style={{ maxWidth:620, margin:"0 auto", padding:"4rem 1.5rem", textAlign:"center" }}>
         <div style={{ fontSize:9, letterSpacing:"0.3em", color:C.gold, fontFamily:"sans-serif", marginBottom:16 }}>BEFORE YOU BEGIN</div>
         <svg viewBox="0 0 60 72" width={52} style={{ display:"block", margin:"0 auto 20px" }}>
@@ -3380,7 +3384,7 @@ export default function CoursePage() {
 
   if (phase === "map") return (
     <div style={{ minHeight:"100vh", background:C.dark, color:C.cream, fontFamily:"Georgia,serif" }}>
-      <NavBar left={<button onClick={goBack} style={{ background:"none", border:"1px solid #b8963e", color:"#b8963e", padding:"6px 14px", borderRadius:"20px", cursor:"pointer", fontSize:"13px", fontFamily:"sans-serif" }}>← Library</button>} title="Select Your Destination" right={<div style={{ fontSize:10, color:C.muted, fontFamily:"sans-serif" }}>{stampedRegions.length} / 6 stamped</div>} />
+      <NavBar left={<button onClick={goBack} style={{ background:"none", border:"1px solid #b8963e", color:"#b8963e", padding:"6px 14px", borderRadius:"20px", cursor:"pointer", fontSize:"13px", fontFamily:"sans-serif" }}>← Home</button>} title="Select Your Destination" right={<div style={{ fontSize:10, color:C.muted, fontFamily:"sans-serif" }}>{stampedRegions.length} / 6 stamped</div>} />
       <div style={{ maxWidth:860, margin:"0 auto", padding:"2.5rem 1.5rem" }}>
         <div style={{ background:C.navyDeep, border:"1px solid #1e3a6e", padding:"1.25rem", marginBottom:"2rem", textAlign:"center" }}>
           <div style={{ fontSize:9, letterSpacing:"0.2em", color:C.mutedDark, fontFamily:"sans-serif", marginBottom:10 }}>YOUR PASSPORT</div>
@@ -3530,7 +3534,7 @@ export default function CoursePage() {
 
   if (phase === "certificate") return (
     <div style={{ minHeight:"100vh", background:C.dark, color:C.cream, fontFamily:"Georgia,serif" }}>
-      <NavBar left={<button onClick={goBack} style={{ background:"none", border:"1px solid #b8963e", color:"#b8963e", padding:"6px 14px", borderRadius:"20px", cursor:"pointer", fontSize:"13px", fontFamily:"sans-serif" }}>← Library</button>} title="Certificate of Commission" />
+      <NavBar left={<button onClick={goBack} style={{ background:"none", border:"1px solid #b8963e", color:"#b8963e", padding:"6px 14px", borderRadius:"20px", cursor:"pointer", fontSize:"13px", fontFamily:"sans-serif" }}>← Home</button>} title="Certificate of Commission" />
       <div style={{ maxWidth:600, margin:"0 auto", padding:"3rem 1.5rem", textAlign:"center" }}>
         <div style={{ background:"linear-gradient(160deg,#0f2347,#1a3a6b)", border:"2px solid #b8963e", padding:"3rem 2rem", position:"relative", boxShadow:"0 20px 60px rgba(0,0,0,0.5)" }}>
           {["top-left","top-right","bottom-left","bottom-right"].map(p => (
@@ -3563,7 +3567,7 @@ export default function CoursePage() {
         </div>
         <div style={{ marginTop:20, display:"flex", gap:10, justifyContent:"center", flexWrap:"wrap" }}>
           <button onClick={() => window.print()} style={{ padding:"10px 22px", background:C.gold, color:C.navyDeep, border:"none", cursor:"pointer", fontSize:12, fontWeight:700, fontFamily:"sans-serif" }}>Print / Save Certificate</button>
-          <button onClick={goBack} style={{ padding:"10px 22px", background:"transparent", color:C.muted, border:"1px solid #1e3a6e", cursor:"pointer", fontSize:12, fontFamily:"sans-serif" }}>← Library</button>
+          <button onClick={goBack} style={{ padding:"10px 22px", background:"transparent", color:C.muted, border:"1px solid #1e3a6e", cursor:"pointer", fontSize:12, fontFamily:"sans-serif" }}>← Home</button>
         </div>
       </div>
     </div>

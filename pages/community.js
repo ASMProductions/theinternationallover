@@ -110,14 +110,18 @@ export default function CommunityPage() {
     setSubmitting(false);
   };
 
-  const goBack = () => { window.location.href = "/library"; };
+  const goBack = () => { window.location.href = "/"; };
 
   const NavBar = ({ title, left }) => (
-    <div style={{ background:C.navyDeep, borderBottom:"1px solid #1e3a6e", padding:"1rem 1.5rem", display:"flex", alignItems:"center", gap:"1rem" }}>
+    <div style={{ background:C.navyDeep, borderBottom:"1px solid #1e3a6e", padding:"1rem 1.5rem", display:"flex", alignItems:"center", gap:"1rem", flexWrap:"wrap" }}>
       {left}
       <div style={{ flex:1 }}>
         <div style={{ fontSize:9, color:C.muted, letterSpacing:"0.15em", textTransform:"uppercase", fontFamily:"sans-serif" }}>The International Lover - The Consulate</div>
         <div style={{ fontSize:15, color:C.goldLight }}>{title}</div>
+      </div>
+      <div style={{ display:"flex", gap:8 }}>
+        <button onClick={() => window.location.href = "/"} style={{ background:"none", border:"1px solid #1e3a6e", color:C.muted, padding:"6px 14px", borderRadius:20, cursor:"pointer", fontSize:12, fontFamily:"sans-serif" }}>← Home</button>
+        <a href="/matrimonial" style={{ background:"none", border:"1px solid #b8963e", color:"#b8963e", padding:"6px 14px", borderRadius:20, cursor:"pointer", fontSize:12, fontFamily:"sans-serif", textDecoration:"none" }}>Matrimonial</a>
       </div>
     </div>
   );
