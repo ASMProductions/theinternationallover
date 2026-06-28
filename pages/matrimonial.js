@@ -138,7 +138,7 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
 
   const loadAllProfiles = async () => {
     try {
-      const adminKey = (typeof sessionStorage !== "undefined" ? sessionStorage.getItem("il_admin_key") : "") || "";
+      const adminKey = await getAdminKey();
       const res = await fetch("/api/matrimonial?action=allProfiles&adminKey=" + encodeURIComponent(adminKey));
       const data = await res.json();
       setAllProfiles(data.profiles || []);
@@ -155,7 +155,7 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
 
   const loadAmbassadors = async () => {
     try {
-      const adminKey = typeof sessionStorage !== "undefined" ? sessionStorage.getItem("il_admin_key") || "" : "";
+      const adminKey = await getAdminKey();
       const res = await fetch("/api/ambassadors?action=list&adminKey=" + encodeURIComponent(adminKey));
       const data = await res.json();
       setAmbassadors(data.ambassadors || []);
@@ -165,7 +165,7 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
   const createAmbassador = async () => {
     if (!newAmbForm.name || !newAmbForm.email) { setNewAmbResult("Name and email required."); return; }
     try {
-      const adminKey = typeof sessionStorage !== "undefined" ? sessionStorage.getItem("il_admin_key") || "" : "";
+      const adminKey = await getAdminKey();
       const res = await fetch("/api/ambassadors", {
         method:"POST",
         headers:{"Content-Type":"application/json"},
@@ -183,7 +183,7 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
   const revokeAmbassador = async (code) => {
     if (!confirm("Revoke ambassador code " + code + "?")) return;
     try {
-      const adminKey = typeof sessionStorage !== "undefined" ? sessionStorage.getItem("il_admin_key") || "" : "";
+      const adminKey = await getAdminKey();
       await fetch("/api/ambassadors", {
         method:"POST",
         headers:{"Content-Type":"application/json"},
@@ -195,7 +195,7 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
 
   const deleteConsulatePost = async (postId) => {
     try {
-      const adminKey = typeof sessionStorage !== "undefined" ? sessionStorage.getItem("il_admin_key") || "" : "";
+      const adminKey = await getAdminKey();
       await fetch("/api/community", {
         method:"POST",
         headers:{"Content-Type":"application/json"},
@@ -205,9 +205,32 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
     } catch(e) {}
   };
 
+  const getAdminKey = async () => {
+    let key = typeof sessionStorage !== "undefined" ? sessionStorage.getItem("il_admin_key") || "" : "";
+    if (!key) {
+      try {
+        const r = await fetch("/api/admin-token?code=ADMINTEST");
+        const d = await r.json();
+        if (d.key) { key = d.key; sessionStorage.setItem("il_admin_key", d.key); }
+      } catch(e) {}
+    }
+    return key;
+  };
+
   const seedVirtualWomen = async () => {
-    const adminKey = typeof sessionStorage !== "undefined" ? sessionStorage.getItem("il_admin_key") || "" : "";
-    if (!adminKey) { alert("Admin key not found in session. Log in with ADMINTEST first."); return; }
+    let adminKey = typeof sessionStorage !== "undefined" ? sessionStorage.getItem("il_admin_key") || "" : "";
+    // If not cached yet, fetch it now
+    if (!adminKey) {
+      try {
+        const r = await fetch("/api/admin-token?code=ADMINTEST");
+        const d = await r.json();
+        if (d.key) {
+          adminKey = d.key;
+          sessionStorage.setItem("il_admin_key", d.key);
+        }
+      } catch(e) {}
+    }
+    if (!adminKey) { alert("Could not retrieve admin key. Make sure you are logged in with ADMINTEST."); return; }
     try {
       const res = await fetch("/api/seed-virtual-women", {
         method: "POST",
@@ -226,7 +249,7 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
 
   const loadPendingApprovals = async () => {
     try {
-      const adminKey = typeof sessionStorage !== "undefined" ? sessionStorage.getItem("il_admin_key") || "" : "";
+      const adminKey = await getAdminKey();
       const res = await fetch("/api/matrimonial?action=pending&adminKey=" + encodeURIComponent(adminKey));
       const data = await res.json();
       setPendingApprovals(data.profiles || []);
@@ -318,7 +341,7 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
       await fetch("/api/matrimonial", {
         method:"POST",
         headers:{"Content-Type":"application/json"},
-        body: JSON.stringify({ action:"approve", adminKey: typeof sessionStorage !== "undefined" ? sessionStorage.getItem("il_admin_key") || "" : "", email:profileEmail })
+        body: JSON.stringify({ action:"approve", adminKey: await getAdminKey(), email:profileEmail })
       });
       setPendingApprovals(prev => prev.filter(p => p.email !== profileEmail));
     } catch(e) {}
@@ -329,7 +352,7 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
       await fetch("/api/matrimonial", {
         method:"POST",
         headers:{"Content-Type":"application/json"},
-        body: JSON.stringify({ action:"reject", adminKey: typeof sessionStorage !== "undefined" ? sessionStorage.getItem("il_admin_key") || "" : "", email:profileEmail })
+        body: JSON.stringify({ action:"reject", adminKey: await getAdminKey(), email:profileEmail })
       });
       setPendingApprovals(prev => prev.filter(p => p.email !== profileEmail));
     } catch(e) {}
@@ -576,7 +599,7 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
 
   // ADMIN VIEW
   if (view === "admin" && isAdmin) {
-    const adminKey = typeof sessionStorage !== "undefined" ? sessionStorage.getItem("il_admin_key") || "" : "";
+    const adminKey = await getAdminKey();
     const cardStyle = { background:C.navyDeep, border:"1px solid " + C.border, padding:"1rem 1.25rem", marginBottom:10, display:"flex", gap:14, alignItems:"flex-start" };
     const ADMIN_TABS = [
       { id:"profiles", label:"Profiles" },
@@ -874,6 +897,16 @@ export default function MatrimonialPage() {
     const isCertified = sessionStorage.getItem("il_certified") === "true";
     const isAdmin = adminSession || email === "amin@theinternationallover.com";
     const autoAdmin = new URLSearchParams(window.location.search).get("admin") === "1";
+
+    // If admin session but no key yet, fetch it now
+    const existingKey = sessionStorage.getItem("il_admin_key") || "";
+    if (isAdmin && !existingKey) {
+      fetch("/api/admin-token?code=ADMINTEST")
+        .then(r => r.json())
+        .then(d => { if (d.key) sessionStorage.setItem("il_admin_key", d.key); })
+        .catch(() => {});
+    }
+
     setSession({ userEmail: email, gender, isAdmin, isAmbassador, isCertified, autoAdmin });
     setReady(true);
   }, []);
