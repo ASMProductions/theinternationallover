@@ -51,12 +51,12 @@ const CONSULTATIONS = [
 ];
 
 const REGIONS = [
+  { id:"us", label:"North America",      desc:"United States — All Backgrounds" },
   { id:"na", label:"North Africa",       desc:"Morocco · Tunisia · Algeria · Egypt" },
   { id:"me", label:"Middle East",        desc:"Jordan · Lebanon · Yemen · Syria" },
   { id:"as", label:"Asia",               desc:"Indonesia · Philippines · Bangladesh" },
   { id:"la", label:"Latin America",      desc:"Colombia · Dominican Republic · Peru" },
   { id:"ss", label:"Sub-Saharan Africa", desc:"Senegal · Ghana · Ethiopia · Kenya" },
-  { id:"us", label:"North America",      desc:"United States — All Backgrounds" },
 ];
 
 const RESOURCES = [
@@ -2413,190 +2413,6 @@ const RESOURCE_MODULES = [
 ];
 
 const REGIONS_COURSE = [
-  { id:"na", label:"North Africa", color:"#c8963e", desc:"Morocco · Tunisia · Algeria · Egypt",
-    context:"North Africa operates on a high-context cultural framework. What is not said carries as much weight as what is. Family honor is structural, not sentimental. A father's silence is not indifference — it is evaluation. Islam governs the rhythm of daily life.",
-    women:[
-      { id:"nadia", name:"Nadia", age:24, city:"Fez, Morocco", education:"Bachelor's, French Literature", religion:"Muslim (practicing)", platform:"Muslima.com",
-        profileText:"I am a teacher. I love books and the Arabic language. I come from a family that holds education and faith as its highest values. I am not looking for adventure. I am looking for a husband who is serious about building a home. My father will speak for me when the time is right.",
-        hidden:"Her father is a retired Arabic calligrapher. Her mother passed away three years ago. She is the eldest of four siblings and has managed the household since. She has never been on a platform before. She has not responded to the last eleven messages she received.",
-        signal:"Her profile has been active four months. Zero responses. Most men interpret this as disinterest. It is neither.",
-        type:"genuine" },
-      { id:"yasmine", name:"Yasmine", age:22, city:"Casablanca, Morocco", education:"Some university — marketing", religion:"Muslim (moderate)", platform:"Muslima.com",
-        profileText:"I am a young woman who loves life, travel, and learning new things. American men seem to understand women better than men here. I want a partner who will be my equal and treat me with respect. I believe love has no borders.",
-        hidden:"Yasmine has been on this platform for fourteen months. She has initiated contact with forty-three men. Three sent money before disappearing. She has a boyfriend named Karim who encouraged the platform. They have discussed what they will do when a foreign man offers marriage.",
-        signal:"She responds within minutes, in fluent English, with warmth and specificity. She references something in your profile most women would not have noticed. It feels like being seen.",
-        type:"fraud" },
-      { id:"fatima", name:"Fatima-Zahra", age:27, city:"Meknes, Morocco", education:"Master's, Islamic Studies", religion:"Muslim (deeply practicing)", platform:"Muslima.com",
-        profileText:"I seek a husband who fears Allah and leads his home with knowledge and wisdom. My father will conduct all initial communications on my behalf. If you are serious, write to him directly.",
-        hidden:"Her father is a respected Islamic scholar. He has already turned away six suitors. She does not know this profile exists — her father created it. She has been told only that he is searching on her behalf through appropriate channels.",
-        signal:"You cannot contact her directly. The profile instructs you to contact the father. Most men skip this one entirely. The ones who do not are immediately in a different category.",
-        type:"genuine_wrong" },
-    ],
-    scenarios:[
-      { scene:1, title:"First Contact", setup:"You have reviewed all three profiles. Yasmine has already sent you a message: 'I saw your profile. You seem like a genuine man. I don't meet many of those here.' It arrived twelve minutes after you created your account. Nadia's profile shows 847 views and zero responses. Fatima-Zahra requires you to contact her father.",
-        choices:[
-          { id:"a", text:"Respond to Yasmine — she reached out first and her English is excellent", next:"yasmine_branch_1", consequence:"She responds in four minutes. The conversation flows easily. On day five she mentions her phone needs repair but doesn't ask for anything directly." },
-          { id:"b", text:"Send a careful first message to Nadia in French, referencing her teaching work", next:"nadia_branch_1", consequence:"No reply for eleven days. On the twelfth, three sentences in formal French. She thanks you. She will write again when she has more to say." },
-          { id:"c", text:"Request Fatima-Zahra's father's contact information and compose a formal letter", next:"fatima_branch_1", consequence:"His contact is provided. You spend two days composing a letter. His reply arrives in seven days — in classical Arabic. You need a translator." },
-        ]
-      },
-    ],
-    endings:{
-      success:"You read the culture correctly. You vetted thoroughly. The mahr is agreed. The nikah is performed in her family's city. The immigration process is long — seven months. When she arrives, you are married within 48 hours. The first year is the hardest and the best year of your life simultaneously.",
-      early_detect:"You caught the fraud before boarding the flight. You lost three months of evenings and the grief of caring about someone who was not real. That grief is real even if she was not. The cost was the cheapest it will ever be.",
-      cultural_fail:"She was real. Her father was real. What ended it was the accumulation of small cultural failures. You checked your phone during the visit — once, briefly. It was noticed. Three months later her father called to say they were closing the process. You will not fully understand what you did wrong for some time.",
-      fraud_pre:"You married her. You missed the signals. But you caught it before citizenship. The second phone. The messages in Arabic. You now have a choice about what to do next.",
-      fraud_post:"She received citizenship. She left. There may be a child. This ending exists because it has happened to real men.",
-    }
-  },
-
-  { id:"me", label:"Middle East", color:"#a07830", desc:"Jordan · Lebanon · Yemen · Syria",
-    context:"Family is the primary social unit around which everything is organized. A man who courts a woman without courting her family is not a serious man. Religion is not personal — it is communal. A woman's reputation affects not just her but her sisters, her mother, and her father's standing.",
-    women:[
-      { id:"sara", name:"Sara", age:26, city:"Amman, Jordan", education:"Bachelor's, Nursing", religion:"Muslim (practicing)", platform:"Muslima.com",
-        profileText:"I am a nurse and I believe in service. I am looking for a man who understands that a good wife is built from character, not from beauty. I have my parents' blessing to use this platform. I am ready for marriage. I am not ready for games.",
-        hidden:"She has had serious correspondence with two men before. The American ended contact after three months without explanation. The British man proposed then withdrew when his family objected. She has not told her parents. She is careful now in a way she was not before.",
-        signal:"The profile reads like a woman who has been disappointed but has not become cynical. That distinction matters.",
-        type:"genuine" },
-      { id:"hessa", name:"Hessa", age:23, city:"Beirut, Lebanon", education:"University — Political Science", religion:"Muslim (cultural)", platform:"Muslima.com",
-        profileText:"I am curious about everything. I believe the world is larger than where you were born. I am looking for a man who is going somewhere — and who wants to take me with him. I believe in partnership, not tradition.",
-        hidden:"Her father is a former journalist forced to leave Lebanon in 2019. The family has been in financial difficulty since. Her mother has told her more than once that an American husband would solve several problems. Hessa genuinely wants to leave Lebanon. Whether the attraction is to marriage, a particular man, or a different country is a question she has not fully answered for herself.",
-        signal:"The profile is written for a Western man. Every line speaks to Western values. This can mean she is genuinely bicultural. It can also mean she is performing for an audience.",
-        type:"genuine_wrong" },
-      { id:"maryam", name:"Maryam", age:29, city:"Irbid, Jordan", education:"Master's, Arabic Literature", religion:"Muslim (deeply practicing)", platform:"Muslima.com",
-        profileText:"I have spent my life studying words. I understand their weight. I will not spend them carelessly here. I am looking for a man of substance. My brother manages this account on my behalf.",
-        hidden:"Maryam has a published book of Arabic poetry used in secondary schools. Her father died two years ago. Her brother has turned away six inquiries without telling her. She found out when a man from their city mentioned it. They disagreed. He still manages the account but now must tell her before dismissing anyone.",
-        signal:"The platform shows this account has been active eleven months with one recorded inquiry sent — to someone else. She reached out once. That person did not respond.",
-        type:"genuine" },
-    ],
-    scenarios:[
-      { scene:1, title:"First Contact", setup:"Sara's profile is direct. Hessa has a profile that speaks fluent Western. Maryam requires contact through her brother. Each represents a completely different entry point.",
-        choices:[
-          { id:"a", text:"Message Sara directly — her English is clear and her profile is honest", next:"sara_branch_1", consequence:"She replies in three days. One paragraph. She asks: 'What does a good husband look like to you?'" },
-          { id:"b", text:"Message Hessa — she is the most immediately accessible culturally", next:"hessa_branch_1", consequence:"She responds within an hour. Warm. Effortless. On day eight she mentions her father is going through financial difficulty." },
-          { id:"c", text:"Write formally to Maryam's brother", next:"maryam_branch_1", consequence:"He responds in Arabic after five days: 'Before I pass your message to her, I need to understand who you are.'" },
-        ]
-      },
-    ],
-    endings:{
-      success:"The religion question was answered honestly. The family meeting in Amman went well. Her father asked about your family — you had thought about this. The mahr negotiation was respectful. The visa process was long. When she arrived, she brought her mother's recipe book and her grandmother's prayer rug. You understood what that meant.",
-      early_detect:"Hessa's warmth was real but her motivation was an exit, not a marriage. When you asked what she loved about her life exactly as it was, she went quiet for a long time. Her answer told you everything. You ended it kindly.",
-      cultural_fail:"You misrepresented your religious practice to gain access to the family. The marriage began on a lie. When the truth surfaced — and it always surfaces — the damage was to both of you. The cultural debrief is clear: deception is never a foundation.",
-      fraud_pre:"The financial pressure was always present. After the Green Card, the requests escalated. You caught the pattern before citizenship. The attorney consultation came first. The damage was limited.",
-      fraud_post:"She had a brother she wanted to bring over. The marriage was the instrument. Post-citizenship, the plan executed exactly as it had been designed, long before she met you.",
-    }
-  },
-
-  { id:"as", label:"Asia", color:"#b88a28", desc:"Indonesia · Philippines · Bangladesh",
-    context:"Asia in this context spans Southeast Asia and South Asia. The common threads: family embeddedness, high-context communication, and the reality that the economic gap between an American man and her family can be large enough to distort the power dynamic significantly. That last point is the primary source of fraud in this arc — usually not malice but desperation given a direction.",
-    women:[
-      { id:"amira", name:"Amira", age:25, city:"Yogyakarta, Indonesia", education:"Bachelor's, Islamic Education", religion:"Muslim (traditionalist)", platform:"Muslima.com",
-        profileText:"My family is my world. My faith is my foundation. I am not looking for a man to take me somewhere. I am looking for a man to build something with me — here or wherever Allah wills. My father speaks for me.",
-        hidden:"Amira's father is an imam of a small mosque. She has no strong desire to go to America — she would go if her husband was good, stay if her husband was good. She is genuinely indifferent to geography. This will confuse men who assume she wants an exit.",
-        signal:"Most men on the platform approach women from this region assuming they want to leave. Her profile does not say this. Most men miss that.",
-        type:"genuine" },
-      { id:"jasmine", name:"Jasmine", age:24, city:"Cebu, Philippines", education:"Associate degree, Business", religion:"Catholic", platform:"ChristianMingle",
-        profileText:"Family is everything to me. I take care of my parents and my two younger brothers. I want a husband who understands that when you marry me, you marry my whole family. Not in a burden way — in a love way. I am a hard worker.",
-        hidden:"Her father has a heart condition requiring medication her family struggles to afford. She sends forty percent of her salary home monthly. She has two cousins who married American men. One marriage is genuinely happy. The other husband sends money but rarely visits. She has watched both closely. She wants the first kind. She has a two-year-old son from a relationship that ended. She has not included this in her profile.",
-        signal:"The profile is honest about family embeddedness. What it does not say will surface when she trusts you enough to say it.",
-        type:"genuine_wrong" },
-      { id:"nurul", name:"Nurul", age:28, city:"Dhaka, Bangladesh", education:"Master's, Economics", religion:"Muslim (practicing privately)", platform:"Muslima.com",
-        profileText:"I have spent my career helping women build economic independence. I believe marriage is a partnership. I am not looking to be managed. I am looking for a man who is secure enough to be beside me rather than above me. I am traditional in my values and contemporary in my methods.",
-        hidden:"She has been on this platform two months after four years of family introductions that failed — the men found her too educated, too independent, too direct. Her father, who holds a graduate degree, is quietly supportive. She is here not because she wants a foreign man specifically but because the men in her community cannot accept what she is.",
-        signal:"She is not looking for rescue. The test of the Nurul arc is not whether you can vet her. It is whether you are the man she would accept.",
-        type:"genuine" },
-    ],
-    scenarios:[
-      { scene:1, title:"First Contact", setup:"Amira's father must be contacted first. Jasmine's profile is warm and family-centered — she has not yet disclosed her son. Nurul's profile is direct and intelligent. Three very different entry points. Three very different tests.",
-        choices:[
-          { id:"a", text:"Contact Amira through her father as instructed", next:"amira_branch_1", consequence:"Her father replies thoughtfully. He asks about your faith and your intentions. He does not ask about money." },
-          { id:"b", text:"Message Jasmine — her profile is warm and her English is strong", next:"jasmine_branch_1", consequence:"She responds with warmth and specificity. She asks about your family immediately. The conversation feels like meeting someone." },
-          { id:"c", text:"Message Nurul — her profile is the most intellectually direct", next:"nurul_branch_1", consequence:"She responds in 24 hours. One paragraph. She asks one question that is harder than it appears." },
-        ]
-      },
-    ],
-    endings:{
-      success:"You understood that her family's financial need was real and not shameful. You discussed what remittances would look like before the marriage, not after. She arrived having never been dishonest with you. The son she disclosed early told you who she was. The marriage was built on that foundation.",
-      early_detect:"The poverty gap was real. The requests were real. But you held the line — no money before the vetting was complete, no financial entanglement before commitment. She respected it. Or she revealed herself. Either way, you were protected.",
-      cultural_fail:"You thought you understood Asian culture because it felt familiar. You did the least preparation. The assumptions you carried into the relationship — about her deference, about her desires, about what she needed from you — were wrong. She was not passive. She was polite. Those are not the same thing.",
-      fraud_pre:"The financial gravity was always present. The requests escalated once she arrived. You caught it before citizenship — the separate account she opened, the money transfers you did not authorize. Limited damage.",
-      fraud_post:"She was sending money home throughout the marriage. After citizenship, the transfers became larger. Then she was gone. The child remained. This arc ends with a single father and a lesson about the difference between a woman who is committed to the marriage and a woman who is committed to what the marriage provides.",
-    }
-  },
-
-  { id:"la", label:"Latin America", color:"#c8a040", desc:"Colombia · Dominican Republic · Peru",
-    context:"Latin America is the arc with the most cultural overlap with American experience and therefore the most dangerous false sense of familiarity. The Latin American woman is often the most immediately accessible — shared cultural references, social warmth that feels like intimacy, English fluency that removes one primary vetting tool. The man who enters this arc thinking he understands it because he has watched Spanish-language television has not begun to understand it.",
-    women:[
-      { id:"valentina", name:"Valentina", age:27, city:"Medellin, Colombia", education:"Bachelor's, Accounting", religion:"Catholic (practicing)", platform:"SimplyMarry.com",
-        profileText:"I believe a home needs a foundation. I am not looking for a vacation. I am looking for a husband. I was raised to understand what that means — by a father who showed me and a mother who lived it. If you are serious, I will know. If you are not, I will also know.",
-        hidden:"She was engaged three years ago to a local man who left her two months before the wedding. The experience made her more discerning rather than more desperate. She has ended three previous platform conversations because she felt something was being performed rather than lived.",
-        signal:"The profile reads like a woman testing for authenticity before warmth. That is exactly what she is doing.",
-        type:"genuine" },
-      { id:"diana", name:"Diana", age:22, city:"Santo Domingo, Dominican Republic", education:"High school; some university", religion:"Catholic (cultural)", platform:"SimplyMarry.com",
-        profileText:"I want a better life. I am not ashamed to say this. My country is difficult. I work hard and I want a man who works hard with me. I want children and a home. I want a husband who will be faithful. I will be faithful to him.",
-        hidden:"Diana is honest in her profile. She does want a better life — that is genuine. She has a two-year-old son from a relationship that ended. She has not included this. She intends to disclose it once a connection is established. The question is not her honesty. It is whether a genuine motive is sufficient foundation for a marriage.",
-        signal:"The phrase 'I want a better life' is sometimes read as a red flag. In Diana's case it is not. The undisclosed child is. How she handles the disclosure will tell you more about her than anything else.",
-        type:"genuine_wrong" },
-      { id:"elena", name:"Elena", age:30, city:"Lima, Peru", education:"Bachelor's, Nursing; pursuing Master's, Public Health", religion:"Catholic with indigenous traditions", platform:"SimplyMarry.com",
-        profileText:"I have spent years going into communities the city forgets. I have seen what a family without a father becomes. I have seen what a woman without a husband carries alone. I do not want that for myself. I am looking for a serious man — not a perfect man, but a man who is committed to being better.",
-        hidden:"She has been proposed to twice and declined both. The American man was her closest to yes. She declined because he said he would want her to stop working after they had children. She told him she could not agree. He could not understand why. The proposal died.",
-        signal:"She is accomplished, dedicated, and has already filtered out men who could not accept her whole life. The test of the Elena arc is not whether you can vet her. It is whether you are the man she would accept.",
-        type:"genuine" },
-    ],
-    scenarios:[
-      { scene:1, title:"First Contact", setup:"Valentina's profile tests for authenticity immediately. Diana's profile is disarmingly honest about wanting a better life. Elena's profile tells you exactly who she is — if you read it carefully.",
-        choices:[
-          { id:"a", text:"Message Valentina — her directness is appealing", next:"valentina_branch_1", consequence:"She replies in two days. She asks one question: 'What does a good husband look like to you?'" },
-          { id:"b", text:"Message Diana — her honesty about wanting a better life is refreshing", next:"diana_branch_1", consequence:"She responds warmly. The conversation develops quickly. On week three she mentions her son." },
-          { id:"c", text:"Message Elena — her profile is the most substantive", next:"elena_branch_1", consequence:"She responds in 48 hours. She has read your profile carefully. She asks whether you have any experience with public health work." },
-        ]
-      },
-    ],
-    endings:{
-      success:"Valentina tested you three times before she showed warmth. You passed each time — not by performing but by being consistent. Her father assessed you in the first five minutes of meeting you. The assessment was silent. You passed that too. The marriage is built on a foundation both of you constructed.",
-      early_detect:"Diana's son was disclosed on week three. You received it with respect and honesty — you were not sure you were ready to be a step-father and you said so directly. She appreciated the honesty more than a false yes would have given her. You ended it with dignity on both sides.",
-      cultural_fail:"You thought the familiarity of Latin culture meant you were prepared. You arrived in Medellin with assumptions. The father's dinner table was an evaluation you did not know you were sitting at. The marriage that followed was good for a year and a half. Then the things you had not discussed — her family's expectations, your assumptions about her role — surfaced as irreconcilable differences. She did not become someone else. She became who she always was, once the performance of early love had passed.",
-      fraud_pre:"The Americanization began before the first year was over. The environment did its work. What she was in Medellin and what she was becoming in America were visibly different. You caught it before it became irreversible — you built the community around her that you should have built from day one.",
-      fraud_post:"The erosion was quiet and cumulative. She was never a villain. She was a woman placed in an environment that constantly offered her an alternative identity. You had not protected the marriage from that environment. By the time you understood what was happening it had already happened.",
-    }
-  },
-
-  { id:"ss", label:"Sub-Saharan Africa", color:"#b07820", desc:"Senegal · Ghana · Ethiopia · Kenya",
-    context:"Sub-Saharan Africa is the arc with the greatest internal diversity and the deepest connection to the African American man's ancestral history. Community is the primary unit of reality. The bride price negotiation is not a transaction — it is a covenant between two families. A man who treats it as a fee is immediately revealed as someone who does not understand what he is entering.",
-    women:[
-      { id:"fatou", name:"Fatou", age:26, city:"Dakar, Senegal", education:"Bachelor's, Education", religion:"Muslim (Sufi — Tijaniyya order)", platform:"Muslima.com",
-        profileText:"I come from a family of teachers and scholars. My grandfather was a marabout. My father is a teacher. I am a teacher. Knowledge is how we have always served our community. I am looking for a man who understands that a wife brings more than her body to a home — she brings her lineage, her faith, and her gifts.",
-        hidden:"Fatou's Sufi tradition is central to who she is. The Tijaniyya order has its own practices, rhythms, and community obligations. A man who dismisses Sufi Islam as unorthodox will be filtered out by her family long before he understands what happened.",
-        signal:"The profile does not mention wanting to leave Senegal. It mentions wanting a man who understands lineage. These are different things.",
-        type:"genuine" },
-      { id:"abena", name:"Abena", age:24, city:"Accra, Ghana", education:"Bachelor's, Business Administration", religion:"Christian (Pentecostal)", platform:"SimplyMarry.com",
-        profileText:"I believe God has a plan for every life. I believe that plan includes a good marriage and a family built on faith. I am not desperate — I am deliberate. My parents are involved in everything important that I do. This is not a warning. It is a promise.",
-        hidden:"Abena's uncle is a well-known Pentecostal pastor in Accra. Her family will expect you to attend a service during any visit — not as a cultural experience, as a statement of who you are. Whether you share her specific denomination matters less than whether you share her orientation toward faith. A secular man will not survive this family's evaluation.",
-        signal:"The last line — 'This is not a warning. It is a promise' — is telling you something precise. Receive it precisely.",
-        type:"genuine_wrong" },
-      { id:"tigist", name:"Tigist", age:28, city:"Addis Ababa, Ethiopia", education:"Master's, Public Health", religion:"Ethiopian Orthodox Christian", platform:"Muslima.com",
-        profileText:"I am on this platform because my family asked me to consider men from outside Ethiopia. I am not certain this is the right path for me. But I am willing to be shown that it is. I am serious, faithful, and I will not waste your time if you do not waste mine.",
-        hidden:"Ethiopian Orthodox Christianity is not a background religion. It is a daily, weekly, and annual practice with over 250 fasting days, its own liturgical calendar, and its own deeply embedded community practices. Her family created this profile hoping she will meet an Ethiopian man from the diaspora. A non-Ethiopian man will need to demonstrate extraordinary cultural seriousness.",
-        signal:"She says she is not certain this is the right path. That is not rejection. It is honesty. Most men read it as rejection.",
-        type:"genuine" },
-    ],
-    scenarios:[
-      { scene:1, title:"First Contact", setup:"Fatou's profile speaks of lineage and knowledge. Abena promises family involvement — directly. Tigist admits uncertainty. Each of these opening positions is a test of how you read what is in front of you.",
-        choices:[
-          { id:"a", text:"Message Fatou — knowledge and lineage speak to you", next:"fatou_branch_1", consequence:"She replies in four days. Formal, warm, precise. She asks about your relationship with your own lineage." },
-          { id:"b", text:"Message Abena — her directness is appealing", next:"abena_branch_1", consequence:"She responds within a day. She asks whether you have a church or faith community. It is the first question." },
-          { id:"c", text:"Message Tigist — her honesty about uncertainty is unusual and interesting", next:"tigist_branch_1", consequence:"She responds in three days. She says: 'Most men do not respond to that line. You did. Why?'" },
-        ]
-      },
-    ],
-    endings:{
-      success:"You entered a lineage, a community, and a tradition that predates your own country. The bride price negotiation was conducted with respect — you asked what the items represented before discussing amounts. The family church service was a participation, not a performance. The children of this marriage will be multilingual, multicultural, and connected to a history the American education system largely erased. That is a specific and irreplaceable gift.",
-      early_detect:"You recognized the romance scam pattern early — the escalating financial crisis, the perfect English, the photo that returned results under a different name. You walked away before it cost you more than your time. The debrief is not about suspicion. It is about the tools that distinguish performance from reality.",
-      cultural_fail:"Your intentions were good. Your preparation was not. The bride price conversation was treated as a transaction to get through efficiently. The family church service was attended but not engaged. The arc did not end dramatically — it ended in a series of cooling conversations and a father who stopped returning calls. The lesson is not about effort. It is about what effort is actually required.",
-      fraud_pre:"The post-Green Card period revealed the pattern. The money was moving in directions you had not agreed to. The phone calls to her home country were longer and more frequent than before. You caught it before citizenship with the help of an attorney you consulted before saying anything.",
-      fraud_post:"The citizenship was the goal. The marriage was the instrument. After naturalization, the departure was organized and deliberate. The children remained. This ending is documented — not hypothetical. The debrief focuses on the signals that were present from the beginning, available to be read, and not read.",
-    }
-  },
   {
     id:"us", label:"North America", color:"#a07840", desc:"United States — All Backgrounds",
     context:"She chose a different standard. Whatever she came from — mosque, church, temple, or simply the decision that the culture around her was not enough — she made a choice that most women around her did not make. This region is about recognizing that choice, meeting her on her terms, and bringing the same preparation to her door that you would bring to a door in Fez or Dakar.",
@@ -2670,6 +2486,186 @@ const REGIONS_COURSE = [
       not_yet:"NOT YET: The correct deferral. Come back when the foundation is ready.",
     }
   },
+  { id:"na", label:"North Africa", color:"#c8963e", desc:"Morocco · Tunisia · Algeria · Egypt",
+    context:"North Africa operates on a high-context cultural framework. What is not said carries as much weight as what is. Family honor is structural, not sentimental. A father's silence is not indifference — it is evaluation. Islam governs the rhythm of daily life.",
+    women:[
+      { id:"nadia", name:"Nadia", age:24, city:"Fez, Morocco", education:"Bachelor's, French Literature", religion:"Muslim (practicing)", platform:"Muslima.com",
+        profileText:"I am a teacher. I love books and the Arabic language. I come from a family that holds education and faith as its highest values. I am not looking for adventure. I am looking for a husband who is serious about building a home. My father will speak for me when the time is right.",
+        hidden:"Her father is a retired Arabic calligrapher. Her mother passed away three years ago. She is the eldest of four siblings and has managed the household since. She has never been on a platform before. She has not responded to the last eleven messages she received.",
+        signal:"Her profile has been active four months. Zero responses. Most men interpret this as disinterest. It is neither.",
+        type:"genuine" },
+      { id:"yasmine", name:"Yasmine", age:22, city:"Casablanca, Morocco", education:"Some university — marketing", religion:"Muslim (moderate)", platform:"Muslima.com",
+        profileText:"I am a young woman who loves life, travel, and learning new things. American men seem to understand women better than men here. I want a partner who will be my equal and treat me with respect. I believe love has no borders.",
+        hidden:"Yasmine has been on this platform for fourteen months. She has initiated contact with forty-three men. Three sent money before disappearing. She has a boyfriend named Karim who encouraged the platform. They have discussed what they will do when a foreign man offers marriage.",
+        signal:"She responds within minutes, in fluent English, with warmth and specificity. She references something in your profile most women would not have noticed. It feels like being seen.",
+        type:"fraud" },
+      { id:"fatima", name:"Fatima-Zahra", age:27, city:"Meknes, Morocco", education:"Master's, Islamic Studies", religion:"Muslim (deeply practicing)", platform:"Muslima.com",
+        profileText:"I seek a husband who fears Allah and leads his home with knowledge and wisdom. My father will conduct all initial communications on my behalf. If you are serious, write to him directly.",
+        hidden:"Her father is a respected Islamic scholar. He has already turned away six suitors. She does not know this profile exists — her father created it. She has been told only that he is searching on her behalf through appropriate channels.",
+        signal:"You cannot contact her directly. The profile instructs you to contact the father. Most men skip this one entirely. The ones who do not are immediately in a different category.",
+        type:"genuine_wrong" },
+    ],
+    scenarios:[
+      { scene:1, title:"First Contact", setup:"You have reviewed all three profiles. Yasmine has already sent you a message: 'I saw your profile. You seem like a genuine man. I don't meet many of those here.' It arrived twelve minutes after you created your account. Nadia's profile shows 847 views and zero responses. Fatima-Zahra requires you to contact her father.",
+        choices:[
+          { id:"a", text:"Respond to Yasmine — she reached out first and her English is excellent", next:"yasmine_branch_1", consequence:"She responds in four minutes. The conversation flows easily. On day five she mentions her phone needs repair but doesn't ask for anything directly." },
+          { id:"b", text:"Send a careful first message to Nadia in French, referencing her teaching work", next:"nadia_branch_1", consequence:"No reply for eleven days. On the twelfth, three sentences in formal French. She thanks you. She will write again when she has more to say." },
+          { id:"c", text:"Request Fatima-Zahra's father's contact information and compose a formal letter", next:"fatima_branch_1", consequence:"His contact is provided. You spend two days composing a letter. His reply arrives in seven days — in classical Arabic. You need a translator." },
+        ]
+      },
+    ],
+    endings:{
+      success:"You read the culture correctly. You vetted thoroughly. The mahr is agreed. The nikah is performed in her family's city. The immigration process is long — seven months. When she arrives, you are married within 48 hours. The first year is the hardest and the best year of your life simultaneously.",
+      early_detect:"You caught the fraud before boarding the flight. You lost three months of evenings and the grief of caring about someone who was not real. That grief is real even if she was not. The cost was the cheapest it will ever be.",
+      cultural_fail:"She was real. Her father was real. What ended it was the accumulation of small cultural failures. You checked your phone during the visit — once, briefly. It was noticed. Three months later her father called to say they were closing the process. You will not fully understand what you did wrong for some time.",
+      fraud_pre:"You married her. You missed the signals. But you caught it before citizenship. The second phone. The messages in Arabic. You now have a choice about what to do next.",
+      fraud_post:"She received citizenship. She left. There may be a child. This ending exists because it has happened to real men.",
+    }
+  },
+  { id:"me", label:"Middle East", color:"#a07830", desc:"Jordan · Lebanon · Yemen · Syria",
+    context:"Family is the primary social unit around which everything is organized. A man who courts a woman without courting her family is not a serious man. Religion is not personal — it is communal. A woman's reputation affects not just her but her sisters, her mother, and her father's standing.",
+    women:[
+      { id:"sara", name:"Sara", age:26, city:"Amman, Jordan", education:"Bachelor's, Nursing", religion:"Muslim (practicing)", platform:"Muslima.com",
+        profileText:"I am a nurse and I believe in service. I am looking for a man who understands that a good wife is built from character, not from beauty. I have my parents' blessing to use this platform. I am ready for marriage. I am not ready for games.",
+        hidden:"She has had serious correspondence with two men before. The American ended contact after three months without explanation. The British man proposed then withdrew when his family objected. She has not told her parents. She is careful now in a way she was not before.",
+        signal:"The profile reads like a woman who has been disappointed but has not become cynical. That distinction matters.",
+        type:"genuine" },
+      { id:"hessa", name:"Hessa", age:23, city:"Beirut, Lebanon", education:"University — Political Science", religion:"Muslim (cultural)", platform:"Muslima.com",
+        profileText:"I am curious about everything. I believe the world is larger than where you were born. I am looking for a man who is going somewhere — and who wants to take me with him. I believe in partnership, not tradition.",
+        hidden:"Her father is a former journalist forced to leave Lebanon in 2019. The family has been in financial difficulty since. Her mother has told her more than once that an American husband would solve several problems. Hessa genuinely wants to leave Lebanon. Whether the attraction is to marriage, a particular man, or a different country is a question she has not fully answered for herself.",
+        signal:"The profile is written for a Western man. Every line speaks to Western values. This can mean she is genuinely bicultural. It can also mean she is performing for an audience.",
+        type:"genuine_wrong" },
+      { id:"maryam", name:"Maryam", age:29, city:"Irbid, Jordan", education:"Master's, Arabic Literature", religion:"Muslim (deeply practicing)", platform:"Muslima.com",
+        profileText:"I have spent my life studying words. I understand their weight. I will not spend them carelessly here. I am looking for a man of substance. My brother manages this account on my behalf.",
+        hidden:"Maryam has a published book of Arabic poetry used in secondary schools. Her father died two years ago. Her brother has turned away six inquiries without telling her. She found out when a man from their city mentioned it. They disagreed. He still manages the account but now must tell her before dismissing anyone.",
+        signal:"The platform shows this account has been active eleven months with one recorded inquiry sent — to someone else. She reached out once. That person did not respond.",
+        type:"genuine" },
+    ],
+    scenarios:[
+      { scene:1, title:"First Contact", setup:"Sara's profile is direct. Hessa has a profile that speaks fluent Western. Maryam requires contact through her brother. Each represents a completely different entry point.",
+        choices:[
+          { id:"a", text:"Message Sara directly — her English is clear and her profile is honest", next:"sara_branch_1", consequence:"She replies in three days. One paragraph. She asks: 'What does a good husband look like to you?'" },
+          { id:"b", text:"Message Hessa — she is the most immediately accessible culturally", next:"hessa_branch_1", consequence:"She responds within an hour. Warm. Effortless. On day eight she mentions her father is going through financial difficulty." },
+          { id:"c", text:"Write formally to Maryam's brother", next:"maryam_branch_1", consequence:"He responds in Arabic after five days: 'Before I pass your message to her, I need to understand who you are.'" },
+        ]
+      },
+    ],
+    endings:{
+      success:"The religion question was answered honestly. The family meeting in Amman went well. Her father asked about your family — you had thought about this. The mahr negotiation was respectful. The visa process was long. When she arrived, she brought her mother's recipe book and her grandmother's prayer rug. You understood what that meant.",
+      early_detect:"Hessa's warmth was real but her motivation was an exit, not a marriage. When you asked what she loved about her life exactly as it was, she went quiet for a long time. Her answer told you everything. You ended it kindly.",
+      cultural_fail:"You misrepresented your religious practice to gain access to the family. The marriage began on a lie. When the truth surfaced — and it always surfaces — the damage was to both of you. The cultural debrief is clear: deception is never a foundation.",
+      fraud_pre:"The financial pressure was always present. After the Green Card, the requests escalated. You caught the pattern before citizenship. The attorney consultation came first. The damage was limited.",
+      fraud_post:"She had a brother she wanted to bring over. The marriage was the instrument. Post-citizenship, the plan executed exactly as it had been designed, long before she met you.",
+    }
+  },
+  { id:"as", label:"Asia", color:"#b88a28", desc:"Indonesia · Philippines · Bangladesh",
+    context:"Asia in this context spans Southeast Asia and South Asia. The common threads: family embeddedness, high-context communication, and the reality that the economic gap between an American man and her family can be large enough to distort the power dynamic significantly. That last point is the primary source of fraud in this arc — usually not malice but desperation given a direction.",
+    women:[
+      { id:"amira", name:"Amira", age:25, city:"Yogyakarta, Indonesia", education:"Bachelor's, Islamic Education", religion:"Muslim (traditionalist)", platform:"Muslima.com",
+        profileText:"My family is my world. My faith is my foundation. I am not looking for a man to take me somewhere. I am looking for a man to build something with me — here or wherever Allah wills. My father speaks for me.",
+        hidden:"Amira's father is an imam of a small mosque. She has no strong desire to go to America — she would go if her husband was good, stay if her husband was good. She is genuinely indifferent to geography. This will confuse men who assume she wants an exit.",
+        signal:"Most men on the platform approach women from this region assuming they want to leave. Her profile does not say this. Most men miss that.",
+        type:"genuine" },
+      { id:"jasmine", name:"Jasmine", age:24, city:"Cebu, Philippines", education:"Associate degree, Business", religion:"Catholic", platform:"ChristianMingle",
+        profileText:"Family is everything to me. I take care of my parents and my two younger brothers. I want a husband who understands that when you marry me, you marry my whole family. Not in a burden way — in a love way. I am a hard worker.",
+        hidden:"Her father has a heart condition requiring medication her family struggles to afford. She sends forty percent of her salary home monthly. She has two cousins who married American men. One marriage is genuinely happy. The other husband sends money but rarely visits. She has watched both closely. She wants the first kind. She has a two-year-old son from a relationship that ended. She has not included this in her profile.",
+        signal:"The profile is honest about family embeddedness. What it does not say will surface when she trusts you enough to say it.",
+        type:"genuine_wrong" },
+      { id:"nurul", name:"Nurul", age:28, city:"Dhaka, Bangladesh", education:"Master's, Economics", religion:"Muslim (practicing privately)", platform:"Muslima.com",
+        profileText:"I have spent my career helping women build economic independence. I believe marriage is a partnership. I am not looking to be managed. I am looking for a man who is secure enough to be beside me rather than above me. I am traditional in my values and contemporary in my methods.",
+        hidden:"She has been on this platform two months after four years of family introductions that failed — the men found her too educated, too independent, too direct. Her father, who holds a graduate degree, is quietly supportive. She is here not because she wants a foreign man specifically but because the men in her community cannot accept what she is.",
+        signal:"She is not looking for rescue. The test of the Nurul arc is not whether you can vet her. It is whether you are the man she would accept.",
+        type:"genuine" },
+    ],
+    scenarios:[
+      { scene:1, title:"First Contact", setup:"Amira's father must be contacted first. Jasmine's profile is warm and family-centered — she has not yet disclosed her son. Nurul's profile is direct and intelligent. Three very different entry points. Three very different tests.",
+        choices:[
+          { id:"a", text:"Contact Amira through her father as instructed", next:"amira_branch_1", consequence:"Her father replies thoughtfully. He asks about your faith and your intentions. He does not ask about money." },
+          { id:"b", text:"Message Jasmine — her profile is warm and her English is strong", next:"jasmine_branch_1", consequence:"She responds with warmth and specificity. She asks about your family immediately. The conversation feels like meeting someone." },
+          { id:"c", text:"Message Nurul — her profile is the most intellectually direct", next:"nurul_branch_1", consequence:"She responds in 24 hours. One paragraph. She asks one question that is harder than it appears." },
+        ]
+      },
+    ],
+    endings:{
+      success:"You understood that her family's financial need was real and not shameful. You discussed what remittances would look like before the marriage, not after. She arrived having never been dishonest with you. The son she disclosed early told you who she was. The marriage was built on that foundation.",
+      early_detect:"The poverty gap was real. The requests were real. But you held the line — no money before the vetting was complete, no financial entanglement before commitment. She respected it. Or she revealed herself. Either way, you were protected.",
+      cultural_fail:"You thought you understood Asian culture because it felt familiar. You did the least preparation. The assumptions you carried into the relationship — about her deference, about her desires, about what she needed from you — were wrong. She was not passive. She was polite. Those are not the same thing.",
+      fraud_pre:"The financial gravity was always present. The requests escalated once she arrived. You caught it before citizenship — the separate account she opened, the money transfers you did not authorize. Limited damage.",
+      fraud_post:"She was sending money home throughout the marriage. After citizenship, the transfers became larger. Then she was gone. The child remained. This arc ends with a single father and a lesson about the difference between a woman who is committed to the marriage and a woman who is committed to what the marriage provides.",
+    }
+  },
+  { id:"la", label:"Latin America", color:"#c8a040", desc:"Colombia · Dominican Republic · Peru",
+    context:"Latin America is the arc with the most cultural overlap with American experience and therefore the most dangerous false sense of familiarity. The Latin American woman is often the most immediately accessible — shared cultural references, social warmth that feels like intimacy, English fluency that removes one primary vetting tool. The man who enters this arc thinking he understands it because he has watched Spanish-language television has not begun to understand it.",
+    women:[
+      { id:"valentina", name:"Valentina", age:27, city:"Medellin, Colombia", education:"Bachelor's, Accounting", religion:"Catholic (practicing)", platform:"SimplyMarry.com",
+        profileText:"I believe a home needs a foundation. I am not looking for a vacation. I am looking for a husband. I was raised to understand what that means — by a father who showed me and a mother who lived it. If you are serious, I will know. If you are not, I will also know.",
+        hidden:"She was engaged three years ago to a local man who left her two months before the wedding. The experience made her more discerning rather than more desperate. She has ended three previous platform conversations because she felt something was being performed rather than lived.",
+        signal:"The profile reads like a woman testing for authenticity before warmth. That is exactly what she is doing.",
+        type:"genuine" },
+      { id:"diana", name:"Diana", age:22, city:"Santo Domingo, Dominican Republic", education:"High school; some university", religion:"Catholic (cultural)", platform:"SimplyMarry.com",
+        profileText:"I want a better life. I am not ashamed to say this. My country is difficult. I work hard and I want a man who works hard with me. I want children and a home. I want a husband who will be faithful. I will be faithful to him.",
+        hidden:"Diana is honest in her profile. She does want a better life — that is genuine. She has a two-year-old son from a relationship that ended. She has not included this. She intends to disclose it once a connection is established. The question is not her honesty. It is whether a genuine motive is sufficient foundation for a marriage.",
+        signal:"The phrase 'I want a better life' is sometimes read as a red flag. In Diana's case it is not. The undisclosed child is. How she handles the disclosure will tell you more about her than anything else.",
+        type:"genuine_wrong" },
+      { id:"elena", name:"Elena", age:30, city:"Lima, Peru", education:"Bachelor's, Nursing; pursuing Master's, Public Health", religion:"Catholic with indigenous traditions", platform:"SimplyMarry.com",
+        profileText:"I have spent years going into communities the city forgets. I have seen what a family without a father becomes. I have seen what a woman without a husband carries alone. I do not want that for myself. I am looking for a serious man — not a perfect man, but a man who is committed to being better.",
+        hidden:"She has been proposed to twice and declined both. The American man was her closest to yes. She declined because he said he would want her to stop working after they had children. She told him she could not agree. He could not understand why. The proposal died.",
+        signal:"She is accomplished, dedicated, and has already filtered out men who could not accept her whole life. The test of the Elena arc is not whether you can vet her. It is whether you are the man she would accept.",
+        type:"genuine" },
+    ],
+    scenarios:[
+      { scene:1, title:"First Contact", setup:"Valentina's profile tests for authenticity immediately. Diana's profile is disarmingly honest about wanting a better life. Elena's profile tells you exactly who she is — if you read it carefully.",
+        choices:[
+          { id:"a", text:"Message Valentina — her directness is appealing", next:"valentina_branch_1", consequence:"She replies in two days. She asks one question: 'What does a good husband look like to you?'" },
+          { id:"b", text:"Message Diana — her honesty about wanting a better life is refreshing", next:"diana_branch_1", consequence:"She responds warmly. The conversation develops quickly. On week three she mentions her son." },
+          { id:"c", text:"Message Elena — her profile is the most substantive", next:"elena_branch_1", consequence:"She responds in 48 hours. She has read your profile carefully. She asks whether you have any experience with public health work." },
+        ]
+      },
+    ],
+    endings:{
+      success:"Valentina tested you three times before she showed warmth. You passed each time — not by performing but by being consistent. Her father assessed you in the first five minutes of meeting you. The assessment was silent. You passed that too. The marriage is built on a foundation both of you constructed.",
+      early_detect:"Diana's son was disclosed on week three. You received it with respect and honesty — you were not sure you were ready to be a step-father and you said so directly. She appreciated the honesty more than a false yes would have given her. You ended it with dignity on both sides.",
+      cultural_fail:"You thought the familiarity of Latin culture meant you were prepared. You arrived in Medellin with assumptions. The father's dinner table was an evaluation you did not know you were sitting at. The marriage that followed was good for a year and a half. Then the things you had not discussed — her family's expectations, your assumptions about her role — surfaced as irreconcilable differences. She did not become someone else. She became who she always was, once the performance of early love had passed.",
+      fraud_pre:"The Americanization began before the first year was over. The environment did its work. What she was in Medellin and what she was becoming in America were visibly different. You caught it before it became irreversible — you built the community around her that you should have built from day one.",
+      fraud_post:"The erosion was quiet and cumulative. She was never a villain. She was a woman placed in an environment that constantly offered her an alternative identity. You had not protected the marriage from that environment. By the time you understood what was happening it had already happened.",
+    }
+  },
+  { id:"ss", label:"Sub-Saharan Africa", color:"#b07820", desc:"Senegal · Ghana · Ethiopia · Kenya",
+    context:"Sub-Saharan Africa is the arc with the greatest internal diversity and the deepest connection to the African American man's ancestral history. Community is the primary unit of reality. The bride price negotiation is not a transaction — it is a covenant between two families. A man who treats it as a fee is immediately revealed as someone who does not understand what he is entering.",
+    women:[
+      { id:"fatou", name:"Fatou", age:26, city:"Dakar, Senegal", education:"Bachelor's, Education", religion:"Muslim (Sufi — Tijaniyya order)", platform:"Muslima.com",
+        profileText:"I come from a family of teachers and scholars. My grandfather was a marabout. My father is a teacher. I am a teacher. Knowledge is how we have always served our community. I am looking for a man who understands that a wife brings more than her body to a home — she brings her lineage, her faith, and her gifts.",
+        hidden:"Fatou's Sufi tradition is central to who she is. The Tijaniyya order has its own practices, rhythms, and community obligations. A man who dismisses Sufi Islam as unorthodox will be filtered out by her family long before he understands what happened.",
+        signal:"The profile does not mention wanting to leave Senegal. It mentions wanting a man who understands lineage. These are different things.",
+        type:"genuine" },
+      { id:"abena", name:"Abena", age:24, city:"Accra, Ghana", education:"Bachelor's, Business Administration", religion:"Christian (Pentecostal)", platform:"SimplyMarry.com",
+        profileText:"I believe God has a plan for every life. I believe that plan includes a good marriage and a family built on faith. I am not desperate — I am deliberate. My parents are involved in everything important that I do. This is not a warning. It is a promise.",
+        hidden:"Abena's uncle is a well-known Pentecostal pastor in Accra. Her family will expect you to attend a service during any visit — not as a cultural experience, as a statement of who you are. Whether you share her specific denomination matters less than whether you share her orientation toward faith. A secular man will not survive this family's evaluation.",
+        signal:"The last line — 'This is not a warning. It is a promise' — is telling you something precise. Receive it precisely.",
+        type:"genuine_wrong" },
+      { id:"tigist", name:"Tigist", age:28, city:"Addis Ababa, Ethiopia", education:"Master's, Public Health", religion:"Ethiopian Orthodox Christian", platform:"Muslima.com",
+        profileText:"I am on this platform because my family asked me to consider men from outside Ethiopia. I am not certain this is the right path for me. But I am willing to be shown that it is. I am serious, faithful, and I will not waste your time if you do not waste mine.",
+        hidden:"Ethiopian Orthodox Christianity is not a background religion. It is a daily, weekly, and annual practice with over 250 fasting days, its own liturgical calendar, and its own deeply embedded community practices. Her family created this profile hoping she will meet an Ethiopian man from the diaspora. A non-Ethiopian man will need to demonstrate extraordinary cultural seriousness.",
+        signal:"She says she is not certain this is the right path. That is not rejection. It is honesty. Most men read it as rejection.",
+        type:"genuine" },
+    ],
+    scenarios:[
+      { scene:1, title:"First Contact", setup:"Fatou's profile speaks of lineage and knowledge. Abena promises family involvement — directly. Tigist admits uncertainty. Each of these opening positions is a test of how you read what is in front of you.",
+        choices:[
+          { id:"a", text:"Message Fatou — knowledge and lineage speak to you", next:"fatou_branch_1", consequence:"She replies in four days. Formal, warm, precise. She asks about your relationship with your own lineage." },
+          { id:"b", text:"Message Abena — her directness is appealing", next:"abena_branch_1", consequence:"She responds within a day. She asks whether you have a church or faith community. It is the first question." },
+          { id:"c", text:"Message Tigist — her honesty about uncertainty is unusual and interesting", next:"tigist_branch_1", consequence:"She responds in three days. She says: 'Most men do not respond to that line. You did. Why?'" },
+        ]
+      },
+    ],
+    endings:{
+      success:"You entered a lineage, a community, and a tradition that predates your own country. The bride price negotiation was conducted with respect — you asked what the items represented before discussing amounts. The family church service was a participation, not a performance. The children of this marriage will be multilingual, multicultural, and connected to a history the American education system largely erased. That is a specific and irreplaceable gift.",
+      early_detect:"You recognized the romance scam pattern early — the escalating financial crisis, the perfect English, the photo that returned results under a different name. You walked away before it cost you more than your time. The debrief is not about suspicion. It is about the tools that distinguish performance from reality.",
+      cultural_fail:"Your intentions were good. Your preparation was not. The bride price conversation was treated as a transaction to get through efficiently. The family church service was attended but not engaged. The arc did not end dramatically — it ended in a series of cooling conversations and a father who stopped returning calls. The lesson is not about effort. It is about what effort is actually required.",
+      fraud_pre:"The post-Green Card period revealed the pattern. The money was moving in directions you had not agreed to. The phone calls to her home country were longer and more frequent than before. You caught it before citizenship with the help of an attorney you consulted before saying anything.",
+      fraud_post:"The citizenship was the goal. The marriage was the instrument. After naturalization, the departure was organized and deliberate. The children remained. This ending is documented — not hypothetical. The debrief focuses on the signals that were present from the beginning, available to be read, and not read.",
+    }
+  }
 ];
 
 const COURSE_PHASES = ["intro", "roster", "scenario", "outcome", "debrief", "certificate"];
@@ -3264,6 +3260,31 @@ export default function InternationalLover() {
       <div style={{ minHeight:"100vh", background:C.dark, color:C.cream, fontFamily:"Georgia, serif" }}>
         <div style={{ background:C.navyDeep, borderBottom:`1px solid ${C.border}`, padding:"1rem 1.5rem", display:"flex", alignItems:"center", justifyContent:"space-between", flexWrap:"wrap", gap:"0.5rem" }}>
           <div>
+            <div style={{ fontSize:9, letterSpacing:"0.2em", color:C.gold, fontFamily:"sans-serif", marginBottom:10 }}>NORTH AMERICA</div>
+            <div style={{ display:"grid", gridTemplateColumns:"repeat(3, 1fr)", gap:12 }}>
+              {[
+                { id:"aisha",   photo:"/women/aisha.jpg",   name:"Aisha",   age:27, city:"Atlanta, Georgia" },
+                { id:"deborah", photo:"/women/deborah.jpg", name:"Deborah", age:29, city:"Washington D.C." },
+                { id:"kezia",   photo:"/women/kezia.jpg",   name:"Kezia",   age:26, city:"Houston, Texas" },
+                { id:"marisol", photo:"/women/marisol.jpg", name:"Marisol", age:28, city:"Chicago, Illinois" },
+                { id:"samira",  photo:"/women/samira.jpg",  name:"Samira",  age:25, city:"Miami, Florida" },
+                { id:"nour_us", photo:"/women/nour-us.jpg", name:"Nour",    age:27, city:"Dearborn, Michigan" },
+                { id:"rachel",  photo:"/women/rachel.jpg",  name:"Rachel",  age:26, city:"Portland, Oregon" },
+              ].map(w => (
+                <div key={w.id} style={{ background:C.navyDeep, border:`1px solid ${C.border}`, overflow:"hidden" }}>
+                  <div style={{ height:200, overflow:"hidden" }}>
+                    <img src={w.photo} alt={w.name} style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center top", display:"block" }} />
+                  </div>
+                  <div style={{ padding:"0.75rem" }}>
+                    <div style={{ fontSize:13, color:C.goldLight, fontFamily:"Georgia,serif", marginBottom:2 }}>{w.name}</div>
+                    <div style={{ fontSize:10, color:C.muted, fontFamily:"sans-serif" }}>{w.age} · {w.city}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div>
             <div style={{ fontSize:"11px", color:C.muted, letterSpacing:"0.2em", textTransform:"uppercase", fontFamily:"sans-serif" }}>The International Lover™</div>
             <div style={{ display:"flex", alignItems:"center", gap:8 }}>
               <div style={{ color:C.goldLight, fontSize:"16px" }}>Your Library</div>
@@ -3467,6 +3488,31 @@ export default function InternationalLover() {
           </div>
 
           <div style={{ marginBottom:"2rem" }}>
+            <div style={{ fontSize:9, letterSpacing:"0.25em", color:C.gold, fontFamily:"sans-serif", marginBottom:14, textAlign:"center" }}>NORTH AMERICA</div>
+            <div style={{ display:"grid", gridTemplateColumns:"repeat(3, 1fr)", gap:12 }}>
+              {[
+                { id:"aisha",   photo:"/women/aisha.jpg",   name:"Aisha",   age:27, city:"Atlanta, Georgia" },
+                { id:"deborah", photo:"/women/deborah.jpg", name:"Deborah", age:29, city:"Washington D.C." },
+                { id:"kezia",   photo:"/women/kezia.jpg",   name:"Kezia",   age:26, city:"Houston, Texas" },
+                { id:"marisol", photo:"/women/marisol.jpg", name:"Marisol", age:28, city:"Chicago, Illinois" },
+                { id:"samira",  photo:"/women/samira.jpg",  name:"Samira",  age:25, city:"Miami, Florida" },
+                { id:"nour_us", photo:"/women/nour-us.jpg", name:"Nour",    age:27, city:"Dearborn, Michigan" },
+                { id:"rachel",  photo:"/women/rachel.jpg",  name:"Rachel",  age:26, city:"Portland, Oregon" },
+              ].map(w => (
+                <div key={w.id} style={{ background:C.navyDeep, border:`1px solid ${C.border}`, overflow:"hidden" }}>
+                  <div style={{ height:200, overflow:"hidden" }}>
+                    <img src={w.photo} alt={w.name} style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center top", display:"block" }} />
+                  </div>
+                  <div style={{ padding:"0.75rem" }}>
+                    <div style={{ fontSize:13, color:C.goldLight, fontFamily:"Georgia,serif", marginBottom:2 }}>{w.name}</div>
+                    <div style={{ fontSize:10, color:C.muted, fontFamily:"sans-serif" }}>{w.age} · {w.city}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div style={{ marginBottom:"2rem" }}>
             <div style={{ fontSize:9, letterSpacing:"0.25em", color:C.gold, fontFamily:"sans-serif", marginBottom:14, textAlign:"center" }}>SUB-SAHARAN AFRICA</div>
             <div style={{ display:"grid", gridTemplateColumns:"repeat(3, 1fr)", gap:12, marginBottom:28 }}>
               {[
@@ -3562,33 +3608,6 @@ export default function InternationalLover() {
               ))}
             </div>
           </div>
-
-          {/* North America */}
-          <div>
-            <div style={{ fontSize:9, letterSpacing:"0.2em", color:C.gold, fontFamily:"sans-serif", marginBottom:10 }}>NORTH AMERICA</div>
-            <div style={{ display:"grid", gridTemplateColumns:"repeat(3, 1fr)", gap:12 }}>
-              {[
-                { id:"aisha",   photo:"/women/aisha.jpg",   name:"Aisha",   age:27, city:"Atlanta, Georgia" },
-                { id:"deborah", photo:"/women/deborah.jpg", name:"Deborah", age:29, city:"Washington D.C." },
-                { id:"kezia",   photo:"/women/kezia.jpg",   name:"Kezia",   age:26, city:"Houston, Texas" },
-                { id:"marisol", photo:"/women/marisol.jpg", name:"Marisol", age:28, city:"Chicago, Illinois" },
-                { id:"samira",  photo:"/women/samira.jpg",  name:"Samira",  age:25, city:"Miami, Florida" },
-                { id:"nour_us", photo:"/women/nour-us.jpg", name:"Nour",    age:27, city:"Dearborn, Michigan" },
-                { id:"rachel",  photo:"/women/rachel.jpg",  name:"Rachel",  age:26, city:"Portland, Oregon" },
-              ].map(w => (
-                <div key={w.id} style={{ background:C.navyDeep, border:`1px solid ${C.border}`, overflow:"hidden" }}>
-                  <div style={{ height:200, overflow:"hidden" }}>
-                    <img src={w.photo} alt={w.name} style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center top", display:"block" }} />
-                  </div>
-                  <div style={{ padding:"0.75rem" }}>
-                    <div style={{ fontSize:13, color:C.goldLight, fontFamily:"Georgia,serif", marginBottom:2 }}>{w.name}</div>
-                    <div style={{ fontSize:10, color:C.muted, fontFamily:"sans-serif" }}>{w.age} · {w.city}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
           <div style={{ textAlign:"center" }}>
             <button onClick={() => setPaywallOpen(true)} style={{ padding:"12px 32px", background:C.gold, color:C.navyDeep, border:"none", cursor:"pointer", fontSize:12, fontWeight:700, letterSpacing:"0.15em", textTransform:"uppercase", fontFamily:"sans-serif" }}>
               Meet Them Inside →

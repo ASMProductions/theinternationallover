@@ -33,6 +33,21 @@ function Portrait({ id, name, photo }) {
 
 const REGIONS_COURSE = [
   {
+    id:"us", label:"North America", desc:"United States — All Backgrounds",
+    context:"She chose a different standard. Whatever she came from — mosque, church, temple, or simply the decision that the culture around her was not enough — she made a choice that most women around her did not make. This region is about recognizing that choice, meeting her on her terms, and bringing the same preparation to her door that you would bring to a door in Fez or Dakar.",
+    unlocked:false,
+    stamp:"USA",
+    women:[
+      { id:"aisha", photo:"/women/aisha.jpg", name:"Aisha", age:27, city:"Atlanta, Georgia", religion:"Muslim", platform:"atlanta-mosque-community.org", bio:"Born Muslim. Her father was one of the first men in his neighborhood to take shahada in the 1980s. She has been waiting for a man who understands what that means.", hidden:"Her father's standing in the community means any man she introduces is immediately visible to forty years of community relationships.", signal:"She asks precise questions and does not accept vague answers.", type:"genuine" },
+      { id:"deborah", photo:"/women/deborah.jpg", name:"Deborah", age:29, city:"Washington D.C.", religion:"Hebrew Israelite", platform:"washingtondc-hebrew-community.org", bio:"She has been in the Hebrew Israelite community her whole life. The law is not a burden — it is the framework she was raised inside and has chosen to remain inside as an adult.", hidden:"Her elder's word is final. The family will not proceed without it.", signal:"She keeps the Sabbath. The silence on Friday evening is not a problem to solve.", type:"genuine" },
+      { id:"kezia", photo:"/women/kezia.jpg", name:"Kezia", age:26, city:"Houston, Texas", religion:"Christian", platform:"houston-faith-community.org", bio:"Not a cultural Christian. She reads. She fasts. She tithes because she decided to. She is waiting for a man who has a relationship with God that is his own, not borrowed.", hidden:"Her pastor's assessment carries the same weight as her father's.", signal:"Her brother is quiet and watching. A quiet man watching is not passive.", type:"genuine" },
+      { id:"marisol", photo:"/women/marisol.jpg", name:"Marisol", age:28, city:"Chicago, Illinois", religion:"Catholic", platform:"chicago-latina-community.org", bio:"Mexican-American. Third generation. Her grandmother came from Jalisco. Her faith is woven into everything her family does.", hidden:"The grandmother is the head of this family. Everyone knows it and no one says it officially.", signal:"She mentions her grandmother constantly. This is the most important information she is giving you.", type:"genuine" },
+      { id:"samira", photo:"/women/samira.jpg", name:"Samira", age:25, city:"Miami, Florida", religion:"Islam (revert)", platform:"miami-muslim-community.org", bio:"Puerto Rican. Took shahada four years ago. Her family is Catholic. Her faith is real — tested, chosen, and maintained against the current of her own culture.", hidden:"Her reversion cost her something real. She is not fragile about it. She is the most grounded woman in this region because her faith cost her something.", signal:"She will tell you the cost without being asked. That honesty is the test of whether you can receive it.", type:"genuine" },
+      { id:"nour_us", photo:"/women/nour-us.jpg", name:"Nour", age:27, city:"Dearborn, Michigan", religion:"Islam", platform:"dearborn-muslim-community.org", bio:"Born in Dearborn. Her parents came from Lebanon. She is American in her fluency and Arab in her framework. The family meeting in Dearborn is not different from the family meeting in Beirut.", hidden:"The family gathering in Dearborn includes extended family who have an unofficial but real vote.", signal:"She asks if you know what marrying into a Lebanese family means. Answer specifically.", type:"genuine" },
+      { id:"rachel", photo:"/women/rachel.jpg", name:"Rachel", age:26, city:"Portland, Oregon", religion:"Islam (revert)", platform:"portland-muslim-community.org", bio:"Took shahada eighteen months ago. Her practice is sincere. Her knowledge is growing. Her foundation is thin. She is using the idea of a husband to fill the space where a community should be.", hidden:"The correct ending for this arc is not success. It is not yet. A man who can tell the difference between the right woman at the wrong time and the wrong woman at any time is ready for this region.", signal:"She talks about the future with specificity before her present is fully built. This is the signal.", type:"not_yet" },
+    ],
+  },
+    {
     id:"na", label:"North Africa", desc:"Morocco - Tunisia - Algeria - Egypt",
     context:"North Africa operates on a high-context cultural framework. What is not said carries as much weight as what is. Family honor is structural. A father's silence is not indifference - it is evaluation. Islam governs the rhythm of daily life.",
     women:[
@@ -53,7 +68,7 @@ const REGIONS_COURSE = [
         type:"genuine_wrong" },
     ],
   },
-  {
+    {
     id:"me", label:"Middle East", desc:"Jordan - Lebanon - Yemen - Syria",
     context:"Family is the primary social unit around which everything is organized. A man who courts a woman without courting her family is not a serious man. Religion is not personal - it is communal.",
     women:[
@@ -74,7 +89,7 @@ const REGIONS_COURSE = [
         type:"genuine" },
     ],
   },
-  {
+    {
     id:"as", label:"Asia", desc:"Indonesia - Philippines - Bangladesh",
     context:"The common threads: family embeddedness, high-context communication, and the reality that the economic gap between an American man and her family can distort the power dynamic significantly.",
     women:[
@@ -95,7 +110,7 @@ const REGIONS_COURSE = [
         type:"genuine" },
     ],
   },
-  {
+    {
     id:"la", label:"Latin America", desc:"Colombia - Dominican Republic - Peru",
     context:"Latin America is the arc with the most dangerous false sense of familiarity. The man who enters thinking he understands it because he has watched Spanish-language television has not begun to understand it.",
     women:[
@@ -116,7 +131,7 @@ const REGIONS_COURSE = [
         type:"genuine" },
     ],
   },
-  {
+    {
     id:"ss", label:"Sub-Saharan Africa", desc:"Senegal - Ghana - Ethiopia - Kenya",
     context:"Community is the primary unit of reality. The bride price negotiation is not a transaction — it is a covenant between two families. A man who treats it as a fee is immediately revealed as someone who does not understand what he is entering.",
     women:[
@@ -135,21 +150,6 @@ const REGIONS_COURSE = [
         hidden:"Ethiopian Orthodox Christianity has over 250 fasting days and its own liturgical calendar. Her family created this profile hoping she will meet an Ethiopian from the diaspora.",
         signal:"She says she is not certain this is the right path. That is not rejection. It is honesty. Most men read it as rejection.",
         type:"genuine" },
-    ],
-  },,
-  {
-    id:"us", label:"North America", desc:"United States — All Backgrounds",
-    context:"She chose a different standard. Whatever she came from — mosque, church, temple, or simply the decision that the culture around her was not enough — she made a choice that most women around her did not make. This region is about recognizing that choice, meeting her on her terms, and bringing the same preparation to her door that you would bring to a door in Fez or Dakar.",
-    unlocked:false,
-    stamp:"USA",
-    women:[
-      { id:"aisha", photo:"/women/aisha.jpg", name:"Aisha", age:27, city:"Atlanta, Georgia", religion:"Muslim", platform:"atlanta-mosque-community.org", bio:"Born Muslim. Her father was one of the first men in his neighborhood to take shahada in the 1980s. She has been waiting for a man who understands what that means.", hidden:"Her father's standing in the community means any man she introduces is immediately visible to forty years of community relationships.", signal:"She asks precise questions and does not accept vague answers.", type:"genuine" },
-      { id:"deborah", photo:"/women/deborah.jpg", name:"Deborah", age:29, city:"Washington D.C.", religion:"Hebrew Israelite", platform:"washingtondc-hebrew-community.org", bio:"She has been in the Hebrew Israelite community her whole life. The law is not a burden — it is the framework she was raised inside and has chosen to remain inside as an adult.", hidden:"Her elder's word is final. The family will not proceed without it.", signal:"She keeps the Sabbath. The silence on Friday evening is not a problem to solve.", type:"genuine" },
-      { id:"kezia", photo:"/women/kezia.jpg", name:"Kezia", age:26, city:"Houston, Texas", religion:"Christian", platform:"houston-faith-community.org", bio:"Not a cultural Christian. She reads. She fasts. She tithes because she decided to. She is waiting for a man who has a relationship with God that is his own, not borrowed.", hidden:"Her pastor's assessment carries the same weight as her father's.", signal:"Her brother is quiet and watching. A quiet man watching is not passive.", type:"genuine" },
-      { id:"marisol", photo:"/women/marisol.jpg", name:"Marisol", age:28, city:"Chicago, Illinois", religion:"Catholic", platform:"chicago-latina-community.org", bio:"Mexican-American. Third generation. Her grandmother came from Jalisco. Her faith is woven into everything her family does.", hidden:"The grandmother is the head of this family. Everyone knows it and no one says it officially.", signal:"She mentions her grandmother constantly. This is the most important information she is giving you.", type:"genuine" },
-      { id:"samira", photo:"/women/samira.jpg", name:"Samira", age:25, city:"Miami, Florida", religion:"Islam (revert)", platform:"miami-muslim-community.org", bio:"Puerto Rican. Took shahada four years ago. Her family is Catholic. Her faith is real — tested, chosen, and maintained against the current of her own culture.", hidden:"Her reversion cost her something real. She is not fragile about it. She is the most grounded woman in this region because her faith cost her something.", signal:"She will tell you the cost without being asked. That honesty is the test of whether you can receive it.", type:"genuine" },
-      { id:"nour_us", photo:"/women/nour-us.jpg", name:"Nour", age:27, city:"Dearborn, Michigan", religion:"Islam", platform:"dearborn-muslim-community.org", bio:"Born in Dearborn. Her parents came from Lebanon. She is American in her fluency and Arab in her framework. The family meeting in Dearborn is not different from the family meeting in Beirut.", hidden:"The family gathering in Dearborn includes extended family who have an unofficial but real vote.", signal:"She asks if you know what marrying into a Lebanese family means. Answer specifically.", type:"genuine" },
-      { id:"rachel", photo:"/women/rachel.jpg", name:"Rachel", age:26, city:"Portland, Oregon", religion:"Islam (revert)", platform:"portland-muslim-community.org", bio:"Took shahada eighteen months ago. Her practice is sincere. Her knowledge is growing. Her foundation is thin. She is using the idea of a husband to fill the space where a community should be.", hidden:"The correct ending for this arc is not success. It is not yet. A man who can tell the difference between the right woman at the wrong time and the wrong woman at any time is ready for this region.", signal:"She talks about the future with specificity before her present is fully built. This is the signal.", type:"not_yet" },
     ],
   }
 ];
