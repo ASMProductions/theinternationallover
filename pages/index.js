@@ -2598,8 +2598,29 @@ const REGIONS_COURSE = [
     }
   },
   {
-    id:"us", label:"North America", desc:"United States — All Backgrounds",
+    id:"us", label:"North America", color:"#a07840", desc:"United States — All Backgrounds",
     context:"She chose a different standard. Whatever she came from — mosque, church, temple, or simply the decision that the culture around her was not enough — she made a choice that most women around her did not make. This region is about recognizing that choice, meeting her on her terms, and bringing the same preparation to her door that you would bring to a door in Fez or Dakar.",
+    scenarios:[
+      { id:"us_1", title:"The Standard She Chose", setup:"She is on this platform because she made a decision most women around her did not make. Before you approach her, understand what that decision cost her — and what it means that she is still standing on it.", choices:[
+        { text:"Acknowledge what it costs to choose a different standard", outcome:"She receives the acknowledgment. The conversation begins at a level of honesty most platform exchanges never reach.", flag:"cost_acknowledged" },
+        { text:"Ask her what brought her to this platform specifically", outcome:"She tells you. What she describes is not a list of preferences — it is a value system. You are now listening to someone who has decided what she is.", flag:"platform_asked" },
+        { text:"Tell her about yourself first — establish your own standard", outcome:"She listens. Then: 'Now ask me.' She needed to hear you before she would open. The sequence matters.", flag:"self_first" },
+      ]},
+      { id:"us_2", title:"Her Family", setup:"Her family is present in this arc the same way every other region's family is present. The meeting will happen. The standard will be applied. The question is whether you come prepared or whether you come performing.", choices:[
+        { text:"Ask her what her family needs to see", outcome:"She tells you specifically. The list is honest and manageable. You now have a preparation target.", flag:"family_prepared" },
+        { text:"Tell her your family background before asking about hers", outcome:"She listens. She asks one question. The question tells you what she values. Your answer to it sets the tone for the family meeting.", flag:"family_reciprocal" },
+        { text:"Ask when the family meeting will happen", outcome:"She says: 'When I decide you are ready for it.' The timeline is hers. You are building toward readiness, not rushing toward a meeting.", flag:"family_timing" },
+      ]},
+    ],
+    women:[
+      { id:"aisha",   photo:"/women/aisha.jpg",   name:"Aisha",   age:27, city:"Atlanta, Georgia",    religion:"Muslim",          type:"genuine", profileText:"Born Muslim. Her father was one of the first men in his neighborhood to take shahada in the 1980s. She has been waiting for a man who understands what that means.", hidden:"Her father's standing in the community means any man she introduces is immediately visible to forty years of community relationships.", signal:"She asks precise questions and does not accept vague answers.", endings:{ success:"Atlanta — complete." } },
+      { id:"deborah", photo:"/women/deborah.jpg", name:"Deborah", age:29, city:"Washington D.C.",     religion:"Hebrew Israelite", type:"genuine", profileText:"She keeps the law. Not as a cultural inheritance — as a living practice she has chosen as an adult. The Sabbath is not negotiable.", hidden:"Her elder's word is final.", signal:"She keeps the Sabbath. The silence Friday evening is not a problem to solve.", endings:{ success:"D.C. — complete." } },
+      { id:"kezia",   photo:"/women/kezia.jpg",   name:"Kezia",   age:26, city:"Houston, Texas",      religion:"Christian",        type:"genuine", profileText:"Not a cultural Christian. She reads. She fasts. She tithes because she decided to. She is waiting for a man who has a relationship with God that is his own.", hidden:"Her pastor's assessment carries the same weight as her father's.", signal:"Her brother said almost nothing at the airport. A quiet man watching is not passive.", endings:{ success:"Houston — complete." } },
+      { id:"marisol", photo:"/women/marisol.jpg", name:"Marisol", age:28, city:"Chicago, Illinois",   religion:"Catholic",         type:"genuine", profileText:"Mexican-American. Third generation. Her grandmother came from Jalisco and is still the head of this family.", hidden:"The grandmother is the decision. Everyone knows it.", signal:"She mentions her grandmother constantly. This is the most important information she is giving you.", endings:{ success:"Chicago — complete." } },
+      { id:"samira",  photo:"/women/samira.jpg",  name:"Samira",  age:25, city:"Miami, Florida",      religion:"Islam (revert)",   type:"genuine", profileText:"Puerto Rican. Took shahada four years ago. Her faith is real — tested, chosen, maintained against the current of her own culture.", hidden:"She teaches the new sisters at her masjid. She has not mentioned it on the profile.", signal:"She will tell you the cost of her reversion without being asked.", endings:{ success:"Miami — complete." } },
+      { id:"nour_us", photo:"/women/nour-us.jpg", name:"Nour",    age:27, city:"Dearborn, Michigan",  religion:"Islam",            type:"genuine", profileText:"Born in Dearborn. Her parents came from Lebanon. She is American in her fluency and Arab in her framework.", hidden:"The family gathering includes extended community with an unofficial but real vote.", signal:"She asked if you know what marrying into a Lebanese family means. Answer specifically.", endings:{ success:"Dearborn — complete." } },
+      { id:"rachel",  photo:"/women/rachel.jpg",  name:"Rachel",  age:26, city:"Portland, Oregon",    religion:"Islam (revert)",   type:"not_yet", profileText:"Took shahada eighteen months ago. Her practice is sincere. Her foundation is still being built.", hidden:"The correct ending is not yet — followed by yes when the foundation is ready.", signal:"She talks about the future before her present is fully built. This is the signal.", endings:{ not_yet:"Portland — not yet. Come back when the foundation is ready.", success:"She built it. Portland — complete." } },
+    ],
     women:[
       { id:"aisha", photo:"/women/aisha.jpg", name:"Aisha", age:27, city:"Atlanta, Georgia", education:"Bachelor's, Education", religion:"Muslim", platform:"theinternationallover.com",
         profileText:"Born Muslim. My father was one of the first men in his neighborhood to take shahada in the 1980s. I have been waiting for a man who understands what that means — not as a talking point, but as a way of life.",
@@ -3536,6 +3557,32 @@ export default function InternationalLover() {
                   <div style={{ padding:"0.75rem" }}>
                     <div style={{ fontSize:13, color:C.goldLight, fontFamily:"Georgia,serif", marginBottom:2 }}>{w.name}</div>
                     <div style={{ fontSize:9, color:C.muted, fontFamily:"sans-serif" }}>{w.age} · {w.city}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* North America */}
+          <div>
+            <div style={{ fontSize:9, letterSpacing:"0.2em", color:C.gold, fontFamily:"sans-serif", marginBottom:10 }}>NORTH AMERICA</div>
+            <div style={{ display:"grid", gridTemplateColumns:"repeat(3, 1fr)", gap:12 }}>
+              {[
+                { id:"aisha",   photo:"/women/aisha.jpg",   name:"Aisha",   age:27, city:"Atlanta, Georgia" },
+                { id:"deborah", photo:"/women/deborah.jpg", name:"Deborah", age:29, city:"Washington D.C." },
+                { id:"kezia",   photo:"/women/kezia.jpg",   name:"Kezia",   age:26, city:"Houston, Texas" },
+                { id:"marisol", photo:"/women/marisol.jpg", name:"Marisol", age:28, city:"Chicago, Illinois" },
+                { id:"samira",  photo:"/women/samira.jpg",  name:"Samira",  age:25, city:"Miami, Florida" },
+                { id:"nour_us", photo:"/women/nour-us.jpg", name:"Nour",    age:27, city:"Dearborn, Michigan" },
+                { id:"rachel",  photo:"/women/rachel.jpg",  name:"Rachel",  age:26, city:"Portland, Oregon" },
+              ].map(w => (
+                <div key={w.id} style={{ background:C.navyDeep, border:`1px solid ${C.border}`, overflow:"hidden" }}>
+                  <div style={{ height:200, overflow:"hidden" }}>
+                    <img src={w.photo} alt={w.name} style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center top", display:"block" }} />
+                  </div>
+                  <div style={{ padding:"0.75rem" }}>
+                    <div style={{ fontSize:13, color:C.goldLight, fontFamily:"Georgia,serif", marginBottom:2 }}>{w.name}</div>
+                    <div style={{ fontSize:10, color:C.muted, fontFamily:"sans-serif" }}>{w.age} · {w.city}</div>
                   </div>
                 </div>
               ))}
