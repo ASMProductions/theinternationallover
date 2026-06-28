@@ -3260,40 +3260,15 @@ export default function InternationalLover() {
       <div style={{ minHeight:"100vh", background:C.dark, color:C.cream, fontFamily:"Georgia, serif" }}>
         <div style={{ background:C.navyDeep, borderBottom:`1px solid ${C.border}`, padding:"1rem 1.5rem", display:"flex", alignItems:"center", justifyContent:"space-between", flexWrap:"wrap", gap:"0.5rem" }}>
           <div>
-            <div style={{ fontSize:9, letterSpacing:"0.2em", color:C.gold, fontFamily:"sans-serif", marginBottom:10 }}>NORTH AMERICA</div>
-            <div style={{ display:"grid", gridTemplateColumns:"repeat(3, 1fr)", gap:12 }}>
-              {[
-                { id:"aisha",   photo:"/women/aisha.jpg",   name:"Aisha",   age:27, city:"Atlanta, Georgia" },
-                { id:"deborah", photo:"/women/deborah.jpg", name:"Deborah", age:29, city:"Washington D.C." },
-                { id:"kezia",   photo:"/women/kezia.jpg",   name:"Kezia",   age:26, city:"Houston, Texas" },
-                { id:"marisol", photo:"/women/marisol.jpg", name:"Marisol", age:28, city:"Chicago, Illinois" },
-                { id:"samira",  photo:"/women/samira.jpg",  name:"Samira",  age:25, city:"Miami, Florida" },
-                { id:"nour_us", photo:"/women/nour-us.jpg", name:"Nour",    age:27, city:"Dearborn, Michigan" },
-                { id:"rachel",  photo:"/women/rachel.jpg",  name:"Rachel",  age:26, city:"Portland, Oregon" },
-              ].map(w => (
-                <div key={w.id} style={{ background:C.navyDeep, border:`1px solid ${C.border}`, overflow:"hidden" }}>
-                  <div style={{ height:200, overflow:"hidden" }}>
-                    <img src={w.photo} alt={w.name} style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center top", display:"block" }} />
-                  </div>
-                  <div style={{ padding:"0.75rem" }}>
-                    <div style={{ fontSize:13, color:C.goldLight, fontFamily:"Georgia,serif", marginBottom:2 }}>{w.name}</div>
-                    <div style={{ fontSize:10, color:C.muted, fontFamily:"sans-serif" }}>{w.age} · {w.city}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div>
             <div style={{ fontSize:"11px", color:C.muted, letterSpacing:"0.2em", textTransform:"uppercase", fontFamily:"sans-serif" }}>The International Lover™</div>
             <div style={{ display:"flex", alignItems:"center", gap:8 }}>
               <div style={{ color:C.goldLight, fontSize:"16px" }}>Your Library</div>
               {typeof window !== "undefined" && sessionStorage.getItem("il_ambassador") === "true" && (
-                <div style={{ background:C.gold, color:C.navyDeep, fontSize:8, fontWeight:700, padding:"2px 10px", fontFamily:"sans-serif", letterSpacing:"0.12em" }}>AMBASSADOR</div>
+                <div style={{ background:C.gold, color:C.navyDeep, fontSize:8, fontWeight:700, padding:"2px 8px", fontFamily:"sans-serif", letterSpacing:"0.1em" }}>AMBASSADOR</div>
               )}
             </div>
           </div>
-          <div style={{ display:"flex", gap:"0.75rem" }}>
+          <div style={{ display:"flex", gap:"0.75rem", flexWrap:"wrap" }}>
             <button onClick={() => setView("landing")} style={{ background:"none", border:`1px solid ${C.border}`, color:C.muted, padding:"6px 14px", borderRadius:"20px", cursor:"pointer", fontSize:"12px", fontFamily:"sans-serif" }}>Home</button>
             <a href="/matrimonial" style={{ background:C.gold, color:C.navyDeep, padding:"6px 16px", borderRadius:"20px", cursor:"pointer", fontSize:"12px", fontWeight:700, fontFamily:"sans-serif", textDecoration:"none" }}>Matrimonial</a>
             <button onClick={() => { sessionStorage.clear(); setHasAccess(false); setView("landing"); }} style={{ background:"none", border:`1px solid ${C.border}`, color:C.muted, padding:"6px 14px", borderRadius:"20px", cursor:"pointer", fontSize:"12px", fontFamily:"sans-serif" }}>Sign Out</button>
