@@ -47,7 +47,7 @@ const REGIONS_COURSE = [
       { id:"rachel", photo:"/women/rachel.jpg", name:"Rachel", age:26, city:"Portland, Oregon", religion:"Islam (revert)", platform:"portland-muslim-community.org", bio:"Took shahada eighteen months ago. Her practice is sincere. Her knowledge is growing. Her foundation is thin. She is using the idea of a husband to fill the space where a community should be.", hidden:"The correct ending for this arc is not success. It is not yet. A man who can tell the difference between the right woman at the wrong time and the wrong woman at any time is ready for this region.", signal:"She talks about the future with specificity before her present is fully built. This is the signal.", type:"not_yet" },
     ],
   },
-    {
+  {
     id:"na", label:"North Africa", desc:"Morocco - Tunisia - Algeria - Egypt",
     context:"North Africa operates on a high-context cultural framework. What is not said carries as much weight as what is. Family honor is structural. A father's silence is not indifference - it is evaluation. Islam governs the rhythm of daily life.",
     women:[
@@ -68,7 +68,7 @@ const REGIONS_COURSE = [
         type:"genuine_wrong" },
     ],
   },
-    {
+  {
     id:"me", label:"Middle East", desc:"Jordan - Lebanon - Yemen - Syria",
     context:"Family is the primary social unit around which everything is organized. A man who courts a woman without courting her family is not a serious man. Religion is not personal - it is communal.",
     women:[
@@ -89,7 +89,7 @@ const REGIONS_COURSE = [
         type:"genuine" },
     ],
   },
-    {
+  {
     id:"as", label:"Asia", desc:"Indonesia - Philippines - Bangladesh",
     context:"The common threads: family embeddedness, high-context communication, and the reality that the economic gap between an American man and her family can distort the power dynamic significantly.",
     women:[
@@ -110,7 +110,7 @@ const REGIONS_COURSE = [
         type:"genuine" },
     ],
   },
-    {
+  {
     id:"la", label:"Latin America", desc:"Colombia - Dominican Republic - Peru",
     context:"Latin America is the arc with the most dangerous false sense of familiarity. The man who enters thinking he understands it because he has watched Spanish-language television has not begun to understand it.",
     women:[
@@ -131,7 +131,7 @@ const REGIONS_COURSE = [
         type:"genuine" },
     ],
   },
-    {
+  {
     id:"ss", label:"Sub-Saharan Africa", desc:"Senegal - Ghana - Ethiopia - Kenya",
     context:"Community is the primary unit of reality. The bride price negotiation is not a transaction — it is a covenant between two families. A man who treats it as a fee is immediately revealed as someone who does not understand what he is entering.",
     women:[
