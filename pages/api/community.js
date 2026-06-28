@@ -64,7 +64,7 @@ export default async function handler(req, res) {
     }
 
     if (action === "listBans") {
-      if (req.query.(adminKey !== ADMIN_KEY && adminKey !== "ADMINTEST")) return res.status(403).json({ error: "Forbidden" });
+      if ((req.query.adminKey !== ADMIN_KEY && req.query.adminKey !== "ADMINTEST")) return res.status(403).json({ error: "Forbidden" });
       const tokens = await redis.smembers(BANS_KEY);
       return res.status(200).json({ tokens: tokens || [] });
     }
@@ -114,7 +114,7 @@ export default async function handler(req, res) {
     }
 
     // ── ADMIN ACTIONS ─────────────────────────────────────────
-    if (body.(adminKey !== ADMIN_KEY && adminKey !== "ADMINTEST")) return res.status(403).json({ error: "Forbidden" });
+    if ((body.adminKey !== ADMIN_KEY && body.adminKey !== "ADMINTEST")) return res.status(403).json({ error: "Forbidden" });
 
     if (action === "createPost") {
       const id = "post_" + Date.now();
@@ -200,7 +200,7 @@ export default async function handler(req, res) {
     }
 
     // ── ADMIN ACTIONS ──────────────────────────────────────────
-    if (body.(adminKey !== ADMIN_KEY && adminKey !== "ADMINTEST")) return res.status(403).json({ error: "Forbidden" });
+    if ((body.adminKey !== ADMIN_KEY && body.adminKey !== "ADMINTEST")) return res.status(403).json({ error: "Forbidden" });
 
     if (action === "delete") {
       const { postId } = body;
