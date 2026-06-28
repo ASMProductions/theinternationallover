@@ -82,7 +82,11 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
   const [hidden, setHidden] = useState(false);
   const [pendingApprovals, setPendingApprovals] = useState([]);
   const [allProfiles, setAllProfiles] = useState([]);
-  const [adminTab, setAdminTab] = useState("pending"); // pending | all | myprofile
+  const [adminTab, setAdminTab] = useState("profiles"); // profiles | consulate | ambassadors | myprofile
+  const [consulatePosts, setConsulatePosts] = useState([]);
+  const [ambassadors, setAmbassadors] = useState([]);
+  const [newAmbForm, setNewAmbForm] = useState({ name:"", email:"", note:"" });
+  const [newAmbResult, setNewAmbResult] = useState("");
 
   const canContact = isAmbassador || isCertified;
   const showMen = gender === "woman";
@@ -129,6 +133,66 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
       const res = await fetch("/api/matrimonial?action=allProfiles&adminKey=" + encodeURIComponent(adminKey));
       const data = await res.json();
       setAllProfiles(data.profiles || []);
+    } catch(e) {}
+  };
+
+  const loadConsulatePosts = async () => {
+    try {
+      const res = await fetch("/api/community?action=list");
+      const data = await res.json();
+      setConsulatePosts(data.posts || []);
+    } catch(e) {}
+  };
+
+  const loadAmbassadors = async () => {
+    try {
+      const adminKey = typeof sessionStorage !== "undefined" ? sessionStorage.getItem("il_admin_key") || "" : "";
+      const res = await fetch("/api/ambassadors?action=list&adminKey=" + encodeURIComponent(adminKey));
+      const data = await res.json();
+      setAmbassadors(data.ambassadors || []);
+    } catch(e) {}
+  };
+
+  const createAmbassador = async () => {
+    if (!newAmbForm.name || !newAmbForm.email) { setNewAmbResult("Name and email required."); return; }
+    try {
+      const adminKey = typeof sessionStorage !== "undefined" ? sessionStorage.getItem("il_admin_key") || "" : "";
+      const res = await fetch("/api/ambassadors", {
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body: JSON.stringify({ action:"add", adminKey, ...newAmbForm })
+      });
+      const data = await res.json();
+      if (data.ok) {
+        setNewAmbResult("Ambassador created. Code: " + data.code);
+        setNewAmbForm({ name:"", email:"", note:"" });
+        loadAmbassadors();
+      } else { setNewAmbResult(data.error || "Failed."); }
+    } catch(e) { setNewAmbResult("Error."); }
+  };
+
+  const revokeAmbassador = async (code) => {
+    if (!confirm("Revoke ambassador code " + code + "?")) return;
+    try {
+      const adminKey = typeof sessionStorage !== "undefined" ? sessionStorage.getItem("il_admin_key") || "" : "";
+      await fetch("/api/ambassadors", {
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body: JSON.stringify({ action:"remove", adminKey, code })
+      });
+      setAmbassadors(prev => prev.filter(a => a.code !== code));
+    } catch(e) {}
+  };
+
+  const deleteConsulatePost = async (postId) => {
+    try {
+      const adminKey = typeof sessionStorage !== "undefined" ? sessionStorage.getItem("il_admin_key") || "" : "";
+      await fetch("/api/community", {
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body: JSON.stringify({ action:"delete", adminKey, postId })
+      });
+      setConsulatePosts(prev => prev.filter(p => p.id !== postId));
     } catch(e) {}
   };
 
@@ -485,94 +549,173 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
   // ADMIN VIEW
   if (view === "admin" && isAdmin) {
     const adminKey = typeof sessionStorage !== "undefined" ? sessionStorage.getItem("il_admin_key") || "" : "";
-    const adminCardStyle = (p) => ({ background:C.navyDeep, border:"1px solid " + C.border, padding:"1rem 1.25rem", marginBottom:10, display:"flex", gap:14, alignItems:"flex-start" });
+    const cardStyle = { background:C.navyDeep, border:"1px solid " + C.border, padding:"1rem 1.25rem", marginBottom:10, display:"flex", gap:14, alignItems:"flex-start" };
+    const ADMIN_TABS = [
+      { id:"profiles", label:"Profiles" },
+      { id:"consulate", label:"Consulate" },
+      { id:"ambassadors", label:"Ambassadors" },
+      { id:"myprofile", label:"My Profile" },
+    ];
     return (
       <div style={{ minHeight:"100vh", background:C.dark, color:C.cream, fontFamily:"Georgia,serif" }}>
+        {/* Header */}
         <div style={{ background:C.navyDeep, borderBottom:"1px solid " + C.border, padding:"1rem 1.5rem", display:"flex", alignItems:"center", gap:12, flexWrap:"wrap" }}>
-          <button onClick={() => setView("browse")} style={{ background:"none", border:"1px solid " + C.gold, color:C.gold, padding:"6px 14px", cursor:"pointer", fontSize:12, fontFamily:"sans-serif" }}>← Back</button>
-          <div style={{ fontSize:14, color:C.goldLight }}>Matrimonial Admin</div>
-          <div style={{ display:"flex", gap:6, marginLeft:"auto" }}>
-            {["pending","all","myprofile"].map(t => (
-              <button key={t} onClick={() => {
-                setAdminTab(t);
-                if (t === "pending") loadPendingApprovals();
-                if (t === "all") loadAllProfiles();
-                if (t === "myprofile") loadMyProfile();
-              }} style={{ padding:"6px 14px", background:adminTab===t?C.gold:"transparent", color:adminTab===t?C.navyDeep:C.muted, border:"1px solid "+(adminTab===t?C.gold:C.border), cursor:"pointer", fontSize:11, fontFamily:"sans-serif", fontWeight:adminTab===t?700:400 }}>
-                {t === "pending" ? "Pending" : t === "all" ? "All Profiles" : "My Profile"}
+          <button onClick={() => setView("browse")} style={{ background:"none", border:"1px solid " + C.gold, color:C.gold, padding:"6px 14px", cursor:"pointer", fontSize:12, fontFamily:"sans-serif" }}>← Platform</button>
+          <div style={{ fontSize:14, color:C.goldLight, fontFamily:"Georgia,serif" }}>The International Lover™ — Admin</div>
+          <div style={{ display:"flex", gap:6, marginLeft:"auto", flexWrap:"wrap" }}>
+            {ADMIN_TABS.map(t => (
+              <button key={t.id} onClick={() => {
+                setAdminTab(t.id);
+                if (t.id === "profiles") { loadAllProfiles(); loadPendingApprovals(); }
+                if (t.id === "consulate") loadConsulatePosts();
+                if (t.id === "ambassadors") loadAmbassadors();
+                if (t.id === "myprofile") loadMyProfile();
+              }} style={{ padding:"6px 14px", background:adminTab===t.id?C.gold:"transparent", color:adminTab===t.id?C.navyDeep:C.muted, border:"1px solid "+(adminTab===t.id?C.gold:C.border), cursor:"pointer", fontSize:11, fontFamily:"sans-serif", fontWeight:adminTab===t.id?700:400 }}>
+                {t.label}
               </button>
             ))}
           </div>
         </div>
-        <div style={{ maxWidth:860, margin:"0 auto", padding:"1.5rem" }}>
 
-          {adminTab === "pending" && (
-            <>
-              {pendingApprovals.length === 0 ? (
-                <div style={{ color:C.muted, textAlign:"center", padding:"3rem", fontFamily:"sans-serif" }}>No pending approvals.</div>
-              ) : pendingApprovals.map(p => (
-                <div key={p.email} style={adminCardStyle(p)}>
-                  {p.photoUrl && <img src={p.photoUrl} alt={p.displayName} style={{ width:80, height:100, objectFit:"cover", objectPosition:"center top", flexShrink:0 }} />}
-                  <div style={{ flex:1 }}>
-                    <div style={{ fontSize:15, color:C.goldLight, marginBottom:3 }}>{p.displayName} · {p.age} · {p.city}, {p.country}</div>
-                    <div style={{ fontSize:11, color:C.muted, fontFamily:"sans-serif", marginBottom:6 }}>{p.email} · {p.religion} · {p.gender}</div>
-                    <p style={{ fontSize:12, color:C.creamDim, fontFamily:"sans-serif", lineHeight:1.7, margin:"0 0 10px" }}>{p.bio}</p>
-                    <div style={{ display:"flex", gap:8 }}>
-                      <button onClick={() => approveProfile(p.email)} style={{ padding:"6px 14px", background:C.green, color:"white", border:"none", cursor:"pointer", fontFamily:"sans-serif", fontSize:11, fontWeight:700 }}>Approve</button>
-                      <button onClick={() => rejectProfile(p.email)} style={{ padding:"6px 14px", background:C.red, color:"white", border:"none", cursor:"pointer", fontFamily:"sans-serif", fontSize:11, fontWeight:700 }}>Reject</button>
+        <div style={{ maxWidth:900, margin:"0 auto", padding:"1.5rem" }}>
+
+          {/* ── PROFILES ── */}
+          {adminTab === "profiles" && (
+            <div>
+              {/* Pending approvals */}
+              {pendingApprovals.length > 0 && (
+                <div style={{ marginBottom:"2rem" }}>
+                  <div style={{ fontSize:9, letterSpacing:"0.2em", color:C.red, fontFamily:"sans-serif", marginBottom:12 }}>PENDING APPROVAL — {pendingApprovals.length} women awaiting review</div>
+                  {pendingApprovals.map(p => (
+                    <div key={p.email} style={cardStyle}>
+                      {p.photoUrl && <img src={p.photoUrl} alt={p.displayName} style={{ width:72, height:90, objectFit:"cover", objectPosition:"center top", flexShrink:0 }} />}
+                      <div style={{ flex:1 }}>
+                        <div style={{ fontSize:14, color:C.goldLight, marginBottom:3 }}>{p.displayName} · {p.age} · {p.city}</div>
+                        <div style={{ fontSize:11, color:C.muted, fontFamily:"sans-serif", marginBottom:6 }}>{p.email} · {p.religion}</div>
+                        <p style={{ fontSize:11, color:C.creamDim, fontFamily:"sans-serif", lineHeight:1.6, margin:"0 0 10px" }}>{(p.bio||"").slice(0,160)}...</p>
+                        <div style={{ display:"flex", gap:8 }}>
+                          <button onClick={() => approveProfile(p.email)} style={{ padding:"6px 14px", background:C.green, color:"white", border:"none", cursor:"pointer", fontFamily:"sans-serif", fontSize:11, fontWeight:700 }}>Approve</button>
+                          <button onClick={() => rejectProfile(p.email)} style={{ padding:"6px 14px", background:C.red, color:"white", border:"none", cursor:"pointer", fontFamily:"sans-serif", fontSize:11, fontWeight:700 }}>Reject</button>
+                        </div>
+                      </div>
                     </div>
-                  </div>
+                  ))}
                 </div>
-              ))}
-            </>
-          )}
-
-          {adminTab === "all" && (
-            <>
-              <div style={{ fontSize:11, color:C.muted, fontFamily:"sans-serif", marginBottom:12 }}>{allProfiles.length} total profiles in Redis</div>
-              {allProfiles.length === 0 && <div style={{ color:C.muted, textAlign:"center", padding:"3rem", fontFamily:"sans-serif" }}>No profiles found.</div>}
+              )}
+              {/* All profiles */}
+              <div style={{ fontSize:9, letterSpacing:"0.2em", color:C.muted, fontFamily:"sans-serif", marginBottom:12 }}>ALL PROFILES — {allProfiles.length} total in Redis</div>
+              {allProfiles.length === 0 && <div style={{ color:C.muted, textAlign:"center", padding:"3rem", fontFamily:"sans-serif" }}>No profiles found. Run the seed route to add virtual women.</div>}
               {allProfiles.map(p => (
-                <div key={p.email} style={adminCardStyle(p)}>
-                  {p.photoUrl && <img src={p.photoUrl} alt={p.displayName} style={{ width:72, height:90, objectFit:"cover", objectPosition:"center top", flexShrink:0 }} />}
+                <div key={p.email} style={cardStyle}>
+                  {p.photoUrl && <img src={p.photoUrl} alt={p.displayName} style={{ width:60, height:76, objectFit:"cover", objectPosition:"center top", flexShrink:0, border:"1px solid " + C.border }} />}
                   <div style={{ flex:1 }}>
                     <div style={{ display:"flex", gap:8, alignItems:"center", marginBottom:4, flexWrap:"wrap" }}>
-                      <span style={{ fontSize:14, color:C.goldLight }}>{p.displayName}</span>
-                      <span style={{ fontSize:10, color:p.approved?C.green:C.red, fontFamily:"sans-serif", border:"1px solid "+(p.approved?C.green:C.red), padding:"1px 6px" }}>{p.approved?"APPROVED":"PENDING"}</span>
-                      <span style={{ fontSize:10, color:C.muted, fontFamily:"sans-serif" }}>{p.gender}</span>
-                      {p.hidden && <span style={{ fontSize:10, color:C.red, fontFamily:"sans-serif" }}>HIDDEN</span>}
-                      {p.isFounder && <span style={{ fontSize:10, color:C.gold, fontFamily:"sans-serif" }}>FOUNDER</span>}
-                      {p.isAmbassador && <span style={{ fontSize:10, color:C.gold, fontFamily:"sans-serif" }}>AMBASSADOR</span>}
+                      <span style={{ fontSize:13, color:C.goldLight }}>{p.displayName}</span>
+                      <span style={{ fontSize:9, color:p.approved?C.green:C.red, fontFamily:"sans-serif", border:"1px solid "+(p.approved?C.green:C.red), padding:"1px 5px" }}>{p.approved?"APPROVED":"PENDING"}</span>
+                      <span style={{ fontSize:9, color:C.muted, fontFamily:"sans-serif" }}>{p.gender}</span>
+                      {p.isVirtual && <span style={{ fontSize:9, color:"#7aa0d0", fontFamily:"sans-serif" }}>VIRTUAL</span>}
+                      {p.isFounder && <span style={{ fontSize:9, color:C.gold, fontFamily:"sans-serif" }}>FOUNDER</span>}
+                      {p.isAmbassador && <span style={{ fontSize:9, color:C.gold, fontFamily:"sans-serif" }}>AMBASSADOR</span>}
+                      {p.hidden && <span style={{ fontSize:9, color:C.red, fontFamily:"sans-serif" }}>HIDDEN</span>}
                     </div>
-                    <div style={{ fontSize:11, color:C.muted, fontFamily:"sans-serif", marginBottom:6 }}>{p.email} · {p.age} · {p.city}</div>
-                    <p style={{ fontSize:11, color:C.creamDim, fontFamily:"sans-serif", lineHeight:1.6, margin:"0 0 10px" }}>{(p.bio||"").slice(0,120)}{p.bio && p.bio.length > 120 ? "..." : ""}</p>
-                    <div style={{ display:"flex", gap:6, flexWrap:"wrap" }}>
-                      {!p.approved && <button onClick={() => approveProfile(p.email)} style={{ padding:"4px 10px", background:C.green, color:"white", border:"none", cursor:"pointer", fontFamily:"sans-serif", fontSize:10 }}>Approve</button>}
-                      {p.approved && <button onClick={() => rejectProfile(p.email)} style={{ padding:"4px 10px", background:C.red, color:"white", border:"none", cursor:"pointer", fontFamily:"sans-serif", fontSize:10 }}>Delete</button>}
+                    <div style={{ fontSize:10, color:C.muted, fontFamily:"sans-serif", marginBottom:6 }}>{p.email} · {p.age} · {p.city}</div>
+                    <div style={{ display:"flex", gap:6 }}>
+                      {!p.approved && <button onClick={() => approveProfile(p.email)} style={{ padding:"3px 10px", background:C.green, color:"white", border:"none", cursor:"pointer", fontFamily:"sans-serif", fontSize:10 }}>Approve</button>}
+                      <button onClick={() => rejectProfile(p.email)} style={{ padding:"3px 10px", background:C.red, color:"white", border:"none", cursor:"pointer", fontFamily:"sans-serif", fontSize:10 }}>Delete</button>
                     </div>
                   </div>
                 </div>
               ))}
-            </>
+            </div>
           )}
 
+          {/* ── CONSULATE ── */}
+          {adminTab === "consulate" && (
+            <div>
+              <div style={{ fontSize:9, letterSpacing:"0.2em", color:C.muted, fontFamily:"sans-serif", marginBottom:16 }}>CONSULATE POSTS — {consulatePosts.length} total</div>
+              {consulatePosts.length === 0 && <div style={{ color:C.muted, textAlign:"center", padding:"3rem", fontFamily:"sans-serif" }}>No posts yet.</div>}
+              {consulatePosts.map(p => (
+                <div key={p.id} style={{ ...cardStyle, flexDirection:"column", gap:10 }}>
+                  <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-start", width:"100%" }}>
+                    <div>
+                      <div style={{ fontSize:13, color:C.goldLight, marginBottom:2 }}>{p.author || "Anonymous"}</div>
+                      <div style={{ fontSize:10, color:C.muted, fontFamily:"sans-serif" }}>{new Date(p.createdAt).toLocaleDateString()} · {p.channel || "general"}</div>
+                    </div>
+                    <div style={{ display:"flex", gap:6 }}>
+                      {!p.approved && (
+                        <button onClick={async () => {
+                          await fetch("/api/community", { method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({ action:"approve", adminKey, postId:p.id }) });
+                          setConsulatePosts(prev => prev.map(x => x.id === p.id ? {...x, approved:true} : x));
+                        }} style={{ padding:"4px 10px", background:C.green, color:"white", border:"none", cursor:"pointer", fontFamily:"sans-serif", fontSize:10 }}>Approve</button>
+                      )}
+                      <button onClick={() => deleteConsulatePost(p.id)} style={{ padding:"4px 10px", background:C.red, color:"white", border:"none", cursor:"pointer", fontFamily:"sans-serif", fontSize:10 }}>Delete</button>
+                    </div>
+                  </div>
+                  <p style={{ fontSize:13, color:C.creamDim, fontFamily:"sans-serif", lineHeight:1.7, margin:0 }}>{p.content}</p>
+                  {!p.approved && <div style={{ fontSize:9, color:C.red, fontFamily:"sans-serif" }}>⚠ Pending approval</div>}
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* ── AMBASSADORS ── */}
+          {adminTab === "ambassadors" && (
+            <div>
+              {/* Create new ambassador */}
+              <div style={{ background:C.navyDeep, border:"1px solid " + C.gold, padding:"1.25rem", marginBottom:"1.5rem" }}>
+                <div style={{ fontSize:9, letterSpacing:"0.2em", color:C.gold, fontFamily:"sans-serif", marginBottom:14 }}>CREATE AMBASSADOR CODE</div>
+                <div style={{ display:"flex", gap:10, flexWrap:"wrap", marginBottom:10 }}>
+                  <input value={newAmbForm.name} onChange={e => setNewAmbForm({...newAmbForm, name:e.target.value})} placeholder="Full name *" style={{ flex:1, minWidth:140, padding:"8px 12px", background:C.dark, border:"1px solid " + C.border, color:C.cream, fontSize:12, fontFamily:"sans-serif" }} />
+                  <input value={newAmbForm.email} onChange={e => setNewAmbForm({...newAmbForm, email:e.target.value})} placeholder="Email *" style={{ flex:1, minWidth:160, padding:"8px 12px", background:C.dark, border:"1px solid " + C.border, color:C.cream, fontSize:12, fontFamily:"sans-serif" }} />
+                  <input value={newAmbForm.note} onChange={e => setNewAmbForm({...newAmbForm, note:e.target.value})} placeholder="Note (optional)" style={{ flex:1, minWidth:120, padding:"8px 12px", background:C.dark, border:"1px solid " + C.border, color:C.cream, fontSize:12, fontFamily:"sans-serif" }} />
+                </div>
+                <div style={{ display:"flex", gap:10, alignItems:"center" }}>
+                  <button onClick={createAmbassador} style={{ padding:"8px 20px", background:C.gold, color:C.navyDeep, border:"none", cursor:"pointer", fontSize:12, fontWeight:700, fontFamily:"sans-serif" }}>Generate Code →</button>
+                  {newAmbResult && <div style={{ fontSize:12, color:newAmbResult.includes("Code:")?C.green:C.red, fontFamily:"sans-serif" }}>{newAmbResult}</div>}
+                </div>
+              </div>
+              {/* Ambassador list */}
+              <div style={{ fontSize:9, letterSpacing:"0.2em", color:C.muted, fontFamily:"sans-serif", marginBottom:12 }}>ACTIVE AMBASSADORS — {ambassadors.length}</div>
+              {ambassadors.length === 0 && <div style={{ color:C.muted, textAlign:"center", padding:"3rem", fontFamily:"sans-serif" }}>No ambassadors yet.</div>}
+              {ambassadors.map(a => (
+                <div key={a.code} style={cardStyle}>
+                  <div style={{ flex:1 }}>
+                    <div style={{ display:"flex", gap:10, alignItems:"center", marginBottom:4, flexWrap:"wrap" }}>
+                      <span style={{ fontSize:14, color:C.goldLight }}>{a.name}</span>
+                      <span style={{ fontSize:11, color:C.gold, fontFamily:"monospace", background:"rgba(184,150,62,0.1)", border:"1px solid " + C.gold, padding:"1px 8px" }}>{a.code}</span>
+                    </div>
+                    <div style={{ fontSize:11, color:C.muted, fontFamily:"sans-serif", marginBottom:4 }}>{a.email}</div>
+                    {a.note && <div style={{ fontSize:11, color:C.creamDim, fontFamily:"sans-serif", marginBottom:4, fontStyle:"italic" }}>{a.note}</div>}
+                    <div style={{ fontSize:10, color:C.muted, fontFamily:"sans-serif" }}>
+                      Created: {new Date(a.createdAt).toLocaleDateString()}
+                      {a.lastAccess ? " · Last used: " + new Date(a.lastAccess).toLocaleDateString() : " · Never used"}
+                    </div>
+                  </div>
+                  <button onClick={() => revokeAmbassador(a.code)} style={{ padding:"6px 14px", background:"transparent", color:C.red, border:"1px solid " + C.red, cursor:"pointer", fontFamily:"sans-serif", fontSize:11, flexShrink:0 }}>Revoke</button>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* ── MY PROFILE ── */}
           {adminTab === "myprofile" && (
             <div>
               {!myProfile ? (
                 <div style={{ color:C.muted, textAlign:"center", padding:"3rem", fontFamily:"sans-serif" }}>
-                  No profile found for {userEmail}.
+                  No profile found for {userEmail || "this session"}.
                   <div style={{ marginTop:16 }}>
                     <button onClick={() => setView("create")} style={{ background:C.gold, color:C.navyDeep, border:"none", padding:"8px 18px", cursor:"pointer", fontFamily:"sans-serif", fontSize:12, fontWeight:700 }}>Create Profile</button>
                   </div>
                 </div>
               ) : (
                 <div style={{ background:C.navyDeep, border:"1px solid " + C.gold, padding:"1.5rem" }}>
-                  <div style={{ display:"flex", gap:16, alignItems:"flex-start", marginBottom:"1rem" }}>
+                  <div style={{ display:"flex", gap:16, alignItems:"flex-start", marginBottom:"1rem", flexWrap:"wrap" }}>
                     {myProfile.photoUrl && <img src={myProfile.photoUrl} alt={myProfile.displayName} style={{ width:100, height:130, objectFit:"cover", objectPosition:"center top", flexShrink:0, border:"2px solid " + C.gold }} />}
                     <div>
-                      <div style={{ fontSize:18, color:C.goldLight, marginBottom:4 }}>{myProfile.displayName}</div>
-                      <div style={{ fontSize:12, color:C.muted, fontFamily:"sans-serif", marginBottom:4 }}>{myProfile.email}</div>
-                      <div style={{ fontSize:12, color:C.muted, fontFamily:"sans-serif", marginBottom:4 }}>{myProfile.age} · {myProfile.city}, {myProfile.country}</div>
-                      <div style={{ fontSize:12, color:C.muted, fontFamily:"sans-serif", marginBottom:8 }}>{myProfile.religion} · {myProfile.gender}</div>
+                      <div style={{ fontSize:20, color:C.goldLight, marginBottom:4 }}>{myProfile.displayName}</div>
+                      <div style={{ fontSize:12, color:C.muted, fontFamily:"sans-serif", marginBottom:3 }}>{myProfile.email}</div>
+                      <div style={{ fontSize:12, color:C.muted, fontFamily:"sans-serif", marginBottom:3 }}>{myProfile.age} · {myProfile.city}, {myProfile.country}</div>
+                      <div style={{ fontSize:12, color:C.muted, fontFamily:"sans-serif", marginBottom:10 }}>{myProfile.religion} · {myProfile.gender}</div>
                       <div style={{ display:"flex", gap:6, flexWrap:"wrap" }}>
                         <span style={{ fontSize:10, color:myProfile.approved?C.green:C.red, border:"1px solid "+(myProfile.approved?C.green:C.red), padding:"2px 8px", fontFamily:"sans-serif" }}>{myProfile.approved?"APPROVED":"PENDING"}</span>
                         {myProfile.isFounder && <span style={{ fontSize:10, color:C.gold, border:"1px solid "+C.gold, padding:"2px 8px", fontFamily:"sans-serif" }}>FOUNDER</span>}
@@ -581,7 +724,7 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
                       </div>
                     </div>
                   </div>
-                  <p style={{ fontSize:13, color:C.creamDim, fontFamily:"sans-serif", lineHeight:1.8 }}>{myProfile.bio}</p>
+                  <p style={{ fontSize:13, color:C.creamDim, fontFamily:"sans-serif", lineHeight:1.85, margin:0 }}>{myProfile.bio}</p>
                 </div>
               )}
             </div>
@@ -591,14 +734,13 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
       </div>
     );
   }
-
   // BROWSE VIEW
   return (
     <div style={{ minHeight:"100vh", background:C.dark, color:C.cream, fontFamily:"Georgia,serif" }}>
       <div style={{ background:C.navyDeep, borderBottom:"1px solid " + C.border, padding:"1rem 1.5rem", display:"flex", alignItems:"center", justifyContent:"space-between", flexWrap:"wrap", gap:10 }}>
         <div style={{ fontSize:15, color:C.goldLight }}>The International Lover™ — Matrimonial</div>
         <div style={{ display:"flex", gap:8, flexWrap:"wrap" }}>
-          {isAdmin && <button onClick={() => { setAdminTab("all"); loadAllProfiles(); loadMyProfile(); setView("admin"); }} style={{ background:"none", border:"1px solid " + C.gold, color:C.gold, padding:"6px 12px", cursor:"pointer", fontSize:11, fontFamily:"sans-serif" }}>Admin</button>}
+          {isAdmin && <button onClick={() => { setAdminTab("profiles"); loadAllProfiles(); loadPendingApprovals(); setView("admin"); }} style={{ background:"none", border:"1px solid " + C.gold, color:C.gold, padding:"6px 12px", cursor:"pointer", fontSize:11, fontFamily:"sans-serif" }}>Admin</button>}
           <button onClick={() => setView("messages")} style={{ background:"none", border:"1px solid " + C.border, color:C.muted, padding:"6px 12px", cursor:"pointer", fontSize:11, fontFamily:"sans-serif" }}>Messages</button>
           {!myProfile ? (
             <button onClick={() => setView("create")} style={{ background:C.gold, color:C.navyDeep, border:"none", padding:"6px 14px", cursor:"pointer", fontSize:11, fontWeight:700, fontFamily:"sans-serif" }}>Create Profile</button>
