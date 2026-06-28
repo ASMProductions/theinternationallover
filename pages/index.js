@@ -36,7 +36,7 @@ function checkTimedCode(code) {
 
 const TIERS = [
   { id:"course", label:"The Course", sublabel:"Course + Full Resource Library", price:"$497", cycle:"one time · lifetime access", stripe:"https://buy.stripe.com/00w00j1Rrd1s1eEcei77O0k",
-    features:["Complete simulation course — all five regions","Fifteen virtual women — broad demographic of potential mates","Branching scenarios — visual novel format","Full cultural obstacle modules","Complete resource library — 14 modules","Certificate of The International Lover™"], highlight:false },
+    features:["Complete simulation course — all six regions","Twenty-two virtual women — broad demographic of potential mates","Branching scenarios — visual novel format","Full cultural obstacle modules","Complete resource library — 14 modules","Certificate of The International Lover™"], highlight:false },
   { id:"complete", label:"Complete Platform", sublabel:"Everything. Active membership.", price:"$49.99", cycle:"per month · or $397/year", stripe:"https://buy.stripe.com/fZu6oH3Zz8LccXm5PU77O0l", stripeYear:"https://buy.stripe.com/14A8wP9jT2mO8H64LQ77O0m",
     features:["Full book — 17 chapters with read-aloud","Complete simulation course","Full resource library — 14 modules","Certificate of The International Lover™","The Consulate — community forum","All five regional subgroups","Member consultation rates","All future content included"], highlight:true },
   { id:"lifetime", label:"Lifetime Commission", sublabel:"Everything. Permanently.", price:"$997", cycle:"one time · never pay again", stripe:"https://buy.stripe.com/28E5kD3ZzaTke1q0vA77O0n",
@@ -2778,7 +2778,7 @@ function CourseView({ onBack }) {
         <div style={{ maxWidth:860, margin:"0 auto", padding:"2.5rem 1.5rem" }}>
           <div style={{ textAlign:"center", marginBottom:"2rem" }}>
             <div style={{ fontSize:9, letterSpacing:"0.3em", color:"#b8963e", fontFamily:"sans-serif", marginBottom:8 }}>THE WORLD MAP</div>
-            <p style={{ fontSize:13, color:"#8a7a5a", fontFamily:"sans-serif", lineHeight:1.7 }}>Five regions. Three women per region. Every decision branches the story.<br />You may switch between women at any decision point — but switching has consequences.</p>
+            <p style={{ fontSize:13, color:"#8a7a5a", fontFamily:"sans-serif", lineHeight:1.7 }}>Six regions. Twenty-two virtual women. Every decision branches the story.<br />You may switch between women at any decision point — but switching has consequences.</p>
           </div>
 
           {/* Passport stamp progress */}
@@ -3271,7 +3271,7 @@ export default function InternationalLover() {
             <div style={{ position:"absolute", top:12, right:16, fontSize:20, color:C.gold, opacity:0.4 }}>✦</div>
             <div style={{ fontSize:9, letterSpacing:"0.3em", color:C.gold, fontFamily:"sans-serif", marginBottom:8 }}>THE COURSE</div>
             <div style={{ fontSize:"clamp(20px,3vw,26px)", color:C.goldLight, fontFamily:"Georgia,serif", marginBottom:8 }}>Find Her. Meet Her. Vet Her.</div>
-            <div style={{ fontSize:12, color:C.creamDim, fontFamily:"sans-serif", marginBottom:16, lineHeight:1.65 }}>Five regions · Fifteen virtual women representing a broad demographic of potential mates · Branching scenarios · All five possible endings · Certificate of Commission</div>
+            <div style={{ fontSize:12, color:C.creamDim, fontFamily:"sans-serif", marginBottom:16, lineHeight:1.65 }}>Six regions · Twenty-two virtual women representing a broad demographic of potential mates · Branching scenarios · All five possible endings · Certificate of Commission</div>
             <div style={{ display:"inline-block", padding:"10px 28px", background:C.gold, color:C.navyDeep, fontSize:13, fontWeight:700, letterSpacing:"0.1em", fontFamily:"sans-serif" }}>Enter the Course →</div>
           </div>
 
@@ -3393,7 +3393,7 @@ export default function InternationalLover() {
           </div>
           {[
             { num:"01", title:"The Book", sub:"17 Chapters · Read-Aloud · Full Text", icon:"📖", body:"The complete text of The International Lover — every chapter available with read-aloud. Your orientation. Your briefing. Your first pages. Every man reads it before the course unlocks." },
-            { num:"02", title:"The Course", sub:"Five Regions · Fifteen Virtual Women · Branching Scenarios", icon:"🗺", body:"A virtual simulation set on a real world map. Five regions. Fifteen virtual women representing a broad demographic of potential mates. Every decision branches the story — first contact, the family meeting, fraud detection, the immigration process, life after she arrives. Complete all five regions and earn your certificate." },
+            { num:"02", title:"The Course", sub:"Six Regions · Twenty-Two Virtual Women · Branching Scenarios", icon:"🗺", body:"A virtual simulation set on a real world map. Six regions. Twenty-two virtual women representing a broad demographic of potential mates. Every decision branches the story — first contact, the family meeting, fraud detection, the immigration process, life after she arrives. Complete all six regions and earn your certificate." },
             { num:"03", title:"The Consulate", sub:"Community · Regional Subgroups · Intelligence", icon:"🏛", body:"A private community of men on the same path. Five regional subgroups. Matrimonial site reviews. Country-specific intelligence. Fraud warning threads. Success story archives." },
           ].map((l,i) => (
             <div key={l.num} style={{ display:"flex", gap:24, padding:"2rem", background:C.navyDeep, border:`1px solid ${C.border}`, borderLeft:`3px solid ${C.gold}`, flexWrap:"wrap", marginBottom:i<2?16:0 }}>
@@ -3413,8 +3413,8 @@ export default function InternationalLover() {
         <div style={{ maxWidth:860, margin:"0 auto" }}>
           <div style={{ textAlign:"center", marginBottom:"2.5rem" }}>
             <Eyebrow>The Course</Eyebrow>
-            <h2 style={{ fontSize:"clamp(20px,3vw,28px)", color:C.goldLight, fontWeight:"normal", marginBottom:12 }}>Five destinations. Fifteen virtual women. One passport.</h2>
-            <p style={{ fontSize:"clamp(12px,1.7vw,14px)", color:C.creamDim, lineHeight:1.85, maxWidth:600, margin:"0 auto", fontFamily:"sans-serif" }}>Fifteen virtual women representing a broad demographic of potential mates across five regions of the world. Some are genuine. Some are running fraud. Some are genuine and still wrong for you. You will not be told which is which.</p>
+            <h2 style={{ fontSize:"clamp(20px,3vw,28px)", color:C.goldLight, fontWeight:"normal", marginBottom:12 }}>Six destinations. Twenty-two virtual women. One passport.</h2>
+            <p style={{ fontSize:"clamp(12px,1.7vw,14px)", color:C.creamDim, lineHeight:1.85, maxWidth:600, margin:"0 auto", fontFamily:"sans-serif" }}>Twenty-two virtual women representing a broad demographic of potential mates across six regions of the world. Some are genuine. Some are running fraud. Some are genuine and still wrong for you. You will not be told which is which.</p>
           </div>
           <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit, minmax(150px,1fr))", gap:12, marginBottom:"2rem" }}>
             {REGIONS.map(r => (
@@ -3431,7 +3431,7 @@ export default function InternationalLover() {
               {REGIONS.map(r => <StampRing key={r.id} label={r.label.split(" ").map(w=>w.slice(0,3).toUpperCase()).join(" ")} size={56} active={stampedRegions.includes(r.id)} />)}
             </div>
             <div style={{ fontSize:10, color:C.mutedDark, marginTop:10, fontFamily:"sans-serif" }}>
-              {stampedRegions.length === 5 ? "All five regions certified — certificate unlocked ✦" : stampedRegions.length > 0 ? `${stampedRegions.length} of 5 regions stamped` : "Click a region above to preview your stamp page"}
+              {stampedRegions.length === 6 ? "All six regions certified — certificate unlocked ✦" : stampedRegions.length > 0 ? `${stampedRegions.length} of 5 regions stamped` : "Click a region above to preview your stamp page"}
             </div>
           </div>
         </div>
@@ -3441,7 +3441,7 @@ export default function InternationalLover() {
         <div style={{ maxWidth:1000, margin:"0 auto" }}>
           <div style={{ textAlign:"center", marginBottom:"2.5rem" }}>
             <Eyebrow>The Roster</Eyebrow>
-            <h2 style={{ fontSize:"clamp(20px,3vw,28px)", color:C.goldLight, fontWeight:"normal", marginBottom:12 }}>Fifteen virtual women. Five regions of the world.</h2>
+            <h2 style={{ fontSize:"clamp(20px,3vw,28px)", color:C.goldLight, fontWeight:"normal", marginBottom:12 }}>Twenty-two virtual women. Six regions of the world.</h2>
             <p style={{ fontSize:"clamp(12px,1.7vw,14px)", color:C.creamDim, lineHeight:1.85, maxWidth:580, margin:"0 auto", fontFamily:"sans-serif" }}>Each represents a broad demographic of potential mates. Some are genuine. Some are not. Some are genuine and still wrong for you.</p>
           </div>
 
@@ -3629,7 +3629,7 @@ export default function InternationalLover() {
             <Eyebrow>Now Live</Eyebrow>
             <h2 style={{ fontSize:"clamp(20px,3vw,30px)", color:C.goldLight, fontWeight:"normal", marginBottom:12 }}>Matrimonial Platform</h2>
             <p style={{ fontSize:"clamp(13px,1.8vw,15px)", color:C.muted, maxWidth:560, margin:"0 auto", lineHeight:1.8, fontFamily:"sans-serif" }}>
-              A private platform built for serious men who have done the work. Browse profiles from women across five regions. Create your own listing. Connect through verified channels.
+              A private platform built for serious men who have done the work. Browse profiles from women across six regions. Create your own listing. Connect through verified channels.
             </p>
           </div>
           <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit, minmax(220px,1fr))", gap:16, marginBottom:"3rem" }}>
