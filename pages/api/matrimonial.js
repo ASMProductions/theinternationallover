@@ -38,6 +38,21 @@ async function listApprovedProfiles(gender, requestorEmail) {
   } catch(e) { return []; }
 }
 
+async function listAllProfiles() {
+  try {
+    const keys = await redis.keys("il:mat:profile:*");
+    if (!keys || keys.length === 0) return [];
+    const profiles = await Promise.all(keys.map(async k => {
+      try {
+        const raw = await redis.get(k);
+        if (!raw) return null;
+        return typeof raw === "string" ? JSON.parse(raw) : raw;
+      } catch(e) { return null; }
+    }));
+    return profiles.filter(p => p).sort((a, b) => (b.createdAt||0) - (a.createdAt||0));
+  } catch(e) { return []; }
+}
+
 async function listPendingProfiles() {
   try {
     const keys = await redis.keys("il:mat:profile:*");
@@ -81,6 +96,16 @@ export default async function handler(req, res) {
     if (action === "pending" && adminKey === ADMIN_KEY) {
       const profiles = await listPendingProfiles();
       return res.status(200).json({ profiles });
+    }
+
+    if (action === "allProfiles" && adminKey === ADMIN_KEY) {
+      const profiles = await listAllProfiles();
+      return res.status(200).json({ profiles });
+    }
+
+    if (action === "deleteProfile" && adminKey === ADMIN_KEY && email) {
+      await redis.del(profileKey(email));
+      return res.status(200).json({ ok: true });
     }
 
     return res.status(400).json({ error: "Invalid action" });
@@ -140,8 +165,13 @@ export default async function handler(req, res) {
     }
 
     if (action === "sendMessage") {
-      const { from, to, text, isAmbassador: senderIsAmb } = body;
+      const { from, to, text, isAmbassador: senderIsAmb, adminKey: senderAdminKey } = body;
       if (!from || !to || !text) return res.status(400).json({ error: "Missing fields" });
+      // Block messages to virtual profiles — only the admin/founder can contact them
+      const targetProfile = await getProfile(to);
+      if (targetProfile && targetProfile.isVirtual && senderAdminKey !== ADMIN_KEY) {
+        return res.status(403).json({ error: "virtual_profile" });
+      }
       const key = msgKey(from, to);
       let messages = [];
       try {
