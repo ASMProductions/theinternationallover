@@ -16,6 +16,7 @@ const REGIONS = [
   { id:"asia", label:"Asia" },
   { id:"latin_america", label:"Latin America" },
   { id:"sub_saharan", label:"Sub-Saharan Africa" },
+  { id:"north_america", label:"North America / USA" },
 ];
 
 const RELIGIONS = ["All", "Islam", "Christianity", "Orthodox Christianity", "Catholicism", "Other"];
@@ -28,6 +29,10 @@ function AmbassadorBadge() {
 
 function CertifiedBadge() {
   return <span style={{ background:C.green, color:"white", fontSize:8, fontWeight:700, padding:"2px 8px", fontFamily:"sans-serif", letterSpacing:"0.1em", verticalAlign:"middle", marginLeft:6 }}>CERTIFIED</span>;
+}
+
+function FounderBadge() {
+  return <span style={{ background:C.navyDeep, border:"1px solid " + C.gold, color:C.gold, fontSize:8, fontWeight:700, padding:"2px 8px", fontFamily:"sans-serif", letterSpacing:"0.1em", verticalAlign:"middle", marginLeft:6 }}>FOUNDER</span>;
 }
 
 const Input = ({ label, value, onChange, type="text", placeholder="" }) => (
@@ -64,7 +69,7 @@ export default function MatrimonialPlatform({ userEmail, isAmbassador, isCertifi
   const [msg, setMsg] = useState("");
   const [filters, setFilters] = useState({ region:"all", religion:"All", age:"All Ages", family:"All" });
   const [createForm, setCreateForm] = useState({
-    displayName:"", age:"", city:"", country:"", region:"north_africa",
+    displayName:"", age:"", city:"", country:"", region:"north_america", regions:[],
     religion:"Islam", bio:"", seeking:"marriage",
     familyInvolvement:"Family must be involved",
     virtueStatus:"prefer_not_say", maritalStatus:"single",
@@ -254,6 +259,7 @@ export default function MatrimonialPlatform({ userEmail, isAmbassador, isCertifi
             <div style={{ flex:1 }}>
               <div style={{ fontSize:"clamp(18px,3vw,24px)", color:C.goldLight, marginBottom:4 }}>
                 {activeProfile.displayName}
+                {activeProfile.isFounder && <FounderBadge />}
                 {activeProfile.isAmbassador && <AmbassadorBadge />}
                 {activeProfile.isCertified && !activeProfile.isAmbassador && <CertifiedBadge />}
               </div>
@@ -355,15 +361,27 @@ export default function MatrimonialPlatform({ userEmail, isAmbassador, isCertifi
           <Input label="CITY *" value={createForm.city} onChange={e => setCreateForm({...createForm, city:e.target.value})} />
           <Input label="COUNTRY *" value={createForm.country} onChange={e => setCreateForm({...createForm, country:e.target.value})} />
           <div style={{ marginBottom:14 }}>
-            <div style={{ fontSize:10, color:C.muted, fontFamily:"sans-serif", letterSpacing:"0.1em", marginBottom:6 }}>REGION *</div>
-            <select value={createForm.region} onChange={e => setCreateForm({...createForm, region:e.target.value})} style={{ width:"100%", padding:"10px 12px", background:C.dark, border:"1px solid " + C.border, color:C.cream, fontSize:13, fontFamily:"sans-serif" }}>
-              <option value="north_africa">North Africa</option>
-              <option value="middle_east">Middle East</option>
-              <option value="asia">Asia</option>
-              <option value="latin_america">Latin America</option>
-              <option value="sub_saharan">Sub-Saharan Africa</option>
-              {gender === "man" && <option value="north_america">North America</option>}
-            </select>
+            <div style={{ fontSize:10, color:C.muted, fontFamily:"sans-serif", letterSpacing:"0.1em", marginBottom:8 }}>{gender === "man" ? "REGIONS (select all that apply)" : "REGION *"}</div>
+            {gender === "man" ? (
+              <div style={{ display:"flex", flexWrap:"wrap", gap:8 }}>
+                {REGIONS.filter(r => r.id !== "all").map(r => {
+                  const selected = (createForm.regions || []).includes(r.id);
+                  return (
+                    <div key={r.id} onClick={() => {
+                      const current = createForm.regions || [];
+                      const updated = selected ? current.filter(x => x !== r.id) : [...current, r.id];
+                      setCreateForm({...createForm, regions: updated, region: updated[0] || "north_america"});
+                    }} style={{ padding:"6px 14px", border:"1px solid " + (selected ? C.gold : C.border), background: selected ? C.gold + "22" : C.dark, color: selected ? C.goldLight : C.muted, fontSize:11, fontFamily:"sans-serif", cursor:"pointer" }}>
+                      {selected ? "✓ " : ""}{r.label}
+                    </div>
+                  );
+                })}
+              </div>
+            ) : (
+              <select value={createForm.region} onChange={e => setCreateForm({...createForm, region:e.target.value})} style={{ width:"100%", padding:"10px 12px", background:C.dark, border:"1px solid " + C.border, color:C.cream, fontSize:13, fontFamily:"sans-serif" }}>
+                {REGIONS.filter(r => r.id !== "all").map(r => <option key={r.id} value={r.id}>{r.label}</option>)}
+              </select>
+            )}
           </div>
           <div style={{ marginBottom:14 }}>
             <div style={{ fontSize:10, color:C.muted, fontFamily:"sans-serif", letterSpacing:"0.1em", marginBottom:6 }}>RELIGION *</div>
@@ -385,6 +403,7 @@ export default function MatrimonialPlatform({ userEmail, isAmbassador, isCertifi
             <div style={{ fontSize:10, color:C.muted, fontFamily:"sans-serif", letterSpacing:"0.1em", marginBottom:6 }}>MARITAL STATUS</div>
             <select value={createForm.maritalStatus} onChange={e => setCreateForm({...createForm, maritalStatus:e.target.value})} style={{ width:"100%", padding:"10px 12px", background:C.dark, border:"1px solid " + C.border, color:C.cream, fontSize:13, fontFamily:"sans-serif" }}>
               <option value="single">Single — never married</option>
+              <option value="married">Married</option>
               <option value="divorced">Divorced</option>
               <option value="widowed">Widowed</option>
             </select>
@@ -545,7 +564,10 @@ export default function MatrimonialPlatform({ userEmail, isAmbassador, isCertifi
                 ) : (
                   <div style={{ width:"100%", height:"100%", display:"flex", alignItems:"center", justifyContent:"center", fontSize:48, color:C.border }}>◈</div>
                 )}
-                {p.isAmbassador && (
+                {p.isFounder && (
+                  <div style={{ position:"absolute", top:8, right:8, background:C.navyDeep, border:"1px solid " + C.gold, color:C.gold, fontSize:7, fontWeight:700, padding:"2px 6px", fontFamily:"sans-serif" }}>FOUNDER</div>
+                )}
+                {p.isAmbassador && !p.isFounder && (
                   <div style={{ position:"absolute", top:8, right:8, background:C.gold, color:C.navyDeep, fontSize:7, fontWeight:700, padding:"2px 6px", fontFamily:"sans-serif" }}>AMBASSADOR</div>
                 )}
                 {p.isCertified && !p.isAmbassador && (
