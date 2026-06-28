@@ -3317,38 +3317,6 @@ export default function InternationalLover() {
       </section>
 
       {/* Matrimonial Platform Section */}
-      <section style={{ background:C.dark, padding:"5rem 1.5rem", borderBottom:`1px solid ${C.border}` }}>
-        <div style={{ maxWidth:940, margin:"0 auto" }}>
-          <div style={{ textAlign:"center", marginBottom:"3rem" }}>
-            <Eyebrow>Now Live</Eyebrow>
-            <h2 style={{ fontSize:"clamp(20px,3vw,30px)", color:C.goldLight, fontWeight:"normal", marginBottom:12 }}>Matrimonial Platform</h2>
-            <p style={{ fontSize:"clamp(13px,1.8vw,15px)", color:C.muted, maxWidth:560, margin:"0 auto", lineHeight:1.8, fontFamily:"sans-serif" }}>
-              A private platform built for serious men who have done the work. Browse profiles from women across five regions. Create your own listing. Connect through verified channels.
-            </p>
-          </div>
-          <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit, minmax(220px,1fr))", gap:16, marginBottom:"3rem" }}>
-            {[
-              { icon:"🌍", title:"Five Regions", desc:"North Africa, Middle East, Asia, Latin America, Sub-Saharan Africa. Real women. Real profiles." },
-              { icon:"🔒", title:"Verified Access", desc:"Men must complete the course or hold Ambassador status to contact women. No casual browsers." },
-              { icon:"👁", title:"Mutual Browsing", desc:"Men see women. Women see men. Filtering by region, religion, age, and family involvement." },
-              { icon:"✦", title:"Ambassador Priority", desc:"Ambassadors have full contact privileges and their status is visible on every profile." },
-            ].map(f => (
-              <div key={f.title} style={{ background:C.navyDeep, border:`1px solid ${C.border}`, padding:"1.5rem" }}>
-                <div style={{ fontSize:28, marginBottom:10 }}>{f.icon}</div>
-                <div style={{ color:C.goldLight, fontWeight:"bold", marginBottom:6, fontFamily:"sans-serif", fontSize:14 }}>{f.title}</div>
-                <div style={{ color:C.muted, fontSize:12, lineHeight:1.65, fontFamily:"sans-serif" }}>{f.desc}</div>
-              </div>
-            ))}
-          </div>
-          <div style={{ textAlign:"center" }}>
-            <a href="/matrimonial" style={{ display:"inline-block", background:C.gold, color:C.navyDeep, padding:"14px 36px", fontSize:14, fontWeight:700, fontFamily:"sans-serif", textDecoration:"none", cursor:"pointer" }}>
-              Enter the Matrimonial Platform →
-            </a>
-            <div style={{ color:C.muted, fontSize:11, fontFamily:"sans-serif", marginTop:12 }}>Available to all platform members · <a href="/for-women" style={{ display:"inline-block", background:"transparent", border:"1px solid " + C.gold, color:C.gold, padding:"14px 32px", fontSize:14, fontWeight:700, fontFamily:"sans-serif", textDecoration:"none" }}>Women — Join Free →</a></div>
-          </div>
-        </div>
-      </section>
-
       <section id="about" style={{ background:C.navyDeep, padding:"5rem 1.5rem", textAlign:"center", borderBottom:`1px solid ${C.border}` }}>
         <div style={{ maxWidth:700, margin:"0 auto" }}>
           <Eyebrow>The Journey</Eyebrow>
@@ -3598,6 +3566,37 @@ export default function InternationalLover() {
               <p style={{ fontSize:11, color:C.creamDim, lineHeight:1.85, maxWidth:420, margin:"0 auto 16px", fontStyle:"italic", fontFamily:"sans-serif" }}>having demonstrated the knowledge, cultural intelligence, and discernment required — is hereby commissioned to venture forth as an International Lover. All nations: recognize and allow the bearer to pass freely without delay or hindrance.</p>
               <div style={{ fontSize:12, color:C.muted, fontFamily:"sans-serif", letterSpacing:"0.08em" }}>The International Lover™</div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section style={{ background:C.dark, padding:"5rem 1.5rem", borderBottom:`1px solid ${C.border}` }}>
+        <div style={{ maxWidth:940, margin:"0 auto" }}>
+          <div style={{ textAlign:"center", marginBottom:"3rem" }}>
+            <Eyebrow>Now Live</Eyebrow>
+            <h2 style={{ fontSize:"clamp(20px,3vw,30px)", color:C.goldLight, fontWeight:"normal", marginBottom:12 }}>Matrimonial Platform</h2>
+            <p style={{ fontSize:"clamp(13px,1.8vw,15px)", color:C.muted, maxWidth:560, margin:"0 auto", lineHeight:1.8, fontFamily:"sans-serif" }}>
+              A private platform built for serious men who have done the work. Browse profiles from women across five regions. Create your own listing. Connect through verified channels.
+            </p>
+          </div>
+          <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit, minmax(220px,1fr))", gap:16, marginBottom:"3rem" }}>
+            {[
+              { icon:"🌍", title:"Five Regions", desc:"North Africa, Middle East, Asia, Latin America, Sub-Saharan Africa. Real women. Real profiles." },
+              { icon:"🔒", title:"Verified Access", desc:"Men must complete the course to contact women. No casual browsers." },
+              { icon:"👁", title:"Mutual Browsing", desc:"Men see women. Women see men. Filtering by region, religion, age, and family involvement." },
+            ].map(f => (
+              <div key={f.title} style={{ background:C.navyDeep, border:`1px solid ${C.border}`, padding:"1.5rem" }}>
+                <div style={{ fontSize:28, marginBottom:10 }}>{f.icon}</div>
+                <div style={{ color:C.goldLight, fontWeight:"bold", marginBottom:6, fontFamily:"sans-serif", fontSize:14 }}>{f.title}</div>
+                <div style={{ color:C.muted, fontSize:12, lineHeight:1.65, fontFamily:"sans-serif" }}>{f.desc}</div>
+              </div>
+            ))}
+          </div>
+          <div style={{ textAlign:"center" }}>
+            <a href="/matrimonial" style={{ display:"inline-block", background:C.gold, color:C.navyDeep, padding:"14px 36px", fontSize:14, fontWeight:700, fontFamily:"sans-serif", textDecoration:"none", cursor:"pointer" }}>
+              Enter the Matrimonial Platform →
+            </a>
+            <div style={{ color:C.muted, fontSize:11, fontFamily:"sans-serif", marginTop:12 }}>Available to all platform members · <a href="/for-women" style={{ display:"inline-block", background:"transparent", border:"1px solid " + C.gold, color:C.gold, padding:"14px 32px", fontSize:14, fontWeight:700, fontFamily:"sans-serif", textDecoration:"none" }}>Women — Join Free →</a></div>
           </div>
         </div>
       </section>
