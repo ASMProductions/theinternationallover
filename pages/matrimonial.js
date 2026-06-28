@@ -81,6 +81,8 @@ export default function MatrimonialPlatform({ userEmail, isAmbassador, isCertifi
   const [messageText, setMessageText] = useState("");
   const [hidden, setHidden] = useState(false);
   const [pendingApprovals, setPendingApprovals] = useState([]);
+  const [allProfiles, setAllProfiles] = useState([]);
+  const [adminTab, setAdminTab] = useState("pending"); // pending | all | myprofile
 
   const canContact = isAmbassador || isCertified;
   const showMen = gender === "woman";
@@ -118,6 +120,15 @@ export default function MatrimonialPlatform({ userEmail, isAmbassador, isCertifi
       const res = await fetch("/api/matrimonial?action=myProfile&email=" + encodeURIComponent(userEmail));
       const data = await res.json();
       if (data.profile) setMyProfile(data.profile);
+    } catch(e) {}
+  };
+
+  const loadAllProfiles = async () => {
+    try {
+      const adminKey = process.env.NEXT_PUBLIC_IL_ADMIN_KEY || sessionStorage.getItem("il_admin_key") || "";
+      const res = await fetch("/api/matrimonial?action=allProfiles&adminKey=" + encodeURIComponent(adminKey));
+      const data = await res.json();
+      setAllProfiles(data.profiles || []);
     } catch(e) {}
   };
 
@@ -292,7 +303,7 @@ export default function MatrimonialPlatform({ userEmail, isAmbassador, isCertifi
           </div>
           {!isMine && (
             <div>
-              {canContact ? (
+              {activeProfile.isVirtual ? null : canContact ? (
                 <button onClick={() => { loadConversation(activeProfile.email); setView("messages"); }} style={{ width:"100%", padding:"14px", background:C.gold, color:C.navyDeep, border:"none", cursor:"pointer", fontSize:13, fontWeight:700, fontFamily:"sans-serif" }}>
                   Send Message →
                 </button>
@@ -472,31 +483,109 @@ export default function MatrimonialPlatform({ userEmail, isAmbassador, isCertifi
 
   // ADMIN VIEW
   if (view === "admin" && isAdmin) {
+    const adminKey = typeof sessionStorage !== "undefined" ? sessionStorage.getItem("il_admin_key") || "" : "";
+    const adminCardStyle = (p) => ({ background:C.navyDeep, border:"1px solid " + C.border, padding:"1rem 1.25rem", marginBottom:10, display:"flex", gap:14, alignItems:"flex-start" });
     return (
       <div style={{ minHeight:"100vh", background:C.dark, color:C.cream, fontFamily:"Georgia,serif" }}>
-        <div style={{ background:C.navyDeep, borderBottom:"1px solid " + C.border, padding:"1rem 1.5rem", display:"flex", alignItems:"center", gap:12 }}>
+        <div style={{ background:C.navyDeep, borderBottom:"1px solid " + C.border, padding:"1rem 1.5rem", display:"flex", alignItems:"center", gap:12, flexWrap:"wrap" }}>
           <button onClick={() => setView("browse")} style={{ background:"none", border:"1px solid " + C.gold, color:C.gold, padding:"6px 14px", cursor:"pointer", fontSize:12, fontFamily:"sans-serif" }}>← Back</button>
-          <div style={{ fontSize:14, color:C.goldLight }}>Matrimonial Admin — Pending Approvals</div>
-          <button onClick={loadPendingApprovals} style={{ marginLeft:"auto", background:C.gold, color:C.navyDeep, border:"none", padding:"6px 14px", cursor:"pointer", fontSize:11, fontFamily:"sans-serif" }}>Refresh</button>
+          <div style={{ fontSize:14, color:C.goldLight }}>Matrimonial Admin</div>
+          <div style={{ display:"flex", gap:6, marginLeft:"auto" }}>
+            {["pending","all","myprofile"].map(t => (
+              <button key={t} onClick={() => {
+                setAdminTab(t);
+                if (t === "pending") loadPendingApprovals();
+                if (t === "all") loadAllProfiles();
+                if (t === "myprofile") loadMyProfile();
+              }} style={{ padding:"6px 14px", background:adminTab===t?C.gold:"transparent", color:adminTab===t?C.navyDeep:C.muted, border:"1px solid "+(adminTab===t?C.gold:C.border), cursor:"pointer", fontSize:11, fontFamily:"sans-serif", fontWeight:adminTab===t?700:400 }}>
+                {t === "pending" ? "Pending" : t === "all" ? "All Profiles" : "My Profile"}
+              </button>
+            ))}
+          </div>
         </div>
-        <div style={{ maxWidth:780, margin:"0 auto", padding:"2rem 1.5rem" }}>
-          {pendingApprovals.length === 0 ? (
-            <div style={{ color:C.muted, textAlign:"center", padding:"3rem", fontFamily:"sans-serif" }}>No pending approvals.</div>
-          ) : pendingApprovals.map(p => (
-            <div key={p.email} style={{ background:C.navyDeep, border:"1px solid " + C.border, padding:"1.25rem", marginBottom:12 }}>
-              <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-start", flexWrap:"wrap", gap:12 }}>
-                <div>
-                  <div style={{ fontSize:15, color:C.goldLight, marginBottom:4 }}>{p.displayName} · {p.age} · {p.city}, {p.country}</div>
-                  <div style={{ fontSize:11, color:C.muted, fontFamily:"sans-serif", marginBottom:8 }}>{p.religion} · {p.familyInvolvement}</div>
-                  <p style={{ fontSize:13, color:C.creamDim, fontFamily:"sans-serif", lineHeight:1.7, maxWidth:480 }}>{p.bio}</p>
+        <div style={{ maxWidth:860, margin:"0 auto", padding:"1.5rem" }}>
+
+          {adminTab === "pending" && (
+            <>
+              {pendingApprovals.length === 0 ? (
+                <div style={{ color:C.muted, textAlign:"center", padding:"3rem", fontFamily:"sans-serif" }}>No pending approvals.</div>
+              ) : pendingApprovals.map(p => (
+                <div key={p.email} style={adminCardStyle(p)}>
+                  {p.photoUrl && <img src={p.photoUrl} alt={p.displayName} style={{ width:80, height:100, objectFit:"cover", objectPosition:"center top", flexShrink:0 }} />}
+                  <div style={{ flex:1 }}>
+                    <div style={{ fontSize:15, color:C.goldLight, marginBottom:3 }}>{p.displayName} · {p.age} · {p.city}, {p.country}</div>
+                    <div style={{ fontSize:11, color:C.muted, fontFamily:"sans-serif", marginBottom:6 }}>{p.email} · {p.religion} · {p.gender}</div>
+                    <p style={{ fontSize:12, color:C.creamDim, fontFamily:"sans-serif", lineHeight:1.7, margin:"0 0 10px" }}>{p.bio}</p>
+                    <div style={{ display:"flex", gap:8 }}>
+                      <button onClick={() => approveProfile(p.email)} style={{ padding:"6px 14px", background:C.green, color:"white", border:"none", cursor:"pointer", fontFamily:"sans-serif", fontSize:11, fontWeight:700 }}>Approve</button>
+                      <button onClick={() => rejectProfile(p.email)} style={{ padding:"6px 14px", background:C.red, color:"white", border:"none", cursor:"pointer", fontFamily:"sans-serif", fontSize:11, fontWeight:700 }}>Reject</button>
+                    </div>
+                  </div>
                 </div>
-                <div style={{ display:"flex", gap:8 }}>
-                  <button onClick={() => approveProfile(p.email)} style={{ padding:"8px 16px", background:C.green, color:"white", border:"none", cursor:"pointer", fontFamily:"sans-serif", fontSize:11, fontWeight:700 }}>Approve</button>
-                  <button onClick={() => rejectProfile(p.email)} style={{ padding:"8px 16px", background:C.red, color:"white", border:"none", cursor:"pointer", fontFamily:"sans-serif", fontSize:11, fontWeight:700 }}>Reject</button>
+              ))}
+            </>
+          )}
+
+          {adminTab === "all" && (
+            <>
+              <div style={{ fontSize:11, color:C.muted, fontFamily:"sans-serif", marginBottom:12 }}>{allProfiles.length} total profiles in Redis</div>
+              {allProfiles.length === 0 && <div style={{ color:C.muted, textAlign:"center", padding:"3rem", fontFamily:"sans-serif" }}>No profiles found.</div>}
+              {allProfiles.map(p => (
+                <div key={p.email} style={adminCardStyle(p)}>
+                  {p.photoUrl && <img src={p.photoUrl} alt={p.displayName} style={{ width:72, height:90, objectFit:"cover", objectPosition:"center top", flexShrink:0 }} />}
+                  <div style={{ flex:1 }}>
+                    <div style={{ display:"flex", gap:8, alignItems:"center", marginBottom:4, flexWrap:"wrap" }}>
+                      <span style={{ fontSize:14, color:C.goldLight }}>{p.displayName}</span>
+                      <span style={{ fontSize:10, color:p.approved?C.green:C.red, fontFamily:"sans-serif", border:"1px solid "+(p.approved?C.green:C.red), padding:"1px 6px" }}>{p.approved?"APPROVED":"PENDING"}</span>
+                      <span style={{ fontSize:10, color:C.muted, fontFamily:"sans-serif" }}>{p.gender}</span>
+                      {p.hidden && <span style={{ fontSize:10, color:C.red, fontFamily:"sans-serif" }}>HIDDEN</span>}
+                      {p.isFounder && <span style={{ fontSize:10, color:C.gold, fontFamily:"sans-serif" }}>FOUNDER</span>}
+                      {p.isAmbassador && <span style={{ fontSize:10, color:C.gold, fontFamily:"sans-serif" }}>AMBASSADOR</span>}
+                    </div>
+                    <div style={{ fontSize:11, color:C.muted, fontFamily:"sans-serif", marginBottom:6 }}>{p.email} · {p.age} · {p.city}</div>
+                    <p style={{ fontSize:11, color:C.creamDim, fontFamily:"sans-serif", lineHeight:1.6, margin:"0 0 10px" }}>{(p.bio||"").slice(0,120)}{p.bio && p.bio.length > 120 ? "..." : ""}</p>
+                    <div style={{ display:"flex", gap:6, flexWrap:"wrap" }}>
+                      {!p.approved && <button onClick={() => approveProfile(p.email)} style={{ padding:"4px 10px", background:C.green, color:"white", border:"none", cursor:"pointer", fontFamily:"sans-serif", fontSize:10 }}>Approve</button>}
+                      {p.approved && <button onClick={() => rejectProfile(p.email)} style={{ padding:"4px 10px", background:C.red, color:"white", border:"none", cursor:"pointer", fontFamily:"sans-serif", fontSize:10 }}>Delete</button>}
+                    </div>
+                  </div>
                 </div>
-              </div>
+              ))}
+            </>
+          )}
+
+          {adminTab === "myprofile" && (
+            <div>
+              {!myProfile ? (
+                <div style={{ color:C.muted, textAlign:"center", padding:"3rem", fontFamily:"sans-serif" }}>
+                  No profile found for {userEmail}.
+                  <div style={{ marginTop:16 }}>
+                    <button onClick={() => setView("create")} style={{ background:C.gold, color:C.navyDeep, border:"none", padding:"8px 18px", cursor:"pointer", fontFamily:"sans-serif", fontSize:12, fontWeight:700 }}>Create Profile</button>
+                  </div>
+                </div>
+              ) : (
+                <div style={{ background:C.navyDeep, border:"1px solid " + C.gold, padding:"1.5rem" }}>
+                  <div style={{ display:"flex", gap:16, alignItems:"flex-start", marginBottom:"1rem" }}>
+                    {myProfile.photoUrl && <img src={myProfile.photoUrl} alt={myProfile.displayName} style={{ width:100, height:130, objectFit:"cover", objectPosition:"center top", flexShrink:0, border:"2px solid " + C.gold }} />}
+                    <div>
+                      <div style={{ fontSize:18, color:C.goldLight, marginBottom:4 }}>{myProfile.displayName}</div>
+                      <div style={{ fontSize:12, color:C.muted, fontFamily:"sans-serif", marginBottom:4 }}>{myProfile.email}</div>
+                      <div style={{ fontSize:12, color:C.muted, fontFamily:"sans-serif", marginBottom:4 }}>{myProfile.age} · {myProfile.city}, {myProfile.country}</div>
+                      <div style={{ fontSize:12, color:C.muted, fontFamily:"sans-serif", marginBottom:8 }}>{myProfile.religion} · {myProfile.gender}</div>
+                      <div style={{ display:"flex", gap:6, flexWrap:"wrap" }}>
+                        <span style={{ fontSize:10, color:myProfile.approved?C.green:C.red, border:"1px solid "+(myProfile.approved?C.green:C.red), padding:"2px 8px", fontFamily:"sans-serif" }}>{myProfile.approved?"APPROVED":"PENDING"}</span>
+                        {myProfile.isFounder && <span style={{ fontSize:10, color:C.gold, border:"1px solid "+C.gold, padding:"2px 8px", fontFamily:"sans-serif" }}>FOUNDER</span>}
+                        {myProfile.isAmbassador && <span style={{ fontSize:10, color:C.gold, border:"1px solid "+C.gold, padding:"2px 8px", fontFamily:"sans-serif" }}>AMBASSADOR</span>}
+                        {myProfile.hidden && <span style={{ fontSize:10, color:C.red, border:"1px solid "+C.red, padding:"2px 8px", fontFamily:"sans-serif" }}>HIDDEN</span>}
+                      </div>
+                    </div>
+                  </div>
+                  <p style={{ fontSize:13, color:C.creamDim, fontFamily:"sans-serif", lineHeight:1.8 }}>{myProfile.bio}</p>
+                </div>
+              )}
             </div>
-          ))}
+          )}
+
         </div>
       </div>
     );
@@ -508,7 +597,7 @@ export default function MatrimonialPlatform({ userEmail, isAmbassador, isCertifi
       <div style={{ background:C.navyDeep, borderBottom:"1px solid " + C.border, padding:"1rem 1.5rem", display:"flex", alignItems:"center", justifyContent:"space-between", flexWrap:"wrap", gap:10 }}>
         <div style={{ fontSize:15, color:C.goldLight }}>The International Lover™ — Matrimonial</div>
         <div style={{ display:"flex", gap:8, flexWrap:"wrap" }}>
-          {isAdmin && <button onClick={() => { loadPendingApprovals(); setView("admin"); }} style={{ background:"none", border:"1px solid " + C.gold, color:C.gold, padding:"6px 12px", cursor:"pointer", fontSize:11, fontFamily:"sans-serif" }}>Admin</button>}
+          {isAdmin && <button onClick={() => { setAdminTab("all"); loadAllProfiles(); loadMyProfile(); setView("admin"); }} style={{ background:"none", border:"1px solid " + C.gold, color:C.gold, padding:"6px 12px", cursor:"pointer", fontSize:11, fontFamily:"sans-serif" }}>Admin</button>}
           <button onClick={() => setView("messages")} style={{ background:"none", border:"1px solid " + C.border, color:C.muted, padding:"6px 12px", cursor:"pointer", fontSize:11, fontFamily:"sans-serif" }}>Messages</button>
           {!myProfile ? (
             <button onClick={() => setView("create")} style={{ background:C.gold, color:C.navyDeep, border:"none", padding:"6px 14px", cursor:"pointer", fontSize:11, fontWeight:700, fontFamily:"sans-serif" }}>Create Profile</button>
@@ -563,6 +652,9 @@ export default function MatrimonialPlatform({ userEmail, isAmbassador, isCertifi
                   <img src={p.photoUrl} alt={p.displayName} style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center top" }} />
                 ) : (
                   <div style={{ width:"100%", height:"100%", display:"flex", alignItems:"center", justifyContent:"center", fontSize:48, color:C.border }}>◈</div>
+                )}
+                {p.isVirtual && (
+                  <div style={{ position:"absolute", top:8, left:8, background:"rgba(10,20,50,0.85)", border:"1px solid #4a6fa5", color:"#7aa0d0", fontSize:7, fontWeight:700, padding:"2px 6px", fontFamily:"sans-serif", letterSpacing:"0.08em" }}>VIRTUAL PROFILE</div>
                 )}
                 {p.isFounder && (
                   <div style={{ position:"absolute", top:8, right:8, background:C.navyDeep, border:"1px solid " + C.gold, color:C.gold, fontSize:7, fontWeight:700, padding:"2px 6px", fontFamily:"sans-serif" }}>FOUNDER</div>
