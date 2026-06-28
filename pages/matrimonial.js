@@ -11,12 +11,12 @@ const C = {
 
 const REGIONS = [
   { id:"all", label:"All Regions" },
-  { id:"north_africa", label:"North Africa" },
-  { id:"middle_east", label:"Middle East" },
-  { id:"asia", label:"Asia" },
-  { id:"latin_america", label:"Latin America" },
-  { id:"sub_saharan", label:"Sub-Saharan Africa" },
-  { id:"north_america", label:"North America / USA" },
+  { id:"us", label:"North America / USA" },
+  { id:"na", label:"North Africa" },
+  { id:"me", label:"Middle East" },
+  { id:"as", label:"Asia" },
+  { id:"la", label:"Latin America" },
+  { id:"ss", label:"Sub-Saharan Africa" },
 ];
 
 const RELIGIONS = ["All", "Islam", "Christianity", "Orthodox Christianity", "Catholicism", "Other"];
