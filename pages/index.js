@@ -3133,11 +3133,7 @@ export default function InternationalLover() {
     if (FREE_CODES[upper]) {
       if (ADMIN_CODES[upper] && typeof window !== "undefined") {
         sessionStorage.setItem("il_admin_session", "true");
-        // Fetch and store the actual admin key for API calls
-        fetch("/api/admin-token?code=" + upper)
-          .then(r => r.json())
-          .then(d => { if (d.key) sessionStorage.setItem("il_admin_key", d.key); })
-          .catch(() => {});
+        sessionStorage.setItem("il_email", "amin@theinternationallover.com");
       }
       grantAccess(); return;
     }
