@@ -59,7 +59,7 @@ const Textarea = ({ label, value, onChange, rows=4, placeholder="" }) => (
 );
 
 
-export default function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isAdmin }) {
+function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isAdmin }) {
   const [profiles, setProfiles] = useState([]);
   const [filtered, setFiltered] = useState([]);
   const [view, setView] = useState("browse"); // browse | profile | create | messages | admin
@@ -134,7 +134,8 @@ export default function MatrimonialPlatform({ userEmail, isAmbassador, isCertifi
 
   const loadPendingApprovals = async () => {
     try {
-      const res = await fetch("/api/matrimonial?action=pending&adminKey=" + (process.env.NEXT_PUBLIC_IL_ADMIN_HINT || ""));
+      const adminKey = typeof sessionStorage !== "undefined" ? sessionStorage.getItem("il_admin_key") || "" : "";
+      const res = await fetch("/api/matrimonial?action=pending&adminKey=" + encodeURIComponent(adminKey));
       const data = await res.json();
       setPendingApprovals(data.profiles || []);
     } catch(e) {}
@@ -225,7 +226,7 @@ export default function MatrimonialPlatform({ userEmail, isAmbassador, isCertifi
       await fetch("/api/matrimonial", {
         method:"POST",
         headers:{"Content-Type":"application/json"},
-        body: JSON.stringify({ action:"approve", adminKey:"IL_ADMIN_FROM_ENV", email:profileEmail })
+        body: JSON.stringify({ action:"approve", adminKey: typeof sessionStorage !== "undefined" ? sessionStorage.getItem("il_admin_key") || "" : "", email:profileEmail })
       });
       setPendingApprovals(prev => prev.filter(p => p.email !== profileEmail));
     } catch(e) {}
@@ -236,7 +237,7 @@ export default function MatrimonialPlatform({ userEmail, isAmbassador, isCertifi
       await fetch("/api/matrimonial", {
         method:"POST",
         headers:{"Content-Type":"application/json"},
-        body: JSON.stringify({ action:"reject", adminKey:"IL_ADMIN_FROM_ENV", email:profileEmail })
+        body: JSON.stringify({ action:"reject", adminKey: typeof sessionStorage !== "undefined" ? sessionStorage.getItem("il_admin_key") || "" : "", email:profileEmail })
       });
       setPendingApprovals(prev => prev.filter(p => p.email !== profileEmail));
     } catch(e) {}
@@ -680,4 +681,33 @@ export default function MatrimonialPlatform({ userEmail, isAmbassador, isCertifi
   );
 }
 
+export default function MatrimonialPage() {
+  const [ready, setReady] = useState(false);
+  const [session, setSession] = useState({
+    userEmail: "",
+    gender: "man",
+    isAdmin: false,
+    isAmbassador: false,
+    isCertified: false,
+  });
 
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const email = sessionStorage.getItem("il_email") || "";
+    const adminSession = sessionStorage.getItem("il_admin_session") === "true";
+    const gender = sessionStorage.getItem("il_gender") || "man";
+    const isAmbassador = sessionStorage.getItem("il_ambassador") === "true";
+    const isCertified = sessionStorage.getItem("il_certified") === "true";
+    const isAdmin = adminSession || email === "amin@theinternationallover.com";
+    setSession({ userEmail: email, gender, isAdmin, isAmbassador, isCertified });
+    setReady(true);
+  }, []);
+
+  if (!ready) return (
+    <div style={{ minHeight:"100vh", background:"#091a35", display:"flex", alignItems:"center", justifyContent:"center" }}>
+      <div style={{ color:"#b8963e", fontFamily:"Georgia,serif", fontSize:14 }}>Loading...</div>
+    </div>
+  );
+
+  return <MatrimonialPlatform {...session} />;
+}

@@ -10,6 +10,7 @@ const C = {
 };
 
 const FREE_CODES = { "ILACCESS": true, "ADMINTEST": true };
+const ADMIN_CODES = { "ADMINTEST": true };
 
 const TIMED_CODES = {
   "BUDDYPASS": 24,
@@ -3118,7 +3119,10 @@ export default function InternationalLover() {
     try {
       const res = await fetch("/api/send-magic-link", { method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify({ email:email.trim().toLowerCase() }) });
       const data = await res.json();
-      if (data.sent) setMsg("Your access link has been sent to " + email + ". Check your inbox.");
+      if (data.sent) {
+        if (typeof window !== "undefined") sessionStorage.setItem("il_email", email.trim().toLowerCase());
+        setMsg("Your access link has been sent to " + email + ". Check your inbox.");
+      }
       else setMsg(data.error || "No purchase found. Please enroll below or use your access code.");
     } catch { setMsg("Connection error. Please try again."); }
     finally { setSending(false); }
@@ -3126,7 +3130,17 @@ export default function InternationalLover() {
 
   const handleCodeSubmit = async () => {
     const upper = code.trim().toUpperCase();
-    if (FREE_CODES[upper]) { grantAccess(); return; }
+    if (FREE_CODES[upper]) {
+      if (ADMIN_CODES[upper] && typeof window !== "undefined") {
+        sessionStorage.setItem("il_admin_session", "true");
+        // Fetch and store the actual admin key for API calls
+        fetch("/api/admin-token?code=" + upper)
+          .then(r => r.json())
+          .then(d => { if (d.key) sessionStorage.setItem("il_admin_key", d.key); })
+          .catch(() => {});
+      }
+      grantAccess(); return;
+    }
     if (typeof window !== "undefined" && checkTimedCode(upper)) {
       const hours = TIMED_CODES[upper];
       sessionStorage.setItem("il_access", "true");
