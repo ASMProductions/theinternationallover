@@ -534,9 +534,18 @@ const VIRTUAL_WOMEN = [
 ];
 
 export default async function handler(req, res) {
-  // Support both GET (with key param) and POST (with adminKey in body)
-  const key = req.method === "POST" ? req.body?.adminKey : req.query.key;
-  if (key !== process.env.IL_ADMIN_KEY) return res.status(403).json({ error: "Forbidden" });
+  // Accept either:
+  // - POST with { adminCode: "ADMINTEST" } — from the admin panel button
+  // - GET with ?code=ADMINTEST — from browser address bar
+  const code = req.method === "POST"
+    ? (req.body?.adminCode || req.body?.adminKey)
+    : (req.query.code || req.query.key);
+
+  // Valid if: code is "ADMINTEST", OR code matches IL_ADMIN_KEY env var
+  const validCode = code === "ADMINTEST" ||
+    (process.env.IL_ADMIN_KEY && code === process.env.IL_ADMIN_KEY);
+
+  if (!validCode) return res.status(403).json({ error: "Forbidden" });
 
   const results = [];
   for (const w of VIRTUAL_WOMEN) {
