@@ -2483,7 +2483,10 @@ const REGIONS_COURSE = [
     ],
     endings:{
       success:"US Region — complete. The same standard as every other region. You held it.",
-      not_yet:"NOT YET: The correct deferral. Come back when the foundation is ready.",
+      not_yet:"NOT YET: She was sincere. The foundation was not yet ready. Come back in two years.",
+      genuine_wrong:"NOT YET — Correct Deferral: She was real and sincere. The timing was not right. The man who can see this and defer with respect has demonstrated the highest form of discernment on this platform.",
+      cultural_fail:"US Region — Cultural Misnavigation: The preparation was insufficient. Study the US region resource module before returning.",
+      early_detect:"US Region — Correct Walkaway: You identified the pattern early. Arc complete.",
     }
   },
   { id:"na", label:"North Africa", color:"#c8963e", desc:"Morocco · Tunisia · Algeria · Egypt",
@@ -2729,12 +2732,14 @@ function CourseView({ onBack }) {
     // Determine outcome based on selected woman and choices
     if (region && selectedWoman) {
       const woman = region.women.find(w => w.id === selectedWoman);
+      if (!woman) return;
       // Simple outcome logic based on woman type and choice patterns
       const newHistory = [...choiceHistory, choice];
       if (newHistory.length >= 2) {
         let ending = "success";
         if (woman.type === "fraud") ending = Math.random() > 0.4 ? "fraud_post" : "fraud_pre";
         else if (woman.type === "genuine_wrong") ending = Math.random() > 0.5 ? "cultural_fail" : "early_detect";
+        else if (woman.type === "not_yet") ending = "genuine_wrong";
         else ending = Math.random() > 0.7 ? "cultural_fail" : "success";
         setOutcome(ending);
         setPhase("outcome");
@@ -2790,7 +2795,7 @@ function CourseView({ onBack }) {
         <div style={{ background:"#0f2347", borderBottom:"1px solid #1e3a6e", padding:"1rem 1.5rem", display:"flex", alignItems:"center", justifyContent:"space-between", flexWrap:"wrap", gap:8 }}>
           <button onClick={onBack} style={{ background:"none", border:"1px solid #b8963e", color:"#b8963e", padding:"6px 14px", borderRadius:"20px", cursor:"pointer", fontSize:"13px", fontFamily:"sans-serif" }}>← Library</button>
           <div style={{ color:"#d4af6a", fontSize:15 }}>Select Your Destination</div>
-          <div style={{ fontSize:10, color:"#8a7a5a", fontFamily:"sans-serif" }}>{stampedRegions.length} / 5 regions stamped</div>
+          <div style={{ fontSize:10, color:"#8a7a5a", fontFamily:"sans-serif" }}>{stampedRegions.length} / 6 regions stamped</div>
         </div>
         <div style={{ maxWidth:860, margin:"0 auto", padding:"2.5rem 1.5rem" }}>
           <div style={{ textAlign:"center", marginBottom:"2rem" }}>
@@ -2808,7 +2813,7 @@ function CourseView({ onBack }) {
                 </div>
               ))}
             </div>
-            {stampedRegions.length === 5 && (
+            {stampedRegions.length === 6 && (
               <button onClick={() => setPhase("certificate")} style={{ marginTop:12, padding:"10px 24px", background:"#b8963e", color:"#0f2347", border:"none", cursor:"pointer", fontSize:12, fontWeight:700, fontFamily:"sans-serif", letterSpacing:"0.1em" }}>
                 Claim Your Certificate →
               </button>
@@ -2941,13 +2946,14 @@ function CourseView({ onBack }) {
 
   // OUTCOME
   if (phase === "outcome" && region && outcome) {
-    const endingText = region.endings[outcome];
+    const endingText = (region.endings && region.endings[outcome]) || "";
     const endingLabels = {
       success:"I — Successful Marriage",
       early_detect:"II — Failed Vetting — Pre-Travel",
       cultural_fail:"III — Failed Relationship — Cultural Misnavigation",
       fraud_pre:"IV — Fraudulent Marriage — Pre-Citizenship",
       fraud_post:"V — Fraudulent Marriage — Post-Citizenship",
+      genuine_wrong:"III — Not Yet — Correct Deferral",
     };
     const endingColors = {
       success:"#b8963e",
@@ -2955,6 +2961,7 @@ function CourseView({ onBack }) {
       cultural_fail:"#8a7a5a",
       fraud_pre:"#8b1a1a",
       fraud_post:"#6b0f0f",
+      genuine_wrong:"#4a7c8a",
     };
 
     return (
