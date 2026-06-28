@@ -56,6 +56,7 @@ const REGIONS = [
   { id:"as", label:"Asia",               desc:"Indonesia · Philippines · Bangladesh" },
   { id:"la", label:"Latin America",      desc:"Colombia · Dominican Republic · Peru" },
   { id:"ss", label:"Sub-Saharan Africa", desc:"Senegal · Ghana · Ethiopia · Kenya" },
+  { id:"us", label:"North America",      desc:"United States — All Backgrounds" },
 ];
 
 const RESOURCES = [
@@ -2596,6 +2597,58 @@ const REGIONS_COURSE = [
       fraud_post:"The citizenship was the goal. The marriage was the instrument. After naturalization, the departure was organized and deliberate. The children remained. This ending is documented — not hypothetical. The debrief focuses on the signals that were present from the beginning, available to be read, and not read.",
     }
   },
+  {
+    id:"us", label:"North America", desc:"United States — All Backgrounds",
+    context:"She chose a different standard. Whatever she came from — mosque, church, temple, or simply the decision that the culture around her was not enough — she made a choice that most women around her did not make. This region is about recognizing that choice, meeting her on her terms, and bringing the same preparation to her door that you would bring to a door in Fez or Dakar.",
+    women:[
+      { id:"aisha", photo:"/women/aisha.jpg", name:"Aisha", age:27, city:"Atlanta, Georgia", education:"Bachelor's, Education", religion:"Muslim", platform:"theinternationallover.com",
+        profileText:"Born Muslim. My father was one of the first men in his neighborhood to take shahada in the 1980s. I have been waiting for a man who understands what that means — not as a talking point, but as a way of life.",
+        hidden:"Her father's standing in the community means any man she introduces is immediately visible to forty years of community relationships. The Friday Jumu'ah is not optional.",
+        signal:"She asks precise questions and does not accept vague answers. The precision is the standard, not the obstacle.",
+        endings:{ success:"You navigated her father's three questions, the community, and the masjid. Atlanta — complete." }
+      },
+      { id:"deborah", photo:"/women/deborah.jpg", name:"Deborah", age:29, city:"Washington D.C.", education:"Master's, Public Policy", religion:"Hebrew Israelite", platform:"theinternationallover.com",
+        profileText:"I keep the law. Not as a cultural inheritance I tolerate — as a living practice I have chosen as an adult. The Sabbath is not negotiable. The feasts are observed. I am looking for a man who can hold his own ground while respecting the ground I stand on.",
+        hidden:"Her elder's word is final. The community has been watching for decades. A man who comes correctly is received warmly — the warmth is just on the other side of the assessment.",
+        signal:"She keeps the Sabbath. The silence Friday evening is not a problem to solve.",
+        endings:{ success:"The elder said you can be taught. The pastor stood beside the elder. D.C. — complete." }
+      },
+      { id:"kezia", photo:"/women/kezia.jpg", name:"Kezia", age:26, city:"Houston, Texas", education:"Bachelor's, Nursing", religion:"Christian", platform:"theinternationallover.com",
+        profileText:"Not a cultural Christian. I read. I fast. I tithe because I decided to. My church is my community in the way that most people's workplaces are their community — completely. I am waiting for a man who has a relationship with God that is his own, not borrowed from someone else.",
+        hidden:"Her brother is quiet and watching. Her pastor's assessment carries the same weight as her father's. The Sunday service is part of the evaluation.",
+        signal:"Her brother said almost nothing at the airport. A quiet man who is watching is not passive.",
+        endings:{ success:"Her brother stepped forward to stand beside you. The pastor said consistent. Houston — complete." }
+      },
+      { id:"marisol", photo:"/women/marisol.jpg", name:"Marisol", age:28, city:"Chicago, Illinois", education:"Bachelor's, Social Work", religion:"Catholic", platform:"theinternationallover.com",
+        profileText:"Mexican-American. Third generation. My grandmother came from Jalisco and she is still the head of this family. My faith is woven into everything we do. I am not looking for a Catholic man specifically. I am looking for a man who understands what it means to enter a family that has been building something for three generations.",
+        hidden:"The grandmother is the decision. Her parents know it, the family knows it, and the man who comes correctly knows it before he arrives.",
+        signal:"She mentions her grandmother constantly. This is the most important information she is giving you.",
+        endings:{ success:"The grandmother saved the dress. The priest has known her since her baptism. Chicago — complete." }
+      },
+      { id:"samira", photo:"/women/samira.jpg", name:"Samira", age:25, city:"Miami, Florida", education:"Bachelor's, Public Health", religion:"Islam (revert)", platform:"theinternationallover.com",
+        profileText:"Puerto Rican. I took shahada four years ago. My family is Catholic. My faith is real — tested, chosen, and maintained against the current of my own culture. I am not fragile about it. I am the most grounded I have ever been. I teach the new sisters at my masjid because I know what they need and no one was there to give it to me.",
+        hidden:"She teaches at the masjid. She has not mentioned it on the profile. The community knows her standing. A man who discovers this on his own has paid attention.",
+        signal:"She will tell you the cost of her reversion without being asked. That honesty is itself the test.",
+        endings:{ success:"The imam watched her build something real. The quinceañera dress. Miami — complete." }
+      },
+      { id:"nour_us", photo:"/women/nour-us.jpg", name:"Nour", age:27, city:"Dearborn, Michigan", education:"Bachelor's, Business", religion:"Islam", platform:"theinternationallover.com",
+        profileText:"Born in Dearborn. My parents came from Lebanon. I am American in my fluency and Arab in my framework. If you know what a Lebanese family meeting looks like, say so. If you do not, I would rather know now than later.",
+        hidden:"The family gathering includes extended community who have an unofficial but real vote. The elder at the community dinner has known the family for twenty-five years.",
+        signal:"She asked if you know what marrying into a Lebanese family means. Answer specifically — not generically.",
+        endings:{ success:"Her father's voice when he gave consent. Thirty years of that masjid behind it. Dearborn — complete." }
+      },
+      { id:"rachel", photo:"/women/rachel.jpg", name:"Rachel", age:26, city:"Portland, Oregon", education:"Bachelor's, Education", religion:"Islam (revert)", platform:"theinternationallover.com",
+        profileText:"I took shahada eighteen months ago. My practice is sincere. I am building my community. My family has been distant since the conversion. I am on this platform because I am serious about marriage and I am serious about my faith and I believe those two things belong together.",
+        hidden:"The correct ending for this arc is not immediate success. It is deferral — not yet — followed by yes when the foundation is ready. A man who can tell the difference between the right woman at the wrong time and the wrong woman at any time has understood this platform.",
+        signal:"She talks about the future with specificity before her present is fully built. This is the signal. It is not a flaw — it is information.",
+        endings:{ not_yet:"She built the foundation. Eighteen months later she sent the proof. The deferral became yes. Portland — complete.", success:"She built what needed to be built. The correct answer changed over time. Arc complete." }
+      },
+    ],
+    endings:{
+      success:"US Region — complete. The same standard as every other region. You held it.",
+      not_yet:"NOT YET: The correct deferral. Come back when the foundation is ready.",
+    }
+  },
 ];
 
 const COURSE_PHASES = ["intro", "roster", "scenario", "outcome", "debrief", "certificate"];
@@ -3402,7 +3455,7 @@ export default function InternationalLover() {
               ].map(w => (
                 <div key={w.id} style={{ background:C.navyDeep, border:`1px solid ${C.border}`, overflow:"hidden" }}>
                   <div style={{ height:200, overflow:"hidden" }}>
-                    <img src={"/women/" + w.id + ".jpg"} alt={w.name} style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center top", display:"block" }} />
+                    <img src={w.photo || ("/women/" + w.id.replace(/_/g, "-") + ".jpg")} alt={w.name} style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center top", display:"block" }} />
                   </div>
                   <div style={{ padding:"0.75rem" }}>
                     <div style={{ fontSize:13, color:C.goldLight, fontFamily:"Georgia,serif", marginBottom:2 }}>{w.name}</div>
@@ -3421,7 +3474,7 @@ export default function InternationalLover() {
               ].map(w => (
                 <div key={w.id} style={{ background:C.navyDeep, border:`1px solid ${C.border}`, overflow:"hidden" }}>
                   <div style={{ height:200, overflow:"hidden" }}>
-                    <img src={"/women/" + w.id + ".jpg"} alt={w.name} style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center top", display:"block" }} />
+                    <img src={w.photo || ("/women/" + w.id.replace(/_/g, "-") + ".jpg")} alt={w.name} style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center top", display:"block" }} />
                   </div>
                   <div style={{ padding:"0.75rem" }}>
                     <div style={{ fontSize:13, color:C.goldLight, fontFamily:"Georgia,serif", marginBottom:2 }}>{w.name}</div>
@@ -3440,7 +3493,7 @@ export default function InternationalLover() {
               ].map(w => (
                 <div key={w.id} style={{ background:C.navyDeep, border:`1px solid ${C.border}`, overflow:"hidden" }}>
                   <div style={{ height:200, overflow:"hidden" }}>
-                    <img src={"/women/" + w.id + ".jpg"} alt={w.name} style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center top", display:"block" }} />
+                    <img src={w.photo || ("/women/" + w.id.replace(/_/g, "-") + ".jpg")} alt={w.name} style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center top", display:"block" }} />
                   </div>
                   <div style={{ padding:"0.75rem" }}>
                     <div style={{ fontSize:13, color:C.goldLight, fontFamily:"Georgia,serif", marginBottom:2 }}>{w.name}</div>
@@ -3459,7 +3512,7 @@ export default function InternationalLover() {
               ].map(w => (
                 <div key={w.id} style={{ background:C.navyDeep, border:`1px solid ${C.border}`, overflow:"hidden" }}>
                   <div style={{ height:200, overflow:"hidden" }}>
-                    <img src={"/women/" + w.id + ".jpg"} alt={w.name} style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center top", display:"block" }} />
+                    <img src={w.photo || ("/women/" + w.id.replace(/_/g, "-") + ".jpg")} alt={w.name} style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center top", display:"block" }} />
                   </div>
                   <div style={{ padding:"0.75rem" }}>
                     <div style={{ fontSize:13, color:C.goldLight, fontFamily:"Georgia,serif", marginBottom:2 }}>{w.name}</div>
@@ -3478,7 +3531,7 @@ export default function InternationalLover() {
               ].map(w => (
                 <div key={w.id} style={{ background:C.navyDeep, border:`1px solid ${C.border}`, overflow:"hidden" }}>
                   <div style={{ height:200, overflow:"hidden" }}>
-                    <img src={"/women/" + w.id + ".jpg"} alt={w.name} style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center top", display:"block" }} />
+                    <img src={w.photo || ("/women/" + w.id.replace(/_/g, "-") + ".jpg")} alt={w.name} style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center top", display:"block" }} />
                   </div>
                   <div style={{ padding:"0.75rem" }}>
                     <div style={{ fontSize:13, color:C.goldLight, fontFamily:"Georgia,serif", marginBottom:2 }}>{w.name}</div>
