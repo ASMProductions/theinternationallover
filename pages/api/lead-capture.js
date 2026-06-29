@@ -39,6 +39,13 @@ export default async function handler(req, res) {
     body: JSON.stringify({ value: "true" }),
   });
 
+  // Store gender so future magic links route correctly
+  await fetch(`${redisUrl}/set/il:gender:${email}`, {
+    method: "POST",
+    headers: { Authorization: `Bearer ${redisToken}`, "Content-Type": "application/json" },
+    body: JSON.stringify({ value: "woman" }),
+  });
+
   // Generate magic link token — same format as masterylevelfasting
   const token = crypto.randomBytes(32).toString("hex");
   const expiry = Date.now() + 15 * 60 * 1000;
