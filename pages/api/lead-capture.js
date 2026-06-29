@@ -1,5 +1,6 @@
 import { Redis } from "@upstash/redis";
 import crypto from "crypto";
+import nodemailer from "nodemailer";
 
 const redis = new Redis({
   url: process.env.UPSTASH_REDIS_REST_URL,
@@ -9,8 +10,7 @@ const redis = new Redis({
 export const config = { api: { bodyParser: true } };
 
 async function sendAccessEmail(to, name, magicLink) {
-  const nodemailer = await import("nodemailer");
-  const transporter = nodemailer.default.createTransport({
+  const transporter = nodemailer.createTransport({
     host: process.env.SMTP_HOST,
     port: parseInt(process.env.SMTP_PORT || "465"),
     secure: true,
@@ -56,14 +56,12 @@ export default async function handler(req, res) {
   }
 
   try {
-    // Save lead record
+    // Save lead
     const leadKey = "il:lead:" + email.replace(/[^a-z0-9]/g, "_");
-    await redis.set(leadKey, JSON.stringify({
-      email, name, source, approved: true, createdAt: Date.now()
-    }));
+    await redis.set(leadKey, JSON.stringify({ email, name, source, approved: true, createdAt: Date.now() }));
     await redis.lpush("il:leads:index", email);
 
-    // Grant women's access
+    // Grant access
     await redis.set(`il:paid:${email}`, "true");
 
     // Generate magic link
@@ -72,10 +70,16 @@ export default async function handler(req, res) {
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://theinternationallover.com";
     const magicLink = `${baseUrl}/api/verify-magic-link?token=${token}&type=women`;
 
-    // Send email — await it so we know if it worked
-    await sendAccessEmail(email, name, magicLink);
+    // Send email
+    try {
+      await sendAccessEmail(email, name, magicLink);
+    } catch(emailErr) {
+      // Log but don't fail — access is already granted
+      console.error("Email send failed:", emailErr.message);
+    }
 
     return res.status(200).json({ ok: true });
+
   } catch(e) {
     console.error("lead-capture error:", e);
     return res.status(500).json({ error: String(e) });
