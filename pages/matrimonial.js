@@ -87,6 +87,7 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
   const [ambassadors, setAmbassadors] = useState([]);
   const [newAmbForm, setNewAmbForm] = useState({ name:"", email:"", note:"" });
   const [newAmbResult, setNewAmbResult] = useState("");
+  const [leads, setLeads] = useState([]);
 
   const canContact = isAmbassador || isCertified;
   const showMen = gender === "woman";
@@ -249,6 +250,31 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
         alert(data.error || "Seed failed.");
       }
     } catch(e) { alert("Error seeding founder profile."); }
+  };
+
+  const loadLeads = async () => {
+    try {
+      const res = await fetch("/api/approve-lead?action=list&code=ADMINTEST");
+      const data = await res.json();
+      setLeads(data.leads || []);
+    } catch(e) {}
+  };
+
+  const approveLead = async (email) => {
+    try {
+      const res = await fetch("/api/approve-lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ adminCode: "ADMINTEST", email })
+      });
+      const data = await res.json();
+      if (data.ok) {
+        alert("Approved — access email sent to " + email);
+        setLeads(prev => prev.map(l => l.email === email ? {...l, approved:true} : l));
+      } else {
+        alert("Error: " + (data.error || "Failed"));
+      }
+    } catch(e) { alert("Error approving lead."); }
   };
 
   const loadPendingApprovals = async () => {
@@ -613,6 +639,7 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
       { id:"profiles", label:"Profiles" },
       { id:"consulate", label:"Consulate" },
       { id:"ambassadors", label:"Ambassadors" },
+      { id:"leads", label:"Leads" },
       { id:"myprofile", label:"My Profile" },
     ];
     return (
@@ -628,6 +655,7 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
                 if (t.id === "profiles") { loadAllProfiles(); loadPendingApprovals(); }
                 if (t.id === "consulate") loadConsulatePosts();
                 if (t.id === "ambassadors") loadAmbassadors();
+                if (t.id === "leads") loadLeads();
                 if (t.id === "myprofile") loadMyProfile();
               }} style={{ padding:"6px 14px", background:adminTab===t.id?C.gold:"transparent", color:adminTab===t.id?C.navyDeep:C.muted, border:"1px solid "+(adminTab===t.id?C.gold:C.border), cursor:"pointer", fontSize:11, fontFamily:"sans-serif", fontWeight:adminTab===t.id?700:400 }}>
                 {t.label}
@@ -755,6 +783,33 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
                     </div>
                   </div>
                   <button onClick={() => revokeAmbassador(a.code)} style={{ padding:"6px 14px", background:"transparent", color:C.red, border:"1px solid " + C.red, cursor:"pointer", fontFamily:"sans-serif", fontSize:11, flexShrink:0 }}>Revoke</button>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* ── LEADS ── */}
+          {adminTab === "leads" && (
+            <div>
+              <div style={{ fontSize:9, letterSpacing:"0.2em", color:C.muted, fontFamily:"sans-serif", marginBottom:16 }}>WOMEN REGISTRATIONS — {leads.length} total</div>
+              {leads.length === 0 && <div style={{ color:C.muted, textAlign:"center", padding:"3rem", fontFamily:"sans-serif" }}>No registrations yet.</div>}
+              {leads.map(lead => (
+                <div key={lead.email} style={{ background:C.navyDeep, border:"1px solid " + (lead.approved ? C.green : C.border), padding:"1rem 1.25rem", marginBottom:10, display:"flex", justifyContent:"space-between", alignItems:"center", flexWrap:"wrap", gap:12 }}>
+                  <div>
+                    <div style={{ display:"flex", gap:8, alignItems:"center", marginBottom:4 }}>
+                      <span style={{ fontSize:14, color:C.goldLight }}>{lead.name || "—"}</span>
+                      <span style={{ fontSize:9, color:lead.approved?C.green:C.red, border:"1px solid "+(lead.approved?C.green:C.red), padding:"1px 6px", fontFamily:"sans-serif" }}>{lead.approved?"APPROVED":"PENDING"}</span>
+                    </div>
+                    <div style={{ fontSize:12, color:C.muted, fontFamily:"sans-serif", marginBottom:2 }}>{lead.email}</div>
+                    <div style={{ fontSize:10, color:C.muted, fontFamily:"sans-serif" }}>
+                      {new Date(lead.createdAt).toLocaleDateString()} · {lead.source || "for-women"}
+                    </div>
+                  </div>
+                  {!lead.approved && (
+                    <button onClick={() => approveLead(lead.email)} style={{ padding:"8px 18px", background:C.green, color:"white", border:"none", cursor:"pointer", fontFamily:"sans-serif", fontSize:12, fontWeight:700 }}>
+                      Approve + Send Link
+                    </button>
+                  )}
                 </div>
               ))}
             </div>
