@@ -48,11 +48,7 @@ export default async function handler(req, res) {
   const token = crypto.randomBytes(32).toString("hex");
   const expiry = Date.now() + 15 * 60 * 1000;
 
-  await fetch(`${redisUrl}/set/il:magic:${token}/${encodeURIComponent(email + ":" + expiry)}`, {
-    method: "POST",
-    headers: { Authorization: `Bearer ${redisToken}` },
-  });
-  await fetch(`${redisUrl}/expire/il:magic:${token}/900`, {
+  await fetch(`${redisUrl}/set/il:magic:${token}/${encodeURIComponent(email)}:${expiry}/ex/900`, {
     method: "POST",
     headers: { Authorization: `Bearer ${redisToken}` },
   });

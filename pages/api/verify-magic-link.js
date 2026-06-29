@@ -17,7 +17,9 @@ export default async function handler(req, res) {
     return res.status(200).json({ valid: false, error: "Link expired or invalid." });
   }
 
-  const [email, expiry] = redisData.result.split(":");
+  const parts = redisData.result.split(":");
+  const email = decodeURIComponent(parts[0]);
+  const expiry = parts[parts.length - 1];
 
   if (Date.now() > parseInt(expiry)) {
     await fetch(`${redisUrl}/del/il:magic:${token}`, {

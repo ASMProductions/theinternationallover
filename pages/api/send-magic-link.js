@@ -38,11 +38,7 @@ export default async function handler(req, res) {
   const expiry = Date.now() + 15 * 60 * 1000;
 
   // Store token in Redis — value in URL path, TTL via separate EXPIRE
-  await fetch(`${redisUrl}/set/il:magic:${token}/${encodeURIComponent(normalizedEmail + ":" + expiry)}`, {
-    method: "POST",
-    headers: { Authorization: `Bearer ${redisToken}` },
-  });
-  await fetch(`${redisUrl}/expire/il:magic:${token}/900`, {
+  await fetch(`${redisUrl}/set/il:magic:${token}/${encodeURIComponent(normalizedEmail)}:${expiry}/ex/900`, {
     method: "POST",
     headers: { Authorization: `Bearer ${redisToken}` },
   });
