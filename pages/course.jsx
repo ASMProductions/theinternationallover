@@ -3274,17 +3274,6 @@ function ProfileCard({ woman, selected, onSelect, revealed }) {
 export default function CoursePage() {
   const [phase, setPhase] = useState("intro");
   const [authed, setAuthed] = useState(false);
-
-  // Auth gate
-  useEffect(() => {
-    const access = sessionStorage.getItem("il_access");
-    if (!access) { window.location.replace("/"); return; }
-    const gender = sessionStorage.getItem("il_gender") || "man";
-    if (gender === "woman") { window.location.replace("/matrimonial"); return; }
-    setAuthed(true);
-  }, []);
-
-  if (!authed) return null;
   const [activeRegionId, setActiveRegionId] = useState(null);
   const [selectedWomanId, setSelectedWomanId] = useState(null);
   const [revealedCards, setRevealedCards] = useState([]);
@@ -3294,6 +3283,13 @@ export default function CoursePage() {
   const [stampedRegions, setStampedRegions] = useState([]);
   const [lastConsequence, setLastConsequence] = useState(null);
   const [outcomeText, setOutcomeText] = useState("");
+
+  useEffect(() => {
+    const access = sessionStorage.getItem("il_access") || sessionStorage.getItem("il_admin_session");
+    if (!access) { window.location.replace("/"); return; }
+    const gender = sessionStorage.getItem("il_gender") || "man";
+    if (gender === "woman") { window.location.replace("/matrimonial"); }
+  }, []);
 
   useEffect(() => { window.scrollTo({ top:0, behavior:"instant" }); }, [phase, activeRegionId, sceneIndex]);
 
