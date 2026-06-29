@@ -88,7 +88,14 @@ export default async function handler(req, res) {
     if (setGenderOnly) {
       try {
         const g = gender || "woman";
-        await redisSet(`il:gender:${email}`, g);
+        // Write a lead record so send-magic-link can detect women by lead key
+        if (g === "woman") {
+          const leadKey = "il:lead:" + email.replace(/[^a-z0-9]/g, "_");
+          const existing = await redisGet(leadKey);
+          if (!existing) {
+            await redisSet(leadKey, JSON.stringify({ email, name: "", source: "admin-set", approved: true, createdAt: Date.now() }));
+          }
+        }
         await redisSet(`il:paid:${email}`, "true");
         return res.status(200).json({ ok: true });
       } catch(e) {
