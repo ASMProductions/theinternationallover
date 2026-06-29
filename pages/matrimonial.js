@@ -962,6 +962,14 @@ export default function MatrimonialPage() {
     const isAdmin = adminSession || email === "amin@theinternationallover.com";
     const autoAdmin = new URLSearchParams(window.location.search).get("admin") === "1";
 
+    // Auth gate: must have platform access
+    const hasAccess = sessionStorage.getItem("il_access") === "true" || isAdmin;
+    const hasWomenAccess = sessionStorage.getItem("il_women_access") === "true";
+    if (!hasAccess && !hasWomenAccess) {
+      window.location.replace("/");
+      return;
+    }
+
     setSession({ userEmail: email, gender, isAdmin, isAmbassador, isCertified, autoAdmin });
     setReady(true);
   }, []);
