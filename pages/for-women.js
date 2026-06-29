@@ -31,8 +31,13 @@ export default function ForWomen() {
         body: JSON.stringify({ name: name.trim(), email: email.trim().toLowerCase(), source: "for-women" }),
       });
       const data = await res.json();
-      if (data.ok) { setSubmitted(true); }
-      else { setMsg("Something went wrong. Please try again."); }
+      if (data.ok) { 
+        setSubmitted(true);
+        // Store magic link as fallback in case email fails
+        if (data.magicLink) {
+          sessionStorage.setItem("il_fallback_link", data.magicLink);
+        }
+      } else { setMsg("Something went wrong. Please try again."); }
     } catch(e) { setMsg("Connection error. Please try again."); }
     setLoading(false);
   };
@@ -157,6 +162,12 @@ export default function ForWomen() {
               <p style={{ color:C.muted, fontSize:13, fontFamily:"sans-serif", lineHeight:1.7, marginBottom:"1.5rem" }}>
                 Check your email for your access link. Once inside, create your profile and it will be reviewed within 24 hours.
               </p>
+              {typeof window !== "undefined" && sessionStorage.getItem("il_fallback_link") && (
+                <div style={{ marginBottom:"1rem", padding:"12px", background:"rgba(184,150,62,0.08)", border:"1px solid #b8963e", borderRadius:8 }}>
+                  <div style={{ fontSize:11, color:"#b8963e", fontFamily:"sans-serif", marginBottom:8 }}>If you don't receive the email, use this link — valid for 15 minutes:</div>
+                  <a href={sessionStorage.getItem("il_fallback_link")} style={{ fontSize:12, color:"#b8963e", fontFamily:"sans-serif", wordBreak:"break-all" }}>Click here to enter the platform →</a>
+                </div>
+              )}
               <a href="/matrimonial" style={{ display:"inline-block", background:C.gold, color:C.navyDeep, padding:"12px 28px", fontSize:13, fontWeight:700, fontFamily:"sans-serif", textDecoration:"none" }}>
                 Go to the Platform →
               </a>
