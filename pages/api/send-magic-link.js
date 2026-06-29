@@ -1,75 +1,76 @@
+// pages/api/send-magic-link.js
 import crypto from "crypto";
 import nodemailer from "nodemailer";
 
-const REDIS_URL = process.env.UPSTASH_REDIS_REST_URL;
-const REDIS_TOKEN = process.env.UPSTASH_REDIS_REST_TOKEN;
+export default async function handler(req, res) {
+  if (req.method !== "POST") return res.status(405).end();
 
-async function redisSet(key, value, exSeconds) {
-  const res = await fetch(`${REDIS_URL}/set/${encodeURIComponent(key)}`, {
+  const { email } = req.body;
+  if (!email) return res.status(400).json({ error: "Email required" });
+
+  const normalizedEmail = email.toLowerCase().trim();
+  const redisUrl = process.env.UPSTASH_REDIS_REST_URL;
+  const redisToken = process.env.UPSTASH_REDIS_REST_TOKEN;
+
+  // Check if email has paid
+  const paidRes = await fetch(`${redisUrl}/get/il:paid:${normalizedEmail}`, {
+    headers: { Authorization: `Bearer ${redisToken}` },
+  });
+  const paidData = await paidRes.json();
+
+  if (!paidData.result) {
+    return res.status(200).json({
+      sent: false,
+      error: "No purchase found for that email. Please use the email you paid with, or enroll below.",
+    });
+  }
+
+  // Generate one-time token
+  const token = crypto.randomBytes(32).toString("hex");
+  const expiry = Date.now() + 15 * 60 * 1000;
+
+  // Store token in Redis — same format as working masterylevelfasting
+  await fetch(`${redisUrl}/set/il:magic:${token}`, {
     method: "POST",
-    headers: { Authorization: `Bearer ${REDIS_TOKEN}`, "Content-Type": "application/json" },
-    body: JSON.stringify({ value, ex: exSeconds }),
+    headers: {
+      Authorization: `Bearer ${redisToken}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ value: `${normalizedEmail}:${expiry}`, ex: 900 }),
   });
-  return res.json();
-}
 
-async function redisGet(key) {
-  const res = await fetch(`${REDIS_URL}/get/${encodeURIComponent(key)}`, {
-    headers: { Authorization: `Bearer ${REDIS_TOKEN}` },
-  });
-  const data = await res.json();
-  return data.result;
-}
+  const magicLink = `https://www.theinternationallover.com/magic-link?token=${token}`;
 
-async function sendEmail(to, magicLink) {
   const transporter = nodemailer.createTransport({
     host: process.env.SMTP_HOST,
     port: parseInt(process.env.SMTP_PORT || "465"),
     secure: true,
-    auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS },
+    auth: {
+      user: process.env.SMTP_USER,
+      pass: process.env.SMTP_PASS,
+    },
   });
+
   await transporter.sendMail({
     from: `"The International Lover" <${process.env.SMTP_USER}>`,
-    to,
-    subject: "Your Access Link — The International Lover",
+    to: normalizedEmail,
+    subject: "Your access link — The International Lover™",
     html: `
-      <div style="background:#050d1a;padding:40px;font-family:Georgia,serif;color:#f0e6cc;max-width:520px;margin:0 auto;">
-        <div style="text-align:center;margin-bottom:32px;">
-          <div style="font-size:11px;letter-spacing:0.35em;color:#b8963e;font-family:sans-serif;margin-bottom:8px;">THE INTERNATIONAL LOVER™</div>
-          <div style="font-size:11px;letter-spacing:0.2em;color:#5a4e32;font-family:sans-serif;">ASM PRODUCTIONS LLC</div>
+      <div style="font-family:Georgia,serif;max-width:480px;margin:0 auto;padding:2rem;background:#050d1a;color:#c8b890;border-radius:8px;">
+        <div style="text-align:center;margin-bottom:1.5rem;">
+          <div style="font-size:11px;letter-spacing:0.35em;text-transform:uppercase;color:#b8963e;margin-bottom:8px;font-family:sans-serif;">THE INTERNATIONAL LOVER™</div>
         </div>
-        <div style="border:1px solid #b8963e;padding:32px;text-align:center;">
-          <p style="font-size:15px;color:#c8b890;line-height:1.85;margin-bottom:24px;">Your access link is ready. Click below to enter the platform.</p>
-          <a href="${magicLink}" style="display:inline-block;padding:14px 36px;background:#b8963e;color:#050d1a;font-family:sans-serif;font-size:13px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;text-decoration:none;">Enter the Platform →</a>
-          <p style="font-size:11px;color:#5a4e32;margin-top:24px;font-family:sans-serif;">This link expires in 15 minutes. If you did not request this, disregard.</p>
+        <p style="color:#c8b890;line-height:1.8;">Click the link below to access the platform. This link expires in 15 minutes and can only be used once.</p>
+        <div style="text-align:center;margin:2rem 0;">
+          <a href="${magicLink}" style="display:inline-block;padding:14px 32px;background:#b8963e;color:#050d1a;text-decoration:none;border-radius:24px;font-size:15px;font-weight:700;font-family:sans-serif;">
+            Enter the Platform →
+          </a>
         </div>
-        <div style="text-align:center;margin-top:24px;font-size:10px;color:#3a2e18;font-family:sans-serif;letter-spacing:0.1em;">theinternationallover.com</div>
+        <p style="font-size:12px;color:#5a4e32;text-align:center;font-family:sans-serif;">If you did not request this link you can ignore this email.</p>
+        <p style="font-size:12px;color:#5a4e32;text-align:center;font-family:sans-serif;">If the button does not work, copy and paste this link into your browser:<br>${magicLink}</p>
       </div>
     `,
   });
-}
 
-export default async function handler(req, res) {
-  if (req.method !== "POST") return res.status(405).end();
-  const { email } = req.body;
-  if (!email) return res.status(400).json({ error: "Email required." });
-
-  const emailLower = email.toLowerCase().trim();
-  const paidKey = `il:paid:${emailLower}`;
-  const paid = await redisGet(paidKey);
-  if (!paid) return res.status(200).json({ sent: false, error: "No purchase found for this email. Please enroll below or use your access code." });
-
-  const token = crypto.randomBytes(32).toString("hex");
-  await redisSet(`il:magic:${token}`, emailLower, 900);
-
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://theinternationallover.com";
-  const magicLink = `${baseUrl}/magic-link?token=${token}`;
-
-  try {
-    await sendEmail(emailLower, magicLink);
-    return res.status(200).json({ sent: true });
-  } catch (err) {
-    console.error("Email error:", err);
-    return res.status(500).json({ error: "Failed to send email. Please try again." });
-  }
+  return res.status(200).json({ sent: true });
 }

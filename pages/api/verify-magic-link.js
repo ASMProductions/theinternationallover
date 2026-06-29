@@ -1,32 +1,37 @@
-const REDIS_URL = process.env.UPSTASH_REDIS_REST_URL;
-const REDIS_TOKEN = process.env.UPSTASH_REDIS_REST_TOKEN;
-
-async function redisGet(key) {
-  const res = await fetch(`${REDIS_URL}/get/${encodeURIComponent(key)}`, {
-    headers: { Authorization: `Bearer ${REDIS_TOKEN}` },
-  });
-  const data = await res.json();
-  return data.result;
-}
-
-async function redisDel(key) {
-  await fetch(`${REDIS_URL}/del/${encodeURIComponent(key)}`, {
-    method: "POST",
-    headers: { Authorization: `Bearer ${REDIS_TOKEN}` },
-  });
-}
-
+// pages/api/verify-magic-link.js
 export default async function handler(req, res) {
-  res.setHeader("Cache-Control", "no-store");
-  const { token, type } = req.query;
+  if (req.method !== "POST") return res.status(405).json({ error: "Method not allowed" });
 
-  if (!token) return res.status(400).json({ error: "invalid" });
+  const { token } = req.body;
+  if (!token) return res.status(400).json({ valid: false, error: "No token provided" });
 
-  const email = await redisGet(`il:magic:${token}`);
-  if (!email) return res.status(200).json({ error: "expired" });
+  const redisUrl = process.env.UPSTASH_REDIS_REST_URL;
+  const redisToken = process.env.UPSTASH_REDIS_REST_TOKEN;
 
-  await redisDel(`il:magic:${token}`);
+  const redisRes = await fetch(`${redisUrl}/get/il:magic:${token}`, {
+    headers: { Authorization: `Bearer ${redisToken}` },
+  });
+  const redisData = await redisRes.json();
 
-  // Return email and type — magic-link page sets sessionStorage client-side
-  return res.status(200).json({ email, type: type || "member" });
+  if (!redisData.result) {
+    return res.status(200).json({ valid: false, error: "Link expired or invalid." });
+  }
+
+  const [email, expiry] = redisData.result.split(":");
+
+  if (Date.now() > parseInt(expiry)) {
+    await fetch(`${redisUrl}/del/il:magic:${token}`, {
+      method: "POST",
+      headers: { Authorization: `Bearer ${redisToken}` },
+    });
+    return res.status(200).json({ valid: false, error: "Link has expired. Please request a new one." });
+  }
+
+  // Delete token — one-time use only
+  await fetch(`${redisUrl}/del/il:magic:${token}`, {
+    method: "POST",
+    headers: { Authorization: `Bearer ${redisToken}` },
+  });
+
+  return res.status(200).json({ valid: true, email });
 }
