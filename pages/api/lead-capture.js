@@ -85,7 +85,7 @@ export default async function handler(req, res) {
     await redisSet(`il:magic:${token}`, email, 900);
 
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://theinternationallover.com";
-    const magicLink = `${baseUrl}/api/verify-magic-link?token=${token}&type=women`;
+    const magicLink = `${baseUrl}/magic-link?token=${token}&type=women`;
 
     // Send email — isolated so failure doesn't block registration
     try {

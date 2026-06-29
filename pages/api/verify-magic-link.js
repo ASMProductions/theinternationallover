@@ -17,17 +17,16 @@ async function redisDel(key) {
 }
 
 export default async function handler(req, res) {
+  res.setHeader("Cache-Control", "no-store");
   const { token, type } = req.query;
-  if (!token) return res.redirect("/?error=invalid");
+
+  if (!token) return res.status(400).json({ error: "invalid" });
 
   const email = await redisGet(`il:magic:${token}`);
-  if (!email) return res.redirect("/?error=expired");
+  if (!email) return res.status(200).json({ error: "expired" });
 
   await redisDel(`il:magic:${token}`);
 
-  const isWoman = type === "women";
-  const dest = isWoman ? "/matrimonial" : "/";
-  const accessType = isWoman ? "women" : "member";
-
-  res.redirect(`/auth-callback?email=${encodeURIComponent(email)}&type=${accessType}&dest=${encodeURIComponent(dest)}`);
+  // Return email and type — magic-link page sets sessionStorage client-side
+  return res.status(200).json({ email, type: type || "member" });
 }

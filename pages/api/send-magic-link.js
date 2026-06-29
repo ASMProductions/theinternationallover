@@ -1,4 +1,5 @@
 import crypto from "crypto";
+import nodemailer from "nodemailer";
 
 const REDIS_URL = process.env.UPSTASH_REDIS_REST_URL;
 const REDIS_TOKEN = process.env.UPSTASH_REDIS_REST_TOKEN;
@@ -21,8 +22,7 @@ async function redisGet(key) {
 }
 
 async function sendEmail(to, magicLink) {
-  const nodemailer = await import("nodemailer");
-  const transporter = nodemailer.default.createTransport({
+  const transporter = nodemailer.createTransport({
     host: process.env.SMTP_HOST,
     port: parseInt(process.env.SMTP_PORT || "465"),
     secure: true,
@@ -63,7 +63,7 @@ export default async function handler(req, res) {
   await redisSet(`il:magic:${token}`, emailLower, 900);
 
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://theinternationallover.com";
-  const magicLink = `${baseUrl}/api/verify-magic-link?token=${token}`;
+  const magicLink = `${baseUrl}/magic-link?token=${token}`;
 
   try {
     await sendEmail(emailLower, magicLink);
