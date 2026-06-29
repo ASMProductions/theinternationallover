@@ -65,6 +65,7 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
   const [view, setView] = useState("browse"); // browse | profile | create | messages | admin
   const [activeProfile, setActiveProfile] = useState(null);
   const [myProfile, setMyProfile] = useState(null);
+  const [profileEmail, setProfileEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const [msg, setMsg] = useState("");
   const [filters, setFilters] = useState({ region:"all", religion:"All", age:"All Ages", family:"All" });
