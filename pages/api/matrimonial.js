@@ -68,15 +68,17 @@ async function listPendingProfiles() {
   } catch(e) { return []; }
 }
 
+export const config = { api: { bodyParser: true } };
+
 export default async function handler(req, res) {
   res.setHeader("Cache-Control", "no-store");
 
   if (req.method === "GET") {
     const { action, email, gender, other, adminKey } = req.query;
 
-    if (action === "list" && email && gender) {
+    if (action === "list" && gender) {
       const oppositeGender = gender === "man" ? "woman" : "man";
-      const profiles = await listApprovedProfiles(oppositeGender, email);
+      const profiles = await listApprovedProfiles(oppositeGender, email || "");
       return res.status(200).json({ profiles });
     }
 
@@ -112,7 +114,7 @@ export default async function handler(req, res) {
   }
 
   if (req.method === "POST") {
-    const body = req.body;
+    const body = req.body || {};
     const { action } = body;
 
     if (action === "createProfile") {
