@@ -674,7 +674,7 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
       { id:"profiles", label:"Profiles" },
       { id:"consulate", label:"Consulate" },
       { id:"ambassadors", label:"Ambassadors" },
-      { id:"leads", label:"Leads" },
+      { id:"leads", label:"Women's Profiles" },
       { id:"myprofile", label:"My Profile" },
     ];
     return (
@@ -849,7 +849,7 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
                 </div>
               </div>
               <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between", marginBottom:12, flexWrap:"wrap", gap:8 }}>
-                <div style={{ fontSize:9, letterSpacing:"0.2em", color:C.muted, fontFamily:"sans-serif" }}>WOMEN REGISTRATIONS — {leads.length} total</div>
+                <div style={{ fontSize:9, letterSpacing:"0.2em", color:C.muted, fontFamily:"sans-serif" }}>WOMEN'S PROFILES — {leads.length} total</div>
                 <button onClick={backfillWomenGender} style={{ padding:"5px 12px", background:"transparent", border:"1px solid #4a6fa5", color:"#7aa0d0", cursor:"pointer", fontSize:10, fontFamily:"sans-serif" }}>Fix Gender for All</button>
               </div>
               {leads.length === 0 && <div style={{ color:C.muted, textAlign:"center", padding:"3rem", fontFamily:"sans-serif" }}>No registrations yet.</div>}
@@ -857,13 +857,13 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
                 <div key={lead.email} style={{ background:C.navyDeep, border:"1px solid " + (lead.approved ? C.green : C.border), padding:"1rem 1.25rem", marginBottom:10, display:"flex", justifyContent:"space-between", alignItems:"center", flexWrap:"wrap", gap:12 }}>
                   <div>
                     <div style={{ display:"flex", gap:8, alignItems:"center", marginBottom:4 }}>
-                      <span style={{ fontSize:14, color:C.goldLight }}>{lead.name || "—"}</span>
+                      <span style={{ fontSize:14, color:C.goldLight }}>{lead.name || lead.email}</span>
                       <span style={{ fontSize:9, color:lead.approved?C.green:C.red, border:"1px solid "+(lead.approved?C.green:C.red), padding:"1px 6px", fontFamily:"sans-serif" }}>{lead.approved?"APPROVED":"PENDING"}</span>
+                      {lead.gender && <span style={{ fontSize:9, color:"#7aa0d0", border:"1px solid #7aa0d0", padding:"1px 6px", fontFamily:"sans-serif" }}>{lead.gender.toUpperCase()}</span>}
                     </div>
                     <div style={{ fontSize:12, color:C.muted, fontFamily:"sans-serif", marginBottom:2 }}>{lead.email}</div>
                     <div style={{ fontSize:10, color:C.muted, fontFamily:"sans-serif" }}>
-                      {new Date(lead.createdAt).toLocaleDateString()} · {lead.source || "for-women"}
-                      {lead.gender && <span style={{ marginLeft:8, color:"#7aa0d0" }}>· {lead.gender}</span>}
+                      {lead.createdAt ? new Date(lead.createdAt).toLocaleDateString() : "Unknown date"} · {lead.source || "for-women"}
                     </div>
                   </div>
                   <div style={{ display:"flex", gap:8, flexWrap:"wrap" }}>
@@ -877,6 +877,15 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
                     </button>
                     <button onClick={() => setLeadGender(lead.email, "man")} style={{ padding:"8px 14px", background:"transparent", border:"1px solid " + C.muted, color:C.muted, cursor:"pointer", fontFamily:"sans-serif", fontSize:11 }}>
                       Set as Man
+                    </button>
+                    <button onClick={async () => {
+                      if (!confirm("Delete profile for " + lead.email + "? This removes all their access.")) return;
+                      const res = await fetch("/api/approve-lead", { method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({ adminCode:"ADMINTEST", email:lead.email, deleteProfile:true }) });
+                      const data = await res.json();
+                      if (data.ok) setLeads(prev => prev.filter(l => l.email !== lead.email));
+                      else alert(data.error || "Delete failed.");
+                    }} style={{ padding:"8px 14px", background:"transparent", border:"1px solid " + C.red, color:C.red, cursor:"pointer", fontFamily:"sans-serif", fontSize:11 }}>
+                      Delete
                     </button>
                   </div>
                 </div>
