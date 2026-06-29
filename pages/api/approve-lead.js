@@ -82,6 +82,9 @@ export default async function handler(req, res) {
       lead.approvedAt = Date.now();
       await redis.set(leadKey, JSON.stringify(lead));
 
+      // Store gender so magic links always route women correctly
+      await redis.set(`il:gender:${email}`, "woman");
+
       // Grant access
       await redis.set(`il:paid:${email}`, "true");
 
