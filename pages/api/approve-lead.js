@@ -70,8 +70,21 @@ export default async function handler(req, res) {
   }
 
   if (req.method === "POST") {
-    const { email } = req.body;
+    const { email, setGenderOnly, gender } = req.body;
     if (!email) return res.status(400).json({ error: "Email required" });
+
+    // Just update gender without full approval flow
+    if (setGenderOnly) {
+      try {
+        const g = gender || "woman";
+        await redis.set(`il:gender:${email}`, g);
+        // Also fix il:paid if missing
+        await redis.set(`il:paid:${email}`, "true");
+        return res.status(200).json({ ok: true });
+      } catch(e) {
+        return res.status(500).json({ error: String(e) });
+      }
+    }
 
     try {
       // Mark as approved
