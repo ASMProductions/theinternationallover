@@ -277,6 +277,24 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
     } catch(e) { alert("Error approving lead."); }
   };
 
+  const backfillWomenGender = async () => {
+    try {
+      const res = await fetch("/api/approve-lead?action=list&code=ADMINTEST");
+      const data = await res.json();
+      const leads = data.leads || [];
+      let count = 0;
+      for (const lead of leads) {
+        await fetch("/api/approve-lead", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ adminCode: "ADMINTEST", email: lead.email, setGender: true })
+        });
+        count++;
+      }
+      alert(`Gender backfilled for ${count} women.`);
+    } catch(e) { alert("Error backfilling gender."); }
+  };
+
   const loadPendingApprovals = async () => {
     try {
       const adminKey = await getAdminKey();
@@ -791,7 +809,10 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
           {/* ── LEADS ── */}
           {adminTab === "leads" && (
             <div>
-              <div style={{ fontSize:9, letterSpacing:"0.2em", color:C.muted, fontFamily:"sans-serif", marginBottom:16 }}>WOMEN REGISTRATIONS — {leads.length} total</div>
+              <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between", marginBottom:16, flexWrap:"wrap", gap:8 }}>
+                <div style={{ fontSize:9, letterSpacing:"0.2em", color:C.muted, fontFamily:"sans-serif" }}>WOMEN REGISTRATIONS — {leads.length} total</div>
+                <button onClick={backfillWomenGender} style={{ padding:"5px 12px", background:"transparent", border:"1px solid #4a6fa5", color:"#7aa0d0", cursor:"pointer", fontSize:10, fontFamily:"sans-serif" }}>Fix Gender for All</button>
+              </div>
               {leads.length === 0 && <div style={{ color:C.muted, textAlign:"center", padding:"3rem", fontFamily:"sans-serif" }}>No registrations yet.</div>}
               {leads.map(lead => (
                 <div key={lead.email} style={{ background:C.navyDeep, border:"1px solid " + (lead.approved ? C.green : C.border), padding:"1rem 1.25rem", marginBottom:10, display:"flex", justifyContent:"space-between", alignItems:"center", flexWrap:"wrap", gap:12 }}>
