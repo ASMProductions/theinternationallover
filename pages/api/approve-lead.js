@@ -5,14 +5,14 @@ const REDIS_URL = process.env.UPSTASH_REDIS_REST_URL;
 const REDIS_TOKEN = process.env.UPSTASH_REDIS_REST_TOKEN;
 
 async function redisSet(key, value) {
-  await fetch(`${REDIS_URL}/set/${encodeURIComponent(key)}/${encodeURIComponent(value)}`, {
+  await fetch(`${REDIS_URL}/set/${key}/${encodeURIComponent(value)}`, {
     method: "POST",
     headers: { Authorization: `Bearer ${REDIS_TOKEN}` },
   });
 }
 
 async function redisGet(key) {
-  const res = await fetch(`${REDIS_URL}/get/${encodeURIComponent(key)}`, {
+  const res = await fetch(`${REDIS_URL}/get/${key}`, {
     headers: { Authorization: `Bearer ${REDIS_TOKEN}` },
   });
   const data = await res.json();
@@ -20,14 +20,14 @@ async function redisGet(key) {
 }
 
 async function redisDel(key) {
-  await fetch(`${REDIS_URL}/del/${encodeURIComponent(key)}`, {
+  await fetch(`${REDIS_URL}/del/${key}`, {
     method: "POST",
     headers: { Authorization: `Bearer ${REDIS_TOKEN}` },
   });
 }
 
 async function redisKeys(pattern) {
-  const res = await fetch(`${REDIS_URL}/keys/${encodeURIComponent(pattern)}`, {
+  const res = await fetch(`${REDIS_URL}/keys/${pattern}`, {
     headers: { Authorization: `Bearer ${REDIS_TOKEN}` },
   });
   const data = await res.json();
