@@ -1,60 +1,72 @@
+// pages/magic-link.js
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
-export default function MagicLink() {
-  const [status, setStatus] = useState("verifying");
+export default function MagicLinkPage() {
+  const router = useRouter();
+  const [status, setStatus] = useState("Verifying your access…");
 
   useEffect(() => {
-    if (typeof window === "undefined") return;
-    const params = new URLSearchParams(window.location.search);
-    const token = params.get("token");
-    const type = params.get("type") || "member";
+    const { token, type } = router.query;
+    if (!token) return;
 
-    if (!token) { setStatus("invalid"); return; }
-
-    // Call our verify API which handles Redis and returns email
-    fetch(`/api/verify-magic-link?token=${token}&type=${type}`)
-      .then(r => r.json())
-      .then(data => {
-        if (!data.email) { setStatus(data.error === "expired" ? "expired" : "invalid"); return; }
-
-        // Set session client-side
-        sessionStorage.setItem("il_email", data.email);
-        if (data.type === "women") {
-          sessionStorage.setItem("il_women_access", "true");
-          sessionStorage.setItem("il_gender", "woman");
-          window.location.replace("/matrimonial");
+    async function verify() {
+      try {
+        const res = await fetch("/api/verify-magic-link", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ token }),
+        });
+        const data = await res.json();
+        if (data.valid) {
+          try {
+            sessionStorage.setItem("il_email", data.email);
+            if (type === "women") {
+              sessionStorage.setItem("il_women_access", "true");
+              sessionStorage.setItem("il_gender", "woman");
+            } else {
+              sessionStorage.setItem("il_access", "true");
+            }
+          } catch(e) {}
+          setStatus("Access confirmed. Entering the platform…");
+          setTimeout(() => {
+            if (type === "women") {
+              router.replace("/matrimonial");
+            } else {
+              router.replace("/");
+            }
+          }, 1500);
         } else {
-          sessionStorage.setItem("il_access", "true");
-          window.location.replace("/");
+          setStatus(data.error || "Link invalid. Please request a new one.");
         }
-      })
-      .catch(() => setStatus("error"));
-  }, []);
+      } catch {
+        setStatus("Connection error. Please try again.");
+      }
+    }
+    verify();
+  }, [router.query]);
 
   const C = { dark:"#050d1a", gold:"#b8963e", cream:"#f0e6cc", muted:"#8a7a5a" };
 
   return (
-    <div style={{ minHeight:"100vh", background:C.dark, display:"flex", alignItems:"center", justifyContent:"center", flexDirection:"column", gap:16, padding:"2rem", fontFamily:"Georgia,serif" }}>
-      <div style={{ fontSize:11, letterSpacing:"0.35em", color:C.gold, fontFamily:"sans-serif" }}>THE INTERNATIONAL LOVER™</div>
-      {status === "verifying" && (
-        <>
-          <div style={{ fontSize:18, color:C.cream }}>Verifying your access…</div>
-          <div style={{ fontSize:12, color:C.muted, fontFamily:"sans-serif" }}>Please wait</div>
-        </>
-      )}
-      {status === "expired" && (
-        <>
-          <div style={{ fontSize:18, color:C.cream }}>This link has expired.</div>
-          <div style={{ fontSize:13, color:C.muted, fontFamily:"sans-serif", textAlign:"center", maxWidth:360 }}>Magic links expire after 15 minutes. Return to the platform to request a new one.</div>
-          <a href="/" style={{ marginTop:8, padding:"10px 24px", background:C.gold, color:C.dark, fontFamily:"sans-serif", fontSize:12, fontWeight:700, textDecoration:"none" }}>Return to Platform →</a>
-        </>
-      )}
-      {(status === "invalid" || status === "error") && (
-        <>
-          <div style={{ fontSize:18, color:C.cream }}>{status === "error" ? "Something went wrong." : "Invalid link."}</div>
-          <a href="/" style={{ marginTop:8, padding:"10px 24px", background:C.gold, color:C.dark, fontFamily:"sans-serif", fontSize:12, fontWeight:700, textDecoration:"none" }}>Return to Platform →</a>
-        </>
-      )}
+    <div style={{
+      minHeight: "100vh",
+      background: C.dark,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      fontFamily: "Georgia, serif",
+      color: C.gold,
+      fontSize: "18px",
+      textAlign: "center",
+      padding: "20px",
+    }}>
+      <div>
+        <div style={{ fontSize: 11, letterSpacing: "0.35em", textTransform: "uppercase", color: C.gold, marginBottom: 16, fontFamily: "sans-serif" }}>
+          The International Lover™
+        </div>
+        <div style={{ color: C.cream, fontSize: 16, fontFamily: "sans-serif" }}>{status}</div>
+      </div>
     </div>
   );
 }
