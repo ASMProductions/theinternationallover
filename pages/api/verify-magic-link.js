@@ -25,6 +25,14 @@ export default async function handler(req, res) {
 
   await redisDel(`il:magic:${token}`);
 
-  res.setHeader("Set-Cookie", `il_access=${encodeURIComponent(email)}; Path=/; HttpOnly; SameSite=Lax; Max-Age=2592000`);
-  res.redirect("/library");
+  // Check if this is a women's access (lead approval)
+  const leadKey = "il:lead:" + email.replace(/[^a-z0-9]/g, "_");
+  const leadRaw = await redisGet(leadKey);
+  const isWoman = leadRaw && (typeof leadRaw === "string" ? JSON.parse(leadRaw) : leadRaw).source === "for-women";
+
+  // Redirect to a page that sets sessionStorage then forwards to the right place
+  const destination = isWoman ? "/matrimonial" : "/";
+  const accessType = isWoman ? "women" : "member";
+
+  res.redirect(`/auth-callback?email=${encodeURIComponent(email)}&type=${accessType}&dest=${encodeURIComponent(destination)}`);
 }
