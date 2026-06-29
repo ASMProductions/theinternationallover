@@ -68,7 +68,7 @@ async function listPendingProfiles() {
   } catch(e) { return []; }
 }
 
-export const config = { api: { bodyParser: true } };
+export const config = { api: { bodyParser: { sizeLimit: "10mb" } } };
 
 export default async function handler(req, res) {
   res.setHeader("Cache-Control", "no-store");
