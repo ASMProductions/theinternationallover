@@ -37,14 +37,14 @@ export default async function handler(req, res) {
   const token = crypto.randomBytes(32).toString("hex");
   const expiry = Date.now() + 15 * 60 * 1000;
 
-  // Store token in Redis — same format as working masterylevelfasting
-  await fetch(`${redisUrl}/set/il:magic:${token}`, {
+  // Store token in Redis — value in URL path, TTL via separate EXPIRE
+  await fetch(`${redisUrl}/set/il:magic:${token}/${encodeURIComponent(normalizedEmail + ":" + expiry)}`, {
     method: "POST",
-    headers: {
-      Authorization: `Bearer ${redisToken}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ value: `${normalizedEmail}:${expiry}`, ex: 900 }),
+    headers: { Authorization: `Bearer ${redisToken}` },
+  });
+  await fetch(`${redisUrl}/expire/il:magic:${token}/900`, {
+    method: "POST",
+    headers: { Authorization: `Bearer ${redisToken}` },
   });
 
   const magicLink = `https://www.theinternationallover.com/magic-link?token=${token}${isWoman ? "&type=women" : ""}`;

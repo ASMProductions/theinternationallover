@@ -48,10 +48,13 @@ export default async function handler(req, res) {
   const token = crypto.randomBytes(32).toString("hex");
   const expiry = Date.now() + 15 * 60 * 1000;
 
-  await fetch(`${redisUrl}/set/il:magic:${token}`, {
+  await fetch(`${redisUrl}/set/il:magic:${token}/${encodeURIComponent(email + ":" + expiry)}`, {
     method: "POST",
-    headers: { Authorization: `Bearer ${redisToken}`, "Content-Type": "application/json" },
-    body: JSON.stringify({ value: `${email}:${expiry}`, ex: 900 }),
+    headers: { Authorization: `Bearer ${redisToken}` },
+  });
+  await fetch(`${redisUrl}/expire/il:magic:${token}/900`, {
+    method: "POST",
+    headers: { Authorization: `Bearer ${redisToken}` },
   });
 
   const magicLink = `https://www.theinternationallover.com/magic-link?token=${token}&type=women`;
