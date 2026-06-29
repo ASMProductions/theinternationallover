@@ -295,6 +295,23 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
     } catch(e) { alert("Error backfilling gender."); }
   };
 
+  const setLeadGender = async (email, gender) => {
+    try {
+      const res = await fetch("/api/approve-lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ adminCode: "ADMINTEST", email, setGenderOnly: true, gender })
+      });
+      const data = await res.json();
+      if (data.ok) {
+        alert(`Gender set to "${gender}" for ${email}. Their next magic link will route correctly.`);
+        setLeads(prev => prev.map(l => l.email === email ? {...l, gender} : l));
+      } else {
+        alert(data.error || "Failed.");
+      }
+    } catch(e) { alert("Error setting gender."); }
+  };
+
   const loadPendingApprovals = async () => {
     try {
       const adminKey = await getAdminKey();
@@ -809,7 +826,29 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
           {/* ── LEADS ── */}
           {adminTab === "leads" && (
             <div>
-              <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between", marginBottom:16, flexWrap:"wrap", gap:8 }}>
+              {/* Manual gender fix for any email */}
+              <div style={{ background:C.navyDeep, border:"1px solid " + C.border, padding:"1rem", marginBottom:16 }}>
+                <div style={{ fontSize:9, letterSpacing:"0.2em", color:C.muted, fontFamily:"sans-serif", marginBottom:10 }}>SET GENDER FOR ANY EMAIL</div>
+                <div style={{ display:"flex", gap:8, flexWrap:"wrap", alignItems:"center" }}>
+                  <input
+                    id="genderEmailInput"
+                    type="email"
+                    placeholder="email@address.com"
+                    style={{ flex:1, minWidth:200, padding:"7px 12px", background:C.dark, border:"1px solid " + C.border, color:C.cream, fontSize:12, fontFamily:"sans-serif" }}
+                  />
+                  <button onClick={() => {
+                    const email = document.getElementById("genderEmailInput").value.trim().toLowerCase();
+                    if (!email) return;
+                    setLeadGender(email, "woman");
+                  }} style={{ padding:"7px 14px", background:"transparent", border:"1px solid #7aa0d0", color:"#7aa0d0", cursor:"pointer", fontFamily:"sans-serif", fontSize:11 }}>Set as Woman</button>
+                  <button onClick={() => {
+                    const email = document.getElementById("genderEmailInput").value.trim().toLowerCase();
+                    if (!email) return;
+                    setLeadGender(email, "man");
+                  }} style={{ padding:"7px 14px", background:"transparent", border:"1px solid " + C.muted, color:C.muted, cursor:"pointer", fontFamily:"sans-serif", fontSize:11 }}>Set as Man</button>
+                </div>
+              </div>
+              <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between", marginBottom:12, flexWrap:"wrap", gap:8 }}>
                 <div style={{ fontSize:9, letterSpacing:"0.2em", color:C.muted, fontFamily:"sans-serif" }}>WOMEN REGISTRATIONS — {leads.length} total</div>
                 <button onClick={backfillWomenGender} style={{ padding:"5px 12px", background:"transparent", border:"1px solid #4a6fa5", color:"#7aa0d0", cursor:"pointer", fontSize:10, fontFamily:"sans-serif" }}>Fix Gender for All</button>
               </div>
@@ -824,13 +863,22 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
                     <div style={{ fontSize:12, color:C.muted, fontFamily:"sans-serif", marginBottom:2 }}>{lead.email}</div>
                     <div style={{ fontSize:10, color:C.muted, fontFamily:"sans-serif" }}>
                       {new Date(lead.createdAt).toLocaleDateString()} · {lead.source || "for-women"}
+                      {lead.gender && <span style={{ marginLeft:8, color:"#7aa0d0" }}>· {lead.gender}</span>}
                     </div>
                   </div>
-                  {!lead.approved && (
-                    <button onClick={() => approveLead(lead.email)} style={{ padding:"8px 18px", background:C.green, color:"white", border:"none", cursor:"pointer", fontFamily:"sans-serif", fontSize:12, fontWeight:700 }}>
-                      Approve + Send Link
+                  <div style={{ display:"flex", gap:8, flexWrap:"wrap" }}>
+                    {!lead.approved && (
+                      <button onClick={() => approveLead(lead.email)} style={{ padding:"8px 18px", background:C.green, color:"white", border:"none", cursor:"pointer", fontFamily:"sans-serif", fontSize:12, fontWeight:700 }}>
+                        Approve + Send Link
+                      </button>
+                    )}
+                    <button onClick={() => setLeadGender(lead.email, "woman")} style={{ padding:"8px 14px", background:"transparent", border:"1px solid #7aa0d0", color:"#7aa0d0", cursor:"pointer", fontFamily:"sans-serif", fontSize:11 }}>
+                      Set as Woman
                     </button>
-                  )}
+                    <button onClick={() => setLeadGender(lead.email, "man")} style={{ padding:"8px 14px", background:"transparent", border:"1px solid " + C.muted, color:C.muted, cursor:"pointer", fontFamily:"sans-serif", fontSize:11 }}>
+                      Set as Man
+                    </button>
+                  </div>
                 </div>
               ))}
             </div>
