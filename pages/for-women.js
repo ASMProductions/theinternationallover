@@ -100,7 +100,7 @@ export default function ForWomen() {
             <h2 style={{ fontSize:"clamp(18px,2.5vw,24px)", color:C.goldLight, fontWeight:"normal" }}>Simple. Secure. On your terms.</h2>
           </div>
           {[
-            { n:"1", title:"Register below — free, always", desc:"Enter your name and email. Your request is reviewed within 24 hours. Once approved, you receive a private access link by email." },
+            { n:"1", title:"Register below — free, always", desc:"Enter your name and email. You will receive your access link by email immediately. Click it to enter the platform." },
             { n:"2", title:"Create your profile", desc:"Your region, your faith, your family involvement preferences, your education, your background. You control what is visible. You can hide or remove your profile at any time." },
             { n:"3", title:"Browse men's profiles", desc:"Women can browse freely. You will see men's profiles, their backgrounds, and whether they hold Certified or Ambassador status." },
             { n:"4", title:"Contact on your own timeline", desc:"Women can initiate contact with any man on the platform. Men can only contact you if they have completed the course or hold Ambassador status." },
@@ -154,13 +154,10 @@ export default function ForWomen() {
           {submitted ? (
             <div style={{ textAlign:"center", padding:"2.5rem 1rem", background:C.dark, border:"1px solid " + C.green }}>
               <div style={{ fontSize:36, marginBottom:12 }}>✓</div>
-              <div style={{ color:C.goldLight, fontSize:18, marginBottom:10 }}>You are registered.</div>
-              <p style={{ color:C.muted, fontSize:13, fontFamily:"sans-serif", lineHeight:1.7, marginBottom:"1.5rem" }}>
-                Your request has been received. Once reviewed and approved, you will receive an email with your access link. This typically takes 24 hours or less.
+              <div style={{ color:C.goldLight, fontSize:18, marginBottom:10 }}>Registration complete.</div>
+              <p style={{ color:C.muted, fontSize:13, fontFamily:"sans-serif", lineHeight:1.7 }}>
+                Check your email for your access link. Click it to enter the platform and create your profile.
               </p>
-              <a href="/matrimonial" style={{ display:"inline-block", background:C.gold, color:C.navyDeep, padding:"12px 28px", fontSize:13, fontWeight:700, fontFamily:"sans-serif", textDecoration:"none" }}>
-                Go to the Platform →
-              </a>
             </div>
           ) : (
             <div style={{ background:C.dark, border:"1px solid " + C.border, padding:"2rem" }}>
