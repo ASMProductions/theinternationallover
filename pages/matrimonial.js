@@ -942,8 +942,10 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
           {!myProfile ? (
             <button onClick={() => { setProfileEmail(userEmail); setMsg(""); setView("create"); }} style={{ background:C.gold, color:C.navyDeep, border:"none", padding:"6px 14px", cursor:"pointer", fontSize:11, fontWeight:700, fontFamily:"sans-serif" }}>Create Profile</button>
           ) : (
-            <button onClick={toggleHideProfile} style={{ background:"none", border:"1px solid " + C.border, color:hidden ? C.gold : C.muted, padding:"6px 12px", cursor:"pointer", fontSize:11, fontFamily:"sans-serif" }}>{hidden ? "Show Profile" : "Hide Profile"}</button>
-            <button onClick={() => { setCreateForm({ displayName:myProfile.displayName||"", age:myProfile.age||"", city:myProfile.city||"", country:myProfile.country||"", region:myProfile.region||"all", religion:myProfile.religion||"Muslim", bio:myProfile.bio||"", familyInvolvement:myProfile.familyInvolvement||"", virtueStatus:myProfile.virtueStatus||"", maritalStatus:myProfile.maritalStatus||"", hasChildren:myProfile.hasChildren||"No", seeking:myProfile.seeking||"Marriage", photoBase64:null }); setProfileEmail(userEmail); setMsg(""); setView("create"); }} style={{ background:"none", border:"1px solid " + C.gold, color:C.gold, padding:"6px 12px", cursor:"pointer", fontSize:11, fontFamily:"sans-serif" }}>Edit Profile</button>
+            <div style={{ display:"flex", gap:6 }}>
+              <button onClick={toggleHideProfile} style={{ background:"none", border:"1px solid " + C.border, color:hidden ? C.gold : C.muted, padding:"6px 12px", cursor:"pointer", fontSize:11, fontFamily:"sans-serif" }}>{hidden ? "Show Profile" : "Hide Profile"}</button>
+              <button onClick={() => { setCreateForm({ displayName:myProfile.displayName||"", age:myProfile.age||"", city:myProfile.city||"", country:myProfile.country||"", region:myProfile.region||"all", religion:myProfile.religion||"Muslim", bio:myProfile.bio||"", familyInvolvement:myProfile.familyInvolvement||"", virtueStatus:myProfile.virtueStatus||"", maritalStatus:myProfile.maritalStatus||"", hasChildren:myProfile.hasChildren||"No", seeking:myProfile.seeking||"Marriage", photoBase64:null }); setProfileEmail(userEmail); setMsg(""); setView("create"); }} style={{ background:"none", border:"1px solid " + C.gold, color:C.gold, padding:"6px 12px", cursor:"pointer", fontSize:11, fontFamily:"sans-serif" }}>Edit Profile</button>
+            </div>
           )}
         </div>
       </div>
