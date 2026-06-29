@@ -21,10 +21,10 @@ export default async function handler(req, res) {
 
   // Save lead
   const leadKey = "il:lead:" + email.replace(/[^a-z0-9]/g, "_");
-  await fetch(`${redisUrl}/set/${leadKey}`, {
+  const leadData = encodeURIComponent(JSON.stringify({ email, name, source, approved: true, createdAt: Date.now() }));
+  await fetch(`${redisUrl}/set/${leadKey}/${leadData}`, {
     method: "POST",
-    headers: { Authorization: `Bearer ${redisToken}`, "Content-Type": "application/json" },
-    body: JSON.stringify({ value: JSON.stringify({ email, name, source, approved: true, createdAt: Date.now() }) }),
+    headers: { Authorization: `Bearer ${redisToken}` },
   });
 
   await fetch(`${redisUrl}/lpush/il:leads:index/${encodeURIComponent(email)}`, {
@@ -33,17 +33,15 @@ export default async function handler(req, res) {
   });
 
   // Grant women's access
-  await fetch(`${redisUrl}/set/il:paid:${email}`, {
+  await fetch(`${redisUrl}/set/il:paid:${email}/true`, {
     method: "POST",
-    headers: { Authorization: `Bearer ${redisToken}`, "Content-Type": "application/json" },
-    body: JSON.stringify({ value: "true" }),
+    headers: { Authorization: `Bearer ${redisToken}` },
   });
 
   // Store gender so future magic links route correctly
-  await fetch(`${redisUrl}/set/il:gender:${email}`, {
+  await fetch(`${redisUrl}/set/il:gender:${email}/woman`, {
     method: "POST",
-    headers: { Authorization: `Bearer ${redisToken}`, "Content-Type": "application/json" },
-    body: JSON.stringify({ value: "woman" }),
+    headers: { Authorization: `Bearer ${redisToken}` },
   });
 
   // Generate magic link token — same format as masterylevelfasting
