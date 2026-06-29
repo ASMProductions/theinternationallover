@@ -901,7 +901,7 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
                 <div style={{ color:C.muted, textAlign:"center", padding:"3rem", fontFamily:"sans-serif" }}>
                   No profile found for {userEmail || "this session"}.
                   <div style={{ marginTop:16 }}>
-                    <button onClick={() => { setProfileEmail(userEmail); setView("create"); }} style={{ background:C.gold, color:C.navyDeep, border:"none", padding:"8px 18px", cursor:"pointer", fontFamily:"sans-serif", fontSize:12, fontWeight:700 }}>Create Profile</button>
+                    <button onClick={() => { setProfileEmail(userEmail); setMsg(""); setView("create"); }} style={{ background:C.gold, color:C.navyDeep, border:"none", padding:"8px 18px", cursor:"pointer", fontFamily:"sans-serif", fontSize:12, fontWeight:700 }}>Create Profile</button>
                   </div>
                 </div>
               ) : (
@@ -940,7 +940,7 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
           {isAdmin && <button onClick={() => { setAdminTab("profiles"); loadAllProfiles(); loadPendingApprovals(); setView("admin"); }} style={{ background:"none", border:"1px solid " + C.gold, color:C.gold, padding:"6px 12px", cursor:"pointer", fontSize:11, fontFamily:"sans-serif" }}>Admin</button>}
           <button onClick={() => setView("messages")} style={{ background:"none", border:"1px solid " + C.border, color:C.muted, padding:"6px 12px", cursor:"pointer", fontSize:11, fontFamily:"sans-serif" }}>Messages</button>
           {!myProfile ? (
-            <button onClick={() => { setProfileEmail(userEmail); setView("create"); }} style={{ background:C.gold, color:C.navyDeep, border:"none", padding:"6px 14px", cursor:"pointer", fontSize:11, fontWeight:700, fontFamily:"sans-serif" }}>Create Profile</button>
+            <button onClick={() => { setProfileEmail(userEmail); setMsg(""); setView("create"); }} style={{ background:C.gold, color:C.navyDeep, border:"none", padding:"6px 14px", cursor:"pointer", fontSize:11, fontWeight:700, fontFamily:"sans-serif" }}>Create Profile</button>
           ) : (
             <button onClick={toggleHideProfile} style={{ background:"none", border:"1px solid " + C.border, color:hidden ? C.gold : C.muted, padding:"6px 12px", cursor:"pointer", fontSize:11, fontFamily:"sans-serif" }}>{hidden ? "Show Profile" : "Hide Profile"}</button>
           )}
