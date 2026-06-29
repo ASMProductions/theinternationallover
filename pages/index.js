@@ -3099,7 +3099,13 @@ export default function InternationalLover() {
   useEffect(() => {
     setTimeout(() => setHeroVisible(true), 100);
     const access = sessionStorage.getItem("il_access");
+    const womenAccess = sessionStorage.getItem("il_women_access");
     if (access === "true") { setHasAccess(true); setView("library"); }
+    // Women only get matrimonial — redirect them there directly
+    if (womenAccess === "true" && access !== "true") {
+      window.location.replace("/matrimonial");
+      return;
+    }
     const saved = sessionStorage.getItem("il_progress");
     if (saved) setProgress(JSON.parse(saved));
   }, []);

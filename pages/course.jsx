@@ -3286,9 +3286,10 @@ export default function CoursePage() {
 
   useEffect(() => {
     const access = sessionStorage.getItem("il_access") || sessionStorage.getItem("il_admin_session");
-    if (!access) { window.location.replace("/"); return; }
+    const womenAccess = sessionStorage.getItem("il_women_access");
+    if (!access && !womenAccess) { window.location.replace("/"); return; }
     const gender = sessionStorage.getItem("il_gender") || "man";
-    if (gender === "woman") { window.location.replace("/matrimonial"); }
+    if (gender === "woman" || womenAccess === "true") { setPhase("women_paywall"); return; }
   }, []);
 
   useEffect(() => { window.scrollTo({ top:0, behavior:"instant" }); }, [phase, activeRegionId, sceneIndex]);
@@ -3368,6 +3369,22 @@ export default function CoursePage() {
     const unrevealed = region.women.map(w => w.id).filter(id => !revealedCards.includes(id));
     if (unrevealed.length > 0) setRevealedCards(r => [...r, unrevealed[0]]);
   };
+
+  if (phase === "women_paywall") return (
+    <div style={{ minHeight:"100vh", background:"#0f2347", display:"flex", alignItems:"center", justifyContent:"center", fontFamily:"Georgia,serif", padding:"2rem" }}>
+      <div style={{ maxWidth:480, textAlign:"center" }}>
+        <div style={{ fontSize:11, letterSpacing:"0.35em", color:"#b8963e", fontFamily:"sans-serif", marginBottom:16 }}>THE INTERNATIONAL LOVER™</div>
+        <div style={{ fontSize:24, color:"#d4af6a", marginBottom:12 }}>The Course</div>
+        <p style={{ fontSize:14, color:"#8a7a5a", lineHeight:1.8, marginBottom:32, fontFamily:"sans-serif" }}>
+          The course is available to enrolled members. Women join the matrimonial platform free — full course access requires enrollment.
+        </p>
+        <div style={{ display:"flex", flexDirection:"column", gap:12, marginBottom:24 }}>
+          <a href="https://buy.stripe.com/00wbJ153D9Pg7D2a6a77O08" style={{ display:"block", padding:"14px 28px", background:"#b8963e", color:"#050d1a", textDecoration:"none", fontFamily:"sans-serif", fontSize:13, fontWeight:700 }}>Enroll — $497 →</a>
+          <a href="/matrimonial" style={{ display:"block", padding:"14px 28px", background:"transparent", border:"1px solid #1e3a6e", color:"#8a7a5a", textDecoration:"none", fontFamily:"sans-serif", fontSize:13 }}>← Return to Matrimonial Platform</a>
+        </div>
+      </div>
+    </div>
+  );
 
   if (phase === "intro") return (
     <div style={{ minHeight:"100vh", background:C.dark, color:C.cream, fontFamily:"Georgia,serif" }}>
