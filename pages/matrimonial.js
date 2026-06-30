@@ -81,6 +81,13 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
   const [conversations, setConversations] = useState([]);
   const [adminViewProfile, setAdminViewProfile] = useState(null);
   const [adminViewConvos, setAdminViewConvos] = useState([]);
+  const [toast, setToast] = useState(null);
+  const [confirmModal, setConfirmModal] = useState(null);
+  const [adminSearch, setAdminSearch] = useState("");
+  const [selectedProfiles, setSelectedProfiles] = useState([]);
+  const [reports, setReports] = useState([]);
+  const [blocks, setBlocks] = useState([]);
+  const [activityLog, setActivityLog] = useState([]);
   const [activeConvo, setActiveConvo] = useState(null);
   const [messageText, setMessageText] = useState("");
   const [hidden, setHidden] = useState(false);
@@ -200,7 +207,7 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
   };
 
   const revokeAmbassador = async (code) => {
-    if (!confirm("Revoke ambassador code " + code + "?")) return;
+    askConfirm("Revoke ambassador code " + code + "?", async () => {
     try {
       const adminKey = await getAdminKey();
       await fetch("/api/ambassadors", {
@@ -209,7 +216,9 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
         body: JSON.stringify({ action:"remove", adminKey, code })
       });
       setAmbassadors(prev => prev.filter(a => a.code !== code));
+      showToast("Ambassador code revoked.", "success");
     } catch(e) {}
+    });
   };
 
   const deleteConsulatePost = async (postId) => {
@@ -227,18 +236,81 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
   // Admin auth: use ADMINTEST code directly — all admin APIs accept it
   const getAdminKey = async () => "ADMINTEST";
 
+  const showToast = (message, type) => {
+    setToast({ message, type: type || "info" });
+    setTimeout(() => setToast(null), 3500);
+  };
+
+  const askConfirm = (message, onConfirm) => {
+    setConfirmModal({ message, onConfirm });
+  };
+
+  const loadReports = async () => {
+    try {
+      const res = await fetch("/api/matrimonial?action=listReports&adminKey=ADMINTEST");
+      const data = await res.json();
+      setReports(data.reports || []);
+    } catch(e) {}
+  };
+
+  const loadBlocks = async () => {
+    try {
+      const res = await fetch("/api/matrimonial?action=listBlocks&adminKey=ADMINTEST");
+      const data = await res.json();
+      setBlocks(data.blocks || []);
+    } catch(e) {}
+  };
+
+  const loadActivityLog = async () => {
+    try {
+      const res = await fetch("/api/matrimonial?action=activityLog&adminKey=ADMINTEST");
+      const data = await res.json();
+      setActivityLog(data.log || []);
+    } catch(e) {}
+  };
+
+  const dismissReport = async (reportIndex, target) => {
+    try {
+      const res = await fetch("/api/matrimonial", {
+        method:"POST", headers:{"Content-Type":"application/json"},
+        body: JSON.stringify({ action:"dismissReport", adminCode:"ADMINTEST", adminKey:"ADMINTEST", reportIndex, target })
+      });
+      const data = await res.json();
+      if (data.ok) { showToast("Report dismissed.", "success"); loadReports(); }
+      else showToast(data.error || "Failed to dismiss.", "error");
+    } catch(e) { showToast("Error dismissing report.", "error"); }
+  };
+
+  const bulkDeleteProfiles = async () => {
+    if (selectedProfiles.length === 0) return;
+    askConfirm(`Delete ${selectedProfiles.length} selected profile(s)? This cannot be undone.`, async () => {
+      try {
+        const res = await fetch("/api/matrimonial", {
+          method:"POST", headers:{"Content-Type":"application/json"},
+          body: JSON.stringify({ action:"bulkDelete", adminKey:"ADMINTEST", emails:selectedProfiles })
+        });
+        const data = await res.json();
+        if (data.ok) {
+          showToast(`${data.deleted} profile(s) deleted.`, "success");
+          setAllProfiles(prev => prev.filter(p => !selectedProfiles.includes(p.email)));
+          setSelectedProfiles([]);
+        } else showToast(data.error || "Bulk delete failed.", "error");
+      } catch(e) { showToast("Error during bulk delete.", "error"); }
+    });
+  };
+
   const seedVirtualWomen = async () => {
     try {
       const res = await fetch("/api/seed-virtual-women?code=ADMINTEST");
       const data = await res.json();
       if (data.seeded) {
-        alert("Success — " + data.seeded + " virtual women added to the platform.");
+        showToast("Success — " + data.seeded + " virtual women added.", "success");
         loadAllProfiles();
       } else {
-        alert(data.error || "Seed failed. Check that the deploy includes the updated seed-virtual-women.js");
+        showToast(data.error || "Seed failed.", "error");
       }
     } catch(e) { 
-      alert("Seed route not found. Make sure seed-virtual-women.js (with hyphens) is uploaded to pages/api/ in GitHub, then redeploy.");
+      showToast("Seed route not found. Check deployment.", "error");
     }
   };
 
@@ -247,13 +319,13 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
       const res = await fetch("/api/seed-founder?code=ADMINTEST");
       const data = await res.json();
       if (data.ok) {
-        alert("Founder profile seeded successfully.");
+        showToast("Founder profile seeded successfully.", "success");
         loadAllProfiles();
         loadMyProfile();
       } else {
-        alert(data.error || "Seed failed.");
+        showToast(data.error || "Seed failed.", "error");
       }
-    } catch(e) { alert("Error seeding founder profile."); }
+    } catch(e) { showToast("Error seeding founder profile.", "error"); }
   };
 
   const loadLeads = async () => {
@@ -273,12 +345,12 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
       });
       const data = await res.json();
       if (data.ok) {
-        alert("Approved — access email sent to " + email);
+        showToast("Approved — access email sent to " + email, "success");
         setLeads(prev => prev.map(l => l.email === email ? {...l, approved:true} : l));
       } else {
-        alert("Error: " + (data.error || "Failed"));
+        showToast("Error: " + (data.error || "Failed"), "error");
       }
-    } catch(e) { alert("Error approving lead."); }
+    } catch(e) { showToast("Error approving lead.", "error"); }
   };
 
   const backfillWomenGender = async () => {
@@ -295,8 +367,8 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
         });
         count++;
       }
-      alert(`Gender backfilled for ${count} women.`);
-    } catch(e) { alert("Error backfilling gender."); }
+      showToast(`Gender backfilled for ${count} women.`, "success");
+    } catch(e) { showToast("Error backfilling gender.", "error"); }
   };
 
   const setLeadGender = async (email, gender) => {
@@ -308,12 +380,12 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
       });
       const data = await res.json();
       if (data.ok) {
-        alert(`Gender set to "${gender}" for ${email}. Their next magic link will route correctly.`);
+        showToast(`Gender set to "${gender}" for ${email}.`, "success");
         setLeads(prev => prev.map(l => l.email === email ? {...l, gender} : l));
       } else {
-        alert(data.error || "Failed.");
+        showToast(data.error || "Failed.", "error");
       }
-    } catch(e) { alert("Error setting gender."); }
+    } catch(e) { showToast("Error setting gender.", "error"); }
   };
 
   const loadPendingApprovals = async () => {
@@ -396,7 +468,7 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
   };
 
   const blockUser = async (targetEmail) => {
-    if (!confirm("Block this member? They will no longer be able to contact you or see your profile.")) return;
+    askConfirm("Block this member? They will no longer be able to contact you or see your profile.", async () => {
     try {
       await fetch("/api/matrimonial", {
         method:"POST",
@@ -405,7 +477,9 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
       });
       setProfiles(prev => prev.filter(p => p.email !== targetEmail));
       setView("browse");
+      showToast("Member blocked.", "success");
     } catch(e) {}
+    });
   };
 
   const reportUser = async (targetEmail) => {
@@ -417,7 +491,7 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
         headers:{"Content-Type":"application/json"},
         body: JSON.stringify({ action:"report", email:userEmail, target:targetEmail, reason })
       });
-      alert("Report submitted. Thank you.");
+      showToast("Report submitted. Thank you.", "success");
     } catch(e) {}
   };
 
@@ -676,7 +750,7 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
                     <input type="file" accept="image/*" style={{ display:"none" }} onChange={e => {
                       const file = e.target.files[0];
                       if (!file) return;
-                      if (file.size > 8 * 1024 * 1024) { alert("Photo must be under 8MB."); return; }
+                      if (file.size > 8 * 1024 * 1024) { showToast("Photo must be under 8MB.", "error"); return; }
                       const img = new Image();
                       const reader = new FileReader();
                       reader.onload = ev => {
@@ -722,9 +796,12 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
     const cardStyle = { background:C.navyDeep, border:"1px solid " + C.border, padding:"1rem 1.25rem", marginBottom:10, display:"flex", gap:14, alignItems:"flex-start" };
     const ADMIN_TABS = [
       { id:"profiles", label:"Profiles" },
+      { id:"reports", label:"Reports" + (reports.length ? ` (${reports.length})` : "") },
+      { id:"blocks", label:"Blocks" },
       { id:"consulate", label:"Consulate" },
       { id:"ambassadors", label:"Ambassadors" },
       { id:"leads", label:"Women's Profiles" },
+      { id:"activity", label:"Activity" },
       { id:"myprofile", label:"My Profile" },
     ];
     return (
@@ -738,9 +815,12 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
               <button key={t.id} onClick={() => {
                 setAdminTab(t.id);
                 if (t.id === "profiles") { loadAllProfiles(); loadPendingApprovals(); }
+                if (t.id === "reports") loadReports();
+                if (t.id === "blocks") loadBlocks();
                 if (t.id === "consulate") loadConsulatePosts();
                 if (t.id === "ambassadors") loadAmbassadors();
                 if (t.id === "leads") loadLeads();
+                if (t.id === "activity") loadActivityLog();
                 if (t.id === "myprofile") loadMyProfile();
               }} style={{ padding:"6px 14px", background:adminTab===t.id?C.gold:"transparent", color:adminTab===t.id?C.navyDeep:C.muted, border:"1px solid "+(adminTab===t.id?C.gold:C.border), cursor:"pointer", fontSize:11, fontFamily:"sans-serif", fontWeight:adminTab===t.id?700:400 }}>
                 {t.label}
@@ -780,9 +860,24 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
                 <button onClick={seedVirtualWomen} style={{ padding:"6px 14px", background:"transparent", border:"1px solid #4a6fa5", color:"#7aa0d0", cursor:"pointer", fontSize:11, fontFamily:"sans-serif" }}>＋ Seed Virtual Women</button>
                 <button onClick={seedFounderProfile} style={{ padding:"6px 14px", background:"transparent", border:"1px solid " + C.gold, color:C.gold, cursor:"pointer", fontSize:11, fontFamily:"sans-serif" }}>✦ Seed Founder Profile</button>
               </div>
+              <div style={{ display:"flex", gap:10, alignItems:"center", marginBottom:14, flexWrap:"wrap" }}>
+                <input value={adminSearch} onChange={e => setAdminSearch(e.target.value)} placeholder="Search by name or email…" style={{ flex:1, minWidth:200, padding:"8px 12px", background:C.dark, border:"1px solid " + C.border, color:C.cream, fontSize:12, fontFamily:"sans-serif" }} />
+                {selectedProfiles.length > 0 && (
+                  <button onClick={bulkDeleteProfiles} style={{ padding:"8px 14px", background:"transparent", border:"1px solid " + C.red, color:C.red, cursor:"pointer", fontSize:11, fontFamily:"sans-serif", fontWeight:700 }}>Delete Selected ({selectedProfiles.length})</button>
+                )}
+              </div>
               {allProfiles.length === 0 && <div style={{ color:C.muted, textAlign:"center", padding:"2rem", fontFamily:"sans-serif" }}>No profiles found. Click "Seed Virtual Women" above to add the 22 course women.</div>}
-              {allProfiles.map(p => (
+              {allProfiles
+                .filter(p => {
+                  if (!adminSearch.trim()) return true;
+                  const q = adminSearch.trim().toLowerCase();
+                  return (p.displayName||"").toLowerCase().includes(q) || (p.email||"").toLowerCase().includes(q);
+                })
+                .map(p => (
                 <div key={p.email} style={cardStyle}>
+                  <input type="checkbox" checked={selectedProfiles.includes(p.email)} onChange={() => {
+                    setSelectedProfiles(prev => prev.includes(p.email) ? prev.filter(e => e !== p.email) : [...prev, p.email]);
+                  }} style={{ marginTop:4, flexShrink:0 }} />
                   {p.photoUrl && <img src={p.photoUrl} alt={p.displayName} style={{ width:60, height:76, objectFit:"cover", objectPosition:"center top", flexShrink:0, border:"1px solid " + C.border }} />}
                   <div style={{ flex:1 }}>
                     <div style={{ display:"flex", gap:8, alignItems:"center", marginBottom:4, flexWrap:"wrap" }}>
@@ -881,6 +976,58 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
             </div>
           )}
 
+          {/* ── REPORTS ── */}
+          {adminTab === "reports" && (
+            <div>
+              <div style={{ fontSize:9, letterSpacing:"0.2em", color:C.muted, fontFamily:"sans-serif", marginBottom:16 }}>REPORTS — {reports.length} total</div>
+              {reports.length === 0 && <div style={{ color:C.muted, textAlign:"center", padding:"3rem", fontFamily:"sans-serif" }}>No reports filed. This is good.</div>}
+              {reports.map((r, i) => (
+                <div key={i} style={{ ...cardStyle, flexDirection:"column", gap:8 }}>
+                  <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-start", width:"100%", flexWrap:"wrap", gap:8 }}>
+                    <div>
+                      <div style={{ fontSize:13, color:C.goldLight, marginBottom:2 }}>{r.target}</div>
+                      <div style={{ fontSize:10, color:C.muted, fontFamily:"sans-serif" }}>Reported by {r.reporter} · {r.timestamp ? new Date(r.timestamp).toLocaleString() : "Unknown date"}</div>
+                    </div>
+                    <button onClick={() => dismissReport(i, r.target)} style={{ padding:"4px 12px", background:"transparent", border:"1px solid " + C.border, color:C.muted, cursor:"pointer", fontFamily:"sans-serif", fontSize:10 }}>Dismiss</button>
+                  </div>
+                  {r.reason && <p style={{ fontSize:12, color:C.creamDim, fontFamily:"sans-serif", lineHeight:1.6, margin:0 }}>{r.reason}</p>}
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* ── BLOCKS ── */}
+          {adminTab === "blocks" && (
+            <div>
+              <div style={{ fontSize:9, letterSpacing:"0.2em", color:C.muted, fontFamily:"sans-serif", marginBottom:16 }}>BLOCK RELATIONSHIPS — {blocks.length} members with active blocks</div>
+              {blocks.length === 0 && <div style={{ color:C.muted, textAlign:"center", padding:"3rem", fontFamily:"sans-serif" }}>No blocks on the platform.</div>}
+              {blocks.map(b => (
+                <div key={b.blocker} style={cardStyle}>
+                  <div style={{ flex:1 }}>
+                    <div style={{ fontSize:13, color:C.goldLight, marginBottom:6 }}>{b.blocker}</div>
+                    <div style={{ fontSize:11, color:C.muted, fontFamily:"sans-serif" }}>has blocked: {b.blocked.join(", ")}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* ── ACTIVITY ── */}
+          {adminTab === "activity" && (
+            <div>
+              <div style={{ fontSize:9, letterSpacing:"0.2em", color:C.muted, fontFamily:"sans-serif", marginBottom:16 }}>ACTIVITY LOG — last {activityLog.length} actions</div>
+              {activityLog.length === 0 && <div style={{ color:C.muted, textAlign:"center", padding:"3rem", fontFamily:"sans-serif" }}>No activity recorded yet.</div>}
+              {activityLog.map((entry, i) => (
+                <div key={i} style={{ padding:"0.65rem 1rem", borderBottom:"1px solid " + C.border, display:"flex", justifyContent:"space-between", alignItems:"center", gap:10, flexWrap:"wrap" }}>
+                  <div style={{ fontSize:12, color:C.creamDim, fontFamily:"sans-serif" }}>
+                    <span style={{ color:C.gold, fontWeight:700 }}>{entry.action}</span> · {entry.target}{entry.detail ? " — " + entry.detail : ""}
+                  </div>
+                  <div style={{ fontSize:10, color:C.muted, fontFamily:"sans-serif", flexShrink:0 }}>{entry.timestamp ? new Date(entry.timestamp).toLocaleString() : ""}</div>
+                </div>
+              ))}
+            </div>
+          )}
+
           {/* ── LEADS ── */}
           {adminTab === "leads" && (
             <div>
@@ -910,8 +1057,15 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
                 <div style={{ fontSize:9, letterSpacing:"0.2em", color:C.muted, fontFamily:"sans-serif" }}>WOMEN'S PROFILES — {leads.length} total</div>
                 <button onClick={backfillWomenGender} style={{ padding:"5px 12px", background:"transparent", border:"1px solid #4a6fa5", color:"#7aa0d0", cursor:"pointer", fontSize:10, fontFamily:"sans-serif" }}>Fix Gender for All</button>
               </div>
+              <input value={adminSearch} onChange={e => setAdminSearch(e.target.value)} placeholder="Search by name or email…" style={{ width:"100%", padding:"8px 12px", background:C.dark, border:"1px solid " + C.border, color:C.cream, fontSize:12, fontFamily:"sans-serif", marginBottom:14, boxSizing:"border-box" }} />
               {leads.length === 0 && <div style={{ color:C.muted, textAlign:"center", padding:"3rem", fontFamily:"sans-serif" }}>No registrations yet.</div>}
-              {leads.map(lead => (
+              {leads
+                .filter(lead => {
+                  if (!adminSearch.trim()) return true;
+                  const q = adminSearch.trim().toLowerCase();
+                  return (lead.name||"").toLowerCase().includes(q) || (lead.email||"").toLowerCase().includes(q);
+                })
+                .map(lead => (
                 <div key={lead.email} style={{ background:C.navyDeep, border:"1px solid " + (lead.approved ? C.green : C.border), padding:"1rem 1.25rem", marginBottom:10, display:"flex", justifyContent:"space-between", alignItems:"center", flexWrap:"wrap", gap:12 }}>
                   <div>
                     <div style={{ display:"flex", gap:8, alignItems:"center", marginBottom:4 }}>
@@ -936,12 +1090,13 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
                     <button onClick={() => setLeadGender(lead.email, "man")} style={{ padding:"8px 14px", background:"transparent", border:"1px solid " + C.muted, color:C.muted, cursor:"pointer", fontFamily:"sans-serif", fontSize:11 }}>
                       Set as Man
                     </button>
-                    <button onClick={async () => {
-                      if (!confirm("Delete profile for " + lead.email + "? This removes all their access.")) return;
+                    <button onClick={() => {
+                      askConfirm("Delete profile for " + lead.email + "? This removes all their access.", async () => {
                       const res = await fetch("/api/approve-lead", { method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({ adminCode:"ADMINTEST", email:lead.email, deleteProfile:true }) });
                       const data = await res.json();
-                      if (data.ok) setLeads(prev => prev.filter(l => l.email !== lead.email));
-                      else alert(data.error || "Delete failed.");
+                      if (data.ok) { setLeads(prev => prev.filter(l => l.email !== lead.email)); showToast("Profile deleted.", "success"); }
+                      else showToast(data.error || "Delete failed.", "error");
+                      });
                     }} style={{ padding:"8px 14px", background:"transparent", border:"1px solid " + C.red, color:C.red, cursor:"pointer", fontFamily:"sans-serif", fontSize:11 }}>
                       Delete
                     </button>
@@ -1030,6 +1185,22 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
                   {c.lastTimestamp > 0 && <div style={{ fontSize:9, color:C.muted, fontFamily:"sans-serif", marginTop:4 }}>{new Date(c.lastTimestamp).toLocaleString()}</div>}
                 </div>
               ))}
+            </div>
+          </div>
+        )}
+        {toast && (
+          <div style={{ position:"fixed", bottom:20, left:"50%", transform:"translateX(-50%)", background: toast.type==="error"?"#3a1414":toast.type==="success"?"#14301c":"#16243f", border:"1px solid "+(toast.type==="error"?C.red:toast.type==="success"?C.green:C.gold), color:C.cream, padding:"12px 24px", fontSize:13, fontFamily:"sans-serif", zIndex:9999, boxShadow:"0 4px 20px rgba(0,0,0,0.5)" }}>
+            {toast.message}
+          </div>
+        )}
+        {confirmModal && (
+          <div style={{ position:"fixed", inset:0, background:"rgba(5,13,26,0.85)", display:"flex", alignItems:"center", justifyContent:"center", zIndex:9998, padding:"1.5rem" }}>
+            <div style={{ background:C.navyDeep, border:"1px solid "+C.gold, padding:"1.75rem", maxWidth:420, width:"100%" }}>
+              <div style={{ fontSize:14, color:C.cream, fontFamily:"sans-serif", lineHeight:1.6, marginBottom:20 }}>{confirmModal.message}</div>
+              <div style={{ display:"flex", gap:10, justifyContent:"flex-end" }}>
+                <button onClick={() => setConfirmModal(null)} style={{ padding:"8px 18px", background:"transparent", border:"1px solid "+C.border, color:C.muted, cursor:"pointer", fontFamily:"sans-serif", fontSize:12 }}>Cancel</button>
+                <button onClick={() => { const fn = confirmModal.onConfirm; setConfirmModal(null); fn(); }} style={{ padding:"8px 18px", background:C.red, color:"white", border:"none", cursor:"pointer", fontFamily:"sans-serif", fontSize:12, fontWeight:700 }}>Confirm</button>
+              </div>
             </div>
           </div>
         )}
@@ -1164,6 +1335,22 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
           ))}
         </div>
       </div>
+      {toast && (
+        <div style={{ position:"fixed", bottom:20, left:"50%", transform:"translateX(-50%)", background: toast.type==="error"?"#3a1414":toast.type==="success"?"#14301c":"#16243f", border:"1px solid "+(toast.type==="error"?C.red:toast.type==="success"?C.green:C.gold), color:C.cream, padding:"12px 24px", fontSize:13, fontFamily:"sans-serif", zIndex:9999, boxShadow:"0 4px 20px rgba(0,0,0,0.5)" }}>
+          {toast.message}
+        </div>
+      )}
+      {confirmModal && (
+        <div style={{ position:"fixed", inset:0, background:"rgba(5,13,26,0.85)", display:"flex", alignItems:"center", justifyContent:"center", zIndex:9998, padding:"1.5rem" }}>
+          <div style={{ background:C.navyDeep, border:"1px solid "+C.gold, padding:"1.75rem", maxWidth:420, width:"100%" }}>
+            <div style={{ fontSize:14, color:C.cream, fontFamily:"sans-serif", lineHeight:1.6, marginBottom:20 }}>{confirmModal.message}</div>
+            <div style={{ display:"flex", gap:10, justifyContent:"flex-end" }}>
+              <button onClick={() => setConfirmModal(null)} style={{ padding:"8px 18px", background:"transparent", border:"1px solid "+C.border, color:C.muted, cursor:"pointer", fontFamily:"sans-serif", fontSize:12 }}>Cancel</button>
+              <button onClick={() => { const fn = confirmModal.onConfirm; setConfirmModal(null); fn(); }} style={{ padding:"8px 18px", background:C.red, color:"white", border:"none", cursor:"pointer", fontFamily:"sans-serif", fontSize:12, fontWeight:700 }}>Confirm</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
