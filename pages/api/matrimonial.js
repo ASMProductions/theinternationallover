@@ -133,7 +133,7 @@ export default async function handler(req, res) {
         city, country, region, religion, bio,
         familyInvolvement, virtueStatus, maritalStatus, hasChildren,
         education, languages, height, seeking,
-        approved: gender === "man", // men auto-approve, women need admin
+        approved: true, // all profiles auto-approve
         hidden: false,
         isCertified: false,
         isAmbassador: false,
