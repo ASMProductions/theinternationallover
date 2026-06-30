@@ -91,7 +91,7 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
   const [newAmbResult, setNewAmbResult] = useState("");
   const [leads, setLeads] = useState([]);
 
-  const canContact = isAmbassador || isCertified;
+  const canContact = isAmbassador || isCertified || isAdmin;
   const showMen = gender === "woman";
   const showWomen = gender !== "woman"; // default to showing women (men + unset sessions)
 
