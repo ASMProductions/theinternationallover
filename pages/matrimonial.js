@@ -88,6 +88,7 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
   const [reports, setReports] = useState([]);
   const [blocks, setBlocks] = useState([]);
   const [passedProfiles, setPassedProfiles] = useState([]);
+  const [blockedProfiles, setBlockedProfiles] = useState([]);
   const [allPasses, setAllPasses] = useState([]);
   const [lightboxPhoto, setLightboxPhoto] = useState(null);
   const [activityLog, setActivityLog] = useState([]);
@@ -281,6 +282,18 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
       });
       setAllPasses(prev => prev.map(p => p.passer === passer ? { ...p, passed: p.passed.filter(t => t !== target) } : p).filter(p => p.passed.length > 0));
       showToast("Pass relationship cleared.", "success");
+    } catch(e) {}
+  };
+
+  const adminClearBlock = async (blocker, target) => {
+    try {
+      await fetch("/api/matrimonial", {
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body: JSON.stringify({ action:"adminClearBlock", adminKey:"ADMINTEST", blocker, target })
+      });
+      setBlocks(prev => prev.map(b => b.blocker === blocker ? { ...b, blocked: b.blocked.filter(t => t !== target) } : b).filter(b => b.blocked.length > 0));
+      showToast("Block relationship cleared.", "success");
     } catch(e) {}
   };
 
@@ -551,6 +564,26 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
     } catch(e) {}
   };
 
+  const loadBlockedProfiles = async () => {
+    try {
+      const res = await fetch("/api/matrimonial?action=listBlocked&email=" + encodeURIComponent(userEmail));
+      const data = await res.json();
+      setBlockedProfiles(data.profiles || []);
+    } catch(e) {}
+  };
+
+  const unblockUser = async (targetEmail) => {
+    try {
+      await fetch("/api/matrimonial", {
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body: JSON.stringify({ action:"unblock", email:userEmail, target:targetEmail })
+      });
+      setBlockedProfiles(prev => prev.filter(p => p.email !== targetEmail));
+      showToast("Member unblocked. They can contact you and see your profile again.", "success");
+    } catch(e) {}
+  };
+
   const approveProfile = async (profileEmail) => {
     try {
       await fetch("/api/matrimonial", {
@@ -660,6 +693,22 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
             <img src={lightboxPhoto} alt="Full size" style={{ maxWidth:"90vw", maxHeight:"85vh", objectFit:"contain", border:"1px solid " + C.gold }} />
           </div>
         )}
+        {toast && (
+          <div style={{ position:"fixed", bottom:20, left:"50%", transform:"translateX(-50%)", background: toast.type==="error"?"#3a1414":toast.type==="success"?"#14301c":"#16243f", border:"1px solid "+(toast.type==="error"?C.red:toast.type==="success"?C.green:C.gold), color:C.cream, padding:"12px 24px", fontSize:13, fontFamily:"sans-serif", zIndex:9999, boxShadow:"0 4px 20px rgba(0,0,0,0.5)" }}>
+            {toast.message}
+          </div>
+        )}
+        {confirmModal && (
+          <div style={{ position:"fixed", inset:0, background:"rgba(5,13,26,0.85)", display:"flex", alignItems:"center", justifyContent:"center", zIndex:9998, padding:"1.5rem" }}>
+            <div style={{ background:C.navyDeep, border:"1px solid "+C.gold, padding:"1.75rem", maxWidth:420, width:"100%" }}>
+              <div style={{ fontSize:14, color:C.cream, fontFamily:"sans-serif", lineHeight:1.6, marginBottom:20 }}>{confirmModal.message}</div>
+              <div style={{ display:"flex", gap:10, justifyContent:"flex-end" }}>
+                <button onClick={() => setConfirmModal(null)} style={{ padding:"8px 18px", background:"transparent", border:"1px solid "+C.border, color:C.muted, cursor:"pointer", fontFamily:"sans-serif", fontSize:12 }}>Cancel</button>
+                <button onClick={() => { const fn = confirmModal.onConfirm; setConfirmModal(null); fn(); }} style={{ padding:"8px 18px", background:C.red, color:"white", border:"none", cursor:"pointer", fontFamily:"sans-serif", fontSize:12, fontWeight:700 }}>Confirm</button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     );
   }
@@ -711,6 +760,22 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
             </div>
           )}
         </div>
+        {toast && (
+          <div style={{ position:"fixed", bottom:20, left:"50%", transform:"translateX(-50%)", background: toast.type==="error"?"#3a1414":toast.type==="success"?"#14301c":"#16243f", border:"1px solid "+(toast.type==="error"?C.red:toast.type==="success"?C.green:C.gold), color:C.cream, padding:"12px 24px", fontSize:13, fontFamily:"sans-serif", zIndex:9999, boxShadow:"0 4px 20px rgba(0,0,0,0.5)" }}>
+            {toast.message}
+          </div>
+        )}
+        {confirmModal && (
+          <div style={{ position:"fixed", inset:0, background:"rgba(5,13,26,0.85)", display:"flex", alignItems:"center", justifyContent:"center", zIndex:9998, padding:"1.5rem" }}>
+            <div style={{ background:C.navyDeep, border:"1px solid "+C.gold, padding:"1.75rem", maxWidth:420, width:"100%" }}>
+              <div style={{ fontSize:14, color:C.cream, fontFamily:"sans-serif", lineHeight:1.6, marginBottom:20 }}>{confirmModal.message}</div>
+              <div style={{ display:"flex", gap:10, justifyContent:"flex-end" }}>
+                <button onClick={() => setConfirmModal(null)} style={{ padding:"8px 18px", background:"transparent", border:"1px solid "+C.border, color:C.muted, cursor:"pointer", fontFamily:"sans-serif", fontSize:12 }}>Cancel</button>
+                <button onClick={() => { const fn = confirmModal.onConfirm; setConfirmModal(null); fn(); }} style={{ padding:"8px 18px", background:C.red, color:"white", border:"none", cursor:"pointer", fontFamily:"sans-serif", fontSize:12, fontWeight:700 }}>Confirm</button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     );
   }
@@ -859,6 +924,22 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
             </div>
           )}
         </div>
+        {toast && (
+          <div style={{ position:"fixed", bottom:20, left:"50%", transform:"translateX(-50%)", background: toast.type==="error"?"#3a1414":toast.type==="success"?"#14301c":"#16243f", border:"1px solid "+(toast.type==="error"?C.red:toast.type==="success"?C.green:C.gold), color:C.cream, padding:"12px 24px", fontSize:13, fontFamily:"sans-serif", zIndex:9999, boxShadow:"0 4px 20px rgba(0,0,0,0.5)" }}>
+            {toast.message}
+          </div>
+        )}
+        {confirmModal && (
+          <div style={{ position:"fixed", inset:0, background:"rgba(5,13,26,0.85)", display:"flex", alignItems:"center", justifyContent:"center", zIndex:9998, padding:"1.5rem" }}>
+            <div style={{ background:C.navyDeep, border:"1px solid "+C.gold, padding:"1.75rem", maxWidth:420, width:"100%" }}>
+              <div style={{ fontSize:14, color:C.cream, fontFamily:"sans-serif", lineHeight:1.6, marginBottom:20 }}>{confirmModal.message}</div>
+              <div style={{ display:"flex", gap:10, justifyContent:"flex-end" }}>
+                <button onClick={() => setConfirmModal(null)} style={{ padding:"8px 18px", background:"transparent", border:"1px solid "+C.border, color:C.muted, cursor:"pointer", fontFamily:"sans-serif", fontSize:12 }}>Cancel</button>
+                <button onClick={() => { const fn = confirmModal.onConfirm; setConfirmModal(null); fn(); }} style={{ padding:"8px 18px", background:C.red, color:"white", border:"none", cursor:"pointer", fontFamily:"sans-serif", fontSize:12, fontWeight:700 }}>Confirm</button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     );
   }
@@ -1074,12 +1155,18 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
           {adminTab === "blocks" && (
             <div>
               <div style={{ fontSize:9, letterSpacing:"0.2em", color:C.muted, fontFamily:"sans-serif", marginBottom:16 }}>BLOCK RELATIONSHIPS — {blocks.length} members with active blocks</div>
+              <p style={{ fontSize:11, color:C.muted, fontFamily:"sans-serif", marginBottom:16, lineHeight:1.6 }}>Members can also undo their own blocks under My Profile → Blocked Members. Use Clear here only for testing or support purposes.</p>
               {blocks.length === 0 && <div style={{ color:C.muted, textAlign:"center", padding:"3rem", fontFamily:"sans-serif" }}>No blocks on the platform.</div>}
               {blocks.map(b => (
-                <div key={b.blocker} style={cardStyle}>
-                  <div style={{ flex:1 }}>
-                    <div style={{ fontSize:13, color:C.goldLight, marginBottom:6 }}>{b.blocker}</div>
-                    <div style={{ fontSize:11, color:C.muted, fontFamily:"sans-serif" }}>has blocked: {b.blocked.join(", ")}</div>
+                <div key={b.blocker} style={{ ...cardStyle, flexDirection:"column", alignItems:"flex-start", gap:8 }}>
+                  <div style={{ fontSize:13, color:C.goldLight }}>{b.blocker}</div>
+                  <div style={{ display:"flex", flexWrap:"wrap", gap:6 }}>
+                    {b.blocked.map(t => (
+                      <div key={t} style={{ display:"flex", alignItems:"center", gap:6, background:C.dark, border:"1px solid " + C.border, padding:"3px 10px", fontSize:11, fontFamily:"sans-serif", color:C.creamDim }}>
+                        {t}
+                        <button onClick={() => adminClearBlock(b.blocker, t)} style={{ background:"none", border:"none", color:C.red, cursor:"pointer", fontSize:11, padding:0 }}>×</button>
+                      </div>
+                    ))}
                   </div>
                 </div>
               ))}
@@ -1329,6 +1416,67 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
             </div>
           ))}
         </div>
+        {toast && (
+          <div style={{ position:"fixed", bottom:20, left:"50%", transform:"translateX(-50%)", background: toast.type==="error"?"#3a1414":toast.type==="success"?"#14301c":"#16243f", border:"1px solid "+(toast.type==="error"?C.red:toast.type==="success"?C.green:C.gold), color:C.cream, padding:"12px 24px", fontSize:13, fontFamily:"sans-serif", zIndex:9999, boxShadow:"0 4px 20px rgba(0,0,0,0.5)" }}>
+            {toast.message}
+          </div>
+        )}
+        {confirmModal && (
+          <div style={{ position:"fixed", inset:0, background:"rgba(5,13,26,0.85)", display:"flex", alignItems:"center", justifyContent:"center", zIndex:9998, padding:"1.5rem" }}>
+            <div style={{ background:C.navyDeep, border:"1px solid "+C.gold, padding:"1.75rem", maxWidth:420, width:"100%" }}>
+              <div style={{ fontSize:14, color:C.cream, fontFamily:"sans-serif", lineHeight:1.6, marginBottom:20 }}>{confirmModal.message}</div>
+              <div style={{ display:"flex", gap:10, justifyContent:"flex-end" }}>
+                <button onClick={() => setConfirmModal(null)} style={{ padding:"8px 18px", background:"transparent", border:"1px solid "+C.border, color:C.muted, cursor:"pointer", fontFamily:"sans-serif", fontSize:12 }}>Cancel</button>
+                <button onClick={() => { const fn = confirmModal.onConfirm; setConfirmModal(null); fn(); }} style={{ padding:"8px 18px", background:C.red, color:"white", border:"none", cursor:"pointer", fontFamily:"sans-serif", fontSize:12, fontWeight:700 }}>Confirm</button>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    );
+  }
+
+  if (view === "blocked") {
+    return (
+      <div style={{ minHeight:"100vh", background:C.dark, color:C.cream, fontFamily:"Georgia,serif" }}>
+        <div style={{ background:C.navyDeep, borderBottom:"1px solid " + C.border, padding:"1rem 1.5rem", display:"flex", alignItems:"center", gap:12 }}>
+          <button onClick={() => setView("myprofile")} style={{ background:"none", border:"1px solid " + C.gold, color:C.gold, padding:"6px 14px", cursor:"pointer", fontSize:12, fontFamily:"sans-serif" }}>← Back</button>
+          <div style={{ fontSize:14, color:C.goldLight }}>Blocked Members</div>
+        </div>
+        <div style={{ maxWidth:620, margin:"0 auto", padding:"2rem 1.5rem" }}>
+          <p style={{ fontSize:12, color:C.muted, fontFamily:"sans-serif", lineHeight:1.6, marginBottom:"1.5rem" }}>Members you've blocked cannot contact you or see your profile. Unblock any of them below to restore normal access.</p>
+          {blockedProfiles.length === 0 && <div style={{ color:C.muted, textAlign:"center", padding:"3rem", fontFamily:"sans-serif" }}>You haven't blocked anyone.</div>}
+          {blockedProfiles.map(p => (
+            <div key={p.email} style={{ display:"flex", gap:14, alignItems:"center", padding:"1rem", background:C.navyDeep, border:"1px solid " + C.border, marginBottom:8 }}>
+              {p.photoUrl ? (
+                <img src={p.photoUrl} alt={p.displayName} style={{ width:48, height:60, objectFit:"cover", objectPosition:"center top", flexShrink:0 }} />
+              ) : (
+                <div style={{ width:48, height:60, background:"rgba(184,150,62,0.15)", border:"1px solid " + C.gold, display:"flex", alignItems:"center", justifyContent:"center", fontSize:16, color:C.gold, flexShrink:0 }}>{(p.displayName||"?")[0].toUpperCase()}</div>
+              )}
+              <div style={{ flex:1, minWidth:0 }}>
+                <div style={{ fontSize:14, color:C.goldLight }}>{p.displayName}</div>
+                <div style={{ fontSize:11, color:C.muted, fontFamily:"sans-serif" }}>{p.age} · {p.city}</div>
+              </div>
+              <button onClick={() => unblockUser(p.email)} style={{ padding:"6px 14px", background:"transparent", border:"1px solid " + C.red, color:C.red, cursor:"pointer", fontFamily:"sans-serif", fontSize:11, flexShrink:0 }}>Unblock</button>
+            </div>
+          ))}
+        </div>
+        {toast && (
+          <div style={{ position:"fixed", bottom:20, left:"50%", transform:"translateX(-50%)", background: toast.type==="error"?"#3a1414":toast.type==="success"?"#14301c":"#16243f", border:"1px solid "+(toast.type==="error"?C.red:toast.type==="success"?C.green:C.gold), color:C.cream, padding:"12px 24px", fontSize:13, fontFamily:"sans-serif", zIndex:9999, boxShadow:"0 4px 20px rgba(0,0,0,0.5)" }}>
+            {toast.message}
+          </div>
+        )}
+        {confirmModal && (
+          <div style={{ position:"fixed", inset:0, background:"rgba(5,13,26,0.85)", display:"flex", alignItems:"center", justifyContent:"center", zIndex:9998, padding:"1.5rem" }}>
+            <div style={{ background:C.navyDeep, border:"1px solid "+C.gold, padding:"1.75rem", maxWidth:420, width:"100%" }}>
+              <div style={{ fontSize:14, color:C.cream, fontFamily:"sans-serif", lineHeight:1.6, marginBottom:20 }}>{confirmModal.message}</div>
+              <div style={{ display:"flex", gap:10, justifyContent:"flex-end" }}>
+                <button onClick={() => setConfirmModal(null)} style={{ padding:"8px 18px", background:"transparent", border:"1px solid "+C.border, color:C.muted, cursor:"pointer", fontFamily:"sans-serif", fontSize:12 }}>Cancel</button>
+                <button onClick={() => { const fn = confirmModal.onConfirm; setConfirmModal(null); fn(); }} style={{ padding:"8px 18px", background:C.red, color:"white", border:"none", cursor:"pointer", fontFamily:"sans-serif", fontSize:12, fontWeight:700 }}>Confirm</button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     );
   }
@@ -1367,10 +1515,27 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
                 <button onClick={() => { setIsEditing(true); setCreateForm({ displayName:myProfile.displayName||"", age:myProfile.age||"", city:myProfile.city||"", country:myProfile.country||"", region:myProfile.region||"all", religion:myProfile.religion||"Muslim", bio:myProfile.bio||"", familyInvolvement:myProfile.familyInvolvement||"", virtueStatus:myProfile.virtueStatus||"", maritalStatus:myProfile.maritalStatus||"", hasChildren:myProfile.hasChildren||"No", seeking:myProfile.seeking||"Marriage", photos: myProfile.photos || (myProfile.photoUrl ? [myProfile.photoUrl] : []), photoBase64:null }); setIsEditing(true); setProfileEmail(userEmail); setMsg(""); setView("create"); }} style={{ padding:"10px 22px", background:C.gold, color:C.navyDeep, border:"none", cursor:"pointer", fontSize:13, fontWeight:700, fontFamily:"sans-serif" }}>Edit Profile</button>
                 <button onClick={toggleHideProfile} style={{ padding:"10px 22px", background:"transparent", border:"1px solid " + C.border, color:C.muted, cursor:"pointer", fontSize:13, fontFamily:"sans-serif" }}>{myProfile.hidden ? "Show Profile" : "Hide Profile"}</button>
                 <button onClick={() => { loadPassedProfiles(); setView("passed"); }} style={{ padding:"10px 22px", background:"transparent", border:"1px solid " + C.border, color:C.muted, cursor:"pointer", fontSize:13, fontFamily:"sans-serif" }}>Passed Profiles</button>
+                <button onClick={() => { loadBlockedProfiles(); setView("blocked"); }} style={{ padding:"10px 22px", background:"transparent", border:"1px solid " + C.border, color:C.muted, cursor:"pointer", fontSize:13, fontFamily:"sans-serif" }}>Blocked Members</button>
               </div>
             </div>
           )}
         </div>
+        {toast && (
+          <div style={{ position:"fixed", bottom:20, left:"50%", transform:"translateX(-50%)", background: toast.type==="error"?"#3a1414":toast.type==="success"?"#14301c":"#16243f", border:"1px solid "+(toast.type==="error"?C.red:toast.type==="success"?C.green:C.gold), color:C.cream, padding:"12px 24px", fontSize:13, fontFamily:"sans-serif", zIndex:9999, boxShadow:"0 4px 20px rgba(0,0,0,0.5)" }}>
+            {toast.message}
+          </div>
+        )}
+        {confirmModal && (
+          <div style={{ position:"fixed", inset:0, background:"rgba(5,13,26,0.85)", display:"flex", alignItems:"center", justifyContent:"center", zIndex:9998, padding:"1.5rem" }}>
+            <div style={{ background:C.navyDeep, border:"1px solid "+C.gold, padding:"1.75rem", maxWidth:420, width:"100%" }}>
+              <div style={{ fontSize:14, color:C.cream, fontFamily:"sans-serif", lineHeight:1.6, marginBottom:20 }}>{confirmModal.message}</div>
+              <div style={{ display:"flex", gap:10, justifyContent:"flex-end" }}>
+                <button onClick={() => setConfirmModal(null)} style={{ padding:"8px 18px", background:"transparent", border:"1px solid "+C.border, color:C.muted, cursor:"pointer", fontFamily:"sans-serif", fontSize:12 }}>Cancel</button>
+                <button onClick={() => { const fn = confirmModal.onConfirm; setConfirmModal(null); fn(); }} style={{ padding:"8px 18px", background:C.red, color:"white", border:"none", cursor:"pointer", fontFamily:"sans-serif", fontSize:12, fontWeight:700 }}>Confirm</button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     );
   }
