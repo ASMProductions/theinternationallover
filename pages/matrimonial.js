@@ -298,6 +298,25 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
     } catch(e) {}
   };
 
+  const fixProfileGender = async (email, newGender) => {
+    try {
+      const res = await fetch("/api/matrimonial", {
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body: JSON.stringify({ action:"setProfileGender", adminKey:"ADMINTEST", email, gender:newGender })
+      });
+      const data = await res.json();
+      if (data.ok) {
+        showToast(`Gender corrected to "${newGender}" for ${email}. She/he will reappear in browse immediately.`, "success");
+        setAdminViewProfile(prev => prev && prev.email === email ? { ...prev, gender:newGender } : prev);
+        setAllProfiles(prev => prev.map(p => p.email === email ? { ...p, gender:newGender } : p));
+        loadAllProfiles();
+      } else {
+        showToast(data.error || "Failed to correct gender.", "error");
+      }
+    } catch(e) { showToast("Error correcting gender.", "error"); }
+  };
+
   const loadActivityLog = async () => {
     try {
       const res = await fetch("/api/matrimonial?action=activityLog&adminKey=ADMINTEST");
@@ -1339,7 +1358,15 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
                   <div style={{ fontSize:18, color:C.goldLight, marginBottom:4 }}>{adminViewProfile.displayName}</div>
                   <div style={{ fontSize:12, color:C.muted, fontFamily:"sans-serif", marginBottom:2 }}>{adminViewProfile.email}</div>
                   <div style={{ fontSize:12, color:C.muted, fontFamily:"sans-serif", marginBottom:2 }}>{adminViewProfile.age} · {adminViewProfile.city}{adminViewProfile.country?", "+adminViewProfile.country:""}</div>
-                  <div style={{ fontSize:12, color:C.muted, fontFamily:"sans-serif", marginBottom:8 }}>{adminViewProfile.religion} · {adminViewProfile.gender}</div>
+                  <div style={{ display:"flex", alignItems:"center", gap:8, marginBottom:8, flexWrap:"wrap" }}>
+                    <div style={{ fontSize:12, color:C.muted, fontFamily:"sans-serif" }}>{adminViewProfile.religion} · {adminViewProfile.gender}</div>
+                    {!adminViewProfile.isVirtual && (
+                      <div style={{ display:"flex", gap:4 }}>
+                        <button onClick={() => fixProfileGender(adminViewProfile.email, "woman")} disabled={adminViewProfile.gender === "woman"} style={{ padding:"2px 8px", background:"transparent", border:"1px solid #7aa0d0", color: adminViewProfile.gender === "woman" ? C.muted : "#7aa0d0", cursor: adminViewProfile.gender === "woman" ? "default" : "pointer", fontFamily:"sans-serif", fontSize:9, opacity: adminViewProfile.gender === "woman" ? 0.4 : 1 }}>Set as Woman</button>
+                        <button onClick={() => fixProfileGender(adminViewProfile.email, "man")} disabled={adminViewProfile.gender === "man"} style={{ padding:"2px 8px", background:"transparent", border:"1px solid " + C.muted, color: adminViewProfile.gender === "man" ? C.muted : C.creamDim, cursor: adminViewProfile.gender === "man" ? "default" : "pointer", fontFamily:"sans-serif", fontSize:9, opacity: adminViewProfile.gender === "man" ? 0.4 : 1 }}>Set as Man</button>
+                      </div>
+                    )}
+                  </div>
                   <div style={{ display:"flex", gap:6, flexWrap:"wrap" }}>
                     <span style={{ fontSize:9, color:adminViewProfile.approved?C.green:C.red, border:"1px solid "+(adminViewProfile.approved?C.green:C.red), padding:"1px 6px", fontFamily:"sans-serif" }}>{adminViewProfile.approved?"APPROVED":"PENDING"}</span>
                     {adminViewProfile.isVirtual && <span style={{ fontSize:9, color:"#7aa0d0", border:"1px solid #7aa0d0", padding:"1px 6px", fontFamily:"sans-serif" }}>VIRTUAL</span>}
