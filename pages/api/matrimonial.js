@@ -252,7 +252,7 @@ export default async function handler(req, res) {
     }
 
     if (action === "createProfile") {
-      const { email, gender, displayName, age, city, country, region, religion, bio,
+      const { email, gender, displayName, age, city, country, region, regions, religion, bio,
               familyInvolvement, virtueStatus, maritalStatus, hasChildren,
               education, languages, height, seeking, photoBase64, photos } = body;
       if (!email || !displayName || !age || !city || !bio) {
@@ -264,7 +264,8 @@ export default async function handler(req, res) {
         gender,
         displayName,
         age: parseInt(age),
-        city, country, region, religion, bio,
+        city, country, region, regions: Array.isArray(regions) ? regions : [],
+        religion, bio,
         familyInvolvement, virtueStatus, maritalStatus, hasChildren,
         education, languages, height, seeking,
         approved: true, // all profiles auto-approve
@@ -280,21 +281,25 @@ export default async function handler(req, res) {
     }
 
     if (action === "updateProfile") {
-      const { email, gender, displayName, age, city, country, region, religion, bio,
+      const { email, gender, displayName, age, city, country, region, regions, religion, bio,
               familyInvolvement, virtueStatus, maritalStatus, hasChildren,
-              education, languages, height, seeking, photoBase64, photos } = body;
+              education, languages, height, seeking, photoBase64, photos, targetGender } = body;
       if (!email || !displayName || !age || !city || !bio) {
         return res.status(400).json({ error: "Required fields missing" });
       }
       // Get existing profile to preserve approval status
       const existing = await getProfile(email);
       const photoList = Array.isArray(photos) ? photos.slice(0, 6) : (existing && existing.photos) || [];
+      // gender must only change via an explicit targetGender override (admin tools) —
+      // never silently inherit the requester's own session gender
+      const resolvedGender = targetGender || (existing && existing.gender) || gender || "woman";
       const updated = {
         ...(existing || {}),
         email: email.toLowerCase(),
-        gender: gender || (existing && existing.gender) || "woman",
+        gender: resolvedGender,
         displayName, age: parseInt(age),
-        city, country, region, religion, bio,
+        city, country, region, regions: Array.isArray(regions) ? regions : (existing && existing.regions) || [],
+        religion, bio,
         familyInvolvement, virtueStatus, maritalStatus, hasChildren,
         education, languages, height, seeking,
         approved: true,
