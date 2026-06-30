@@ -974,7 +974,7 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
       { id:"passes", label:"Passes" },
       { id:"consulate", label:"Consulate" },
       { id:"ambassadors", label:"Ambassadors" },
-      { id:"leads", label:"Women's Profiles" },
+      { id:"leads", label:"Registrations" },
       { id:"activity", label:"Activity" },
       { id:"myprofile", label:"My Profile" },
     ];
@@ -1231,7 +1231,7 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
             </div>
           )}
 
-          {/* ── LEADS ── */}
+          {/* ── REGISTRATIONS ── */}
           {adminTab === "leads" && (
             <div>
               {/* Manual gender fix for any email */}
@@ -1257,7 +1257,7 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
                 </div>
               </div>
               <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between", marginBottom:12, flexWrap:"wrap", gap:8 }}>
-                <div style={{ fontSize:9, letterSpacing:"0.2em", color:C.muted, fontFamily:"sans-serif" }}>WOMEN'S PROFILES — {leads.length} total</div>
+                <div style={{ fontSize:9, letterSpacing:"0.2em", color:C.muted, fontFamily:"sans-serif" }}>REGISTRATIONS — {leads.length} total</div>
                 <button onClick={backfillWomenGender} style={{ padding:"5px 12px", background:"transparent", border:"1px solid #4a6fa5", color:"#7aa0d0", cursor:"pointer", fontSize:10, fontFamily:"sans-serif" }}>Fix Gender for All</button>
               </div>
               <input value={adminSearch} onChange={e => setAdminSearch(e.target.value)} placeholder="Search by name or email…" style={{ width:"100%", padding:"8px 12px", background:C.dark, border:"1px solid " + C.border, color:C.cream, fontSize:12, fontFamily:"sans-serif", marginBottom:14, boxSizing:"border-box" }} />
@@ -1539,6 +1539,16 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
                   </div>
                 </div>
                 <p style={{ fontSize:13, color:C.creamDim, fontFamily:"sans-serif", lineHeight:1.85, margin:0 }}>{myProfile.bio}</p>
+                {myProfile.photos && myProfile.photos.length > 1 && (
+                  <div style={{ display:"flex", gap:8, flexWrap:"wrap", marginTop:"1.25rem" }}>
+                    {myProfile.photos.map((photo, i) => (
+                      <div key={i} style={{ position:"relative" }}>
+                        <img src={photo} alt={"Photo " + (i+1)} style={{ width:80, height:100, objectFit:"cover", objectPosition:"center top", border: i===0 ? "2px solid " + C.gold : "1px solid " + C.border, cursor:"pointer" }} onClick={() => setLightboxPhoto(photo)} />
+                        {i === 0 && <div style={{ position:"absolute", top:2, left:2, background:C.gold, color:C.navyDeep, fontSize:8, fontWeight:700, padding:"1px 5px", fontFamily:"sans-serif" }}>PRIMARY</div>}
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
               <div style={{ display:"flex", gap:10, flexWrap:"wrap" }}>
                 <button onClick={() => { setIsEditing(true); setCreateForm({ displayName:myProfile.displayName||"", age:myProfile.age||"", city:myProfile.city||"", country:myProfile.country||"", region:myProfile.region||"all", regions:myProfile.regions||[], religion:myProfile.religion||"Muslim", bio:myProfile.bio||"", familyInvolvement:myProfile.familyInvolvement||"", virtueStatus:myProfile.virtueStatus||"", maritalStatus:myProfile.maritalStatus||"", hasChildren:myProfile.hasChildren||"No", seeking:myProfile.seeking||"Marriage", photos: myProfile.photos || (myProfile.photoUrl ? [myProfile.photoUrl] : []), photoBase64:null }); setIsEditing(true); setProfileEmail(userEmail); setProfileGender(myProfile.gender || gender || ""); setMsg(""); setView("create"); }} style={{ padding:"10px 22px", background:C.gold, color:C.navyDeep, border:"none", cursor:"pointer", fontSize:13, fontWeight:700, fontFamily:"sans-serif" }}>Edit Profile</button>
@@ -1549,6 +1559,11 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
             </div>
           )}
         </div>
+        {lightboxPhoto && (
+          <div onClick={() => setLightboxPhoto(null)} style={{ position:"fixed", inset:0, background:"rgba(5,13,26,0.92)", display:"flex", alignItems:"center", justifyContent:"center", zIndex:9997, padding:"2rem", cursor:"pointer" }}>
+            <img src={lightboxPhoto} alt="Full size" style={{ maxWidth:"90vw", maxHeight:"85vh", objectFit:"contain", border:"1px solid " + C.gold }} />
+          </div>
+        )}
         {toast && (
           <div style={{ position:"fixed", bottom:20, left:"50%", transform:"translateX(-50%)", background: toast.type==="error"?"#3a1414":toast.type==="success"?"#14301c":"#16243f", border:"1px solid "+(toast.type==="error"?C.red:toast.type==="success"?C.green:C.gold), color:C.cream, padding:"12px 24px", fontSize:13, fontFamily:"sans-serif", zIndex:9999, boxShadow:"0 4px 20px rgba(0,0,0,0.5)" }}>
             {toast.message}
