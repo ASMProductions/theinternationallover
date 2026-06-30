@@ -79,6 +79,8 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
     height:"", photos:[]
   });
   const [conversations, setConversations] = useState([]);
+  const [adminViewProfile, setAdminViewProfile] = useState(null);
+  const [adminViewConvos, setAdminViewConvos] = useState([]);
   const [activeConvo, setActiveConvo] = useState(null);
   const [messageText, setMessageText] = useState("");
   const [hidden, setHidden] = useState(false);
@@ -353,13 +355,24 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
     if (!messageText.trim() || !activeConvo) return;
     if (!canContact) { setMsg("Complete the course to contact members."); return; }
     try {
-      await fetch("/api/matrimonial", {
+      const adminKey = isAdmin ? await getAdminKey() : "";
+      const res = await fetch("/api/matrimonial", {
         method:"POST",
         headers:{"Content-Type":"application/json"},
-        body: JSON.stringify({ action:"sendMessage", from:userEmail, to:activeConvo.email, text:messageText.trim(), isAmbassador })
+        body: JSON.stringify({ action:"sendMessage", from:userEmail, to:activeConvo.email, text:messageText.trim(), isAmbassador, adminKey })
       });
+      const data = await res.json();
+      if (!data.ok) { setMsg(data.error || "Failed to send message."); return; }
       setMessageText("");
       loadConversation(activeConvo.email);
+    } catch(e) { setMsg("Error sending message: " + String(e)); }
+  };
+
+  const loadConversations = async () => {
+    try {
+      const res = await fetch("/api/matrimonial?action=listConversations&email=" + encodeURIComponent(userEmail));
+      const data = await res.json();
+      setConversations(data.conversations || []);
     } catch(e) {}
   };
 
@@ -533,7 +546,26 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
               </div>
             </div>
           ) : (
-            <div style={{ color:C.muted, textAlign:"center", padding:"3rem", fontFamily:"sans-serif" }}>No active conversation.</div>
+            <div>
+              {conversations.length === 0 ? (
+                <div style={{ color:C.muted, textAlign:"center", padding:"3rem", fontFamily:"sans-serif" }}>No conversations yet.</div>
+              ) : (
+                conversations.map(c => (
+                  <div key={c.email} onClick={() => loadConversation(c.email)} style={{ display:"flex", gap:14, alignItems:"center", padding:"1rem", background:C.navyDeep, border:"1px solid " + C.border, marginBottom:8, cursor:"pointer" }}>
+                    {c.photoUrl ? (
+                      <img src={c.photoUrl} alt={c.displayName} style={{ width:48, height:48, borderRadius:"50%", objectFit:"cover", flexShrink:0 }} />
+                    ) : (
+                      <div style={{ width:48, height:48, borderRadius:"50%", background:"rgba(184,150,62,0.15)", border:"1px solid " + C.gold, display:"flex", alignItems:"center", justifyContent:"center", fontSize:18, color:C.gold, flexShrink:0 }}>{(c.displayName||"?")[0].toUpperCase()}</div>
+                    )}
+                    <div style={{ flex:1, minWidth:0 }}>
+                      <div style={{ fontSize:14, color:C.goldLight, marginBottom:2 }}>{c.displayName}</div>
+                      <div style={{ fontSize:12, color:C.muted, fontFamily:"sans-serif", whiteSpace:"nowrap", overflow:"hidden", textOverflow:"ellipsis" }}>{c.lastMessage}</div>
+                    </div>
+                    {c.lastTimestamp > 0 && <div style={{ fontSize:10, color:C.muted, fontFamily:"sans-serif", flexShrink:0 }}>{new Date(c.lastTimestamp).toLocaleDateString()}</div>}
+                  </div>
+                ))
+              )}
+            </div>
           )}
         </div>
       </div>
@@ -764,6 +796,14 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
                     </div>
                     <div style={{ fontSize:10, color:C.muted, fontFamily:"sans-serif", marginBottom:6 }}>{p.email} · {p.age} · {p.city}</div>
                     <div style={{ display:"flex", gap:6 }}>
+                      <button onClick={async () => {
+                        setAdminViewProfile(p);
+                        try {
+                          const res = await fetch("/api/matrimonial?action=listConversations&email=" + encodeURIComponent(p.email));
+                          const data = await res.json();
+                          setAdminViewConvos(data.conversations || []);
+                        } catch(e) { setAdminViewConvos([]); }
+                      }} style={{ padding:"3px 10px", background:"transparent", border:"1px solid " + C.gold, color:C.gold, cursor:"pointer", fontFamily:"sans-serif", fontSize:10 }}>View</button>
                       {!p.approved && <button onClick={() => approveProfile(p.email)} style={{ padding:"3px 10px", background:C.green, color:"white", border:"none", cursor:"pointer", fontFamily:"sans-serif", fontSize:10 }}>Approve</button>}
                       <button onClick={() => rejectProfile(p.email)} style={{ padding:"3px 10px", background:C.red, color:"white", border:"none", cursor:"pointer", fontFamily:"sans-serif", fontSize:10 }}>Delete</button>
                     </div>
@@ -945,6 +985,54 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
           )}
 
         </div>
+
+        {/* ADMIN PROFILE DETAIL MODAL */}
+        {adminViewProfile && (
+          <div style={{ position:"fixed", inset:0, background:"rgba(5,13,26,0.92)", display:"flex", alignItems:"center", justifyContent:"center", zIndex:999, padding:"1.5rem" }} onClick={() => setAdminViewProfile(null)}>
+            <div onClick={e => e.stopPropagation()} style={{ background:C.navyDeep, border:"1px solid " + C.gold, maxWidth:560, width:"100%", maxHeight:"85vh", overflowY:"auto", padding:"1.75rem" }}>
+              <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-start", marginBottom:"1.25rem" }}>
+                <div style={{ fontSize:9, letterSpacing:"0.2em", color:C.muted, fontFamily:"sans-serif" }}>PROFILE DETAIL — ADMIN VIEW</div>
+                <button onClick={() => setAdminViewProfile(null)} style={{ background:"none", border:"none", color:C.muted, fontSize:20, cursor:"pointer" }}>×</button>
+              </div>
+              <div style={{ display:"flex", gap:16, alignItems:"flex-start", marginBottom:"1.25rem", flexWrap:"wrap" }}>
+                {adminViewProfile.photoUrl && <img src={adminViewProfile.photoUrl} alt={adminViewProfile.displayName} style={{ width:90, height:115, objectFit:"cover", objectPosition:"center top", border:"1px solid "+C.border }} />}
+                <div style={{ flex:1 }}>
+                  <div style={{ fontSize:18, color:C.goldLight, marginBottom:4 }}>{adminViewProfile.displayName}</div>
+                  <div style={{ fontSize:12, color:C.muted, fontFamily:"sans-serif", marginBottom:2 }}>{adminViewProfile.email}</div>
+                  <div style={{ fontSize:12, color:C.muted, fontFamily:"sans-serif", marginBottom:2 }}>{adminViewProfile.age} · {adminViewProfile.city}{adminViewProfile.country?", "+adminViewProfile.country:""}</div>
+                  <div style={{ fontSize:12, color:C.muted, fontFamily:"sans-serif", marginBottom:8 }}>{adminViewProfile.religion} · {adminViewProfile.gender}</div>
+                  <div style={{ display:"flex", gap:6, flexWrap:"wrap" }}>
+                    <span style={{ fontSize:9, color:adminViewProfile.approved?C.green:C.red, border:"1px solid "+(adminViewProfile.approved?C.green:C.red), padding:"1px 6px", fontFamily:"sans-serif" }}>{adminViewProfile.approved?"APPROVED":"PENDING"}</span>
+                    {adminViewProfile.isVirtual && <span style={{ fontSize:9, color:"#7aa0d0", border:"1px solid #7aa0d0", padding:"1px 6px", fontFamily:"sans-serif" }}>VIRTUAL</span>}
+                    {adminViewProfile.hidden && <span style={{ fontSize:9, color:C.red, border:"1px solid "+C.red, padding:"1px 6px", fontFamily:"sans-serif" }}>HIDDEN</span>}
+                  </div>
+                </div>
+              </div>
+              <p style={{ fontSize:13, color:C.creamDim, fontFamily:"sans-serif", lineHeight:1.75, marginBottom:"1.5rem" }}>{adminViewProfile.bio}</p>
+
+              {!adminViewProfile.isVirtual && (
+                <button onClick={() => {
+                  setCreateForm({ displayName:adminViewProfile.displayName||"", age:adminViewProfile.age||"", city:adminViewProfile.city||"", country:adminViewProfile.country||"", region:adminViewProfile.region||"all", religion:adminViewProfile.religion||"Muslim", bio:adminViewProfile.bio||"", familyInvolvement:adminViewProfile.familyInvolvement||"", virtueStatus:adminViewProfile.virtueStatus||"", maritalStatus:adminViewProfile.maritalStatus||"", hasChildren:adminViewProfile.hasChildren||"No", seeking:adminViewProfile.seeking||"Marriage", photoBase64:null });
+                  setIsEditing(true);
+                  setProfileEmail(adminViewProfile.email);
+                  setMsg("");
+                  setAdminViewProfile(null);
+                  setView("create");
+                }} style={{ padding:"8px 18px", background:C.gold, color:C.navyDeep, border:"none", cursor:"pointer", fontSize:12, fontWeight:700, fontFamily:"sans-serif", marginBottom:"1.5rem" }}>Edit This Profile</button>
+              )}
+
+              <div style={{ fontSize:9, letterSpacing:"0.2em", color:C.muted, fontFamily:"sans-serif", marginBottom:10, borderTop:"1px solid "+C.border, paddingTop:"1.25rem" }}>CONVERSATIONS — {adminViewConvos.length}</div>
+              {adminViewConvos.length === 0 && <div style={{ color:C.muted, fontFamily:"sans-serif", fontSize:12 }}>No conversations.</div>}
+              {adminViewConvos.map(c => (
+                <div key={c.email} style={{ padding:"0.75rem", background:C.dark, border:"1px solid "+C.border, marginBottom:8 }}>
+                  <div style={{ fontSize:12, color:C.goldLight, marginBottom:3 }}>{c.displayName} <span style={{ color:C.muted, fontSize:10 }}>({c.email})</span></div>
+                  <div style={{ fontSize:11, color:C.creamDim, fontFamily:"sans-serif" }}>{c.lastMessage}</div>
+                  {c.lastTimestamp > 0 && <div style={{ fontSize:9, color:C.muted, fontFamily:"sans-serif", marginTop:4 }}>{new Date(c.lastTimestamp).toLocaleString()}</div>}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     );
   }
@@ -997,7 +1085,7 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
         <div style={{ fontSize:15, color:C.goldLight }}>The International Lover™ — Matrimonial</div>
         <div style={{ display:"flex", gap:8, flexWrap:"wrap" }}>
           {isAdmin && <button onClick={() => { setAdminTab("profiles"); loadAllProfiles(); loadPendingApprovals(); setView("admin"); }} style={{ background:"none", border:"1px solid " + C.gold, color:C.gold, padding:"6px 12px", cursor:"pointer", fontSize:11, fontFamily:"sans-serif" }}>Admin</button>}
-          <button onClick={() => setView("messages")} style={{ background:"none", border:"1px solid " + C.border, color:C.muted, padding:"6px 12px", cursor:"pointer", fontSize:11, fontFamily:"sans-serif" }}>Messages</button>
+          <button onClick={() => { setActiveConvo(null); loadConversations(); setView("messages"); }} style={{ background:"none", border:"1px solid " + C.border, color:C.muted, padding:"6px 12px", cursor:"pointer", fontSize:11, fontFamily:"sans-serif" }}>Messages</button>
           <button onClick={() => setView("myprofile")} style={{ background:C.gold, color:C.navyDeep, border:"none", padding:"8px 18px", cursor:"pointer", fontSize:12, fontWeight:700, fontFamily:"sans-serif" }}>My Profile</button>
         </div>
       </div>
