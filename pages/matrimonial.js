@@ -334,7 +334,7 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
       const res = await fetch("/api/matrimonial", {
         method:"POST",
         headers:{"Content-Type":"application/json"},
-        body: JSON.stringify({ action:"createProfile", email:emailToUse, gender, ...createForm, photoBase64: createForm.photoBase64 || null })
+        body: JSON.stringify({ action: isEditing ? "updateProfile" : "createProfile", email:emailToUse, gender, ...createForm, photoBase64: createForm.photoBase64 || null })
       });
       const data = await res.json();
       if (data.ok) {
@@ -1026,11 +1026,16 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
         <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fill, minmax(240px,1fr))", gap:16 }}>
           {filtered.map(p => (
             <div key={p.email} onClick={() => { setActiveProfile(p); setView("profile"); }} style={{ background:C.navyDeep, border:"1px solid " + C.border, cursor:"pointer", overflow:"hidden" }}>
-              <div style={{ height:200, background:C.dark, position:"relative" }}>
+              <div style={{ height:260, background:C.dark, position:"relative" }}>
                 {p.photoUrl ? (
                   <img src={p.photoUrl} alt={p.displayName} style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center top" }} />
                 ) : (
-                  <div style={{ width:"100%", height:"100%", display:"flex", alignItems:"center", justifyContent:"center", fontSize:48, color:C.border }}>◈</div>
+                  <div style={{ width:"100%", height:"100%", display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", background:"linear-gradient(135deg, #0a1628, #1a2a4a)", gap:8 }}>
+                    <div style={{ width:64, height:64, borderRadius:"50%", background:"rgba(184,150,62,0.15)", border:"1px solid " + C.gold, display:"flex", alignItems:"center", justifyContent:"center", fontSize:24, color:C.gold, fontFamily:"Georgia,serif" }}>
+                      {(p.displayName||"?")[0].toUpperCase()}
+                    </div>
+                    <div style={{ fontSize:9, color:C.muted, fontFamily:"sans-serif", letterSpacing:"0.1em" }}>NO PHOTO</div>
+                  </div>
                 )}
                 {p.isVirtual && (
                   <div style={{ position:"absolute", top:8, left:8, background:"rgba(10,20,50,0.85)", border:"1px solid #4a6fa5", color:"#7aa0d0", fontSize:7, fontWeight:700, padding:"2px 6px", fontFamily:"sans-serif", letterSpacing:"0.08em" }}>VIRTUAL PROFILE</div>
@@ -1045,11 +1050,11 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
                   <div style={{ position:"absolute", top:8, right:8, background:C.green, color:"white", fontSize:7, fontWeight:700, padding:"2px 6px", fontFamily:"sans-serif" }}>CERTIFIED</div>
                 )}
               </div>
-              <div style={{ padding:"0.875rem" }}>
-                <div style={{ fontSize:14, color:C.goldLight, marginBottom:3 }}>{p.displayName}</div>
-                <div style={{ fontSize:11, color:C.muted, fontFamily:"sans-serif", marginBottom:6 }}>{p.age} · {p.city}</div>
-                <div style={{ fontSize:10, color:C.creamDim, fontFamily:"sans-serif", marginBottom:6 }}>{p.religion}</div>
-                <p style={{ fontSize:11, color:C.creamDim, fontFamily:"sans-serif", lineHeight:1.5, margin:0, display:"-webkit-box", WebkitLineClamp:2, WebkitBoxOrient:"vertical", overflow:"hidden" }}>{p.bio}</p>
+              <div style={{ padding:"1rem" }}>
+                <div style={{ fontSize:15, color:C.goldLight, marginBottom:4, fontFamily:"Georgia,serif" }}>{p.displayName}</div>
+                <div style={{ fontSize:11, color:C.muted, fontFamily:"sans-serif", marginBottom:4 }}>{p.age} · {p.city}{p.country ? ", " + p.country : ""}</div>
+                <div style={{ fontSize:10, color:C.creamDim, fontFamily:"sans-serif", marginBottom:8, textTransform:"uppercase", letterSpacing:"0.06em" }}>{p.religion}</div>
+                <p style={{ fontSize:12, color:C.creamDim, fontFamily:"sans-serif", lineHeight:1.65, margin:0, display:"-webkit-box", WebkitLineClamp:3, WebkitBoxOrient:"vertical", overflow:"hidden" }}>{p.bio}</p>
               </div>
             </div>
           ))}
