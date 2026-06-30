@@ -80,7 +80,7 @@ export default function ForWomen() {
               { icon:"📖", title:"Educated Before They Arrive", desc:"Every man on this platform has completed a course in cultural intelligence, family engagement, and international marriage protocol. They are not guessing." },
               { icon:"👨‍👩‍👧", title:"Family Comes First", desc:"The men here understand that marrying you means entering your family. They have studied how to approach a father, meet a family, and honor your tradition." },
               { icon:"🌍", title:"Internationally Aware", desc:"These men have studied the specific cultures, regions, and protocols relevant to where you are from. They are not treating every culture as interchangeable." },
-              { icon:"✦", title:"Verified and Screened", desc:"Profiles are reviewed. Men must complete the course or hold Ambassador status before they can contact any woman. No casual browsers." },
+              { icon:"✦", title:"Verified and Screened", desc:"Profiles are real. Men must complete the course or hold Ambassador status before they can contact any woman. No casual browsers." },
             ].map(f => (
               <div key={f.title} style={{ background:C.navyDeep, border:"1px solid " + C.border, padding:"1.5rem" }}>
                 <div style={{ fontSize:28, marginBottom:10 }}>{f.icon}</div>
@@ -130,7 +130,7 @@ export default function ForWomen() {
               "Block any member permanently",
               "Report any concerning behavior",
               "Your email is never visible to other members",
-              "Profile reviewed before going live",
+              "Your profile, your control",
               "Contact men only when you are ready",
             ].map(item => (
               <div key={item} style={{ background:C.navyDeep, border:"1px solid " + C.border, padding:"1rem", display:"flex", gap:10, alignItems:"flex-start" }}>
@@ -148,7 +148,7 @@ export default function ForWomen() {
           <div style={{ textAlign:"center", marginBottom:"2.5rem" }}>
             <Eyebrow>Join Free</Eyebrow>
             <h2 style={{ fontSize:"clamp(18px,2.5vw,24px)", color:C.goldLight, fontWeight:"normal", marginBottom:8 }}>Create your free profile.</h2>
-            <p style={{ color:C.muted, fontSize:12, fontFamily:"sans-serif", lineHeight:1.7 }}>Women join free. Your profile is reviewed before going live. You are never charged.</p>
+            <p style={{ color:C.muted, fontSize:12, fontFamily:"sans-serif", lineHeight:1.7 }}>Women join free. Create your profile and start browsing right away. You are never charged.</p>
           </div>
 
           {submitted ? (

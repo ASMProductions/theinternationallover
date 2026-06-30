@@ -339,7 +339,7 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
       });
       const data = await res.json();
       if (data.ok) {
-        setMsg(isEditing ? "Profile updated successfully." : "Profile submitted for review. You will be notified once approved.");
+        setMsg(isEditing ? "Profile updated successfully." : "Profile created successfully.");
         setView(isEditing ? "myprofile" : "browse");
         loadMyProfile();
       } else { 
@@ -551,7 +551,7 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
         <div style={{ maxWidth:620, margin:"0 auto", padding:"2rem 1.5rem" }}>
           {gender === "woman" && (
             <div style={{ background:"rgba(74,124,94,0.1)", border:"1px solid " + C.green, padding:"0.875rem", marginBottom:"1.5rem", fontSize:12, color:C.green, fontFamily:"sans-serif" }}>
-              {isEditing ? "Update your profile details below." : "Women join free. Your profile will be reviewed before going live."}
+              {isEditing ? "Update your profile details below." : "Women join free. Create your profile and start browsing."}
             </div>
           )}
           {msg && <div style={{ color:C.red, fontFamily:"sans-serif", fontSize:12, marginBottom:12, padding:"8px 12px", background:"rgba(139,26,26,0.1)", border:"1px solid " + C.red }}>{msg}</div>}
@@ -673,11 +673,11 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
             </div>
           </div>
           <button onClick={submitProfile} disabled={loading} style={{ width:"100%", padding:"14px", background:loading ? C.border : C.gold, color:C.navyDeep, border:"none", cursor:loading ? "default" : "pointer", fontSize:13, fontWeight:700, fontFamily:"sans-serif" }}>
-            {loading ? "Saving..." : isEditing ? "Save Changes →" : gender === "woman" ? "Submit Profile for Review →" : "Create Profile →"}
+            {loading ? "Saving..." : isEditing ? "Save Changes →" : "Create Profile →"}
           </button>
           {gender === "woman" && (
             <div style={{ fontSize:11, color:C.muted, fontFamily:"sans-serif", textAlign:"center", marginTop:12, lineHeight:1.6 }}>
-              {!isEditing && "Your profile will be reviewed before going live. This usually takes 24-48 hours."}
+              
             </div>
           )}
         </div>
@@ -972,7 +972,7 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
                     <div style={{ fontSize:12, color:C.muted, fontFamily:"sans-serif", marginBottom:2 }}>{myProfile.age} · {myProfile.city}{myProfile.country ? ", " + myProfile.country : ""}</div>
                     <div style={{ fontSize:12, color:C.muted, fontFamily:"sans-serif", marginBottom:8 }}>{myProfile.religion}</div>
                     <div style={{ display:"flex", gap:6, flexWrap:"wrap" }}>
-                      <span style={{ fontSize:10, color:myProfile.approved?C.green:C.red, border:"1px solid "+(myProfile.approved?C.green:C.red), padding:"2px 8px", fontFamily:"sans-serif" }}>{myProfile.approved ? "APPROVED" : "PENDING REVIEW"}</span>
+                      <span style={{ fontSize:10, color:myProfile.approved?C.green:C.red, border:"1px solid "+(myProfile.approved?C.green:C.red), padding:"2px 8px", fontFamily:"sans-serif" }}>{myProfile.approved ? "ACTIVE" : "PENDING REVIEW"}</span>
                       {myProfile.hidden && <span style={{ fontSize:10, color:C.red, border:"1px solid "+C.red, padding:"2px 8px", fontFamily:"sans-serif" }}>HIDDEN</span>}
                     </div>
                   </div>
