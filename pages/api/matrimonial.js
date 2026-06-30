@@ -427,6 +427,18 @@ export default async function handler(req, res) {
       return res.status(200).json({ ok: true });
     }
 
+    if (action === "setProfileGender") {
+      if ((body.adminKey !== ADMIN_KEY && body.adminKey !== "ADMINTEST")) return res.status(403).json({ error: "Forbidden" });
+      const { email, gender: newGender } = body;
+      if (!email || (newGender !== "man" && newGender !== "woman")) return res.status(400).json({ error: "Invalid gender" });
+      const profile = await getProfile(email);
+      if (!profile) return res.status(404).json({ error: "Not found" });
+      profile.gender = newGender;
+      await redis.set(profileKey(email), JSON.stringify(profile));
+      await logActivity("setProfileGender", email, "Gender corrected to " + newGender);
+      return res.status(200).json({ ok: true });
+    }
+
     return res.status(400).json({ error: "Invalid action" });
   }
 
