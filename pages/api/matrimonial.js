@@ -12,6 +12,14 @@ function msgKey(a, b) { const pair = [a,b].sort().join("__"); return "il:mat:msg
 function blockKey(email) { return "il:mat:blocks:" + email.toLowerCase().replace(/[^a-z0-9]/g, "_"); }
 function reportKey() { return "il:mat:reports"; }
 
+async function logActivity(action, target, detail) {
+  try {
+    const entry = { action, target, detail: detail || "", timestamp: Date.now() };
+    await redis.lpush("il:mat:activity", JSON.stringify(entry));
+    await redis.ltrim("il:mat:activity", 0, 499);
+  } catch(e) {}
+}
+
 async function getProfile(email) {
   try {
     const raw = await redis.get(profileKey(email));
@@ -118,6 +126,34 @@ export default async function handler(req, res) {
       } catch(e) { return res.status(200).json({ conversations: [] }); }
     }
 
+    if (action === "listReports" && (adminKey === ADMIN_KEY || adminKey === "ADMINTEST")) {
+      try {
+        const raw = await redis.lrange(reportKey(), 0, 199);
+        const reports = (raw || []).map(r => { try { return typeof r === "string" ? JSON.parse(r) : r; } catch(e) { return null; } }).filter(Boolean);
+        return res.status(200).json({ reports });
+      } catch(e) { return res.status(200).json({ reports: [] }); }
+    }
+
+    if (action === "listBlocks" && (adminKey === ADMIN_KEY || adminKey === "ADMINTEST")) {
+      try {
+        const keys = await redis.keys("il:mat:blocks:*");
+        const blocks = await Promise.all((keys || []).map(async k => {
+          const members = await redis.smembers(k);
+          const blocker = k.replace("il:mat:blocks:", "");
+          return { blocker, blocked: members || [] };
+        }));
+        return res.status(200).json({ blocks: blocks.filter(b => b.blocked.length > 0) });
+      } catch(e) { return res.status(200).json({ blocks: [] }); }
+    }
+
+    if (action === "activityLog" && (adminKey === ADMIN_KEY || adminKey === "ADMINTEST")) {
+      try {
+        const raw = await redis.lrange("il:mat:activity", 0, 199);
+        const log = (raw || []).map(r => { try { return typeof r === "string" ? JSON.parse(r) : r; } catch(e) { return null; } }).filter(Boolean);
+        return res.status(200).json({ log });
+      } catch(e) { return res.status(200).json({ log: [] }); }
+    }
+
     if (action === "pending" && (adminKey === ADMIN_KEY || adminKey === "ADMINTEST")) {
       const profiles = await listPendingProfiles();
       return res.status(200).json({ profiles });
@@ -130,6 +166,7 @@ export default async function handler(req, res) {
 
     if (action === "deleteProfile" && (adminKey === ADMIN_KEY || adminKey === "ADMINTEST") && email) {
       await redis.del(profileKey(email));
+      await logActivity("delete", email, "Profile deleted");
       return res.status(200).json({ ok: true });
     }
 
@@ -139,6 +176,50 @@ export default async function handler(req, res) {
   if (req.method === "POST") {
     const body = req.body || {};
     const { action } = body;
+
+    if (action === "adminMessage") {
+      if ((body.adminKey !== ADMIN_KEY && body.adminKey !== "ADMINTEST")) return res.status(403).json({ error: "Forbidden" });
+      const { to, text } = body;
+      if (!to || !text) return res.status(400).json({ error: "Missing fields" });
+      const from = "platform@theinternationallover.com";
+      const key = msgKey(from, to);
+      let messages = [];
+      try {
+        const raw = await redis.get(key);
+        messages = raw ? (typeof raw === "string" ? JSON.parse(raw) : raw) : [];
+      } catch(e) {}
+      messages.push({ from, text, timestamp: Date.now(), isPlatform: true });
+      await redis.set(key, JSON.stringify(messages));
+      await redis.sadd(`il:mat:convos:${from}`, to);
+      await redis.sadd(`il:mat:convos:${to}`, from);
+      await logActivity("adminMessage", to, text.slice(0, 60));
+      return res.status(200).json({ ok: true });
+    }
+
+    if (action === "bulkDelete") {
+      if ((body.adminKey !== ADMIN_KEY && body.adminKey !== "ADMINTEST")) return res.status(403).json({ error: "Forbidden" });
+      const emails = body.emails || [];
+      for (const e of emails) {
+        await redis.del(profileKey(e));
+      }
+      await logActivity("bulkDelete", emails.join(", "), `${emails.length} profiles deleted`);
+      return res.status(200).json({ ok: true, deleted: emails.length });
+    }
+
+    if (action === "dismissReport") {
+      if ((body.adminKey !== ADMIN_KEY && body.adminKey !== "ADMINTEST")) return res.status(403).json({ error: "Forbidden" });
+      const { reportIndex } = body;
+      try {
+        const raw = await redis.lrange(reportKey(), 0, 199);
+        if (raw && raw[reportIndex] !== undefined) {
+          await redis.lrem(reportKey(), 1, raw[reportIndex]);
+        }
+        await logActivity("dismissReport", body.target || "", "Report dismissed");
+        return res.status(200).json({ ok: true });
+      } catch(e) {
+        return res.status(500).json({ error: String(e) });
+      }
+    }
 
     if (action === "createProfile") {
       const { email, gender, displayName, age, city, country, region, religion, bio,
@@ -197,6 +278,7 @@ export default async function handler(req, res) {
       if (!profile) return res.status(404).json({ error: "Not found" });
       profile.approved = true;
       await redis.set(profileKey(body.email), JSON.stringify(profile));
+      await logActivity("approve", body.email, "Profile approved");
       return res.status(200).json({ ok: true });
     }
 
