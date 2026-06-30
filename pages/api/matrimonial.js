@@ -161,6 +161,7 @@ export default async function handler(req, res) {
         city, country, region, religion, bio,
         familyInvolvement, virtueStatus, maritalStatus, hasChildren,
         education, languages, height, seeking,
+        approved: true,
         photoUrl: photoBase64 || (existing && existing.photoUrl) || null,
         updatedAt: Date.now(),
       };
