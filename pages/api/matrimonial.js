@@ -72,6 +72,7 @@ export const config = { api: { bodyParser: { sizeLimit: "10mb" } } };
 
 export default async function handler(req, res) {
   res.setHeader("Cache-Control", "no-store");
+  try {
 
   if (req.method === "GET") {
     const { action, email, gender, other, adminKey } = req.query;
@@ -140,6 +141,30 @@ export default async function handler(req, res) {
         photoUrl: body.photoBase64 || null,
       };
       await redis.set(profileKey(email), JSON.stringify(profile));
+      return res.status(200).json({ ok: true });
+    }
+
+    if (action === "updateProfile") {
+      const { email, gender, displayName, age, city, country, region, religion, bio,
+              familyInvolvement, virtueStatus, maritalStatus, hasChildren,
+              education, languages, height, seeking, photoBase64 } = body;
+      if (!email || !displayName || !age || !city || !bio) {
+        return res.status(400).json({ error: "Required fields missing" });
+      }
+      // Get existing profile to preserve approval status
+      const existing = await getProfile(email);
+      const updated = {
+        ...(existing || {}),
+        email: email.toLowerCase(),
+        gender: gender || (existing && existing.gender) || "woman",
+        displayName, age: parseInt(age),
+        city, country, region, religion, bio,
+        familyInvolvement, virtueStatus, maritalStatus, hasChildren,
+        education, languages, height, seeking,
+        photoUrl: photoBase64 || (existing && existing.photoUrl) || null,
+        updatedAt: Date.now(),
+      };
+      await redis.set(profileKey(email), JSON.stringify(updated));
       return res.status(200).json({ ok: true });
     }
 
@@ -220,4 +245,11 @@ export default async function handler(req, res) {
   }
 
   res.status(405).json({ error: "Method not allowed" });
+
+  } catch(e) {
+    console.error("matrimonial API error:", e);
+    if (!res.headersSent) {
+      res.status(500).json({ error: String(e.message || e) });
+    }
+  }
 }
