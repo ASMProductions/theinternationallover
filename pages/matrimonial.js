@@ -324,6 +324,7 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
   };
 
   const submitProfile = async () => {
+    setMsg("");
     const emailToUse = profileEmail || userEmail;
     if (!emailToUse) { setMsg("Please enter your email address."); return; }
     if (!createForm.displayName || !createForm.age || !createForm.city || !createForm.bio) {
@@ -643,10 +644,25 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
                     <input type="file" accept="image/*" style={{ display:"none" }} onChange={e => {
                       const file = e.target.files[0];
                       if (!file) return;
-                      if (file.size > 5 * 1024 * 1024) { alert("Photo must be under 5MB."); return; }
+                      if (file.size > 8 * 1024 * 1024) { alert("Photo must be under 8MB."); return; }
+                      const img = new Image();
                       const reader = new FileReader();
                       reader.onload = ev => {
-                        setCreateForm(f => ({...f, photoPreview: ev.target.result, photoBase64: ev.target.result}));
+                        img.onload = () => {
+                          const maxDim = 800;
+                          let w = img.width, h = img.height;
+                          if (w > maxDim || h > maxDim) {
+                            if (w > h) { h = Math.round(h * maxDim / w); w = maxDim; }
+                            else { w = Math.round(w * maxDim / h); h = maxDim; }
+                          }
+                          const canvas = document.createElement("canvas");
+                          canvas.width = w; canvas.height = h;
+                          const ctx = canvas.getContext("2d");
+                          ctx.drawImage(img, 0, 0, w, h);
+                          const compressed = canvas.toDataURL("image/jpeg", 0.8);
+                          setCreateForm(f => ({...f, photoPreview: compressed, photoBase64: compressed}));
+                        };
+                        img.src = ev.target.result;
                       };
                       reader.readAsDataURL(file);
                     }} />
@@ -661,7 +677,7 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
           </button>
           {gender === "woman" && (
             <div style={{ fontSize:11, color:C.muted, fontFamily:"sans-serif", textAlign:"center", marginTop:12, lineHeight:1.6 }}>
-              Your profile will be reviewed before going live. This usually takes 24-48 hours.
+              {!isEditing && "Your profile will be reviewed before going live. This usually takes 24-48 hours."}
             </div>
           )}
         </div>
