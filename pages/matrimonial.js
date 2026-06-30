@@ -66,6 +66,7 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
   const [activeProfile, setActiveProfile] = useState(null);
   const [myProfile, setMyProfile] = useState(null);
   const [profileEmail, setProfileEmail] = useState("");
+  const [profileGender, setProfileGender] = useState("");
   const [isEditing, setIsEditing] = useState(false);
   const [loading, setLoading] = useState(false);
   const [msg, setMsg] = useState("");
@@ -445,7 +446,7 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
       const res = await fetch("/api/matrimonial", {
         method:"POST",
         headers:{"Content-Type":"application/json"},
-        body: JSON.stringify({ action: isEditing ? "updateProfile" : "createProfile", email:emailToUse, gender, ...createForm, photoBase64: (createForm.photos && createForm.photos[0]) || createForm.photoBase64 || null, photos: createForm.photos || [] })
+        body: JSON.stringify({ action: isEditing ? "updateProfile" : "createProfile", email:emailToUse, gender, targetGender: profileGender || undefined, ...createForm, photoBase64: (createForm.photos && createForm.photos[0]) || createForm.photoBase64 || null, photos: createForm.photos || [] })
       });
       const data = await res.json();
       if (data.ok) {
@@ -789,7 +790,7 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
           <div style={{ fontSize:14, color:C.goldLight }}>{isEditing ? "Edit Your Profile" : "Create Your Profile"}</div>
         </div>
         <div style={{ maxWidth:620, margin:"0 auto", padding:"2rem 1.5rem" }}>
-          {gender === "woman" && (
+          {(isEditing ? (profileGender || gender) : gender) === "woman" && (
             <div style={{ background:"rgba(74,124,94,0.1)", border:"1px solid " + C.green, padding:"0.875rem", marginBottom:"1.5rem", fontSize:12, color:C.green, fontFamily:"sans-serif" }}>
               {isEditing ? "Update your profile details below." : "Women join free. Create your profile and start browsing."}
             </div>
@@ -801,8 +802,8 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
           <Input label="CITY *" value={createForm.city} onChange={e => setCreateForm({...createForm, city:e.target.value})} />
           <Input label="COUNTRY *" value={createForm.country} onChange={e => setCreateForm({...createForm, country:e.target.value})} />
           <div style={{ marginBottom:14 }}>
-            <div style={{ fontSize:10, color:C.muted, fontFamily:"sans-serif", letterSpacing:"0.1em", marginBottom:8 }}>{gender === "man" ? "REGIONS (select all that apply)" : "REGION *"}</div>
-            {gender === "man" ? (
+            <div style={{ fontSize:10, color:C.muted, fontFamily:"sans-serif", letterSpacing:"0.1em", marginBottom:8 }}>{(isEditing ? (profileGender || gender) : gender) === "man" ? "REGIONS (select all that apply)" : "REGION *"}</div>
+            {(isEditing ? (profileGender || gender) : gender) === "man" ? (
               <div style={{ display:"flex", flexWrap:"wrap", gap:8 }}>
                 {REGIONS.filter(r => r.id !== "all").map(r => {
                   const selected = (createForm.regions || []).includes(r.id);
@@ -855,7 +856,7 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
               <option value="yes">Have children</option>
             </select>
           </div>
-          {gender === "woman" && (
+          {(isEditing ? (profileGender || gender) : gender) === "woman" && (
             <div style={{ marginBottom:14 }}>
               <div style={{ fontSize:10, color:C.muted, fontFamily:"sans-serif", letterSpacing:"0.1em", marginBottom:6 }}>VIRTUE STATUS (optional)</div>
               <select value={createForm.virtueStatus} onChange={e => setCreateForm({...createForm, virtueStatus:e.target.value})} style={{ width:"100%", padding:"10px 12px", background:C.dark, border:"1px solid " + C.border, color:C.cream, fontSize:13, fontFamily:"sans-serif" }}>
@@ -918,7 +919,7 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
           <button onClick={submitProfile} disabled={loading} style={{ width:"100%", padding:"14px", background:loading ? C.border : C.gold, color:C.navyDeep, border:"none", cursor:loading ? "default" : "pointer", fontSize:13, fontWeight:700, fontFamily:"sans-serif" }}>
             {loading ? "Saving..." : isEditing ? "Save Changes →" : "Create Profile →"}
           </button>
-          {gender === "woman" && (
+          {(isEditing ? (profileGender || gender) : gender) === "woman" && (
             <div style={{ fontSize:11, color:C.muted, fontFamily:"sans-serif", textAlign:"center", marginTop:12, lineHeight:1.6 }}>
               
             </div>
@@ -1296,7 +1297,7 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
                 <div style={{ color:C.muted, textAlign:"center", padding:"3rem", fontFamily:"sans-serif" }}>
                   No profile found for {userEmail || "this session"}.
                   <div style={{ marginTop:16 }}>
-                    <button onClick={() => { setIsEditing(false); setProfileEmail(userEmail); setMsg(""); setView("create"); }} style={{ background:C.gold, color:C.navyDeep, border:"none", padding:"8px 18px", cursor:"pointer", fontFamily:"sans-serif", fontSize:12, fontWeight:700 }}>Create Profile</button>
+                    <button onClick={() => { setIsEditing(false); setProfileEmail(userEmail); setProfileGender(""); setMsg(""); setView("create"); }} style={{ background:C.gold, color:C.navyDeep, border:"none", padding:"8px 18px", cursor:"pointer", fontFamily:"sans-serif", fontSize:12, fontWeight:700 }}>Create Profile</button>
                   </div>
                 </div>
               ) : (
@@ -1350,9 +1351,10 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
 
               {!adminViewProfile.isVirtual && (
                 <button onClick={() => {
-                  setCreateForm({ displayName:adminViewProfile.displayName||"", age:adminViewProfile.age||"", city:adminViewProfile.city||"", country:adminViewProfile.country||"", region:adminViewProfile.region||"all", religion:adminViewProfile.religion||"Muslim", bio:adminViewProfile.bio||"", familyInvolvement:adminViewProfile.familyInvolvement||"", virtueStatus:adminViewProfile.virtueStatus||"", maritalStatus:adminViewProfile.maritalStatus||"", hasChildren:adminViewProfile.hasChildren||"No", seeking:adminViewProfile.seeking||"Marriage", photos: adminViewProfile.photos || (adminViewProfile.photoUrl ? [adminViewProfile.photoUrl] : []), photoBase64:null });
+                  setCreateForm({ displayName:adminViewProfile.displayName||"", age:adminViewProfile.age||"", city:adminViewProfile.city||"", country:adminViewProfile.country||"", region:adminViewProfile.region||"all", regions:adminViewProfile.regions||[], religion:adminViewProfile.religion||"Muslim", bio:adminViewProfile.bio||"", familyInvolvement:adminViewProfile.familyInvolvement||"", virtueStatus:adminViewProfile.virtueStatus||"", maritalStatus:adminViewProfile.maritalStatus||"", hasChildren:adminViewProfile.hasChildren||"No", seeking:adminViewProfile.seeking||"Marriage", photos: adminViewProfile.photos || (adminViewProfile.photoUrl ? [adminViewProfile.photoUrl] : []), photoBase64:null });
                   setIsEditing(true);
                   setProfileEmail(adminViewProfile.email);
+                  setProfileGender(adminViewProfile.gender || "");
                   setMsg("");
                   setAdminViewProfile(null);
                   setView("create");
@@ -1492,7 +1494,7 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
           {!myProfile ? (
             <div style={{ textAlign:"center", padding:"3rem" }}>
               <div style={{ color:C.muted, fontFamily:"sans-serif", fontSize:13, marginBottom:24 }}>You don't have a profile yet.</div>
-              <button onClick={() => { setIsEditing(false); setProfileEmail(userEmail); setMsg(""); setView("create"); }} style={{ background:C.gold, color:C.navyDeep, border:"none", padding:"12px 28px", cursor:"pointer", fontSize:13, fontWeight:700, fontFamily:"sans-serif" }}>Create Profile →</button>
+              <button onClick={() => { setIsEditing(false); setProfileEmail(userEmail); setProfileGender(""); setMsg(""); setView("create"); }} style={{ background:C.gold, color:C.navyDeep, border:"none", padding:"12px 28px", cursor:"pointer", fontSize:13, fontWeight:700, fontFamily:"sans-serif" }}>Create Profile →</button>
             </div>
           ) : (
             <div>
@@ -1512,7 +1514,7 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
                 <p style={{ fontSize:13, color:C.creamDim, fontFamily:"sans-serif", lineHeight:1.85, margin:0 }}>{myProfile.bio}</p>
               </div>
               <div style={{ display:"flex", gap:10, flexWrap:"wrap" }}>
-                <button onClick={() => { setIsEditing(true); setCreateForm({ displayName:myProfile.displayName||"", age:myProfile.age||"", city:myProfile.city||"", country:myProfile.country||"", region:myProfile.region||"all", religion:myProfile.religion||"Muslim", bio:myProfile.bio||"", familyInvolvement:myProfile.familyInvolvement||"", virtueStatus:myProfile.virtueStatus||"", maritalStatus:myProfile.maritalStatus||"", hasChildren:myProfile.hasChildren||"No", seeking:myProfile.seeking||"Marriage", photos: myProfile.photos || (myProfile.photoUrl ? [myProfile.photoUrl] : []), photoBase64:null }); setIsEditing(true); setProfileEmail(userEmail); setMsg(""); setView("create"); }} style={{ padding:"10px 22px", background:C.gold, color:C.navyDeep, border:"none", cursor:"pointer", fontSize:13, fontWeight:700, fontFamily:"sans-serif" }}>Edit Profile</button>
+                <button onClick={() => { setIsEditing(true); setCreateForm({ displayName:myProfile.displayName||"", age:myProfile.age||"", city:myProfile.city||"", country:myProfile.country||"", region:myProfile.region||"all", regions:myProfile.regions||[], religion:myProfile.religion||"Muslim", bio:myProfile.bio||"", familyInvolvement:myProfile.familyInvolvement||"", virtueStatus:myProfile.virtueStatus||"", maritalStatus:myProfile.maritalStatus||"", hasChildren:myProfile.hasChildren||"No", seeking:myProfile.seeking||"Marriage", photos: myProfile.photos || (myProfile.photoUrl ? [myProfile.photoUrl] : []), photoBase64:null }); setIsEditing(true); setProfileEmail(userEmail); setProfileGender(myProfile.gender || gender || ""); setMsg(""); setView("create"); }} style={{ padding:"10px 22px", background:C.gold, color:C.navyDeep, border:"none", cursor:"pointer", fontSize:13, fontWeight:700, fontFamily:"sans-serif" }}>Edit Profile</button>
                 <button onClick={toggleHideProfile} style={{ padding:"10px 22px", background:"transparent", border:"1px solid " + C.border, color:C.muted, cursor:"pointer", fontSize:13, fontFamily:"sans-serif" }}>{myProfile.hidden ? "Show Profile" : "Hide Profile"}</button>
                 <button onClick={() => { loadPassedProfiles(); setView("passed"); }} style={{ padding:"10px 22px", background:"transparent", border:"1px solid " + C.border, color:C.muted, cursor:"pointer", fontSize:13, fontFamily:"sans-serif" }}>Passed Profiles</button>
                 <button onClick={() => { loadBlockedProfiles(); setView("blocked"); }} style={{ padding:"10px 22px", background:"transparent", border:"1px solid " + C.border, color:C.muted, cursor:"pointer", fontSize:13, fontFamily:"sans-serif" }}>Blocked Members</button>
