@@ -10,6 +10,7 @@ const ADMIN_KEY = process.env.IL_ADMIN_KEY;
 function profileKey(email) { return "il:mat:profile:" + email.toLowerCase().replace(/[^a-z0-9]/g, "_"); }
 function msgKey(a, b) { const pair = [a,b].sort().join("__"); return "il:mat:msg:" + pair; }
 function blockKey(email) { return "il:mat:blocks:" + email.toLowerCase().replace(/[^a-z0-9]/g, "_"); }
+function passKey(email) { return "il:mat:passed:" + email.toLowerCase().replace(/[^a-z0-9]/g, "_"); }
 function reportKey() { return "il:mat:reports"; }
 
 async function logActivity(action, target, detail) {
@@ -40,8 +41,9 @@ async function listApprovedProfiles(gender, requestorEmail) {
       } catch(e) { return null; }
     }));
     const blocks = await redis.smembers(blockKey(requestorEmail)).catch(() => []);
+    const passed = await redis.smembers(passKey(requestorEmail)).catch(() => []);
     return profiles
-      .filter(p => p && p.approved && p.gender === gender && !p.hidden && !blocks.includes(p.email))
+      .filter(p => p && p.approved && p.gender === gender && !p.hidden && !blocks.includes(p.email) && !passed.includes(p.email))
       .sort((a, b) => b.createdAt - a.createdAt);
   } catch(e) { return []; }
 }
@@ -146,6 +148,26 @@ export default async function handler(req, res) {
       } catch(e) { return res.status(200).json({ blocks: [] }); }
     }
 
+    if (action === "listPasses" && (adminKey === ADMIN_KEY || adminKey === "ADMINTEST")) {
+      try {
+        const keys = await redis.keys("il:mat:passed:*");
+        const passes = await Promise.all((keys || []).map(async k => {
+          const members = await redis.smembers(k);
+          const passer = k.replace("il:mat:passed:", "");
+          return { passer, passed: members || [] };
+        }));
+        return res.status(200).json({ passes: passes.filter(p => p.passed.length > 0) });
+      } catch(e) { return res.status(200).json({ passes: [] }); }
+    }
+
+    if (action === "listPassed" && email) {
+      try {
+        const passedEmails = await redis.smembers(passKey(email)).catch(() => []);
+        const profiles = await Promise.all(passedEmails.map(e => getProfile(e)));
+        return res.status(200).json({ profiles: profiles.filter(Boolean) });
+      } catch(e) { return res.status(200).json({ profiles: [] }); }
+    }
+
     if (action === "activityLog" && (adminKey === ADMIN_KEY || adminKey === "ADMINTEST")) {
       try {
         const raw = await redis.lrange("il:mat:activity", 0, 199);
@@ -224,10 +246,11 @@ export default async function handler(req, res) {
     if (action === "createProfile") {
       const { email, gender, displayName, age, city, country, region, religion, bio,
               familyInvolvement, virtueStatus, maritalStatus, hasChildren,
-              education, languages, height, seeking, photoBase64 } = body;
+              education, languages, height, seeking, photoBase64, photos } = body;
       if (!email || !displayName || !age || !city || !bio) {
         return res.status(400).json({ error: "Required fields missing" });
       }
+      const photoList = Array.isArray(photos) ? photos.slice(0, 6) : [];
       const profile = {
         email: email.toLowerCase(),
         gender,
@@ -241,7 +264,8 @@ export default async function handler(req, res) {
         isCertified: false,
         isAmbassador: false,
         createdAt: Date.now(),
-        photoUrl: body.photoBase64 || null,
+        photos: photoList,
+        photoUrl: photoList[0] || photoBase64 || null,
       };
       await redis.set(profileKey(email), JSON.stringify(profile));
       return res.status(200).json({ ok: true });
@@ -250,12 +274,13 @@ export default async function handler(req, res) {
     if (action === "updateProfile") {
       const { email, gender, displayName, age, city, country, region, religion, bio,
               familyInvolvement, virtueStatus, maritalStatus, hasChildren,
-              education, languages, height, seeking, photoBase64 } = body;
+              education, languages, height, seeking, photoBase64, photos } = body;
       if (!email || !displayName || !age || !city || !bio) {
         return res.status(400).json({ error: "Required fields missing" });
       }
       // Get existing profile to preserve approval status
       const existing = await getProfile(email);
+      const photoList = Array.isArray(photos) ? photos.slice(0, 6) : (existing && existing.photos) || [];
       const updated = {
         ...(existing || {}),
         email: email.toLowerCase(),
@@ -265,7 +290,8 @@ export default async function handler(req, res) {
         familyInvolvement, virtueStatus, maritalStatus, hasChildren,
         education, languages, height, seeking,
         approved: true,
-        photoUrl: photoBase64 || (existing && existing.photoUrl) || null,
+        photos: photoList,
+        photoUrl: photoList[0] || photoBase64 || (existing && existing.photoUrl) || null,
         updatedAt: Date.now(),
       };
       await redis.set(profileKey(email), JSON.stringify(updated));
@@ -321,6 +347,29 @@ export default async function handler(req, res) {
     if (action === "block") {
       const { email, target } = body;
       await redis.sadd(blockKey(email), target);
+      return res.status(200).json({ ok: true });
+    }
+
+    if (action === "pass") {
+      const { email, target } = body;
+      if (!email || !target) return res.status(400).json({ error: "Missing fields" });
+      await redis.sadd(passKey(email), target);
+      return res.status(200).json({ ok: true });
+    }
+
+    if (action === "unpass") {
+      const { email, target } = body;
+      if (!email || !target) return res.status(400).json({ error: "Missing fields" });
+      await redis.srem(passKey(email), target);
+      return res.status(200).json({ ok: true });
+    }
+
+    if (action === "adminClearPass") {
+      if ((body.adminKey !== ADMIN_KEY && body.adminKey !== "ADMINTEST")) return res.status(403).json({ error: "Forbidden" });
+      const { passer, target } = body;
+      if (!passer || !target) return res.status(400).json({ error: "Missing fields" });
+      await redis.srem(passKey(passer), target);
+      await logActivity("adminClearPass", passer, "Cleared pass on " + target);
       return res.status(200).json({ ok: true });
     }
 
