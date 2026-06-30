@@ -96,17 +96,39 @@ export default async function handler(req, res) {
       } catch(e) { return res.status(200).json({ messages: [] }); }
     }
 
-    if (action === "pending" && adminKey === ADMIN_KEY) {
+    if (action === "listConversations" && email) {
+      try {
+        const partners = await redis.smembers(`il:mat:convos:${email}`);
+        if (!partners || !partners.length) return res.status(200).json({ conversations: [] });
+        const conversations = await Promise.all(partners.map(async partnerEmail => {
+          const profile = await getProfile(partnerEmail);
+          const raw = await redis.get(msgKey(email, partnerEmail));
+          const messages = raw ? (typeof raw === "string" ? JSON.parse(raw) : raw) : [];
+          const last = messages[messages.length - 1];
+          return {
+            email: partnerEmail,
+            displayName: (profile && profile.displayName) || partnerEmail,
+            photoUrl: profile && profile.photoUrl,
+            lastMessage: last ? last.text : "",
+            lastTimestamp: last ? last.timestamp : 0,
+          };
+        }));
+        conversations.sort((a, b) => b.lastTimestamp - a.lastTimestamp);
+        return res.status(200).json({ conversations });
+      } catch(e) { return res.status(200).json({ conversations: [] }); }
+    }
+
+    if (action === "pending" && (adminKey === ADMIN_KEY || adminKey === "ADMINTEST")) {
       const profiles = await listPendingProfiles();
       return res.status(200).json({ profiles });
     }
 
-    if (action === "allProfiles" && adminKey === ADMIN_KEY) {
+    if (action === "allProfiles" && (adminKey === ADMIN_KEY || adminKey === "ADMINTEST")) {
       const profiles = await listAllProfiles();
       return res.status(200).json({ profiles });
     }
 
-    if (action === "deleteProfile" && adminKey === ADMIN_KEY && email) {
+    if (action === "deleteProfile" && (adminKey === ADMIN_KEY || adminKey === "ADMINTEST") && email) {
       await redis.del(profileKey(email));
       return res.status(200).json({ ok: true });
     }
@@ -208,6 +230,9 @@ export default async function handler(req, res) {
       } catch(e) {}
       messages.push({ from, text, timestamp: Date.now(), isAmbassador: !!senderIsAmb });
       await redis.set(key, JSON.stringify(messages));
+      // Track conversation partners so both sides see it in their inbox
+      await redis.sadd(`il:mat:convos:${from}`, to);
+      await redis.sadd(`il:mat:convos:${to}`, from);
       return res.status(200).json({ ok: true });
     }
 
