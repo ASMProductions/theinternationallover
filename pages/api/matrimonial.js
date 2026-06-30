@@ -168,6 +168,14 @@ export default async function handler(req, res) {
       } catch(e) { return res.status(200).json({ profiles: [] }); }
     }
 
+    if (action === "listBlocked" && email) {
+      try {
+        const blockedEmails = await redis.smembers(blockKey(email)).catch(() => []);
+        const profiles = await Promise.all(blockedEmails.map(e => getProfile(e)));
+        return res.status(200).json({ profiles: profiles.filter(Boolean) });
+      } catch(e) { return res.status(200).json({ profiles: [] }); }
+    }
+
     if (action === "activityLog" && (adminKey === ADMIN_KEY || adminKey === "ADMINTEST")) {
       try {
         const raw = await redis.lrange("il:mat:activity", 0, 199);
@@ -347,6 +355,22 @@ export default async function handler(req, res) {
     if (action === "block") {
       const { email, target } = body;
       await redis.sadd(blockKey(email), target);
+      return res.status(200).json({ ok: true });
+    }
+
+    if (action === "unblock") {
+      const { email, target } = body;
+      if (!email || !target) return res.status(400).json({ error: "Missing fields" });
+      await redis.srem(blockKey(email), target);
+      return res.status(200).json({ ok: true });
+    }
+
+    if (action === "adminClearBlock") {
+      if ((body.adminKey !== ADMIN_KEY && body.adminKey !== "ADMINTEST")) return res.status(403).json({ error: "Forbidden" });
+      const { blocker, target } = body;
+      if (!blocker || !target) return res.status(400).json({ error: "Missing fields" });
+      await redis.srem(blockKey(blocker), target);
+      await logActivity("adminClearBlock", blocker, "Cleared block on " + target);
       return res.status(200).json({ ok: true });
     }
 
