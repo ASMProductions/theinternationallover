@@ -87,6 +87,9 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
   const [selectedProfiles, setSelectedProfiles] = useState([]);
   const [reports, setReports] = useState([]);
   const [blocks, setBlocks] = useState([]);
+  const [passedProfiles, setPassedProfiles] = useState([]);
+  const [allPasses, setAllPasses] = useState([]);
+  const [lightboxPhoto, setLightboxPhoto] = useState(null);
   const [activityLog, setActivityLog] = useState([]);
   const [activeConvo, setActiveConvo] = useState(null);
   const [messageText, setMessageText] = useState("");
@@ -261,6 +264,26 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
     } catch(e) {}
   };
 
+  const loadAllPasses = async () => {
+    try {
+      const res = await fetch("/api/matrimonial?action=listPasses&adminKey=ADMINTEST");
+      const data = await res.json();
+      setAllPasses(data.passes || []);
+    } catch(e) {}
+  };
+
+  const adminClearPass = async (passer, target) => {
+    try {
+      await fetch("/api/matrimonial", {
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body: JSON.stringify({ action:"adminClearPass", adminKey:"ADMINTEST", passer, target })
+      });
+      setAllPasses(prev => prev.map(p => p.passer === passer ? { ...p, passed: p.passed.filter(t => t !== target) } : p).filter(p => p.passed.length > 0));
+      showToast("Pass relationship cleared.", "success");
+    } catch(e) {}
+  };
+
   const loadActivityLog = async () => {
     try {
       const res = await fetch("/api/matrimonial?action=activityLog&adminKey=ADMINTEST");
@@ -409,7 +432,7 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
       const res = await fetch("/api/matrimonial", {
         method:"POST",
         headers:{"Content-Type":"application/json"},
-        body: JSON.stringify({ action: isEditing ? "updateProfile" : "createProfile", email:emailToUse, gender, ...createForm, photoBase64: createForm.photoBase64 || null })
+        body: JSON.stringify({ action: isEditing ? "updateProfile" : "createProfile", email:emailToUse, gender, ...createForm, photoBase64: (createForm.photos && createForm.photos[0]) || createForm.photoBase64 || null, photos: createForm.photos || [] })
       });
       const data = await res.json();
       if (data.ok) {
@@ -495,6 +518,39 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
     } catch(e) {}
   };
 
+  const passUser = async (targetEmail) => {
+    try {
+      await fetch("/api/matrimonial", {
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body: JSON.stringify({ action:"pass", email:userEmail, target:targetEmail })
+      });
+      setProfiles(prev => prev.filter(p => p.email !== targetEmail));
+      setView("browse");
+      showToast("Passed. You can revisit this anytime under My Profile → Passed Profiles.", "info");
+    } catch(e) {}
+  };
+
+  const loadPassedProfiles = async () => {
+    try {
+      const res = await fetch("/api/matrimonial?action=listPassed&email=" + encodeURIComponent(userEmail));
+      const data = await res.json();
+      setPassedProfiles(data.profiles || []);
+    } catch(e) {}
+  };
+
+  const unpassUser = async (targetEmail) => {
+    try {
+      await fetch("/api/matrimonial", {
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body: JSON.stringify({ action:"unpass", email:userEmail, target:targetEmail })
+      });
+      setPassedProfiles(prev => prev.filter(p => p.email !== targetEmail));
+      showToast("Profile restored to your browse list.", "success");
+    } catch(e) {}
+  };
+
   const approveProfile = async (profileEmail) => {
     try {
       await fetch("/api/matrimonial", {
@@ -528,6 +584,7 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
           <div style={{ fontSize:14, color:C.goldLight }}>Profile</div>
           {!isMine && (
             <div style={{ marginLeft:"auto", display:"flex", gap:8 }}>
+              <button onClick={() => passUser(activeProfile.email)} style={{ background:"none", border:"1px solid " + C.muted, color:C.muted, padding:"6px 12px", cursor:"pointer", fontSize:10, fontFamily:"sans-serif" }}>Pass</button>
               <button onClick={() => reportUser(activeProfile.email)} style={{ background:"none", border:"1px solid " + C.border, color:C.muted, padding:"6px 12px", cursor:"pointer", fontSize:10, fontFamily:"sans-serif" }}>Report</button>
               <button onClick={() => blockUser(activeProfile.email)} style={{ background:"none", border:"1px solid " + C.red, color:C.red, padding:"6px 12px", cursor:"pointer", fontSize:10, fontFamily:"sans-serif" }}>Block</button>
             </div>
@@ -557,6 +614,13 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
               </div>
             </div>
           </div>
+          {activeProfile.photos && activeProfile.photos.length > 1 && (
+            <div style={{ display:"flex", gap:8, flexWrap:"wrap", marginBottom:"1.5rem" }}>
+              {activeProfile.photos.slice(1).map((photo, i) => (
+                <img key={i} src={photo} alt={"Photo " + (i+2)} style={{ width:80, height:100, objectFit:"cover", objectPosition:"center top", border:"1px solid " + C.border, cursor:"pointer" }} onClick={() => setLightboxPhoto(photo)} />
+              ))}
+            </div>
+          )}
           <div style={{ background:C.navyDeep, border:"1px solid " + C.border, padding:"1.5rem", marginBottom:"1.5rem" }}>
             <div style={{ fontSize:9, letterSpacing:"0.15em", color:C.gold, fontFamily:"sans-serif", marginBottom:12 }}>ABOUT</div>
             <p style={{ fontSize:14, color:C.creamDim, lineHeight:1.85, fontFamily:"sans-serif", margin:0 }}>{activeProfile.bio}</p>
@@ -591,6 +655,11 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
             </div>
           )}
         </div>
+        {lightboxPhoto && (
+          <div onClick={() => setLightboxPhoto(null)} style={{ position:"fixed", inset:0, background:"rgba(5,13,26,0.92)", display:"flex", alignItems:"center", justifyContent:"center", zIndex:9997, padding:"2rem", cursor:"pointer" }}>
+            <img src={lightboxPhoto} alt="Full size" style={{ maxWidth:"90vw", maxHeight:"85vh", objectFit:"contain", border:"1px solid " + C.gold }} />
+          </div>
+        )}
       </div>
     );
   }
@@ -732,51 +801,54 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
             </div>
           )}
           <div style={{ marginBottom:20 }}>
-            <div style={{ fontSize:10, color:C.muted, fontFamily:"sans-serif", letterSpacing:"0.1em", marginBottom:6 }}>PROFILE PHOTO (optional)</div>
-            <div style={{ border:"1px dashed " + C.border, padding:"1.5rem", textAlign:"center", position:"relative" }}>
-              {createForm.photoPreview ? (
-                <div>
-                  <img src={createForm.photoPreview} alt="Preview" style={{ width:120, height:150, objectFit:"cover", objectPosition:"center top", marginBottom:10 }} />
-                  <div>
-                    <button onClick={() => setCreateForm({...createForm, photoPreview:null, photoBase64:null})} style={{ background:"none", border:"1px solid " + C.border, color:C.muted, padding:"4px 12px", cursor:"pointer", fontSize:11, fontFamily:"sans-serif" }}>Remove</button>
-                  </div>
+            <div style={{ fontSize:10, color:C.muted, fontFamily:"sans-serif", letterSpacing:"0.1em", marginBottom:6 }}>PROFILE PHOTOS (optional, up to 6)</div>
+            <div style={{ display:"flex", flexWrap:"wrap", gap:10, marginBottom:10 }}>
+              {(createForm.photos || []).map((photo, i) => (
+                <div key={i} style={{ position:"relative", width:90, height:112 }}>
+                  <img src={photo} alt={"Photo " + (i+1)} style={{ width:90, height:112, objectFit:"cover", objectPosition:"center top", border: i===0 ? "2px solid " + C.gold : "1px solid " + C.border }} />
+                  {i === 0 && <div style={{ position:"absolute", top:2, left:2, background:C.gold, color:C.navyDeep, fontSize:8, fontWeight:700, padding:"1px 5px", fontFamily:"sans-serif" }}>PRIMARY</div>}
+                  <button onClick={() => {
+                    const updated = (createForm.photos || []).filter((_, idx) => idx !== i);
+                    setCreateForm({...createForm, photos: updated, photoBase64: updated[0] || null, photoPreview: updated[0] || null});
+                  }} style={{ position:"absolute", top:2, right:2, background:"rgba(10,10,20,0.85)", border:"none", color:C.red, cursor:"pointer", fontSize:13, width:18, height:18, lineHeight:"18px", textAlign:"center", padding:0 }}>×</button>
                 </div>
-              ) : (
-                <div>
-                  <div style={{ fontSize:28, marginBottom:8, color:C.border }}>◈</div>
-                  <div style={{ fontSize:12, color:C.muted, fontFamily:"sans-serif", marginBottom:10 }}>Upload a photo for your profile</div>
-                  <label style={{ background:C.navyDeep, border:"1px solid " + C.border, color:C.gold, padding:"8px 18px", cursor:"pointer", fontSize:12, fontFamily:"sans-serif", display:"inline-block" }}>
-                    Choose Photo
-                    <input type="file" accept="image/*" style={{ display:"none" }} onChange={e => {
-                      const file = e.target.files[0];
-                      if (!file) return;
-                      if (file.size > 8 * 1024 * 1024) { showToast("Photo must be under 8MB.", "error"); return; }
-                      const img = new Image();
-                      const reader = new FileReader();
-                      reader.onload = ev => {
-                        img.onload = () => {
-                          const maxDim = 800;
-                          let w = img.width, h = img.height;
-                          if (w > maxDim || h > maxDim) {
-                            if (w > h) { h = Math.round(h * maxDim / w); w = maxDim; }
-                            else { w = Math.round(w * maxDim / h); h = maxDim; }
-                          }
-                          const canvas = document.createElement("canvas");
-                          canvas.width = w; canvas.height = h;
-                          const ctx = canvas.getContext("2d");
-                          ctx.drawImage(img, 0, 0, w, h);
-                          const compressed = canvas.toDataURL("image/jpeg", 0.8);
-                          setCreateForm(f => ({...f, photoPreview: compressed, photoBase64: compressed}));
-                        };
-                        img.src = ev.target.result;
+              ))}
+              {(createForm.photos || []).length < 6 && (
+                <label style={{ width:90, height:112, border:"1px dashed " + C.border, display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", cursor:"pointer", color:C.muted, fontFamily:"sans-serif" }}>
+                  <div style={{ fontSize:22, marginBottom:4 }}>＋</div>
+                  <div style={{ fontSize:9 }}>Add Photo</div>
+                  <input type="file" accept="image/*" style={{ display:"none" }} onChange={e => {
+                    const file = e.target.files[0];
+                    if (!file) return;
+                    const current = createForm.photos || [];
+                    if (current.length >= 6) { showToast("Maximum 6 photos.", "error"); return; }
+                    if (file.size > 8 * 1024 * 1024) { showToast("Photo must be under 8MB.", "error"); return; }
+                    const img = new Image();
+                    const reader = new FileReader();
+                    reader.onload = ev => {
+                      img.onload = () => {
+                        const maxDim = 800;
+                        let w = img.width, h = img.height;
+                        if (w > maxDim || h > maxDim) {
+                          if (w > h) { h = Math.round(h * maxDim / w); w = maxDim; }
+                          else { w = Math.round(w * maxDim / h); h = maxDim; }
+                        }
+                        const canvas = document.createElement("canvas");
+                        canvas.width = w; canvas.height = h;
+                        const ctx = canvas.getContext("2d");
+                        ctx.drawImage(img, 0, 0, w, h);
+                        const compressed = canvas.toDataURL("image/jpeg", 0.8);
+                        const updated = [...current, compressed];
+                        setCreateForm(f => ({...f, photos: updated, photoBase64: updated[0], photoPreview: updated[0]}));
                       };
-                      reader.readAsDataURL(file);
-                    }} />
-                  </label>
-                  <div style={{ fontSize:10, color:C.muted, fontFamily:"sans-serif", marginTop:8 }}>JPG or PNG · Max 5MB</div>
-                </div>
+                      img.src = ev.target.result;
+                    };
+                    reader.readAsDataURL(file);
+                  }} />
+                </label>
               )}
             </div>
+            <div style={{ fontSize:10, color:C.muted, fontFamily:"sans-serif" }}>JPG or PNG · Max 8MB each · First photo is your primary/cover image · {(createForm.photos || []).length}/6 used</div>
           </div>
           <button onClick={submitProfile} disabled={loading} style={{ width:"100%", padding:"14px", background:loading ? C.border : C.gold, color:C.navyDeep, border:"none", cursor:loading ? "default" : "pointer", fontSize:13, fontWeight:700, fontFamily:"sans-serif" }}>
             {loading ? "Saving..." : isEditing ? "Save Changes →" : "Create Profile →"}
@@ -798,6 +870,7 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
       { id:"profiles", label:"Profiles" },
       { id:"reports", label:"Reports" + (reports.length ? ` (${reports.length})` : "") },
       { id:"blocks", label:"Blocks" },
+      { id:"passes", label:"Passes" },
       { id:"consulate", label:"Consulate" },
       { id:"ambassadors", label:"Ambassadors" },
       { id:"leads", label:"Women's Profiles" },
@@ -817,6 +890,7 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
                 if (t.id === "profiles") { loadAllProfiles(); loadPendingApprovals(); }
                 if (t.id === "reports") loadReports();
                 if (t.id === "blocks") loadBlocks();
+                if (t.id === "passes") loadAllPasses();
                 if (t.id === "consulate") loadConsulatePosts();
                 if (t.id === "ambassadors") loadAmbassadors();
                 if (t.id === "leads") loadLeads();
@@ -1012,6 +1086,28 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
             </div>
           )}
 
+          {/* ── PASSES ── */}
+          {adminTab === "passes" && (
+            <div>
+              <div style={{ fontSize:9, letterSpacing:"0.2em", color:C.muted, fontFamily:"sans-serif", marginBottom:16 }}>PASS RELATIONSHIPS — {allPasses.length} members with active passes</div>
+              <p style={{ fontSize:11, color:C.muted, fontFamily:"sans-serif", marginBottom:16, lineHeight:1.6 }}>Pass is reversible — users can undo it themselves under My Profile → Passed Profiles. Use Clear here only for testing or support purposes.</p>
+              {allPasses.length === 0 && <div style={{ color:C.muted, textAlign:"center", padding:"3rem", fontFamily:"sans-serif" }}>No passes on the platform.</div>}
+              {allPasses.map(p => (
+                <div key={p.passer} style={{ ...cardStyle, flexDirection:"column", alignItems:"flex-start", gap:8 }}>
+                  <div style={{ fontSize:13, color:C.goldLight }}>{p.passer}</div>
+                  <div style={{ display:"flex", flexWrap:"wrap", gap:6 }}>
+                    {p.passed.map(t => (
+                      <div key={t} style={{ display:"flex", alignItems:"center", gap:6, background:C.dark, border:"1px solid " + C.border, padding:"3px 10px", fontSize:11, fontFamily:"sans-serif", color:C.creamDim }}>
+                        {t}
+                        <button onClick={() => adminClearPass(p.passer, t)} style={{ background:"none", border:"none", color:C.red, cursor:"pointer", fontSize:11, padding:0 }}>×</button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+
           {/* ── ACTIVITY ── */}
           {adminTab === "activity" && (
             <div>
@@ -1167,7 +1263,7 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
 
               {!adminViewProfile.isVirtual && (
                 <button onClick={() => {
-                  setCreateForm({ displayName:adminViewProfile.displayName||"", age:adminViewProfile.age||"", city:adminViewProfile.city||"", country:adminViewProfile.country||"", region:adminViewProfile.region||"all", religion:adminViewProfile.religion||"Muslim", bio:adminViewProfile.bio||"", familyInvolvement:adminViewProfile.familyInvolvement||"", virtueStatus:adminViewProfile.virtueStatus||"", maritalStatus:adminViewProfile.maritalStatus||"", hasChildren:adminViewProfile.hasChildren||"No", seeking:adminViewProfile.seeking||"Marriage", photoBase64:null });
+                  setCreateForm({ displayName:adminViewProfile.displayName||"", age:adminViewProfile.age||"", city:adminViewProfile.city||"", country:adminViewProfile.country||"", region:adminViewProfile.region||"all", religion:adminViewProfile.religion||"Muslim", bio:adminViewProfile.bio||"", familyInvolvement:adminViewProfile.familyInvolvement||"", virtueStatus:adminViewProfile.virtueStatus||"", maritalStatus:adminViewProfile.maritalStatus||"", hasChildren:adminViewProfile.hasChildren||"No", seeking:adminViewProfile.seeking||"Marriage", photos: adminViewProfile.photos || (adminViewProfile.photoUrl ? [adminViewProfile.photoUrl] : []), photoBase64:null });
                   setIsEditing(true);
                   setProfileEmail(adminViewProfile.email);
                   setMsg("");
@@ -1208,6 +1304,35 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
     );
   }
   // MY PROFILE VIEW
+  if (view === "passed") {
+    return (
+      <div style={{ minHeight:"100vh", background:C.dark, color:C.cream, fontFamily:"Georgia,serif" }}>
+        <div style={{ background:C.navyDeep, borderBottom:"1px solid " + C.border, padding:"1rem 1.5rem", display:"flex", alignItems:"center", gap:12 }}>
+          <button onClick={() => setView("myprofile")} style={{ background:"none", border:"1px solid " + C.gold, color:C.gold, padding:"6px 14px", cursor:"pointer", fontSize:12, fontFamily:"sans-serif" }}>← Back</button>
+          <div style={{ fontSize:14, color:C.goldLight }}>Passed Profiles</div>
+        </div>
+        <div style={{ maxWidth:620, margin:"0 auto", padding:"2rem 1.5rem" }}>
+          <p style={{ fontSize:12, color:C.muted, fontFamily:"sans-serif", lineHeight:1.6, marginBottom:"1.5rem" }}>Profiles you've passed on are hidden from your browse list. Undo any of them below to bring them back.</p>
+          {passedProfiles.length === 0 && <div style={{ color:C.muted, textAlign:"center", padding:"3rem", fontFamily:"sans-serif" }}>You haven't passed on anyone.</div>}
+          {passedProfiles.map(p => (
+            <div key={p.email} style={{ display:"flex", gap:14, alignItems:"center", padding:"1rem", background:C.navyDeep, border:"1px solid " + C.border, marginBottom:8 }}>
+              {p.photoUrl ? (
+                <img src={p.photoUrl} alt={p.displayName} style={{ width:48, height:60, objectFit:"cover", objectPosition:"center top", flexShrink:0 }} />
+              ) : (
+                <div style={{ width:48, height:60, background:"rgba(184,150,62,0.15)", border:"1px solid " + C.gold, display:"flex", alignItems:"center", justifyContent:"center", fontSize:16, color:C.gold, flexShrink:0 }}>{(p.displayName||"?")[0].toUpperCase()}</div>
+              )}
+              <div style={{ flex:1, minWidth:0 }}>
+                <div style={{ fontSize:14, color:C.goldLight }}>{p.displayName}</div>
+                <div style={{ fontSize:11, color:C.muted, fontFamily:"sans-serif" }}>{p.age} · {p.city}</div>
+              </div>
+              <button onClick={() => unpassUser(p.email)} style={{ padding:"6px 14px", background:"transparent", border:"1px solid " + C.gold, color:C.gold, cursor:"pointer", fontFamily:"sans-serif", fontSize:11, flexShrink:0 }}>Undo</button>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
   if (view === "myprofile") {
     return (
       <div style={{ minHeight:"100vh", background:C.dark, color:C.cream, fontFamily:"Georgia,serif" }}>
@@ -1239,8 +1364,9 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
                 <p style={{ fontSize:13, color:C.creamDim, fontFamily:"sans-serif", lineHeight:1.85, margin:0 }}>{myProfile.bio}</p>
               </div>
               <div style={{ display:"flex", gap:10, flexWrap:"wrap" }}>
-                <button onClick={() => { setIsEditing(true); setCreateForm({ displayName:myProfile.displayName||"", age:myProfile.age||"", city:myProfile.city||"", country:myProfile.country||"", region:myProfile.region||"all", religion:myProfile.religion||"Muslim", bio:myProfile.bio||"", familyInvolvement:myProfile.familyInvolvement||"", virtueStatus:myProfile.virtueStatus||"", maritalStatus:myProfile.maritalStatus||"", hasChildren:myProfile.hasChildren||"No", seeking:myProfile.seeking||"Marriage", photoBase64:null }); setIsEditing(true); setProfileEmail(userEmail); setMsg(""); setView("create"); }} style={{ padding:"10px 22px", background:C.gold, color:C.navyDeep, border:"none", cursor:"pointer", fontSize:13, fontWeight:700, fontFamily:"sans-serif" }}>Edit Profile</button>
+                <button onClick={() => { setIsEditing(true); setCreateForm({ displayName:myProfile.displayName||"", age:myProfile.age||"", city:myProfile.city||"", country:myProfile.country||"", region:myProfile.region||"all", religion:myProfile.religion||"Muslim", bio:myProfile.bio||"", familyInvolvement:myProfile.familyInvolvement||"", virtueStatus:myProfile.virtueStatus||"", maritalStatus:myProfile.maritalStatus||"", hasChildren:myProfile.hasChildren||"No", seeking:myProfile.seeking||"Marriage", photos: myProfile.photos || (myProfile.photoUrl ? [myProfile.photoUrl] : []), photoBase64:null }); setIsEditing(true); setProfileEmail(userEmail); setMsg(""); setView("create"); }} style={{ padding:"10px 22px", background:C.gold, color:C.navyDeep, border:"none", cursor:"pointer", fontSize:13, fontWeight:700, fontFamily:"sans-serif" }}>Edit Profile</button>
                 <button onClick={toggleHideProfile} style={{ padding:"10px 22px", background:"transparent", border:"1px solid " + C.border, color:C.muted, cursor:"pointer", fontSize:13, fontFamily:"sans-serif" }}>{myProfile.hidden ? "Show Profile" : "Hide Profile"}</button>
+                <button onClick={() => { loadPassedProfiles(); setView("passed"); }} style={{ padding:"10px 22px", background:"transparent", border:"1px solid " + C.border, color:C.muted, cursor:"pointer", fontSize:13, fontFamily:"sans-serif" }}>Passed Profiles</button>
               </div>
             </div>
           )}
