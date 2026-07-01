@@ -1595,7 +1595,7 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
       <div style={{ background:C.navyDeep, borderBottom:"1px solid " + C.border, padding:"1rem 1.5rem", display:"flex", alignItems:"center", justifyContent:"space-between", flexWrap:"wrap", gap:10 }}>
         <div style={{ fontSize:15, color:C.goldLight }}>The International Lover™ — Matrimonial</div>
         <div style={{ display:"flex", gap:8, flexWrap:"wrap" }}>
-          <a href="/" style={{ background:"none", border:"1px solid " + C.border, color:C.muted, padding:"6px 12px", cursor:"pointer", fontSize:11, fontFamily:"sans-serif", textDecoration:"none", display:"inline-flex", alignItems:"center" }}>← Home</a>
+          <a href="/" style={{ background:"none", border:"1px solid " + C.gold, color:C.gold, padding:"6px 12px", cursor:"pointer", fontSize:11, fontFamily:"sans-serif", textDecoration:"none", display:"inline-flex", alignItems:"center" }}>← Home</a>
           {isAdmin && <button onClick={() => { setAdminTab("profiles"); loadAllProfiles(); loadPendingApprovals(); setView("admin"); }} style={{ background:"none", border:"1px solid " + C.gold, color:C.gold, padding:"6px 12px", cursor:"pointer", fontSize:11, fontFamily:"sans-serif" }}>Admin</button>}
           <button onClick={() => { setActiveConvo(null); loadConversations(); setView("messages"); }} style={{ background:"none", border:"1px solid " + C.border, color:C.muted, padding:"6px 12px", cursor:"pointer", fontSize:11, fontFamily:"sans-serif" }}>Messages</button>
           <button onClick={() => setView("myprofile")} style={{ background:C.gold, color:C.navyDeep, border:"none", padding:"8px 18px", cursor:"pointer", fontSize:12, fontWeight:700, fontFamily:"sans-serif" }}>My Profile</button>
