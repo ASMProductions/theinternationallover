@@ -1,6 +1,16 @@
-import { Redis } from "@upstash/redis";
-const redis = new Redis({ url: process.env.UPSTASH_REDIS_REST_URL, token: process.env.UPSTASH_REDIS_REST_TOKEN });
 function profileKey(email) { return "il:mat:profile:" + email.toLowerCase().replace(/[^a-z0-9]/g, "_"); }
+
+async function redisSet(key, value) {
+  const url = process.env.UPSTASH_REDIS_REST_URL;
+  const token = process.env.UPSTASH_REDIS_REST_TOKEN;
+  const encodedKey = encodeURIComponent(key);
+  const encodedValue = encodeURIComponent(JSON.stringify(value));
+  const res = await fetch(`${url}/set/${encodedKey}/${encodedValue}`, {
+    method: "GET",
+    headers: { Authorization: `Bearer ${token}` }
+  });
+  return res.ok;
+}
 
 const VIRTUAL_WOMEN = [
   {
@@ -551,7 +561,7 @@ export default async function handler(req, res) {
   for (const w of VIRTUAL_WOMEN) {
     try {
       const k = profileKey(w.email);
-      await redis.set(k, JSON.stringify(w));
+      await redisSet(k, w);
       results.push({ name: w.displayName, email: w.email, ok: true });
     } catch(e) {
       results.push({ name: w.displayName, error: String(e) });
