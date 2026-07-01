@@ -2486,8 +2486,10 @@ const REGIONS_COURSE = [
       success:"US Region — complete. The same standard as every other region. You held it.",
       not_yet:"NOT YET: She was sincere. The foundation was not yet ready. Come back in two years.",
       genuine_wrong:"NOT YET — Correct Deferral: She was real and sincere. The timing was not right. The man who can see this and defer with respect has demonstrated the highest form of discernment on this platform.",
-      cultural_fail:"US Region — Cultural Misnavigation: The preparation was insufficient. Study the US region resource module before returning.",
-      early_detect:"US Region — Correct Walkaway: You identified the pattern early. Arc complete.",
+      cultural_fail:"US Region — Cultural Misnavigation: The preparation was insufficient. The signals were present. You did not read them. Study the US region resource module before returning.",
+      early_detect:"US Region — Correct Walkaway: You identified the pattern early and exited cleanly. Arc complete.",
+      fraud_pre:"She presented as genuine. The warmth was real enough that you believed it. What was not real was the intention. You caught it before the legal process was complete. The damage was real — time, emotional investment, money in some cases — but the worst outcome was avoided.",
+      fraud_post:"She received citizenship. She left. This ending exists because it has happened to real men who did everything they believed was right. The signals were there. They were subtle and they were present. This is why the platform exists.",
     }
   },
   { id:"na", label:"North Africa", color:"#c8963e", desc:"Morocco · Tunisia · Algeria · Egypt",
@@ -3003,13 +3005,14 @@ function CourseView({ onBack }) {
       not_yet:        "II — Correct Deferral",
     };
     const endingColors = {
-      success:"#b8963e",
-      early_detect:"#7a6228",
-      cultural_fail:"#8a7a5a",
-      fraud_pre:"#8b1a1a",
-      fraud_post:"#6b0f0f",
-      genuine_wrong:"#4a7c8a",
+      success:       "#b8963e",
+      early_detect:  "#7a6228",
+      cultural_fail: "#8a7a5a",
+      fraud_pre:     "#8b1a1a",
+      fraud_post:    "#6b0f0f",
+      not_yet:       "#4a7c8a",
     };
+    const color = color || "#8a7a5a";
 
     return (
       <div style={{ minHeight:"100vh", background:"#091a35", color:"#f0e6cc", fontFamily:"Georgia,serif" }}>
@@ -3018,11 +3021,11 @@ function CourseView({ onBack }) {
         </div>
         <div style={{ maxWidth:640, margin:"0 auto", padding:"3rem 1.5rem" }}>
           <div style={{ textAlign:"center", marginBottom:"2rem" }}>
-            <div style={{ fontSize:9, letterSpacing:"0.3em", color:endingColors[outcome], fontFamily:"sans-serif", marginBottom:8 }}>ENDING</div>
-            <div style={{ fontSize:"clamp(16px,2.5vw,22px)", color:endingColors[outcome], fontFamily:"Georgia,serif", marginBottom:16 }}>{endingLabels[outcome]}</div>
-            <div style={{ width:48, height:2, background:endingColors[outcome], margin:"0 auto" }} />
+            <div style={{ fontSize:9, letterSpacing:"0.3em", color:color, fontFamily:"sans-serif", marginBottom:8 }}>ENDING</div>
+            <div style={{ fontSize:"clamp(16px,2.5vw,22px)", color:color, fontFamily:"Georgia,serif", marginBottom:16 }}>{endingLabels[outcome]}</div>
+            <div style={{ width:48, height:2, background:color, margin:"0 auto" }} />
           </div>
-          <div style={{ background:"#0f2347", border:`1px solid ${endingColors[outcome]}`, borderLeft:`4px solid ${endingColors[outcome]}`, padding:"1.5rem", marginBottom:"1.5rem" }}>
+          <div style={{ background:"#0f2347", border:`1px solid ${color}`, borderLeft:`4px solid ${color}`, padding:"1.5rem", marginBottom:"1.5rem" }}>
             <p style={{ fontSize:"clamp(13px,1.8vw,15px)", color:"#c8b890", lineHeight:1.9, fontFamily:"sans-serif", margin:0 }}>{endingText}</p>
           </div>
           <div style={{ display:"flex", gap:10, flexWrap:"wrap", justifyContent:"center" }}>
