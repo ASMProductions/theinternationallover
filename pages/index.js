@@ -2731,46 +2731,36 @@ function CourseView({ onBack }) {
   const region = activeRegion ? REGIONS_COURSE.find(r => r.id === activeRegion) : null;
 
   const handleChoice = (choice) => {
+    if (!choice) return;
     const newHistory = [...choiceHistory, choice];
     setChoiceHistory(newHistory);
 
-    if (region && selectedWoman) {
-      const woman = region.women.find(w => w.id === selectedWoman);
-      if (!woman) { setScenarioStep(s => s + 1); return; }
+    if (!region || !selectedWoman) { setScenarioStep(s => s + 1); return; }
+    const woman = (region.women || []).find(w => w.id === selectedWoman);
+    if (!woman) { setScenarioStep(s => s + 1); return; }
+    const choices = (region.scenarios && region.scenarios[0] && region.scenarios[0].choices) || [];
 
-      if (newHistory.length >= 2) {
-        // Real-world outcome probabilities for uninstructed men.
-        // One roll. One outcome. A relationship has exactly one ending.
-        const r = Math.random();
-        let ending;
-
-        if (woman.type === "fraud") {
-          // 35% catch it pre-travel, 45% marry before citizenship, 20% she leaves after citizenship
-          if (r < 0.35) ending = "early_detect";
-          else if (r < 0.80) ending = "fraud_pre";
-          else ending = "fraud_post";
-
-        } else if (woman.type === "genuine_wrong") {
-          // She's real but wrong fit or wrong approach — 30% see it early, 70% cultural fail
-          if (r < 0.30) ending = "early_detect";
-          else ending = "cultural_fail";
-
-        } else if (woman.type === "not_yet") {
-          // Rachel — the only correct outcome is deferral. Not failure. Not success yet.
-          ending = "not_yet";
-
-        } else {
-          // Genuine woman, uninstructed man:
-          // 20% success, 30% catches cultural mismatch early, 50% fails further in
-          if (r < 0.20) ending = "success";
-          else if (r < 0.50) ending = "early_detect";
-          else ending = "cultural_fail";
-        }
-
-        setOutcome(ending);
-        setPhase("outcome");
-        return;
+    // Fire outcome once all choices are exhausted
+    if (choices.length > 0 && newHistory.length >= choices.length) {
+      const r = Math.random();
+      let ending;
+      const type = woman.type || "genuine";
+      if (type === "fraud") {
+        if (r < 0.35) ending = "early_detect";
+        else if (r < 0.80) ending = "fraud_pre";
+        else ending = "fraud_post";
+      } else if (type === "genuine_wrong") {
+        ending = r < 0.30 ? "early_detect" : "cultural_fail";
+      } else if (type === "not_yet") {
+        ending = "not_yet";
+      } else {
+        if (r < 0.20) ending = "success";
+        else if (r < 0.50) ending = "early_detect";
+        else ending = "cultural_fail";
       }
+      setOutcome(ending);
+      setPhase("outcome");
+      return;
     }
     setScenarioStep(s => s + 1);
   };
@@ -2905,10 +2895,16 @@ function CourseView({ onBack }) {
 
   // SCENARIO — Branching decision
   if (phase === "scenario" && region && selectedWoman) {
-    const woman = region.women.find(w => w.id === selectedWoman);
-    const scenario = region.scenarios[0];
-    const currentChoice = scenarioStep < scenario.choices.length ? scenario.choices[scenarioStep] : null;
-    const lastChoice = choiceHistory[choiceHistory.length - 1];
+    const woman = region.women ? region.women.find(w => w.id === selectedWoman) : null;
+    if (!woman) { setPhase("roster"); return null; }
+    const scenarios = region.scenarios || [];
+    const scenario = scenarios[0];
+    if (!scenario) { setPhase("roster"); return null; }
+    const choices = scenario.choices || [];
+    const safeStep = Math.min(scenarioStep, choices.length - 1);
+    const currentChoice = safeStep >= 0 && safeStep < choices.length ? choices[safeStep] : null;
+    const lastChoice = choiceHistory.length > 0 ? choiceHistory[choiceHistory.length - 1] : null;
+    const lastConsequence = lastChoice ? (lastChoice.consequence || lastChoice.outcome || "") : "";
 
     return (
       <div style={{ minHeight:"100vh", background:"#091a35", color:"#f0e6cc", fontFamily:"Georgia,serif" }}>
@@ -2916,15 +2912,15 @@ function CourseView({ onBack }) {
           <button onClick={() => setPhase("roster")} style={{ background:"none", border:"1px solid #b8963e", color:"#b8963e", padding:"6px 14px", borderRadius:"20px", cursor:"pointer", fontSize:"13px", fontFamily:"sans-serif" }}>← Roster</button>
           <div style={{ flex:1 }}>
             <div style={{ fontSize:9, color:"#8a7a5a", letterSpacing:"0.15em", textTransform:"uppercase", fontFamily:"sans-serif" }}>{region.label} · {woman.name}</div>
-            <div style={{ fontSize:14, color:"#d4af6a" }}>{scenario.title}</div>
+            <div style={{ fontSize:14, color:"#d4af6a" }}>{scenario.title || "The Arc"}</div>
           </div>
-          <div style={{ fontSize:9, color:"#5a4e32", fontFamily:"sans-serif" }}>Step {scenarioStep + 1}</div>
+          <div style={{ fontSize:9, color:"#5a4e32", fontFamily:"sans-serif" }}>Move {choiceHistory.length} of {choices.length}</div>
         </div>
         <div style={{ maxWidth:680, margin:"0 auto", padding:"2rem 1.5rem" }}>
 
           {/* Dashboard status */}
           <div style={{ display:"flex", gap:8, marginBottom:"1.5rem", flexWrap:"wrap" }}>
-            {region.women.map(w => (
+            {(region.women || []).map(w => (
               <div key={w.id} style={{ padding:"4px 10px", background:w.id===selectedWoman?"rgba(184,150,62,0.15)":"#0f2347", border:`1px solid ${w.id===selectedWoman?"#b8963e":"#1e3a6e"}`, fontSize:9, fontFamily:"sans-serif" }}>
                 <span style={{ color:w.id===selectedWoman?"#d4af6a":"#5a4e32" }}>{w.name}</span>
                 <span style={{ color:w.id===selectedWoman?"#b8963e":"#2a3a5e", marginLeft:6 }}>{w.id===selectedWoman?"● ACTIVE":"○ COOLING"}</span>
@@ -2935,25 +2931,23 @@ function CourseView({ onBack }) {
           {/* Scene setup */}
           <div style={{ background:"#0f2347", border:"1px solid #1e3a6e", borderLeft:"3px solid #b8963e", padding:"1.25rem", marginBottom:"1.5rem" }}>
             <div style={{ fontSize:9, letterSpacing:"0.15em", color:"#b8963e", fontFamily:"sans-serif", marginBottom:8 }}>THE SITUATION</div>
-            <p style={{ fontSize:"clamp(13px,1.8vw,15px)", color:"#c8b890", lineHeight:1.85, fontFamily:"sans-serif", margin:0 }}>{scenario.setup}</p>
+            <p style={{ fontSize:"clamp(13px,1.8vw,15px)", color:"#c8b890", lineHeight:1.85, fontFamily:"sans-serif", margin:0 }}>{scenario.setup || ""}</p>
           </div>
 
           {/* Previous choice consequence */}
-          {lastChoice && (
+          {lastConsequence ? (
             <div style={{ background:"rgba(184,150,62,0.06)", border:"0.5px solid #b8963e", padding:"1rem 1.25rem", marginBottom:"1.5rem" }}>
               <div style={{ fontSize:9, letterSpacing:"0.15em", color:"#7a6228", fontFamily:"sans-serif", marginBottom:6 }}>CONSEQUENCE OF YOUR LAST DECISION</div>
-              <p style={{ fontSize:12, color:"#c8b890", lineHeight:1.75, fontFamily:"sans-serif", margin:0, fontStyle:"italic" }}>{lastChoice.consequence}</p>
+              <p style={{ fontSize:12, color:"#c8b890", lineHeight:1.75, fontFamily:"sans-serif", margin:0, fontStyle:"italic" }}>{lastConsequence}</p>
             </div>
-          )}
+          ) : null}
 
-          {/* Decision point */}
-          {currentChoice ? (
+          {/* Decision point — one choice at a time */}
+          {currentChoice && !outcome ? (
             <div>
-              <div style={{ fontSize:9, letterSpacing:"0.15em", color:"#b8963e", fontFamily:"sans-serif", marginBottom:10 }}>DECISION POINT — What do you do?</div>
-              <div style={{ fontSize:10, color:"#5a4e32", fontFamily:"sans-serif", marginBottom:10 }}>Move {choiceHistory.length + 1} of {scenario.choices.length}</div>
-              {[scenario.choices[scenarioStep]].filter(Boolean).map(choice => (
-                <ScenarioCard key={choice.id || choice.text} choice={choice} onSelect={handleChoice} />
-              ))}
+              <div style={{ fontSize:9, letterSpacing:"0.15em", color:"#b8963e", fontFamily:"sans-serif", marginBottom:6 }}>DECISION POINT — What do you do?</div>
+              <div style={{ fontSize:10, color:"#5a4e32", fontFamily:"sans-serif", marginBottom:12 }}>Decision {choiceHistory.length + 1} of {choices.length}</div>
+              <ScenarioCard choice={currentChoice} onSelect={handleChoice} />
               <div style={{ marginTop:12, padding:"0.875rem 1rem", background:"#0f2347", border:"0.5px solid #1e3a6e", fontSize:10, color:"#5a4e32", fontFamily:"sans-serif", lineHeight:1.65 }}>
                 You may switch to a different woman at any time. Returning to the roster pauses this scenario.
               </div>
@@ -2967,17 +2961,18 @@ function CourseView({ onBack }) {
             </div>
           ) : (
             <div style={{ textAlign:"center", padding:"2rem" }}>
-              <div style={{ fontSize:13, color:"#c8b890", fontFamily:"sans-serif", marginBottom:16 }}>Your decisions are complete.</div>
+              <div style={{ fontSize:13, color:"#c8b890", fontFamily:"sans-serif", marginBottom:16 }}>All decisions made. Ready to resolve.</div>
               <button onClick={() => {
                 const r = Math.random();
                 let resolvedOutcome;
-                if (woman.type === "fraud") {
+                const type = woman.type || "genuine";
+                if (type === "fraud") {
                   if (r < 0.35) resolvedOutcome = "early_detect";
                   else if (r < 0.80) resolvedOutcome = "fraud_pre";
                   else resolvedOutcome = "fraud_post";
-                } else if (woman.type === "genuine_wrong") {
+                } else if (type === "genuine_wrong") {
                   resolvedOutcome = r < 0.30 ? "early_detect" : "cultural_fail";
-                } else if (woman.type === "not_yet") {
+                } else if (type === "not_yet") {
                   resolvedOutcome = "not_yet";
                 } else {
                   if (r < 0.20) resolvedOutcome = "success";
