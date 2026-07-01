@@ -3318,7 +3318,10 @@ export default function CoursePage() {
     const womanData = DEEP_SCENARIOS[woman.id] || {};
     const scenes = womanData.scenes || [];
     const nextScene = sceneIndex + 1;
-    if (nextScene < scenes.length) {
+    // Fire outcome if next scene doesn't exist OR is invalid (missing setup/choices)
+    const nextSceneData = scenes[nextScene];
+    const nextSceneValid = nextSceneData && nextSceneData.setup && nextSceneData.choices && nextSceneData.choices.length > 0;
+    if (nextScene < scenes.length && nextSceneValid) {
       setSceneIndex(nextScene);
     } else {
       const flags = newHistory.map(c => c.flag || "");
