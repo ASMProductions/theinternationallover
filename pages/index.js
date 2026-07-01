@@ -3292,7 +3292,6 @@ export default function InternationalLover() {
             </div>
           </div>
           <div style={{ display:"flex", gap:"0.75rem", flexWrap:"wrap" }}>
-            <button onClick={() => setView("landing")} style={{ background:"none", border:`1px solid ${C.border}`, color:C.muted, padding:"6px 14px", borderRadius:"20px", cursor:"pointer", fontSize:"12px", fontFamily:"sans-serif" }}>Home</button>
             <a href="/matrimonial" style={{ background:C.gold, color:C.navyDeep, padding:"6px 16px", borderRadius:"20px", cursor:"pointer", fontSize:"12px", fontWeight:700, fontFamily:"sans-serif", textDecoration:"none" }}>Matrimonial</a>
             {typeof window !== "undefined" && sessionStorage.getItem("il_admin_session") === "true" && (
               <a href="/matrimonial?admin=1" style={{ background:"none", border:`1px solid ${C.gold}`, color:C.gold, padding:"6px 14px", borderRadius:"20px", cursor:"pointer", fontSize:"12px", fontFamily:"sans-serif", textDecoration:"none" }}>Admin</a>
