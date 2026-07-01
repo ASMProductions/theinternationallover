@@ -638,13 +638,13 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
     return (
       <div style={{ minHeight:"100vh", background:C.dark, color:C.cream, fontFamily:"Georgia,serif" }}>
         <div style={{ background:C.navyDeep, borderBottom:"1px solid " + C.border, padding:"1rem 1.5rem", display:"flex", alignItems:"center", gap:12 }}>
-          <button onClick={() => setView("browse")} style={{ background:"none", border:"1px solid " + C.gold, color:C.gold, padding:"6px 14px", cursor:"pointer", fontSize:12, fontFamily:"sans-serif" }}>← Back</button>
+          <button onClick={() => setView("browse")} style={{ background:"none", border:"1px solid " + C.gold, color:C.gold, padding:"6px 14px", cursor:"pointer", borderRadius:"20px", fontSize:12, fontFamily:"sans-serif" }}>← Back</button>
           <div style={{ fontSize:14, color:C.goldLight }}>Profile</div>
           {!isMine && (
             <div style={{ marginLeft:"auto", display:"flex", gap:8 }}>
-              <button onClick={() => passUser(activeProfile.email)} style={{ background:"none", border:"1px solid " + C.muted, color:C.muted, padding:"6px 12px", cursor:"pointer", fontSize:10, fontFamily:"sans-serif" }}>Pass</button>
-              <button onClick={() => reportUser(activeProfile.email)} style={{ background:"none", border:"1px solid " + C.border, color:C.muted, padding:"6px 12px", cursor:"pointer", fontSize:10, fontFamily:"sans-serif" }}>Report</button>
-              <button onClick={() => blockUser(activeProfile.email)} style={{ background:"none", border:"1px solid " + C.red, color:C.red, padding:"6px 12px", cursor:"pointer", fontSize:10, fontFamily:"sans-serif" }}>Block</button>
+              <button onClick={() => passUser(activeProfile.email)} style={{ background:"none", border:"1px solid " + C.muted, color:C.muted, padding:"6px 12px", cursor:"pointer", borderRadius:"20px", fontSize:10, fontFamily:"sans-serif" }}>Pass</button>
+              <button onClick={() => reportUser(activeProfile.email)} style={{ background:"none", border:"1px solid " + C.border, color:C.muted, padding:"6px 12px", cursor:"pointer", borderRadius:"20px", fontSize:10, fontFamily:"sans-serif" }}>Report</button>
+              <button onClick={() => blockUser(activeProfile.email)} style={{ background:"none", border:"1px solid " + C.red, color:C.red, padding:"6px 12px", cursor:"pointer", borderRadius:"20px", fontSize:10, fontFamily:"sans-serif" }}>Block</button>
             </div>
           )}
         </div>
@@ -743,7 +743,7 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
     return (
       <div style={{ minHeight:"100vh", background:C.dark, color:C.cream, fontFamily:"Georgia,serif" }}>
         <div style={{ background:C.navyDeep, borderBottom:"1px solid " + C.border, padding:"1rem 1.5rem", display:"flex", alignItems:"center", gap:12 }}>
-          <button onClick={() => setView("browse")} style={{ background:"none", border:"1px solid " + C.gold, color:C.gold, padding:"6px 14px", cursor:"pointer", fontSize:12, fontFamily:"sans-serif" }}>← Back</button>
+          <button onClick={() => setView("browse")} style={{ background:"none", border:"1px solid " + C.gold, color:C.gold, padding:"6px 14px", cursor:"pointer", borderRadius:"20px", fontSize:12, fontFamily:"sans-serif" }}>← Back</button>
           <div style={{ fontSize:14, color:C.goldLight }}>{activeConvo ? "Conversation" : "Messages"}</div>
         </div>
         <div style={{ maxWidth:680, margin:"0 auto", padding:"1.5rem" }}>
@@ -810,7 +810,7 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
     return (
       <div style={{ minHeight:"100vh", background:C.dark, color:C.cream, fontFamily:"Georgia,serif" }}>
         <div style={{ background:C.navyDeep, borderBottom:"1px solid " + C.border, padding:"1rem 1.5rem", display:"flex", alignItems:"center", gap:12 }}>
-          <button onClick={() => setView("browse")} style={{ background:"none", border:"1px solid " + C.gold, color:C.gold, padding:"6px 14px", cursor:"pointer", fontSize:12, fontFamily:"sans-serif" }}>← Back</button>
+          <button onClick={() => setView("browse")} style={{ background:"none", border:"1px solid " + C.gold, color:C.gold, padding:"6px 14px", cursor:"pointer", borderRadius:"20px", fontSize:12, fontFamily:"sans-serif" }}>← Back</button>
           <div style={{ fontSize:14, color:C.goldLight }}>{isEditing ? "Edit Your Profile" : "Create Your Profile"}</div>
         </div>
         <div style={{ maxWidth:620, margin:"0 auto", padding:"2rem 1.5rem" }}>
@@ -836,7 +836,7 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
                       const current = createForm.regions || [];
                       const updated = selected ? current.filter(x => x !== r.id) : [...current, r.id];
                       setCreateForm({...createForm, regions: updated, region: updated[0] || "north_america"});
-                    }} style={{ padding:"6px 14px", border:"1px solid " + (selected ? C.gold : C.border), background: selected ? C.gold + "22" : C.dark, color: selected ? C.goldLight : C.muted, fontSize:11, fontFamily:"sans-serif", cursor:"pointer" }}>
+                    }} style={{ padding:"6px 14px", border:"1px solid " + (selected ? C.gold : C.border), background: selected ? C.gold + "22" : C.dark, color: selected ? C.goldLight : C.muted, fontSize:11, fontFamily:"sans-serif", cursor:"pointer", borderRadius:"20px" }}>
                       {selected ? "✓ " : ""}{r.label}
                     </div>
                   );
@@ -987,7 +987,7 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
       <div style={{ minHeight:"100vh", background:C.dark, color:C.cream, fontFamily:"Georgia,serif" }}>
         {/* Header */}
         <div style={{ background:C.navyDeep, borderBottom:"1px solid " + C.border, padding:"1rem 1.5rem", display:"flex", alignItems:"center", gap:12, flexWrap:"wrap" }}>
-          <button onClick={() => setView("browse")} style={{ background:"none", border:"1px solid " + C.gold, color:C.gold, padding:"6px 14px", cursor:"pointer", fontSize:12, fontFamily:"sans-serif" }}>← Platform</button>
+          <button onClick={() => setView("browse")} style={{ background:"none", border:"1px solid " + C.gold, color:C.gold, padding:"6px 14px", cursor:"pointer", borderRadius:"20px", fontSize:12, fontFamily:"sans-serif" }}>← Platform</button>
           <div style={{ fontSize:14, color:C.goldLight, fontFamily:"Georgia,serif" }}>The International Lover™ — Admin</div>
           <div style={{ display:"flex", gap:6, marginLeft:"auto", flexWrap:"wrap" }}>
             {ADMIN_TABS.map(t => (
@@ -1002,7 +1002,7 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
                 if (t.id === "leads") loadLeads();
                 if (t.id === "activity") loadActivityLog();
                 if (t.id === "myprofile") loadMyProfile();
-              }} style={{ padding:"6px 14px", background:adminTab===t.id?C.gold:"transparent", color:adminTab===t.id?C.navyDeep:C.muted, border:"1px solid "+(adminTab===t.id?C.gold:C.border), cursor:"pointer", fontSize:11, fontFamily:"sans-serif", fontWeight:adminTab===t.id?700:400 }}>
+              }} style={{ padding:"6px 14px", background:adminTab===t.id?C.gold:"transparent", color:adminTab===t.id?C.navyDeep:C.muted, border:"1px solid "+(adminTab===t.id?C.gold:C.border), cursor:"pointer", borderRadius:"20px", fontSize:11, fontFamily:"sans-serif", fontWeight:adminTab===t.id?700:400 }}>
                 {t.label}
               </button>
             ))}
@@ -1026,8 +1026,8 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
                         <div style={{ fontSize:11, color:C.muted, fontFamily:"sans-serif", marginBottom:6 }}>{p.email} · {p.religion}</div>
                         <p style={{ fontSize:11, color:C.creamDim, fontFamily:"sans-serif", lineHeight:1.6, margin:"0 0 10px" }}>{(p.bio||"").slice(0,160)}...</p>
                         <div style={{ display:"flex", gap:8 }}>
-                          <button onClick={() => approveProfile(p.email)} style={{ padding:"6px 14px", background:C.green, color:"white", border:"none", cursor:"pointer", fontFamily:"sans-serif", fontSize:11, fontWeight:700 }}>Approve</button>
-                          <button onClick={() => rejectProfile(p.email)} style={{ padding:"6px 14px", background:C.red, color:"white", border:"none", cursor:"pointer", fontFamily:"sans-serif", fontSize:11, fontWeight:700 }}>Reject</button>
+                          <button onClick={() => approveProfile(p.email)} style={{ padding:"6px 14px", background:C.green, color:"white", border:"none", cursor:"pointer", borderRadius:"20px", fontFamily:"sans-serif", fontSize:11, fontWeight:700 }}>Approve</button>
+                          <button onClick={() => rejectProfile(p.email)} style={{ padding:"6px 14px", background:C.red, color:"white", border:"none", cursor:"pointer", borderRadius:"20px", fontFamily:"sans-serif", fontSize:11, fontWeight:700 }}>Reject</button>
                         </div>
                       </div>
                     </div>
@@ -1037,8 +1037,8 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
               {/* All profiles */}
               <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between", marginBottom:12, flexWrap:"wrap", gap:8 }}>
                 <div style={{ fontSize:9, letterSpacing:"0.2em", color:C.muted, fontFamily:"sans-serif" }}>ALL PROFILES — {allProfiles.length} total in Redis</div>
-                <button onClick={seedVirtualWomen} style={{ padding:"6px 14px", background:"transparent", border:"1px solid #4a6fa5", color:"#7aa0d0", cursor:"pointer", fontSize:11, fontFamily:"sans-serif" }}>＋ Seed Virtual Women</button>
-                <button onClick={seedFounderProfile} style={{ padding:"6px 14px", background:"transparent", border:"1px solid " + C.gold, color:C.gold, cursor:"pointer", fontSize:11, fontFamily:"sans-serif" }}>✦ Seed Founder Profile</button>
+                <button onClick={seedVirtualWomen} style={{ padding:"6px 14px", background:"transparent", border:"1px solid #4a6fa5", color:"#7aa0d0", cursor:"pointer", borderRadius:"20px", fontSize:11, fontFamily:"sans-serif" }}>＋ Seed Virtual Women</button>
+                <button onClick={seedFounderProfile} style={{ padding:"6px 14px", background:"transparent", border:"1px solid " + C.gold, color:C.gold, cursor:"pointer", borderRadius:"20px", fontSize:11, fontFamily:"sans-serif" }}>✦ Seed Founder Profile</button>
               </div>
               <div style={{ display:"flex", gap:10, alignItems:"center", marginBottom:14, flexWrap:"wrap" }}>
                 <input value={adminSearch} onChange={e => setAdminSearch(e.target.value)} placeholder="Search by name or email…" style={{ flex:1, minWidth:200, padding:"8px 12px", background:C.dark, border:"1px solid " + C.border, color:C.cream, fontSize:12, fontFamily:"sans-serif" }} />
@@ -1150,7 +1150,7 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
                       {a.lastAccess ? " · Last used: " + new Date(a.lastAccess).toLocaleDateString() : " · Never used"}
                     </div>
                   </div>
-                  <button onClick={() => revokeAmbassador(a.code)} style={{ padding:"6px 14px", background:"transparent", color:C.red, border:"1px solid " + C.red, cursor:"pointer", fontFamily:"sans-serif", fontSize:11, flexShrink:0 }}>Revoke</button>
+                  <button onClick={() => revokeAmbassador(a.code)} style={{ padding:"6px 14px", background:"transparent", color:C.red, border:"1px solid " + C.red, cursor:"pointer", borderRadius:"20px", fontFamily:"sans-serif", fontSize:11, flexShrink:0 }}>Revoke</button>
                 </div>
               ))}
             </div>
@@ -1429,7 +1429,7 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
     return (
       <div style={{ minHeight:"100vh", background:C.dark, color:C.cream, fontFamily:"Georgia,serif" }}>
         <div style={{ background:C.navyDeep, borderBottom:"1px solid " + C.border, padding:"1rem 1.5rem", display:"flex", alignItems:"center", gap:12 }}>
-          <button onClick={() => setView("myprofile")} style={{ background:"none", border:"1px solid " + C.gold, color:C.gold, padding:"6px 14px", cursor:"pointer", fontSize:12, fontFamily:"sans-serif" }}>← Back</button>
+          <button onClick={() => setView("myprofile")} style={{ background:"none", border:"1px solid " + C.gold, color:C.gold, padding:"6px 14px", cursor:"pointer", borderRadius:"20px", fontSize:12, fontFamily:"sans-serif" }}>← Back</button>
           <div style={{ fontSize:14, color:C.goldLight }}>Passed Profiles</div>
         </div>
         <div style={{ maxWidth:620, margin:"0 auto", padding:"2rem 1.5rem" }}>
@@ -1446,7 +1446,7 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
                 <div style={{ fontSize:14, color:C.goldLight }}>{p.displayName}</div>
                 <div style={{ fontSize:11, color:C.muted, fontFamily:"sans-serif" }}>{p.age} · {p.city}</div>
               </div>
-              <button onClick={() => unpassUser(p.email)} style={{ padding:"6px 14px", background:"transparent", border:"1px solid " + C.gold, color:C.gold, cursor:"pointer", fontFamily:"sans-serif", fontSize:11, flexShrink:0 }}>Undo</button>
+              <button onClick={() => unpassUser(p.email)} style={{ padding:"6px 14px", background:"transparent", border:"1px solid " + C.gold, color:C.gold, cursor:"pointer", borderRadius:"20px", fontFamily:"sans-serif", fontSize:11, flexShrink:0 }}>Undo</button>
             </div>
           ))}
         </div>
@@ -1474,7 +1474,7 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
     return (
       <div style={{ minHeight:"100vh", background:C.dark, color:C.cream, fontFamily:"Georgia,serif" }}>
         <div style={{ background:C.navyDeep, borderBottom:"1px solid " + C.border, padding:"1rem 1.5rem", display:"flex", alignItems:"center", gap:12 }}>
-          <button onClick={() => setView("myprofile")} style={{ background:"none", border:"1px solid " + C.gold, color:C.gold, padding:"6px 14px", cursor:"pointer", fontSize:12, fontFamily:"sans-serif" }}>← Back</button>
+          <button onClick={() => setView("myprofile")} style={{ background:"none", border:"1px solid " + C.gold, color:C.gold, padding:"6px 14px", cursor:"pointer", borderRadius:"20px", fontSize:12, fontFamily:"sans-serif" }}>← Back</button>
           <div style={{ fontSize:14, color:C.goldLight }}>Blocked Members</div>
         </div>
         <div style={{ maxWidth:620, margin:"0 auto", padding:"2rem 1.5rem" }}>
@@ -1491,7 +1491,7 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
                 <div style={{ fontSize:14, color:C.goldLight }}>{p.displayName}</div>
                 <div style={{ fontSize:11, color:C.muted, fontFamily:"sans-serif" }}>{p.age} · {p.city}</div>
               </div>
-              <button onClick={() => unblockUser(p.email)} style={{ padding:"6px 14px", background:"transparent", border:"1px solid " + C.red, color:C.red, cursor:"pointer", fontFamily:"sans-serif", fontSize:11, flexShrink:0 }}>Unblock</button>
+              <button onClick={() => unblockUser(p.email)} style={{ padding:"6px 14px", background:"transparent", border:"1px solid " + C.red, color:C.red, cursor:"pointer", borderRadius:"20px", fontFamily:"sans-serif", fontSize:11, flexShrink:0 }}>Unblock</button>
             </div>
           ))}
         </div>
@@ -1519,7 +1519,7 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
     return (
       <div style={{ minHeight:"100vh", background:C.dark, color:C.cream, fontFamily:"Georgia,serif" }}>
         <div style={{ background:C.navyDeep, borderBottom:"1px solid " + C.border, padding:"1rem 1.5rem", display:"flex", alignItems:"center", gap:12 }}>
-          <button onClick={() => setView("browse")} style={{ background:"none", border:"1px solid " + C.gold, color:C.gold, padding:"6px 14px", cursor:"pointer", fontSize:12, fontFamily:"sans-serif" }}>← Back</button>
+          <button onClick={() => setView("browse")} style={{ background:"none", border:"1px solid " + C.gold, color:C.gold, padding:"6px 14px", cursor:"pointer", borderRadius:"20px", fontSize:12, fontFamily:"sans-serif" }}>← Back</button>
           <div style={{ fontSize:14, color:C.goldLight }}>My Profile</div>
         </div>
         <div style={{ maxWidth:620, margin:"0 auto", padding:"2rem 1.5rem" }}>
@@ -1595,9 +1595,9 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
       <div style={{ background:C.navyDeep, borderBottom:"1px solid " + C.border, padding:"1rem 1.5rem", display:"flex", alignItems:"center", justifyContent:"space-between", flexWrap:"wrap", gap:10 }}>
         <div style={{ fontSize:15, color:C.goldLight }}>The International Lover™ — Matrimonial</div>
         <div style={{ display:"flex", gap:8, flexWrap:"wrap" }}>
-          <a href="/" style={{ background:"none", border:"1px solid " + C.gold, color:C.gold, padding:"6px 12px", cursor:"pointer", fontSize:11, fontFamily:"sans-serif", textDecoration:"none", display:"inline-flex", alignItems:"center" }}>← Home</a>
-          {isAdmin && <button onClick={() => { setAdminTab("profiles"); loadAllProfiles(); loadPendingApprovals(); setView("admin"); }} style={{ background:"none", border:"1px solid " + C.gold, color:C.gold, padding:"6px 12px", cursor:"pointer", fontSize:11, fontFamily:"sans-serif" }}>Admin</button>}
-          <button onClick={() => { setActiveConvo(null); loadConversations(); setView("messages"); }} style={{ background:"none", border:"1px solid " + C.border, color:C.muted, padding:"6px 12px", cursor:"pointer", fontSize:11, fontFamily:"sans-serif" }}>Messages</button>
+          <a href="/" style={{ background:"none", border:"1px solid " + C.gold, color:C.gold, padding:"6px 12px", cursor:"pointer", borderRadius:"20px", fontSize:11, fontFamily:"sans-serif", textDecoration:"none", display:"inline-flex", alignItems:"center" }}>← Home</a>
+          {isAdmin && <button onClick={() => { setAdminTab("profiles"); loadAllProfiles(); loadPendingApprovals(); setView("admin"); }} style={{ background:"none", border:"1px solid " + C.gold, color:C.gold, padding:"6px 12px", cursor:"pointer", borderRadius:"20px", fontSize:11, fontFamily:"sans-serif" }}>Admin</button>}
+          <button onClick={() => { setActiveConvo(null); loadConversations(); setView("messages"); }} style={{ background:"none", border:"1px solid " + C.border, color:C.muted, padding:"6px 12px", cursor:"pointer", borderRadius:"20px", fontSize:11, fontFamily:"sans-serif" }}>Messages</button>
           <button onClick={() => setView("myprofile")} style={{ background:C.gold, color:C.navyDeep, border:"none", padding:"8px 18px", cursor:"pointer", fontSize:12, fontWeight:700, fontFamily:"sans-serif" }}>My Profile</button>
         </div>
       </div>
