@@ -3466,7 +3466,32 @@ export default function CoursePage() {
     const womanData = DEEP_SCENARIOS[woman.id] || {};
     const scenes = womanData.scenes || [];
     const scene = scenes[sceneIndex];
-    if (!scene) return null;
+    if (!scene) {
+      // sceneIndex out of bounds — show recovery screen with debug info
+      return (
+        <div style={{ minHeight:"100vh", background:C.dark, color:C.cream, fontFamily:"Georgia,serif", display:"flex", alignItems:"center", justifyContent:"center", padding:"2rem" }}>
+          <div style={{ maxWidth:540, width:"100%", textAlign:"center" }}>
+            <div style={{ fontSize:9, letterSpacing:"0.3em", color:"#8b1a1a", fontFamily:"sans-serif", marginBottom:12 }}>SESSION STATE — PLEASE SCREENSHOT AND REPORT</div>
+            <div style={{ background:C.navyDeep, border:"1px solid #8b1a1a", padding:"1rem", marginBottom:"1.5rem", textAlign:"left", fontFamily:"sans-serif", fontSize:11, color:C.creamDim, lineHeight:1.8 }}>
+              <div>Woman: {woman ? woman.name : "null"} (id: {woman ? woman.id : "null"})</div>
+              <div>sceneIndex: {sceneIndex}</div>
+              <div>scenes.length: {scenes.length}</div>
+              <div>phase: {phase}</div>
+              <div>outcome: {outcome || "null"}</div>
+              <div>choiceHistory.length: {choiceHistory.length}</div>
+            </div>
+            <div style={{ display:"flex", gap:12, justifyContent:"center", flexWrap:"wrap" }}>
+              <button onClick={() => { setSceneIndex(0); setChoiceHistory([]); setOutcome(null); setLastConsequence(null); setPhase("scenario"); }} style={{ padding:"10px 20px", background:C.gold, color:C.navyDeep, border:"none", cursor:"pointer", fontSize:11, fontWeight:700, fontFamily:"sans-serif", borderRadius:"20px" }}>
+                Replay Arc
+              </button>
+              <button onClick={() => { setSelectedWomanId(null); setSceneIndex(0); setChoiceHistory([]); setOutcome(null); setLastConsequence(null); setPhase("roster"); }} style={{ padding:"10px 20px", background:"transparent", color:C.gold, border:"1px solid " + C.gold, cursor:"pointer", fontSize:11, fontFamily:"sans-serif", borderRadius:"20px" }}>
+                Back to Roster
+              </button>
+            </div>
+          </div>
+        </div>
+      );
+    }
     return (
       <div style={{ minHeight:"100vh", background:C.dark, color:C.cream, fontFamily:"Georgia,serif" }}>
         <NavBar left={<button onClick={() => setPhase("roster")} style={{ background:"none", border:"1px solid #b8963e", color:"#b8963e", padding:"6px 14px", borderRadius:"20px", cursor:"pointer", fontSize:"13px", fontFamily:"sans-serif" }}>← Roster</button>} title={region.label + " · " + woman.name + " · Scene " + (sceneIndex+1) + " of " + ((DEEP_SCENARIOS[woman.id] || {}).scenes || []).length} right={<div style={{ fontSize:9, color:C.mutedDark, fontFamily:"sans-serif" }}>Pursuing {woman.name}</div>} />
