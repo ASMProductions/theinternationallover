@@ -2950,37 +2950,43 @@ function CourseView({ onBack }) {
           {currentChoice ? (
             <div>
               <div style={{ fontSize:9, letterSpacing:"0.15em", color:"#b8963e", fontFamily:"sans-serif", marginBottom:10 }}>DECISION POINT — What do you do?</div>
-              {scenario.choices.map(choice => (
-                <ScenarioCard key={choice.id} choice={choice} onSelect={handleChoice} />
+              <div style={{ fontSize:10, color:"#5a4e32", fontFamily:"sans-serif", marginBottom:10 }}>Move {choiceHistory.length + 1} of {scenario.choices.length}</div>
+              {[scenario.choices[scenarioStep]].filter(Boolean).map(choice => (
+                <ScenarioCard key={choice.id || choice.text} choice={choice} onSelect={handleChoice} />
               ))}
               <div style={{ marginTop:12, padding:"0.875rem 1rem", background:"#0f2347", border:"0.5px solid #1e3a6e", fontSize:10, color:"#5a4e32", fontFamily:"sans-serif", lineHeight:1.65 }}>
                 You may switch to a different woman at any time. Returning to the roster pauses this scenario.
               </div>
             </div>
+          ) : outcome ? (
+            <div style={{ textAlign:"center", padding:"2rem" }}>
+              <div style={{ fontSize:13, color:"#c8b890", fontFamily:"sans-serif", marginBottom:16 }}>Your decisions have resolved.</div>
+              <button onClick={() => setPhase("outcome")} style={{ padding:"12px 28px", background:"#b8963e", color:"#0f2347", border:"none", cursor:"pointer", fontSize:12, fontWeight:700, fontFamily:"sans-serif", borderRadius:"20px" }}>
+                See Outcome →
+              </button>
+            </div>
           ) : (
             <div style={{ textAlign:"center", padding:"2rem" }}>
-              <div style={{ fontSize:13, color:"#c8b890", fontFamily:"sans-serif", marginBottom:16 }}>Your decisions are unfolding...</div>
+              <div style={{ fontSize:13, color:"#c8b890", fontFamily:"sans-serif", marginBottom:16 }}>Your decisions are complete.</div>
               <button onClick={() => {
-                let resolvedOutcome = outcome;
-                if (!resolvedOutcome) {
-                  const r = Math.random();
-                  if (woman.type === "fraud") {
-                    if (r < 0.35) resolvedOutcome = "early_detect";
-                    else if (r < 0.80) resolvedOutcome = "fraud_pre";
-                    else resolvedOutcome = "fraud_post";
-                  } else if (woman.type === "genuine_wrong") {
-                    resolvedOutcome = r < 0.30 ? "early_detect" : "cultural_fail";
-                  } else if (woman.type === "not_yet") {
-                    resolvedOutcome = "not_yet";
-                  } else {
-                    if (r < 0.20) resolvedOutcome = "success";
-                    else if (r < 0.50) resolvedOutcome = "early_detect";
-                    else resolvedOutcome = "cultural_fail";
-                  }
+                const r = Math.random();
+                let resolvedOutcome;
+                if (woman.type === "fraud") {
+                  if (r < 0.35) resolvedOutcome = "early_detect";
+                  else if (r < 0.80) resolvedOutcome = "fraud_pre";
+                  else resolvedOutcome = "fraud_post";
+                } else if (woman.type === "genuine_wrong") {
+                  resolvedOutcome = r < 0.30 ? "early_detect" : "cultural_fail";
+                } else if (woman.type === "not_yet") {
+                  resolvedOutcome = "not_yet";
+                } else {
+                  if (r < 0.20) resolvedOutcome = "success";
+                  else if (r < 0.50) resolvedOutcome = "early_detect";
+                  else resolvedOutcome = "cultural_fail";
                 }
                 setOutcome(resolvedOutcome);
                 setPhase("outcome");
-              }} style={{ padding:"12px 28px", background:"#b8963e", color:"#0f2347", border:"none", cursor:"pointer", fontSize:12, fontWeight:700, fontFamily:"sans-serif" }}>
+              }} style={{ padding:"12px 28px", background:"#b8963e", color:"#0f2347", border:"none", cursor:"pointer", fontSize:12, fontWeight:700, fontFamily:"sans-serif", borderRadius:"20px" }}>
                 See Outcome →
               </button>
             </div>
