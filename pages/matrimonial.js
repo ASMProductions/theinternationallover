@@ -32,7 +32,12 @@ function CertifiedBadge() {
 }
 
 function FounderBadge() {
-  return <span style={{ background:C.navyDeep, border:"1px solid " + C.gold, color:C.gold, fontSize:8, fontWeight:700, padding:"2px 8px", fontFamily:"sans-serif", letterSpacing:"0.1em", verticalAlign:"middle", marginLeft:6 }}>FOUNDER</span>;
+  return (
+    <>
+      <span style={{ background:C.navyDeep, border:"1px solid " + C.gold, color:C.gold, fontSize:8, fontWeight:700, padding:"2px 8px", fontFamily:"sans-serif", letterSpacing:"0.1em", verticalAlign:"middle", marginLeft:6 }}>FOUNDER</span>
+      <span style={{ background:C.gold, color:C.navyDeep, fontSize:8, fontWeight:700, padding:"2px 8px", fontFamily:"sans-serif", letterSpacing:"0.1em", verticalAlign:"middle", marginLeft:4 }}>OWNER</span>
+    </>
+  );
 }
 
 const Input = ({ label, value, onChange, type="text", placeholder="" }) => (
@@ -1060,7 +1065,7 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
                       <span style={{ fontSize:9, color:p.approved?C.green:C.red, fontFamily:"sans-serif", border:"1px solid "+(p.approved?C.green:C.red), padding:"1px 5px" }}>{p.approved?"APPROVED":"PENDING"}</span>
                       <span style={{ fontSize:9, color:C.muted, fontFamily:"sans-serif" }}>{p.gender}</span>
                       {p.isVirtual && <span style={{ fontSize:9, color:"#7aa0d0", fontFamily:"sans-serif" }}>VIRTUAL</span>}
-                      {p.isFounder && <span style={{ fontSize:9, color:C.gold, fontFamily:"sans-serif" }}>FOUNDER</span>}
+                      {p.isFounder && <><span style={{ fontSize:9, color:C.gold, fontFamily:"sans-serif" }}>FOUNDER</span><span style={{ fontSize:9, color:C.gold, fontFamily:"sans-serif", marginLeft:4 }}>OWNER</span></>}
                       {p.isAmbassador && <span style={{ fontSize:9, color:C.gold, fontFamily:"sans-serif" }}>AMBASSADOR</span>}
                       {p.hidden && <span style={{ fontSize:9, color:C.red, fontFamily:"sans-serif" }}>HIDDEN</span>}
                     </div>
@@ -1330,8 +1335,8 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
                       <div style={{ fontSize:12, color:C.muted, fontFamily:"sans-serif", marginBottom:10 }}>{myProfile.religion} · {myProfile.gender}</div>
                       <div style={{ display:"flex", gap:6, flexWrap:"wrap" }}>
                         <span style={{ fontSize:10, color:myProfile.approved?C.green:C.red, border:"1px solid "+(myProfile.approved?C.green:C.red), padding:"2px 8px", fontFamily:"sans-serif" }}>{myProfile.approved?"APPROVED":"PENDING"}</span>
-                        {myProfile.isFounder && <span style={{ fontSize:10, color:C.gold, border:"1px solid "+C.gold, padding:"2px 8px", fontFamily:"sans-serif" }}>FOUNDER</span>}
-                        {myProfile.isAmbassador && <span style={{ fontSize:10, color:C.gold, border:"1px solid "+C.gold, padding:"2px 8px", fontFamily:"sans-serif" }}>AMBASSADOR</span>}
+                        {myProfile.isFounder && <><span style={{ fontSize:10, color:C.gold, border:"1px solid "+C.gold, padding:"2px 8px", fontFamily:"sans-serif" }}>FOUNDER</span><span style={{ fontSize:10, background:C.gold, color:C.navyDeep, padding:"2px 8px", fontFamily:"sans-serif", fontWeight:700, marginLeft:4 }}>OWNER</span></>}
+                        {myProfile.isAmbassador && !myProfile.isFounder && <span style={{ fontSize:10, color:C.gold, border:"1px solid "+C.gold, padding:"2px 8px", fontFamily:"sans-serif" }}>AMBASSADOR</span>}
                         {myProfile.hidden && <span style={{ fontSize:10, color:C.red, border:"1px solid "+C.red, padding:"2px 8px", fontFamily:"sans-serif" }}>HIDDEN</span>}
                       </div>
                     </div>
@@ -1590,6 +1595,7 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
       <div style={{ background:C.navyDeep, borderBottom:"1px solid " + C.border, padding:"1rem 1.5rem", display:"flex", alignItems:"center", justifyContent:"space-between", flexWrap:"wrap", gap:10 }}>
         <div style={{ fontSize:15, color:C.goldLight }}>The International Lover™ — Matrimonial</div>
         <div style={{ display:"flex", gap:8, flexWrap:"wrap" }}>
+          <a href="/" style={{ background:"none", border:"1px solid " + C.border, color:C.muted, padding:"6px 12px", cursor:"pointer", fontSize:11, fontFamily:"sans-serif", textDecoration:"none", display:"inline-flex", alignItems:"center" }}>← Home</a>
           {isAdmin && <button onClick={() => { setAdminTab("profiles"); loadAllProfiles(); loadPendingApprovals(); setView("admin"); }} style={{ background:"none", border:"1px solid " + C.gold, color:C.gold, padding:"6px 12px", cursor:"pointer", fontSize:11, fontFamily:"sans-serif" }}>Admin</button>}
           <button onClick={() => { setActiveConvo(null); loadConversations(); setView("messages"); }} style={{ background:"none", border:"1px solid " + C.border, color:C.muted, padding:"6px 12px", cursor:"pointer", fontSize:11, fontFamily:"sans-serif" }}>Messages</button>
           <button onClick={() => setView("myprofile")} style={{ background:C.gold, color:C.navyDeep, border:"none", padding:"8px 18px", cursor:"pointer", fontSize:12, fontWeight:700, fontFamily:"sans-serif" }}>My Profile</button>
@@ -1651,7 +1657,10 @@ function MatrimonialPlatform({ userEmail, isAmbassador, isCertified, gender, isA
                   <div style={{ position:"absolute", top:8, left:8, background:"rgba(10,20,50,0.85)", border:"1px solid #4a6fa5", color:"#7aa0d0", fontSize:7, fontWeight:700, padding:"2px 6px", fontFamily:"sans-serif", letterSpacing:"0.08em" }}>VIRTUAL PROFILE</div>
                 )}
                 {p.isFounder && (
-                  <div style={{ position:"absolute", top:8, right:8, background:C.navyDeep, border:"1px solid " + C.gold, color:C.gold, fontSize:7, fontWeight:700, padding:"2px 6px", fontFamily:"sans-serif" }}>FOUNDER</div>
+                  <div style={{ position:"absolute", top:8, right:8, display:"flex", flexDirection:"column", gap:2, alignItems:"flex-end" }}>
+                    <div style={{ background:C.navyDeep, border:"1px solid " + C.gold, color:C.gold, fontSize:7, fontWeight:700, padding:"2px 6px", fontFamily:"sans-serif" }}>FOUNDER</div>
+                    <div style={{ background:C.gold, color:C.navyDeep, fontSize:7, fontWeight:700, padding:"2px 6px", fontFamily:"sans-serif" }}>OWNER</div>
+                  </div>
                 )}
                 {p.isAmbassador && !p.isFounder && (
                   <div style={{ position:"absolute", top:8, right:8, background:C.gold, color:C.navyDeep, fontSize:7, fontWeight:700, padding:"2px 6px", fontFamily:"sans-serif" }}>AMBASSADOR</div>
