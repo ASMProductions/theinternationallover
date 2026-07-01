@@ -2729,19 +2729,42 @@ function CourseView({ onBack }) {
   const region = activeRegion ? REGIONS_COURSE.find(r => r.id === activeRegion) : null;
 
   const handleChoice = (choice) => {
-    setChoiceHistory(h => [...h, choice]);
-    // Determine outcome based on selected woman and choices
+    const newHistory = [...choiceHistory, choice];
+    setChoiceHistory(newHistory);
+
     if (region && selectedWoman) {
       const woman = region.women.find(w => w.id === selectedWoman);
-      if (!woman) return;
-      // Simple outcome logic based on woman type and choice patterns
-      const newHistory = [...choiceHistory, choice];
+      if (!woman) { setScenarioStep(s => s + 1); return; }
+
       if (newHistory.length >= 2) {
-        let ending = "success";
-        if (woman.type === "fraud") ending = Math.random() > 0.4 ? "fraud_post" : "fraud_pre";
-        else if (woman.type === "genuine_wrong") ending = Math.random() > 0.5 ? "cultural_fail" : "early_detect";
-        else if (woman.type === "not_yet") ending = "genuine_wrong";
-        else ending = Math.random() > 0.7 ? "cultural_fail" : "success";
+        // Real-world outcome probabilities for uninstructed men.
+        // One roll. One outcome. A relationship has exactly one ending.
+        const r = Math.random();
+        let ending;
+
+        if (woman.type === "fraud") {
+          // 35% catch it pre-travel, 45% marry before citizenship, 20% she leaves after citizenship
+          if (r < 0.35) ending = "early_detect";
+          else if (r < 0.80) ending = "fraud_pre";
+          else ending = "fraud_post";
+
+        } else if (woman.type === "genuine_wrong") {
+          // She's real but wrong fit or wrong approach — 30% see it early, 70% cultural fail
+          if (r < 0.30) ending = "early_detect";
+          else ending = "cultural_fail";
+
+        } else if (woman.type === "not_yet") {
+          // Rachel — the only correct outcome is deferral. Not failure. Not success yet.
+          ending = "not_yet";
+
+        } else {
+          // Genuine woman, uninstructed man:
+          // 20% success, 30% catches cultural mismatch early, 50% fails further in
+          if (r < 0.20) ending = "success";
+          else if (r < 0.50) ending = "early_detect";
+          else ending = "cultural_fail";
+        }
+
         setOutcome(ending);
         setPhase("outcome");
         return;
@@ -2935,7 +2958,27 @@ function CourseView({ onBack }) {
           ) : (
             <div style={{ textAlign:"center", padding:"2rem" }}>
               <div style={{ fontSize:13, color:"#c8b890", fontFamily:"sans-serif", marginBottom:16 }}>Your decisions are unfolding...</div>
-              <button onClick={() => { const endings = Object.keys(region.endings); const ending = endings[Math.floor(Math.random() * endings.length)]; setOutcome(ending); setPhase("outcome"); }} style={{ padding:"12px 28px", background:"#b8963e", color:"#0f2347", border:"none", cursor:"pointer", fontSize:12, fontWeight:700, fontFamily:"sans-serif" }}>
+              <button onClick={() => {
+                let resolvedOutcome = outcome;
+                if (!resolvedOutcome) {
+                  const r = Math.random();
+                  if (woman.type === "fraud") {
+                    if (r < 0.35) resolvedOutcome = "early_detect";
+                    else if (r < 0.80) resolvedOutcome = "fraud_pre";
+                    else resolvedOutcome = "fraud_post";
+                  } else if (woman.type === "genuine_wrong") {
+                    resolvedOutcome = r < 0.30 ? "early_detect" : "cultural_fail";
+                  } else if (woman.type === "not_yet") {
+                    resolvedOutcome = "not_yet";
+                  } else {
+                    if (r < 0.20) resolvedOutcome = "success";
+                    else if (r < 0.50) resolvedOutcome = "early_detect";
+                    else resolvedOutcome = "cultural_fail";
+                  }
+                }
+                setOutcome(resolvedOutcome);
+                setPhase("outcome");
+              }} style={{ padding:"12px 28px", background:"#b8963e", color:"#0f2347", border:"none", cursor:"pointer", fontSize:12, fontWeight:700, fontFamily:"sans-serif" }}>
                 See Outcome →
               </button>
             </div>
@@ -2947,14 +2990,17 @@ function CourseView({ onBack }) {
 
   // OUTCOME
   if (phase === "outcome" && region && outcome) {
-    const endingText = (region.endings && region.endings[outcome]) || "";
+    const woman = region.women.find(w => w.id === selectedWoman);
+    const endingText = (woman && woman.endings && woman.endings[outcome])
+      || (region.endings && region.endings[outcome])
+      || "Arc complete.";
     const endingLabels = {
-      success:"I — Successful Marriage",
-      early_detect:"II — Failed Vetting — Pre-Travel",
-      cultural_fail:"III — Failed Relationship — Cultural Misnavigation",
-      fraud_pre:"IV — Fraudulent Marriage — Pre-Citizenship",
-      fraud_post:"V — Fraudulent Marriage — Post-Citizenship",
-      genuine_wrong:"III — Not Yet — Correct Deferral",
+      success:        "I — Marriage",
+      early_detect:   "II — Correct Walkaway",
+      cultural_fail:  "III — Cultural Misnavigation",
+      fraud_pre:      "IV — Fraud — Caught Before Citizenship",
+      fraud_post:     "V — Fraud — After Citizenship",
+      not_yet:        "II — Correct Deferral",
     };
     const endingColors = {
       success:"#b8963e",
