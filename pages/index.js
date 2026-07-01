@@ -2991,7 +2991,12 @@ function CourseView({ onBack }) {
   }
 
   // OUTCOME
-  if (phase === "outcome" && region && outcome) {
+  if (phase === "outcome") {
+    if (!region || !outcome) {
+      // State is inconsistent — reset cleanly rather than showing black
+      setPhase("map"); setActiveRegion(null); setSelectedWoman(null); setOutcome(null); setChoiceHistory([]); setScenarioStep(0);
+      return null;
+    }
     const woman = region.women.find(w => w.id === selectedWoman);
     const endingText = (woman && woman.endings && woman.endings[outcome])
       || (region.endings && region.endings[outcome])
@@ -3088,7 +3093,25 @@ function CourseView({ onBack }) {
     );
   }
 
-  return null;
+  // RECOVERY — catch-all for any unmatched phase/state combination
+  // This should never appear in normal use, but prevents black screens
+  return (
+    <div style={{ minHeight:"100vh", background:"#091a35", color:"#f0e6cc", fontFamily:"Georgia,serif", display:"flex", alignItems:"center", justifyContent:"center" }}>
+      <div style={{ textAlign:"center", padding:"3rem 1.5rem", maxWidth:480 }}>
+        <div style={{ fontSize:9, letterSpacing:"0.3em", color:"#b8963e", fontFamily:"sans-serif", marginBottom:16 }}>THE INTERNATIONAL LOVER™</div>
+        <div style={{ fontSize:18, color:"#d4af6a", marginBottom:12 }}>Something interrupted your session.</div>
+        <p style={{ fontSize:13, color:"#8a7a5a", fontFamily:"sans-serif", lineHeight:1.7, marginBottom:28 }}>Your progress has been preserved. Return to the map to continue from where you left off.</p>
+        <div style={{ display:"flex", gap:12, justifyContent:"center", flexWrap:"wrap" }}>
+          <button onClick={() => { setPhase("map"); setActiveRegion(null); setSelectedWoman(null); setOutcome(null); setChoiceHistory([]); setScenarioStep(0); }} style={{ padding:"12px 24px", background:"#b8963e", color:"#0f2347", border:"none", cursor:"pointer", fontSize:12, fontWeight:700, fontFamily:"sans-serif", borderRadius:"20px" }}>
+            Return to Map →
+          </button>
+          <button onClick={onBack} style={{ padding:"12px 24px", background:"transparent", color:"#b8963e", border:"1px solid #b8963e", cursor:"pointer", fontSize:12, fontFamily:"sans-serif", borderRadius:"20px" }}>
+            ← Library
+          </button>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 
