@@ -164,7 +164,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Answer honestly about your current relationship with faith — however incomplete`, consequence: `She follows up: 'Honest. I appreciate that more than a performance. What does faith mean to you when you are alone — not in community, but when you are by yourself and something difficult is happening?'`, flag: `honest_faith` },
           { text: `Tell her you are open to faith and to growth — which is true`, consequence: `She asks: 'Open to growth or committed to a path? Those are different things.' She has heard open to growth before. It usually means something that is not what she needs.`, flag: `tested` },
-          { text: `Ask her what faith looks like in her daily life before answering`, consequence: `She tells you at length and with warmth. The Pentecostal rhythms — the church services, the fasting days, the prayer life, the community obligations. Then she waits for your answer. She is comparing what you say next to what she just described.`, flag: `context_received` },
+          { text: `Ask her what faith looks like in her daily life before answering`, consequence: `She tells you at length and with warmth. The Pentecostal rhythms — the church services, the fasting days, the prayer life, the community obligations. Then she waits for your answer. She is comparing what you say next to what she just described.`, flag: `cultural_fail` },
         ],
       },
       {
@@ -173,7 +173,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Tell her you are not concerned about the question — you will answer it honestly whatever it is`, consequence: `She says: 'That is the correct attitude.' She does not tell you the question. When you eventually meet the uncle, the question is the only one that matters.`, flag: `attitude_correct` },
           { text: `Ask her to tell you what the question is so you can prepare`, consequence: `She shakes her head. 'If you prepare for it, the answer will be a prepared answer. He will know. The question is designed to receive an unprepared answer.' You accept this.`, flag: `accepted_no_preparation` },
-          { text: `Ask her what she has observed the question reveal in other men`, consequence: `She tells you about two men who answered the question in ways her uncle could tell were performances. And one man who answered it in a way that made her uncle call her mother that night. She does not tell you what any of them said.`, flag: `context_without_answer` },
+          { text: `Ask her what she has observed the question reveal in other men`, consequence: `She tells you about two men who answered the question in ways her uncle could tell were performances. And one man who answered it in a way that made her uncle call her mother that night. She does not tell you what any of them said.`, flag: `cultural_fail` },
         ],
       },
       {
@@ -182,7 +182,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Tell her honestly which one you are and describe what faith is for you specifically`, consequence: `She is quiet for a moment. Then: 'I have asked this question seven times. Six men gave me the respectful-of-others-diets answer. You gave me the living-thing answer. I need it to be the living-thing answer.' She means this.`, flag: `living_faith` },
           { text: `Tell her that your faith is still forming and that you are in the process of understanding what it is`, consequence: `She says: 'In formation is different from absent. I can work with in formation. What I cannot work with is someone who believes faith is for other people.' You tell her where you actually are. She listens fully.`, flag: `in_formation` },
-          { text: `Ask her what she needs from a husband's faith — specifically, not generally`, consequence: `She tells you. It is specific. She needs a man who can stand in a church service and not be performing tolerance — who can actually be present. Who can pray. Who takes the spiritual life seriously even if his tradition is different. 'My family will see the difference,' she says.`, flag: `specific_need` },
+          { text: `Ask her what she needs from a husband's faith — specifically, not generally`, consequence: `She tells you. It is specific. She needs a man who can stand in a church service and not be performing tolerance — who can actually be present. Who can pray. Who takes the spiritual life seriously even if his tradition is different. 'My family will see the difference,' she says.`, flag: `cultural_fail` },
         ],
       },
       {
@@ -191,7 +191,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Laugh with them — you understand you are being welcomed in a form that requires participation`, consequence: `Her uncle smiles once, then continues. After the service he finds you in the crowd before you find him. He says: 'You laughed. That means you are paying attention.'`, flag: `participated` },
           { text: `Remain still and respectful — you do not want to perform an emotion you do not feel`, consequence: `Her uncle notes the stillness. After the service he finds you. 'You did not laugh with us.' He says it without judgment. 'Why?' Your answer to this question matters more than the laugh.`, flag: `honest_stillness` },
-          { text: `Follow Abena's lead completely — do what she does`, consequence: `She is leading. Following her through the service means you are fully present in it. Her uncle watches this. After the service he says to her, in Twi: 'He follows your lead. That is good. Now I want to see if he has his own faith or only follows.'`, flag: `following_not_enough` },
+          { text: `Follow Abena's lead completely — do what she does`, consequence: `She is leading. Following her through the service means you are fully present in it. Her uncle watches this. After the service he says to her, in Twi: 'He follows your lead. That is good. Now I want to see if he has his own faith or only follows.'`, flag: `cultural_fail` },
         ],
       },
       {
@@ -200,7 +200,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Answer from what you actually believe — specifically, not generally`, consequence: `He listens without interrupting. When you finish he is quiet for a long moment. Then: 'You answered it as though the question was real. That is what I was looking for.' He calls Abena's father that evening.`, flag: `answered_as_real` },
           { text: `Tell him you do not know but that the question itself tells you something important about what you are still learning`, consequence: `He looks at you carefully. 'Not knowing and saying so is better than knowing and performing. What does the question tell you?' The conversation goes deeper.`, flag: `honest_not_knowing` },
-          { text: `Ask him what he believes before answering`, consequence: `He says: 'I am asking you.' He is not being difficult. He genuinely needs your answer, not an echo of his. Try again.`, flag: `deflected` },
+          { text: `Ask him what he believes before answering`, consequence: `He says: 'I am asking you.' He is not being difficult. He genuinely needs your answer, not an echo of his. Try again.`, flag: `cultural_fail` },
         ],
       },
       {
@@ -209,7 +209,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Tell her you want to hear both — the family's reasons and her reasons`, consequence: `She tells you both. The family reasons are about faith and character and the evidence of the service and the uncle's conversation. Her reasons are about what she has observed over four months in every exchange. They are specific and exact and she has been building this assessment since day one.`, flag: `success` },
           { text: `Tell her you only need to hear her reasons — the family's decision is theirs and hers is the one that matters to you`, consequence: `She says: 'They are not separable. When you marry me you marry what I come from. I need you to understand that the family's reasons are also reasons you should care about.' She is right. You listen to both.`, flag: `corrected_rightly` },
-          { text: `Ask her what she needed to see from you that she did not know she was looking for when this began`, consequence: `She thinks for a long time. 'I needed to see that you could be present in our world without needing to be the center of it. You were present. You followed my lead and you also brought yourself. That is not easy.' She gives you her answer.`, flag: `success` },
+          { text: `Ask her what she needed to see from you that she did not know she was looking for when this began`, consequence: `She thinks for a long time. 'I needed to see that you could be present in our world without needing to be the center of it. You were present. You followed my lead and you also brought yourself. That is not easy.' She gives you her answer.`, flag: `cultural_fail` },
         ],
       },
     ,
@@ -219,7 +219,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Prepare thoroughly — read about the Pentecostal tradition before the call`, consequence: `He asks a question you could not have answered without the preparation. You answer it. He pauses. 'You did your homework. Most men do not do their homework.'`, flag: "prepared" },
           { text: `Go into the call honest about your faith and open about your gaps in knowledge`, consequence: `He receives the honesty better than he would have received a performance. He asks: 'You told me what you do not know. That is more than I usually get.'`, flag: "honest_gaps" },
-          { text: `Ask Abena to tell you what her uncle will ask before the call`, consequence: `She gives you three things. You prepare for all three. He asks two of them and one you did not expect. The two you prepared for you answer well. The unexpected one you answer honestly. He approves of all three responses.`, flag: "abena_prepared" },
+          { text: `Ask Abena to tell you what her uncle will ask before the call`, consequence: `She gives you three things. You prepare for all three. He asks two of them and one you did not expect. The two you prepared for you answer well. The unexpected one you answer honestly. He approves of all three responses.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -228,7 +228,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Arrive prepared to be present and participate genuinely`, consequence: `The service is full and long and physically expressive in ways you have not experienced. You participate where you can and observe where you cannot. The congregation notices the quality of your presence.`, flag: "church_present" },
           { text: `Ask Abena before the service what to expect and how to participate`, consequence: `She prepares you. You arrive knowing the rhythms. The uncle watches you absorb the service. He tells the family afterward: 'He was not performing. He was there.'`, flag: "church_prepared" },
-          { text: `Follow Abena's lead during the service — she is your guide in this context`, consequence: `She notices you following her lead. After the service she says: 'You trusted me.' This is more than the church. This is a preview of what marriage to her will require.`, flag: "abena_trusted" },
+          { text: `Follow Abena's lead during the service — she is your guide in this context`, consequence: `She notices you following her lead. After the service she says: 'You trusted me.' This is more than the church. This is a preview of what marriage to her will require.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -237,7 +237,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Answer honestly — name a real fear`, consequence: `He listens completely. Then: 'Most men say they are not afraid of anything. That is not an answer. You gave me an answer.' He tells the family you are real.`, flag: "fear_honest" },
           { text: `Ask him why he asks this question specifically`, consequence: `He explains. A man's fear tells you what he is protecting. A man who knows his fear can manage it. A man who does not know it will be managed by it without knowing. You answer the question with this framework in mind.`, flag: "question_understood" },
-          { text: `Ask him what the men who did not pass said`, consequence: `He tells you one example. You understand what it cost that man. You answer differently. He nods once. 'That is the right kind of fear to name.'`, flag: "failed_example" },
+          { text: `Ask him what the men who did not pass said`, consequence: `He tells you one example. You understand what it cost that man. You answer differently. He nods once. 'That is the right kind of fear to name.'`, flag: "cultural_fail" },
         ],
       },
       {
@@ -246,7 +246,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Speak to him the way you spoke to the uncle — honestly, without performance`, consequence: `He listens for forty minutes. He asks three questions. He stands at the end. He extends his hand. This is the agreement in this family — the handshake from the father.`, flag: "father_handshake" },
           { text: `Ask him what he wants to hear — not to give him what he wants, but to understand what he values`, consequence: `He says: 'I want to hear who you are when you are not trying to be what you think I want.' You take a breath. Then you speak.`, flag: "father_real" },
-          { text: `Tell him what brought you to this platform, what you have learned, and why Abena specifically`, consequence: `He listens to all three. The third part — why Abena specifically — he asks you to say again. He asks Abena to come in. He asks you to say it again in front of her. You do.`, flag: "father_why_abena" },
+          { text: `Tell him what brought you to this platform, what you have learned, and why Abena specifically`, consequence: `He listens to all three. The third part — why Abena specifically — he asks you to say again. He asks Abena to come in. He asks you to say it again in front of her. You do.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -255,7 +255,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Participate in each stage with patience and respect for the length of the process`, consequence: `The uncle tells the family afterward: 'He sat through the whole process. He did not rush a single stage.' The length of the process is a feature, not a flaw.`, flag: "process_honored" },
           { text: `Ask about each item as it is named — you want to understand what you are agreeing to`, consequence: `The uncle is pleased. The questions slow the process further but deepen the meaning. Her father watches you learning the tradition in real time.`, flag: "items_understood" },
-          { text: `Let the uncle lead completely and agree to what is agreed upon`, consequence: `He leads well. Your trust in his stewardship of the process is itself a form of respect for the tradition. The community notes the deference.`, flag: "uncle_trusted" },
+          { text: `Let the uncle lead completely and agree to what is agreed upon`, consequence: `He leads well. Your trust in his stewardship of the process is itself a form of respect for the tradition. The community notes the deference.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -264,7 +264,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `SUCCESS: Abena — Accra, Ghana.`, consequence: `SUCCESS: The uncle's question, the church service, the three-hour ceremony, the father's handshake — all of it was the path. Sub-Saharan Africa arc — complete.`, flag: "success" },
           { text: `SUCCESS: The fear you named in that room was the right fear.`, consequence: `SUCCESS: It told the uncle everything he needed to know. Arc complete.`, flag: "success" },
-          { text: `SUCCESS: Arc complete.`, consequence: `SUCCESS: Abena — Accra, Ghana. Complete.`, flag: "success" },
+          { text: `SUCCESS: Arc complete.`, consequence: `SUCCESS: Abena — Accra, Ghana. Complete.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -273,7 +273,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `SUCCESS: Your marriage has a sound in Ghana.`, consequence: `SUCCESS: Honor what that means. Sub-Saharan Africa arc — complete.`, flag: "success" },
           { text: `SUCCESS: Arc complete.`, consequence: `SUCCESS: Ghana — complete.`, flag: "success" },
-          { text: `SUCCESS: Abena — complete.`, consequence: `SUCCESS: Everything you learned here applies throughout the Sub-Saharan Africa arc.`, flag: "success" },
+          { text: `SUCCESS: Abena — complete.`, consequence: `SUCCESS: Everything you learned here applies throughout the Sub-Saharan Africa arc.`, flag: "cultural_fail" },
         ],
       }
     ,
@@ -283,7 +283,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Listen completely — do not redirect toward the future`, consequence: `He speaks for forty minutes. The woman you thought you knew deepens. The father is giving you the context for who you married. This is a gift.`, flag: "father_listen" },
           { text: `Ask him one question about something he mentioned`, consequence: `He is pleased by the question. He continues. He tells you something about her that she has never told you herself. He says: 'She will tell you eventually. I am telling you now so you are not surprised when she does.'`, flag: "father_question" },
-          { text: `Thank him for the ceremony, for the reception of the bride price, for the trust`, consequence: `He receives it briefly. Then: 'The ceremony is the public thing. This conversation is the real thing.' He continues talking. The tea goes cold. Neither of you notices.`, flag: "father_thanks" },
+          { text: `Thank him for the ceremony, for the reception of the bride price, for the trust`, consequence: `He receives it briefly. Then: 'The ceremony is the public thing. This conversation is the real thing.' He continues talking. The tea goes cold. Neither of you notices.`, flag: "cultural_fail" },
         ],
       }
     ],
@@ -300,7 +300,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Answer the faith and intentions questions fully and admit you know little about Java but are willing to learn`, consequence: `'Willing to learn is the correct posture.' He asks what you have already done to learn. This is the real first question.`, flag: `honest` },
           { text: `Research Java and Javanese culture before answering and give a substantive response`, consequence: `He is surprised. 'Most men do not prepare before they write to me.' The correspondence takes on a different quality from this point.`, flag: `prepared` },
-          { text: `Answer all three from what you currently know`, consequence: `Your answer on Java is thin. He notes this without saying so directly. His follow-up questions are more fundamental than they would have been otherwise.`, flag: `unprepared` },
+          { text: `Answer all three from what you currently know`, consequence: `Your answer on Java is thin. He notes this without saying so directly. His follow-up questions are more fundamental than they would have been otherwise.`, flag: `cultural_fail` },
         ],
       },
       {
@@ -309,7 +309,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Tell her you understand and explain what building means to you`, consequence: `She asks a follow-up: 'If building meant staying in Indonesia, would you still be here?' Answer this carefully.`, flag: `tested` },
           { text: `Tell her honestly that you had assumed she wanted to come to America and ask her to help you understand what she actually wants`, consequence: `She appreciates the honesty. 'Most men do not admit this assumption. The ones who do not admit it carry it into the marriage.' The conversation deepens.`, flag: `honest_assumption` },
-          { text: `Ask her what building would look like in her vision`, consequence: `She describes a life that is specific and grounded and almost entirely in Indonesia. You have to decide whether you can offer this or whether you have been thinking about the wrong thing entirely.`, flag: `listening` },
+          { text: `Ask her what building would look like in her vision`, consequence: `She describes a life that is specific and grounded and almost entirely in Indonesia. You have to decide whether you can offer this or whether you have been thinking about the wrong thing entirely.`, flag: `cultural_fail` },
         ],
       },
       {
@@ -318,7 +318,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Answer honestly: America has been the assumption and you are now reconsidering what you are actually offering`, consequence: `Long pause. 'Honesty before commitment is the most valuable thing you can give me.' He asks you to take two weeks to think about what you can genuinely offer and then call him back.`, flag: `honest_reconsideration` },
           { text: `Tell him you are open to building in Indonesia — and mean it`, consequence: `He asks specific questions about how this would work practically. He is not testing your willingness — he is testing whether your willingness has thought behind it.`, flag: `open` },
-          { text: `Tell him America offers more opportunity and security and that Amira would thrive there`, consequence: `He receives this. 'You may be right about opportunity. But you have not answered my question.' He is asking about your flexibility, not about America's merits.`, flag: `missed_question` },
+          { text: `Tell him America offers more opportunity and security and that Amira would thrive there`, consequence: `He receives this. 'You may be right about opportunity. But you have not answered my question.' He is asking about your flexibility, not about America's merits.`, flag: `cultural_fail` },
         ],
       },
       {
@@ -327,7 +327,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Pay full attention to the grandmother — ask her about her life, listen to the stories`, consequence: `The father watches you for twenty minutes. When dinner ends he says, in Indonesian, something to his son. His son translates for you later: 'He said you have good manners for a man who does not know our customs.'`, flag: `attentive` },
           { text: `Focus your attention on the father and brothers — they are the decision-makers`, consequence: `The grandmother notices she has been bypassed. She does not say anything. But the energy of the room shifts slightly. The father notices this shift.`, flag: `strategic_but_wrong` },
-          { text: `Try to speak some Indonesian even if imperfectly`, consequence: `The grandmother laughs — warmly, not cruelly. She says something and the whole table relaxes. The father's wife reaches over and pats your arm. You have passed something without knowing what it was.`, flag: `language_effort` },
+          { text: `Try to speak some Indonesian even if imperfectly`, consequence: `The grandmother laughs — warmly, not cruelly. She says something and the whole table relaxes. The father's wife reaches over and pats your arm. You have passed something without knowing what it was.`, flag: `cultural_fail` },
         ],
       },
       {
@@ -336,7 +336,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Tell her what you have learned about the life — specific, honest, including the hardships`, consequence: `She nods slowly. 'You have been paying attention.' She asks one more question: 'Are you willing to learn Indonesian — not to visit, but to live in?'`, flag: `specific` },
           { text: `Ask her to describe the actual life so you can respond to the reality rather than your imagination of it`, consequence: `She describes it. Specifically. The daily rhythms, the family obligations, the mosque schedule, the market, the rains. When she finishes she says: 'That is what I am asking if you can love.' Silence. This is the right kind of silence.`, flag: `listening` },
-          { text: `Tell her you love her and that love means you will figure out the details`, consequence: `Her mother looks at the floor. Amira looks at you steadily. 'Love is not a plan.' The thirty minutes end quietly.`, flag: `insufficient` },
+          { text: `Tell her you love her and that love means you will figure out the details`, consequence: `Her mother looks at the floor. Amira looks at you steadily. 'Love is not a plan.' The thirty minutes end quietly.`, flag: `cultural_fail` },
         ],
       },
       {
@@ -345,7 +345,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Tell him yes — and state clearly what you have decided`, consequence: `He nods once. 'Then we will discuss the conditions.' The conditions take two hours. They are specific and fair. You agree to all of them.`, flag: `success` },
           { text: `Tell him you need more time to decide and ask for it honestly`, consequence: `He respects this. 'Take the time. But understand that time has a limit and she is watching whether you can finish.' You have three months.`, flag: `needs_time` },
-          { text: `Ask him what his daughter has told him she needs from this decision`, consequence: `He tells you. It is not complicated. It is specific. She needs a man who will not decide and then revise. Who will decide and hold. 'Can you do that?' he asks. Answer him.`, flag: `clarifying` },
+          { text: `Ask him what his daughter has told him she needs from this decision`, consequence: `He tells you. It is not complicated. It is specific. She needs a man who will not decide and then revise. Who will decide and hold. 'Can you do that?' he asks. Answer him.`, flag: `cultural_fail` },
         ],
       },
     ,
@@ -355,7 +355,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Test this deliberately: state something you do not fully believe and see if she agrees`, consequence: `She agrees. Warmly. You revise the statement to its opposite. She agrees with that too. Warmly. You are dealing with a cultural pattern, not a personality.`, flag: "agreement_tested" },
           { text: `Ask her directly: 'Have you ever disagreed with anything I have said?'`, consequence: `She pauses. Then laughs gently. Then says: 'In my family we do not argue directly.' She explains rukun — the harmony principle. What you are experiencing is cultural, not evasive.`, flag: "directly_asked" },
-          { text: `Accept the harmony and look for disagreement in subtler signals`, consequence: `You start reading what she chooses not to say, what she answers briefly, what she redirects. Her real opinions are present — they are just coded differently than you are used to.`, flag: "reading_subtext" },
+          { text: `Accept the harmony and look for disagreement in subtler signals`, consequence: `You start reading what she chooses not to say, what she answers briefly, what she redirects. Her real opinions are present — they are just coded differently than you are used to.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -364,7 +364,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Ask her to teach you what you need to know`, consequence: `She teaches you over three weeks. She is more comfortable and more herself in this teaching than in any previous conversation. This is her. The teaching is the person.`, flag: "taught" },
           { text: `Research Javanese Islam independently and then discuss what you found with her`, consequence: `She is surprised and moved that you researched independently. She corrects two misunderstandings warmly. The correction is itself a form of trust.`, flag: "researched" },
-          { text: `Tell her your own faith framework and ask if she sees a path of compatibility`, consequence: `She thinks carefully. She says: 'Compatibility is not about being the same. It is about whether both paths go to the same place.' This is one of the most precise things anyone has said to you in this process.`, flag: "compatibility_framed" },
+          { text: `Tell her your own faith framework and ask if she sees a path of compatibility`, consequence: `She thinks carefully. She says: 'Compatibility is not about being the same. It is about whether both paths go to the same place.' This is one of the most precise things anyone has said to you in this process.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -373,7 +373,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Correspond with the uncle with the same seriousness you would give her father`, consequence: `The uncle reports back favorably. Her father receives the reports. The proxy has worked as it was designed to work.`, flag: "uncle_respected" },
           { text: `Ask the uncle if there is an opportunity to speak with her father directly at some point`, consequence: `The uncle relays the request. Her father appreciates that you asked. He schedules a video call for the following month.`, flag: "father_requested" },
-          { text: `Ask Amira privately to help you understand what the uncle is really assessing`, consequence: `She explains. The uncle is assessing three things: your seriousness, your financial stability, and your respect for the traditional process. You adjust accordingly.`, flag: "assessment_known" },
+          { text: `Ask Amira privately to help you understand what the uncle is really assessing`, consequence: `She explains. The uncle is assessing three things: your seriousness, your financial stability, and your respect for the traditional process. You adjust accordingly.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -382,7 +382,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Follow the cousin's lead entirely — he is your host in this context`, consequence: `He takes you to places most visitors do not go. He is testing your curiosity. You are curious. By the third hour he is explaining things you did not ask — this is a good sign.`, flag: "cousin_led" },
           { text: `Ask the cousin what the family needs to see from you during this visit`, consequence: `He thinks. Then: 'They need to see that you are not in a hurry. In Yogyakarta, patience is character.' You file this.`, flag: "cousin_asked" },
-          { text: `Ask the cousin about the sultan and the city's history`, consequence: `He lights up. He talks for an hour. You have found the right subject. By the time you reach the family home he has called ahead to say something. Amira tells you later: he said you were interested in the real things.`, flag: "history_asked" },
+          { text: `Ask the cousin about the sultan and the city's history`, consequence: `He lights up. He talks for an hour. You have found the right subject. By the time you reach the family home he has called ahead to say something. Amira tells you later: he said you were interested in the real things.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -391,7 +391,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Answer honestly: stillness is something you have been working toward`, consequence: `The uncle translates. Her father speaks again. The uncle translates: 'He says that is the correct answer because it is honest. A man who claims to already be still is not still.' Her father pours you tea himself.`, flag: "stillness_honest" },
           { text: `Answer: 'I am learning from being here'`, consequence: `Her father listens to the translation. He is quiet a moment. He says one word to his brother. The uncle translates: 'Good.' The meeting continues.`, flag: "present_answer" },
-          { text: `Ask what stillness means in his understanding`, consequence: `Her father speaks for several minutes. The uncle translates in sections. The teaching is specific and rooted in his tarekat practice. You listen completely. Her father notices.`, flag: "stillness_asked" },
+          { text: `Ask what stillness means in his understanding`, consequence: `Her father speaks for several minutes. The uncle translates in sections. The teaching is specific and rooted in his tarekat practice. You listen completely. Her father notices.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -400,7 +400,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Take the concern seriously and research what Javanese and Indonesian communities exist in your city`, consequence: `You find a mosque with an Indonesian community within forty minutes of where you live. You bring the information to the uncle the next day. Her father listens to the translation. He speaks to his brother for a full minute.`, flag: "community_researched" },
           { text: `Tell him you will help Amira build her community — you cannot promise what already exists`, consequence: `He hears this. The uncle translates: 'He says honesty about what does not exist is more trustworthy than a promise about it.' Her father nods.`, flag: "honest_about_community" },
-          { text: `Ask Amira privately what she needs from her community and how you can provide it`, consequence: `She tells you specifically. You build a plan together. You bring the plan to the uncle. Her father hears it. This is the first thing you and Amira have built together.`, flag: "plan_built" },
+          { text: `Ask Amira privately what she needs from her community and how you can provide it`, consequence: `She tells you specifically. You build a plan together. You bring the plan to the uncle. Her father hears it. This is the first thing you and Amira have built together.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -409,7 +409,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `SUCCESS: Amira — Yogyakarta, Indonesia.`, consequence: `SUCCESS: The stillness the father asked about — you found it here, in this room, in this moment. Asia arc — complete.`, flag: "success" },
           { text: `SUCCESS: The cultural distance was real. You crossed it with patience and research.`, consequence: `SUCCESS: Every arc in Asia will require this kind of preparation. You now know what that looks like.`, flag: "success" },
-          { text: `SUCCESS: Arc complete.`, consequence: `SUCCESS: Amira — Yogyakarta, Indonesia. Complete.`, flag: "success" },
+          { text: `SUCCESS: Arc complete.`, consequence: `SUCCESS: Amira — Yogyakarta, Indonesia. Complete.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -418,7 +418,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `SUCCESS: Her father sent the family into your home.`, consequence: `SUCCESS: Honor what arrived in that box. Asia arc — complete.`, flag: "success" },
           { text: `SUCCESS: The patience was worth everything it cost.`, consequence: `SUCCESS: Arc complete.`, flag: "success" },
-          { text: `SUCCESS: Amira — complete.`, consequence: `SUCCESS: Everything you learned in this arc applies in Bangladesh and the Philippines. The cultural intelligence transfers.`, flag: "success" },
+          { text: `SUCCESS: Amira — complete.`, consequence: `SUCCESS: Everything you learned in this arc applies in Bangladesh and the Philippines. The cultural intelligence transfers.`, flag: "cultural_fail" },
         ],
       }
     ],
@@ -435,7 +435,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Answer her question about family and ask about hers`, consequence: `She writes about her parents, her neighborhood, her work. The warmth is real and the reality is also real — the country is difficult, the economic pressure is constant. She is not hiding any of this.`, flag: `open_about_reality` },
           { text: `Note that wanting a better life could mean many things and ask what she specifically means`, consequence: `She is slightly defensive at first, then honest: 'I mean I do not want to worry every month about whether there is enough. I mean I want my children to have options I did not have. Is that wrong?' It is not wrong.`, flag: `direct_question` },
-          { text: `Respond to her warmth with warmth — the connection feels immediate and real`, consequence: `It is immediate and real. But immediacy is not depth. The warmth is genuine and it is also the opening of something that will require more than warmth to carry.`, flag: `warmth_first` },
+          { text: `Respond to her warmth with warmth — the connection feels immediate and real`, consequence: `It is immediate and real. But immediacy is not depth. The warmth is genuine and it is also the opening of something that will require more than warmth to carry.`, flag: `cultural_fail` },
         ],
       },
       {
@@ -444,7 +444,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Tell her you are ready to hear it whenever she is ready to say it`, consequence: `She pauses one more day. Then tells you about her son. She is braced for you to disappear. She has watched men disappear before. The way you receive this will define everything.`, flag: `ready_to_receive` },
           { text: `Tell her she can tell you anything — that the connection you have built can hold it`, consequence: `She tells you. The son is two years old. His father is not in their lives. She waits. The silence is one of the most important silences of the arc.`, flag: `prepared_reception` },
-          { text: `Ask her to just say it — you can tell she is carrying something and it is better out than in`, consequence: `She laughs once, nervously, and then tells you. 'His name is Miguel. He is two. He is the most important person in my life.' The disclosure is made. The real conversation begins now.`, flag: `direct_invitation` },
+          { text: `Ask her to just say it — you can tell she is carrying something and it is better out than in`, consequence: `She laughs once, nervously, and then tells you. 'His name is Miguel. He is two. He is the most important person in my life.' The disclosure is made. The real conversation begins now.`, flag: `cultural_fail` },
         ],
       },
       {
@@ -453,7 +453,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Take 24 hours before responding — give the information the weight it deserves, then respond thoughtfully`, consequence: `She receives the pause with anxiety that becomes respect. When you respond she says: 'You did not disappear and you did not immediately say it is fine. You thought about it. That is the only honest response.'`, flag: `measured_honest` },
           { text: `Tell her immediately it does not change anything — you are still in`, consequence: `She asks: 'Have you thought about what it means? To be in a child's life and then possibly leave it? He has already lost one person.' She is not rejecting your acceptance. She is asking if your acceptance is real.`, flag: `immediate_untested` },
-          { text: `Ask her about him first — his name, what he is like, what he loves`, consequence: `She was not expecting this question first. The warmth of her answer is different from anything you have heard from her. 'You asked about him first,' she says. 'Not about what it means for you.'`, flag: `child_first` },
+          { text: `Ask her about him first — his name, what he is like, what he loves`, consequence: `She was not expecting this question first. The warmth of her answer is different from anything you have heard from her. 'You asked about him first,' she says. 'Not about what it means for you.'`, flag: `cultural_fail` },
         ],
       },
       {
@@ -462,7 +462,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Tell her honestly what you believe and what you are uncertain about`, consequence: `She says: 'The uncertainty is correct. Anyone who is not uncertain has not thought about it carefully enough. What I need is for the uncertainty to not become disappearance when it gets hard.'`, flag: `honest_uncertainty` },
           { text: `Tell her you will love him as your own — because in that moment you mean it`, consequence: `She says: 'Love is real. But love requires a specific kind of showing up that love alone does not guarantee. I need to know you understand the specific shape of the showing up.'`, flag: `love_not_enough` },
-          { text: `Ask her what she has seen in step-fathers she knows — good and bad`, consequence: `She tells you about her cousin's husband — who adopted her cousin's daughter and never, not once, made the girl feel the difference. And about another man who promised the same and lasted fourteen months before the resentment surfaced. 'The ones who last,' she says, 'decided before they began.'`, flag: `learning_from_examples` },
+          { text: `Ask her what she has seen in step-fathers she knows — good and bad`, consequence: `She tells you about her cousin's husband — who adopted her cousin's daughter and never, not once, made the girl feel the difference. And about another man who promised the same and lasted fourteen months before the resentment surfaced. 'The ones who last,' she says, 'decided before they began.'`, flag: `cultural_fail` },
         ],
       },
       {
@@ -471,7 +471,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Cross the room and introduce yourself to him at his level — carefully, without pressure`, consequence: `Her mother says something quietly to Diana. Diana translates later: 'She said you did not wait for him to come to you but you also did not force him.' The grandmother nods once. This moment travels through the rest of the visit.`, flag: `right_instinct` },
           { text: `Let the grandmother manage the introduction — this is her territory`, consequence: `He watches you from a safe distance for two days. He does not approach. On the last day he gives you a toy car and then takes it back. His grandmother laughs. Diana says: 'He does that with everyone at first. He showed you the car.'`, flag: `patient_correct` },
-          { text: `Focus on the parents first — they are the gatekeepers`, consequence: `Her son watches you ignore him for an hour. He retreats further. Her mother notices. The visit is good but something is slightly unresolved.`, flag: `misread_the_room` },
+          { text: `Focus on the parents first — they are the gatekeepers`, consequence: `Her son watches you ignore him for an hour. He retreats further. Her mother notices. The visit is good but something is slightly unresolved.`, flag: `cultural_fail` },
         ],
       },
       {
@@ -480,7 +480,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Tell her you have decided — and describe the specific life you are deciding for, difficult parts included`, consequence: `She is quiet. Then: 'That is what I needed to hear. Not the feeling — the decision.' She gives you her answer.`, flag: `success` },
           { text: `Tell her honestly you are hoping more than you have decided and ask if she can give you a little more time`, consequence: `She says: 'A little more time is honest. But I want you to understand that my son cannot be in someone's life provisionally. When you decide, it has to be a decision, not a hope.' She gives you three weeks.`, flag: `honest_not_ready` },
-          { text: `Ask her what she has decided`, consequence: `She says: 'I have decided yes. But I need to know if you have also decided.' The decision has to be mutual or it is not a marriage.`, flag: `mutual_required` },
+          { text: `Ask her what she has decided`, consequence: `She says: 'I have decided yes. But I need to know if you have also decided.' The decision has to be mutual or it is not a marriage.`, flag: `cultural_fail` },
         ],
       },
     ,
@@ -490,7 +490,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Tell her honestly: you know there is a difference and you want to learn it from her`, consequence: `She teaches you for a month. The difference is significant. She becomes more real as the teaching progresses — this is the version of her that exists before the performance American culture expects from her.`, flag: "learning_from_her" },
           { text: `Ask her to describe the difference`, consequence: `She does. Specifically and without softening. She has had this conversation before and most men have not been able to receive it. You receive it.`, flag: "difference_described" },
-          { text: `Tell her you have been doing your own research`, consequence: `She asks what you found. You tell her. She corrects three things. Then: 'At least you tried. Most men don't even try.' The conversation accelerates.`, flag: "research_corrected" },
+          { text: `Tell her you have been doing your own research`, consequence: `She asks what you found. You tell her. She corrects three things. Then: 'At least you tried. Most men don't even try.' The conversation accelerates.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -499,7 +499,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Ask what the community's concerns are`, consequence: `She tells you three: that you will come, take her, and cut her from her roots. That you will not know how to be in community. That you will not be serious. She asks which of these three you can address.`, flag: "concerns_named" },
           { text: `Tell her you welcome being known by her community`, consequence: `She pauses. Then: 'That is either very smart or very real.' You tell her which. She decides which herself.`, flag: "community_welcomed" },
-          { text: `Ask her what it would take for the community to see you as serious`, consequence: `She thinks. Then: 'Come here. Be here. Let them see you exist.' The question has produced an invitation.`, flag: "community_invitation" },
+          { text: `Ask her what it would take for the community to see you as serious`, consequence: `She thinks. Then: 'Come here. Be here. Let them see you exist.' The question has produced an invitation.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -508,7 +508,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Arrive with dignity and warmth — greet everyone who looks at you`, consequence: `By the time you reach the house, the cousin has already called Diana. She says: 'He greeted everyone.' This has been noted.`, flag: "arrival_dignified" },
           { text: `Observe and absorb — you are a visitor here`, consequence: `The cousin notices the quality of your attention. He tells Diana: 'He is watching everything. He wants to understand.' This is the correct behavior for a first arrival.`, flag: "arrival_observant" },
-          { text: `Ask the cousin who you should greet specifically`, consequence: `He names three people. You greet them by name. Diana calls you five minutes after you reach the house: 'How do you already know their names?' The cousin told you. She knows. She is still impressed.`, flag: "arrival_prepared" },
+          { text: `Ask the cousin who you should greet specifically`, consequence: `He names three people. You greet them by name. Diana calls you five minutes after you reach the house: 'How do you already know their names?' The cousin told you. She knows. She is still impressed.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -517,7 +517,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Go to the grandmother before the meal begins and introduce yourself to her specifically`, consequence: `The room notices. Diana's mother touches her husband's arm. The grandmother speaks to you in Spanish. Diana translates: 'She says you knew who was most important in this room.' You did.`, flag: "grandmother_first" },
           { text: `Let the grandmother come to you when she is ready`, consequence: `Halfway through the meal she taps the table near you. She speaks. Diana translates: 'She is asking you something she does not ask most people.' The question is the real family test.`, flag: "grandmother_patient" },
-          { text: `Ask Diana before the meal who the most important person in the room is`, consequence: `She says: 'My grandmother. Do not wait for someone to introduce you.' You stand immediately. The room sees.`, flag: "grandmother_directed" },
+          { text: `Ask Diana before the meal who the most important person in the room is`, consequence: `She says: 'My grandmother. Do not wait for someone to introduce you.' You stand immediately. The room sees.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -526,7 +526,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Answer both questions from personal experience and genuine reflection`, consequence: `He listens completely. Then he says something in Spanish that Diana translates slowly: 'He says a man who has thought about those questions has already begun to answer them correctly.'`, flag: "father_answered" },
           { text: `Answer the second question first — it is the one that matters most to him`, consequence: `He stops. He was expecting you to answer in order. You answered in priority. He tells Diana: 'He knows which question is real.' He answers nothing further. He has seen what he needed to see.`, flag: "priority_answered" },
-          { text: `Ask him the same two questions about his own experience as a husband and father`, consequence: `He is very still. Then he speaks for twenty minutes. Diana translates continuously. At the end: 'No man has ever asked me that.' He calls his wife over.`, flag: "father_asked" },
+          { text: `Ask him the same two questions about his own experience as a husband and father`, consequence: `He is very still. Then he speaks for twenty minutes. Diana translates continuously. At the end: 'No man has ever asked me that.' He calls his wife over.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -535,7 +535,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Tell her the truth: you came here because you made a decision, and decisions like this one are not made to be unmade`, consequence: `She is quiet. Then she says something to the cousin. He translates: 'She says she has never heard a man say exactly that.' She calls Diana in. She says one sentence. Diana cries.`, flag: "grandmother_convinced" },
           { text: `Tell her you cannot promise what the future holds but you can tell her what kind of man you are`, consequence: `She listens. She asks the cousin one clarifying question. She makes a sound that the cousin translates as: 'Acceptable.' It is the grandmother's version of strong approval.`, flag: "grandmother_honest" },
-          { text: `Ask her what the men before said when she asked them this question`, consequence: `She tells you. She tells you what they said and what happened. She is telling you what not to say by telling you what they said. You understand this. You answer differently from all of them.`, flag: "grandmother_learned" },
+          { text: `Ask her what the men before said when she asked them this question`, consequence: `She tells you. She tells you what they said and what happened. She is telling you what not to say by telling you what they said. You understand this. You answer differently from all of them.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -544,7 +544,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `SUCCESS: Diana — Santo Domingo, Dominican Republic.`, consequence: `SUCCESS: The grandmother's room was the real family meeting. Everything before it was preparation. Latin America arc — complete.`, flag: "success" },
           { text: `SUCCESS: The community knew before the paperwork began.`, consequence: `SUCCESS: You arrived and let yourself be seen. This is the Latin America arc's central requirement. Arc complete.`, flag: "success" },
-          { text: `SUCCESS: Arc complete.`, consequence: `SUCCESS: Diana — complete.`, flag: "success" },
+          { text: `SUCCESS: Arc complete.`, consequence: `SUCCESS: Diana — complete.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -553,7 +553,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `SUCCESS: You received a family's history as a wedding gift.`, consequence: `SUCCESS: Honor it. Latin America arc — complete.`, flag: "success" },
           { text: `SUCCESS: Arc complete.`, consequence: `SUCCESS: Dominican Republic — complete.`, flag: "success" },
-          { text: `SUCCESS: Diana — complete.`, consequence: `SUCCESS: The grandmother's word made it real.`, flag: "success" },
+          { text: `SUCCESS: Diana — complete.`, consequence: `SUCCESS: The grandmother's word made it real.`, flag: "cultural_fail" },
         ],
       }
     ],
@@ -571,7 +571,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Answer both halves directly from what you actually believe`, consequence: `She responds: 'I have asked this question before. Most men answer the first part fully and the second part vaguely. You did the opposite. Tell me why.' She is not criticizing — she is curious about the asymmetry.`, flag: `reversed_emphasis` },
           { text: `Ask her what prompted the question before answering — you want to understand what she is measuring`, consequence: `She tells you about the proposal that died. The man who said he would want her to stop working after children. The conversation that ended it. She is giving you the map before asking if you can read it.`, flag: `context_first` },
-          { text: `Answer and then ask what prompted her to put this in her profile from the beginning`, consequence: `She says: 'Experience. I stopped waiting for the conversation to arrive on its own. Men reveal themselves in how they answer this question much more than in how they answer any other question.' You are being told exactly what is being measured.`, flag: `rubric_revealed` },
+          { text: `Answer and then ask what prompted her to put this in her profile from the beginning`, consequence: `She says: 'Experience. I stopped waiting for the conversation to arrive on its own. Men reveal themselves in how they answer this question much more than in how they answer any other question.' You are being told exactly what is being measured.`, flag: `cultural_fail` },
         ],
       },
       {
@@ -580,7 +580,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Tell her honestly what you understand and what you do not — ask her to tell you more`, consequence: `She tells you. For two hours. The specific villages, the specific diseases, the specific politics of getting resources to places that do not have advocates. You are fully absorbed. She notices this.`, flag: `genuinely_interested` },
           { text: `Research her field before the next conversation and demonstrate you have prepared`, consequence: `She is surprised. 'You studied it.' She asks three specific questions that reveal whether you studied the surface or the depth. The depth of your preparation reveals the depth of your interest.`, flag: `prepared` },
-          { text: `Tell her you understand the importance and the sacrifice of the work she does`, consequence: `She says: 'You understand that I believe in it. I am asking if you understand what it actually is. There is a difference.' She is right. There is.`, flag: `summary_not_substance` },
+          { text: `Tell her you understand the importance and the sacrifice of the work she does`, consequence: `She says: 'You understand that I believe in it. I am asking if you understand what it actually is. There is a difference.' She is right. There is.`, flag: `cultural_fail` },
         ],
       },
       {
@@ -589,7 +589,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Tell her specifically what you have thought about — regarding her work, regarding children, regarding what you are agreeing to`, consequence: `She listens carefully. She asks three follow-up questions, each one testing a different corner of what you have said. Each answer gives her more information. At the end she says: 'You have thought about it.'`, flag: `specific_thought` },
           { text: `Ask her what she would need to see from you over time to know that you had thought carefully`, consequence: `She gives you a list. It is not impossible. It is not simple. It requires you to be attentive in specific ways over time. 'The list is not a test,' she says. 'It is a description of the man I need. You can decide if that man is you.'`, flag: `list_received` },
-          { text: `Tell her you are not that man — you are not the man who does not think carefully`, consequence: `She says: 'I know. But you are also not yet the man who has demonstrated it. That takes time. I am willing to take the time if you are.'`, flag: `patience_offered` },
+          { text: `Tell her you are not that man — you are not the man who does not think carefully`, consequence: `She says: 'I know. But you are also not yet the man who has demonstrated it. That takes time. I am willing to take the time if you are.'`, flag: `cultural_fail` },
         ],
       },
       {
@@ -598,7 +598,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Answer from what you genuinely understand — even if that understanding is incomplete`, consequence: `She nods. 'Incomplete but honest understanding is the beginning. False complete understanding is the end.' She speaks to Elena for a moment in Quechua. Elena later translates: 'She said: he is listening.'`, flag: `honest_incomplete` },
           { text: `Tell her you are still learning to understand it but you are committed to the learning`, consequence: `She says: 'Commitment to learning is the right posture for a man entering our family.' She says something to Elena that makes Elena smile. You ask what it was. Elena says: 'She said you have good eyes for listening.'`, flag: `committed_learner` },
-          { text: `Describe what you understand about what Elena has built and why someone would build it`, consequence: `She listens fully. At the end she says one sentence to Elena in Quechua. Elena's eyes fill briefly. Later: 'She said: this man has paid attention to who you are.'`, flag: `specific_seeing` },
+          { text: `Describe what you understand about what Elena has built and why someone would build it`, consequence: `She listens fully. At the end she says one sentence to Elena in Quechua. Elena's eyes fill briefly. Later: 'She said: this man has paid attention to who you are.'`, flag: `cultural_fail` },
         ],
       },
       {
@@ -607,7 +607,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Tell her specifically what you saw — the people, the system, the gaps, what she was doing in each moment`, consequence: `She is quiet for a moment. 'You were watching the work, not me doing the work. That is not the same thing. Thank you.' She takes your hand for the first time.`, flag: `saw_the_work` },
           { text: `Tell her you saw what she has built and what it costs her`, consequence: `She nods. 'Both things. Yes.' She asks: 'And what did you see in me specifically today?' You tell her. She listens. At the end she says: 'Keep talking.'`, flag: `saw_her` },
-          { text: `Tell her you saw why you are here — that seeing her in this context confirmed something`, consequence: `She says: 'Tell me what it confirmed.' You tell her. She listens without interrupting. When you finish she says: 'You saw clearly. Most men do not see clearly when they are trying to impress me.'`, flag: `confirmed` },
+          { text: `Tell her you saw why you are here — that seeing her in this context confirmed something`, consequence: `She says: 'Tell me what it confirmed.' You tell her. She listens without interrupting. When you finish she says: 'You saw clearly. Most men do not see clearly when they are trying to impress me.'`, flag: `cultural_fail` },
         ],
       },
       {
@@ -616,7 +616,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Tell her specifically what you have decided — including the sacrifices it requires from you`, consequence: `She is still for a long time. Then: 'He was not willing to decide. You decided before I asked.' She gives you her answer that night.`, flag: `success` },
           { text: `Tell her you have thought about it deeply but you are not sure a decision is possible before you are actually in it`, consequence: `She says: 'That is honest. What I need to know is: are you the kind of man who decides in advance, or the kind who discovers what he has decided when circumstances demand it?' Both are real. Only one works for her.`, flag: `honest_uncertainty` },
-          { text: `Ask her what she has decided — you want to build the answer together`, consequence: `She says: 'I have decided. I decided six weeks ago. I have been waiting to see if you would also decide, or if you would arrive at decision only if I told you I had already made mine.' Answer carefully. The order matters.`, flag: `order_matters` },
+          { text: `Ask her what she has decided — you want to build the answer together`, consequence: `She says: 'I have decided. I decided six weeks ago. I have been waiting to see if you would also decide, or if you would arrive at decision only if I told you I had already made mine.' Answer carefully. The order matters.`, flag: `cultural_fail` },
         ],
       },
     ,
@@ -626,7 +626,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Appreciate the directness and match it`, consequence: `She receives the matched directness well. The first month of correspondence covers more real ground than most arcs cover in three months.`, flag: "direct_match" },
           { text: `Ask about the previous engagement before anything else`, consequence: `She tells you. What ended it, what she learned, what she is specifically looking for differently. This is the most useful information you could have received.`, flag: "previous_asked" },
-          { text: `Tell her you appreciate the approach and want to know what 'somewhere' looks like to her`, consequence: `She describes it specifically. A timeline. A plan. A man who can be held to what he says. You take notes.`, flag: "destination_described" },
+          { text: `Tell her you appreciate the approach and want to know what 'somewhere' looks like to her`, consequence: `She describes it specifically. A timeline. A plan. A man who can be held to what he says. You take notes.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -635,7 +635,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Ask her what 'serious in person and absent in practice' looked like specifically`, consequence: `She tells you. The list is precise and instructive. You make commitments in this conversation that are specific and small and that you honor immediately.`, flag: "specific_commitments" },
           { text: `Tell her you understand the concern and ask how you can demonstrate the difference`, consequence: `She gives you three small tests over the next month. You pass all three without knowing they were tests. She tells you afterward.`, flag: "tests_passed" },
-          { text: `Acknowledge the concern and let your consistency over time be the answer`, consequence: `She respects this. Over three months the consistency builds the case better than any promise could.`, flag: "consistent" },
+          { text: `Acknowledge the concern and let your consistency over time be the answer`, consequence: `She respects this. Over three months the consistency builds the case better than any promise could.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -644,7 +644,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Approach the call with the same directness Elena has shown you`, consequence: `He responds to directness. He has been receiving performances. He asked Elena that night: 'He speaks like he is telling me something, not selling me something.' This is the distinction he has been looking for.`, flag: "direct_with_father" },
           { text: `Address the previous engagement directly with him — acknowledge it before he does`, consequence: `He is surprised. He had prepared to bring it up himself. You brought it first. He says: 'You knew this was in the room.' You tell him yes. He respects the acknowledgment.`, flag: "engagement_acknowledged" },
-          { text: `Ask him what would make him confident this time`, consequence: `He thinks. Then he answers specifically. The specificity is what you needed. Everything you do after this call is calibrated to what he named.`, flag: "father_asked" },
+          { text: `Ask him what would make him confident this time`, consequence: `He thinks. Then he answers specifically. The specificity is what you needed. Everything you do after this call is calibrated to what he named.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -653,7 +653,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Tell her you understand — and let her assessment happen`, consequence: `She studies you for twenty minutes over coffee near the airport. Then: 'You are real.' She calls her mother. The family meeting is confirmed for tomorrow.`, flag: "real_confirmed" },
           { text: `Ask her what real looks like to her`, consequence: `She says: 'The same person in the airport as in the messages.' You ask her what she sees. She tells you. You have passed before the family meeting has begun.`, flag: "real_asked" },
-          { text: `Tell her you appreciate being given this moment with her before the family`, consequence: `She nods. 'I needed it. My family will like who they see. I needed to see who you are when no one is watching.' The observation happens over coffee. You are the same.`, flag: "private_moment" },
+          { text: `Tell her you appreciate being given this moment with her before the family`, consequence: `She nods. 'I needed it. My family will like who they see. I needed to see who you are when no one is watching.' The observation happens over coffee. You are the same.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -662,7 +662,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Tell her you understand what 'trying again' costs Elena and what it costs her as a mother`, consequence: `She is very quiet. Then she takes your hand briefly. She says something to Elena. Elena translates: 'She says you see both of us.' This is what the mother has been waiting for.`, flag: "mother_seen" },
           { text: `Tell her you intend to be the answer to the trying again, not another question`, consequence: `She studies this. She asks Elena something in Spanish. Elena nods. The mother smiles. Something has been decided.`, flag: "mother_answer" },
-          { text: `Ask her what she needs to see to believe in this`, consequence: `She thinks for a long time. Then she names one thing. It is specific. You arrange it before you leave Lima.`, flag: "mother_condition" },
+          { text: `Ask her what she needs to see to believe in this`, consequence: `She thinks for a long time. Then she names one thing. It is specific. You arrange it before you leave Lima.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -671,7 +671,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Watch him work and answer his questions without trying to control the conversation`, consequence: `He continues working while you talk. At the end he shows you the piece he is making. He says: 'It is for Elena. For when she has her own home.' He is already making her a future.`, flag: "workshop_patience" },
           { text: `Ask him about the piece he is making`, consequence: `He tells you about it. He tells you more than he planned to. By the end of the workshop visit he has told you about Elena's childhood, her previous engagement, what he saw in the previous man that he did not say until it was too late.`, flag: "piece_asked" },
-          { text: `Offer to help in the workshop — whatever he needs`, consequence: `He hands you something to hold. Then something to sand. The conversation happens over work. This is how he trusts.`, flag: "workshop_help" },
+          { text: `Offer to help in the workshop — whatever he needs`, consequence: `He hands you something to hold. Then something to sand. The conversation happens over work. This is how he trusts.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -680,7 +680,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Tell him you understand the weight of what he has said and you accept it`, consequence: `He nods. Her mother serves dessert. The rest of the evening is a celebration.`, flag: "weight_accepted" },
           { text: `Tell him you will earn his trust through what you do, not what you say tonight`, consequence: `He looks at you a long moment. Then: 'Good. Because what you say tonight I have heard before.' He pours you a drink.`, flag: "trust_through_action" },
-          { text: `Ask him what would make him regret it — not to promise to avoid it, but to understand it`, consequence: `He is very still. Then he answers. Elena translates carefully. What he says is the most important thing she has heard her father say about what he needs from a man who loves her.`, flag: "regret_asked" },
+          { text: `Ask him what would make him regret it — not to promise to avoid it, but to understand it`, consequence: `He is very still. Then he answers. Elena translates carefully. What he says is the most important thing she has heard her father say about what he needs from a man who loves her.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -689,7 +689,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `SUCCESS: Elena — Lima, Peru.`, consequence: `SUCCESS: The workshop, the mother's hand, the father's warning, the previous engagement that made everything more honest — all of it was the path. Latin America arc — complete.`, flag: "success" },
           { text: `SUCCESS: Her father is still making the furniture.`, consequence: `SUCCESS: He will bring it when he visits. Arc complete.`, flag: "success" },
-          { text: `SUCCESS: Arc complete.`, consequence: `SUCCESS: Elena — Lima, Peru. Complete.`, flag: "success" },
+          { text: `SUCCESS: Arc complete.`, consequence: `SUCCESS: Elena — Lima, Peru. Complete.`, flag: "cultural_fail" },
         ],
       }
     ],
@@ -706,7 +706,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Write in English — professional, clear, direct about your intentions`, consequence: `He responds in Arabic. His English is perfect — he chose not to use it. His three questions arrive in classical Arabic. You need a translator for all three.`, flag: `english` },
           { text: `Write in Arabic — your proficiency is intermediate but the effort is the point`, consequence: `He responds the same day. He corrects one grammatical construction gently and then proceeds. 'A man who attempts the language of a woman's family is a man worth knowing.'`, flag: `arabic` },
-          { text: `Research Islamic marriage protocols thoroughly before writing and reference them specifically`, consequence: `He reads the letter twice. He shares it with his brother. His response: 'You have studied. Most do not. What else have you studied?'`, flag: `studied` },
+          { text: `Research Islamic marriage protocols thoroughly before writing and reference them specifically`, consequence: `He reads the letter twice. He shares it with his brother. His response: 'You have studied. Most do not. What else have you studied?'`, flag: `time_waster` },
         ],
       },
       {
@@ -715,7 +715,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Answer the first two fully and admit you know little of the Tijaniyya but are willing to learn`, consequence: `He receives the honesty on the third question with more warmth than the confident answers to the first two. 'Willingness to learn is rarer than knowledge already held.'`, flag: `honest` },
           { text: `Research the Tijaniyya before answering and give a substantive response to all three`, consequence: `He is surprised. He asks a follow-up question about the order that only someone who went past the surface would know to answer. You answer correctly. The correspondence changes tone.`, flag: `deep_study` },
-          { text: `Answer all three from your current knowledge without additional research`, consequence: `Your answer on the Tijaniyya reveals the surface depth of your preparation. He is not harsh. He simply asks more questions. The bar has been raised.`, flag: `insufficient` },
+          { text: `Answer all three from your current knowledge without additional research`, consequence: `Your answer on the Tijaniyya reveals the surface depth of your preparation. He is not harsh. He simply asks more questions. The bar has been raised.`, flag: `time_waster` },
         ],
       },
       {
@@ -724,7 +724,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Commit to specific and frequent visits — give him a schedule he can hold you to`, consequence: `He asks how you will fund this over time. He is not testing your wealth — he is testing whether you have thought past the promise to the logistics.`, flag: `practical` },
           { text: `Propose that she and her mother visit America first, before any commitment is finalized`, consequence: `He pauses. This is not how it is done. But the respect for his wife implicit in the suggestion registers. He says he will consider it.`, flag: `thoughtful` },
-          { text: `Tell him honestly that distance will be real and that you will not minimize it but will work to make it bearable`, consequence: `He appreciates the honesty. He says: 'Every father of a daughter who marries abroad carries this. What I need to know is that you understand the weight of what you are asking.'`, flag: `honest` },
+          { text: `Tell him honestly that distance will be real and that you will not minimize it but will work to make it bearable`, consequence: `He appreciates the honesty. He says: 'Every father of a daughter who marries abroad carries this. What I need to know is that you understand the weight of what you are asking.'`, flag: `time_waster` },
         ],
       },
       {
@@ -733,7 +733,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Write about what you have learned from the months of correspondence with her father`, consequence: `She responds — through him — with more warmth than her father's tone has prepared you for. She asks one question: 'What do you believe a wife is owed that has nothing to do with money?'`, flag: `reflective` },
           { text: `Ask her a question rather than making statements — let her set the terms`, consequence: `She responds. Her answer is precise and unexpected and reveals someone far more formed than the profile suggested. You have been corresponding with her father. You are now meeting her.`, flag: `listening` },
-          { text: `Tell her directly what you are looking for and why you believe she might be it`, consequence: `Her father edits three lines before passing it. What she receives is still enough. She replies: 'I appreciate that you spoke directly. Most men speak around the thing they mean.'`, flag: `direct` },
+          { text: `Tell her directly what you are looking for and why you believe she might be it`, consequence: `Her father edits three lines before passing it. What she receives is still enough. She replies: 'I appreciate that you spoke directly. Most men speak around the thing they mean.'`, flag: `time_waster` },
         ],
       },
       {
@@ -742,7 +742,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Answer with complete honesty about your current practice, however incomplete`, consequence: `She passes your answer to her father unedited. He calls you that evening. 'She showed me your answer. I want you to know that honesty in this moment counts more than the answer itself.'`, flag: `honest_faith` },
           { text: `Tell her what a man at your level of commitment to growth would say`, consequence: `Her father asks you a specific question about a specific practice the following week. Your answer reveals the gap. The correspondence pauses for two weeks.`, flag: `performed_faith` },
-          { text: `Ask her what she needs from a husband's practice before answering — you want to understand what is required`, consequence: `She gives you a precise and non-negotiable list. Some of it you already practice. Some of it you would need to grow into. She is giving you the map before asking if you can read it.`, flag: `strategic` },
+          { text: `Ask her what she needs from a husband's practice before answering — you want to understand what is required`, consequence: `She gives you a precise and non-negotiable list. Some of it you already practice. Some of it you would need to grow into. She is giving you the map before asking if you can read it.`, flag: `time_waster` },
         ],
       },
       {
@@ -751,7 +751,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Give him a specific answer about community, practice, language at home, and how you will guard the marriage from the culture around it`, consequence: `He says: 'Come to Fez. We will discuss the mahr.' Four months later the nikah is performed.`, flag: `success` },
           { text: `Tell him you believe in her strength and trust her to protect herself`, consequence: `Long silence. 'Her strength is not the question. The question is yours.' He is giving you another chance. Do not waste it.`, flag: `needs_work` },
-          { text: `Ask him what he has seen happen to other daughters who went abroad without this protection`, consequence: `He tells you about two. The conversation takes an hour. At the end he says: 'You asked the right question. Call me next week with your answer to mine.'`, flag: `success` },
+          { text: `Ask him what he has seen happen to other daughters who went abroad without this protection`, consequence: `He tells you about two. The conversation takes an hour. At the end he says: 'You asked the right question. Call me next week with your answer to mine.'`, flag: `time_waster` },
         ],
       },
     ,
@@ -761,7 +761,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Acknowledge the gap directly — 'I noticed you were away'`, consequence: `She explains. A family obligation in another city, no phone access, her father's insistence on a full departure from correspondence during a family period. The explanation holds.`, flag: "gap_acknowledged" },
           { text: `Respond as though nothing happened — match her energy`, consequence: `She continues. But the test passed unexamined. She is watching whether you will require accountability or accept silence without question. You accepted.`, flag: "silence_accepted" },
-          { text: `Tell her the silence was noticed and ask if everything is alright`, consequence: `She appreciates the framing. Not accusation, not indifference — genuine concern. She tells you more about the family period than she originally intended.`, flag: "concerned" },
+          { text: `Tell her the silence was noticed and ask if everything is alright`, consequence: `She appreciates the framing. Not accusation, not indifference — genuine concern. She tells you more about the family period than she originally intended.`, flag: "time_waster" },
         ],
       },
       {
@@ -770,7 +770,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Welcome it — tell Fatima you are happy to answer her sister's questions`, consequence: `The sister writes. Her questions are sharper than Fatima's. She is protecting her sister with precision. You answer each one honestly. Fatima writes the next day: 'She likes you. That is unusual.'`, flag: "sister_welcomed" },
           { text: `Express mild surprise — you did not expect a third party`, consequence: `Fatima explains: in her family, her sister has always been her first counsel. This is not negotiable. Your mild surprise is noted and filed.`, flag: "surprised" },
-          { text: `Ask to speak with the sister directly rather than through Fatima`, consequence: `Fatima pauses. Then: 'Yes. That is the correct way to do this.' The sister writes you directly the next day. The directness impresses her.`, flag: "direct_with_sister" },
+          { text: `Ask to speak with the sister directly rather than through Fatima`, consequence: `Fatima pauses. Then: 'Yes. That is the correct way to do this.' The sister writes you directly the next day. The directness impresses her.`, flag: "time_waster" },
         ],
       },
       {
@@ -779,7 +779,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Accept without hesitation`, consequence: `The cousin calls. He is warm, frank, and evaluating you on behalf of the family. Your three days with him teach you more about Fatima than three months of messages did.`, flag: "host_accepted" },
           { text: `Ask if a hotel is possible — you value your independence during the visit`, consequence: `She explains again. The hotel option signals to the family that you are not committed to the tradition. You can stay at a hotel but the family will interpret it. She is giving you the information — what you do with it is your decision.`, flag: "hotel_requested" },
-          { text: `Ask what is expected of you as a guest in the cousin's home`, consequence: `She walks you through it. You take notes. She is impressed that you asked. 'Most men either accept without understanding or refuse without asking. You did neither.'`, flag: "protocol_asked" },
+          { text: `Ask what is expected of you as a guest in the cousin's home`, consequence: `She walks you through it. You take notes. She is impressed that you asked. 'Most men either accept without understanding or refuse without asking. You did neither.'`, flag: "time_waster" },
         ],
       },
       {
@@ -788,7 +788,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Receive the unannounced introduction with warmth and dignity`, consequence: `His parents are watching you absorb the surprise. You absorb it well. His mother offers you mint tea before you are sitting. This is a good sign.`, flag: "surprise_absorbed" },
           { text: `Note privately that this was unannounced but say nothing — observe everything`, consequence: `You store what you see. The home. The photographs on the walls. The way the cousin's father addresses his wife. This is the family Fatima grew up surrounded by.`, flag: "observer" },
-          { text: `Ask the cousin to let Fatima know you have arrived safely`, consequence: `He has already texted her. She responds in two minutes. Her message to you arrives twenty minutes later: 'My uncle said you were good with the surprise.' The cousin's parents are the uncle and aunt.`, flag: "family_connected" },
+          { text: `Ask the cousin to let Fatima know you have arrived safely`, consequence: `He has already texted her. She responds in two minutes. Her message to you arrives twenty minutes later: 'My uncle said you were good with the surprise.' The cousin's parents are the uncle and aunt.`, flag: "time_waster" },
         ],
       },
       {
@@ -797,7 +797,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Answer his three questions fully and let the silence after each one sit`, consequence: `He nods at the end of the third answer. He calls his wife in. He speaks to her briefly in Darija. She smiles. The family dinner is announced.`, flag: "father_satisfied" },
           { text: `After his questions, ask him one question of your own`, consequence: `He is surprised. He thinks for a moment. Then answers at length. Then: 'You are the first man who has asked me something.' He calls his wife in immediately.`, flag: "father_questioned" },
-          { text: `Listen more than you speak throughout`, consequence: `He notes the restraint. At the end: 'My daughter told me you listen. I wanted to see it.' He has received what he came to see.`, flag: "listener" },
+          { text: `Listen more than you speak throughout`, consequence: `He notes the restraint. At the end: 'My daughter told me you listen. I wanted to see it.' He has received what he came to see.`, flag: "time_waster" },
         ],
       },
       {
@@ -806,7 +806,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Welcome the imam's presence — this is their tradition and you respect it`, consequence: `The imam is direct and learned. He asks about your prayer practice, your understanding of the nikah contract, and your position on a wife's right to education and work. You answer honestly. He nods at each answer.`, flag: "imam_welcomed" },
           { text: `Ask what the imam's role will be exactly`, consequence: `Her father explains. The imam witnesses and offers counsel. He does not have veto power but his assessment carries weight. You prepare accordingly.`, flag: "imam_role_understood" },
-          { text: `Express that you would like to have your own Islamic community represented as well`, consequence: `Her father considers this. He agrees. The next meeting includes both perspectives. This is seen as a sign of seriousness rather than resistance.`, flag: "own_community_requested" },
+          { text: `Express that you would like to have your own Islamic community represented as well`, consequence: `Her father considers this. He agrees. The next meeting includes both perspectives. This is seen as a sign of seriousness rather than resistance.`, flag: "time_waster" },
         ],
       },
       {
@@ -815,7 +815,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Agree to the date and the location`, consequence: `Planning begins. Her mother sends you a list of what you will need to prepare. The list is detailed and warm.`, flag: "nikah_agreed" },
           { text: `Ask about the civil registration requirement and how it connects to the religious ceremony`, consequence: `Her father explains the Moroccan civil process. You understand that both are required. He has a lawyer who handles this regularly. The question impressed him.`, flag: "civil_asked" },
-          { text: `Ask when you should begin the K-1 visa filing`, consequence: `Her father has already consulted with someone about this. He has the information ready. He was waiting to see if you would ask the right question at the right moment.`, flag: "visa_asked" },
+          { text: `Ask when you should begin the K-1 visa filing`, consequence: `Her father has already consulted with someone about this. He has the information ready. He was waiting to see if you would ask the right question at the right moment.`, flag: "time_waster" },
         ],
       },
       {
@@ -824,7 +824,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Answer in Arabic — imperfectly but genuinely`, consequence: `The room responds. Her father translates for the family members who did not hear the preparation that went into this moment. The imam places his hand briefly on your shoulder.`, flag: "arabic_answered" },
           { text: `Answer in English and let the imam translate`, consequence: `This is acceptable. The imam translates carefully. The family receives your words. Fatima hears them from the next room through her sister.`, flag: "english_answered" },
-          { text: `Answer and then address her father directly in French`, consequence: `Her father's expression shifts. He had not expected French. He responds in French. Something passes between you that the rest of the room does not fully see.`, flag: "french_moment" },
+          { text: `Answer and then address her father directly in French`, consequence: `Her father's expression shifts. He had not expected French. He responds in French. Something passes between you that the rest of the room does not fully see.`, flag: "time_waster" },
         ],
       },
       {
@@ -833,7 +833,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `SUCCESS: Fatima — Meknes, Morocco.`, consequence: `SUCCESS: The patience, the protocol, the imam, the cousin, the sister, the father's thirty-minute test — all of it built something real. The certificate of commission is earned.`, flag: "success" },
           { text: `SUCCESS: Every scene in this arc required something of you.`, consequence: `SUCCESS: You gave it. North Africa arc — complete.`, flag: "success" },
-          { text: `SUCCESS: The work begins here.`, consequence: `SUCCESS: Everything before today was preparation. Everything from today is practice.`, flag: "success" },
+          { text: `SUCCESS: The work begins here.`, consequence: `SUCCESS: Everything before today was preparation. Everything from today is practice.`, flag: "time_waster" },
         ],
       }
     ],
@@ -851,7 +851,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Answer honestly — including what you do not know and why`, consequence: `'Many men from America do not know. But you have told me the truth of what you know and what you do not. That is its own kind of answer.' The correspondence deepens.`, flag: `honest_absence` },
           { text: `Research your lineage before answering — go deeper than you have gone before`, consequence: `She receives the research with evident surprise. 'You made an effort on a question most men would answer casually. That matters here.' Her father asks to read the correspondence.`, flag: `effort_made` },
-          { text: `Ask her what the question is really asking beneath the surface`, consequence: `She says: 'It is asking whether you are a man with roots or a man who has cut his roots. A man without roots cannot understand what he is asking when he asks to enter a family like mine.'`, flag: `question_understood` },
+          { text: `Ask her what the question is really asking beneath the surface`, consequence: `She says: 'It is asking whether you are a man with roots or a man who has cut his roots. A man without roots cannot understand what he is asking when he asks to enter a family like mine.'`, flag: `cultural_fail` },
         ],
       },
       {
@@ -860,7 +860,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Research the Tijaniyya thoroughly before responding`, consequence: `She is astonished. 'You studied it.' She asks three questions that test the depth of your study. You answer all three. The correspondence changes quality permanently.`, flag: `deep_research` },
           { text: `Tell her honestly that you know little about it but ask her to teach you`, consequence: `'The willingness to be taught is the correct posture for someone entering this lineage.' She begins teaching you over the following weeks. The correspondence becomes an education.`, flag: `willing_student` },
-          { text: `Tell her you respect all spiritual traditions and leave it there`, consequence: `She says: 'Respect for all traditions equally is not the same as understanding mine specifically. I am not asking you to convert. I am asking you to understand.' Try again.`, flag: `insufficient_respect` },
+          { text: `Tell her you respect all spiritual traditions and leave it there`, consequence: `She says: 'Respect for all traditions equally is not the same as understanding mine specifically. I am not asking you to convert. I am asking you to understand.' Try again.`, flag: `cultural_fail` },
         ],
       },
       {
@@ -869,7 +869,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Answer honestly: you know you are asking for something you do not fully understand yet and that the learning will be the work of a lifetime`, consequence: `Long silence. 'That answer is more correct than the men who come here claiming full understanding.' He asks a second question: 'What are you bringing to this family — not to my daughter, to the family?'`, flag: `honest_about_limits` },
           { text: `Tell him what you know about his family and his lineage — demonstrate you have prepared`, consequence: `He tests the depth of your knowledge with three questions. If you have gone beyond the surface, the conversation continues. If not, he notes the gap without comment and asks something else.`, flag: `tested_knowledge` },
-          { text: `Ask him what he believes should be brought to a family like his by a man like you`, consequence: `He pauses. 'You have asked me to define the terms rather than guessing at them. That is wisdom.' He tells you. The answer is specific and demands something of you that is more than material.`, flag: `smart_question` },
+          { text: `Ask him what he believes should be brought to a family like his by a man like you`, consequence: `He pauses. 'You have asked me to define the terms rather than guessing at them. That is wisdom.' He tells you. The answer is specific and demands something of you that is more than material.`, flag: `cultural_fail` },
         ],
       },
       {
@@ -878,7 +878,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Research the meaning and components of the bride price in Senegalese Tijaniyya tradition before it comes up`, consequence: `When her father raises it, you ask what each item represents rather than what it costs. The room — her father, his brother, her uncle — goes quiet. Her father's brother says something in Wolof. Her father translates: 'He said you asked the right question.' This moment changes the arc of the negotiation.`, flag: `meaning_over_cost` },
           { text: `Ask Fatou to explain what the bride price means to her family before the conversation begins`, consequence: `She teaches you over two conversations. When the discussion happens you understand what you are entering. Her father notices this understanding. 'She prepared you,' he says. 'That is also part of the answer to what kind of man you are.'`, flag: `prepared_by_her` },
-          { text: `Enter the conversation focused on the amounts — you want to be fair and not underpay`, consequence: `Her father's brother says something to her father after the first exchange. Her father's tone becomes slightly more formal. You have reduced a covenant to a transaction. The conversation can recover but it has lost ground.`, flag: `transaction_framing` },
+          { text: `Enter the conversation focused on the amounts — you want to be fair and not underpay`, consequence: `Her father's brother says something to her father after the first exchange. Her father's tone becomes slightly more formal. You have reduced a covenant to a transaction. The conversation can recover but it has lost ground.`, flag: `cultural_fail` },
         ],
       },
       {
@@ -887,7 +887,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Follow her lead completely — let her guide you through every interaction`, consequence: `She watches you trust her guidance without resistance. After the evening her mother says to her, in Wolof: 'He does not need to be the most important person in the room.' Fatou translates this for you the next morning. 'That is the highest thing my mother says about a man.'`, flag: `trusted_guidance` },
           { text: `Attempt to speak some Wolof even if imperfectly — show the effort`, consequence: `The grandmother laughs — warm, not unkind. She says something and the room relaxes. Forty people shift their energy simultaneously. You have passed something without knowing exactly what it was.`, flag: `language_effort` },
-          { text: `Focus your attention on the elders — they carry the most weight in this culture`, consequence: `You are not wrong about the elders. But you have missed the horizontal dimension — the cousins, the neighbors, the friends who are assessing in parallel. The elders approve. The room is neutral. Both things together mean something.`, flag: `partial_right` },
+          { text: `Focus your attention on the elders — they carry the most weight in this culture`, consequence: `You are not wrong about the elders. But you have missed the horizontal dimension — the cousins, the neighbors, the friends who are assessing in parallel. The elders approve. The room is neutral. Both things together mean something.`, flag: `cultural_fail` },
         ],
       },
       {
@@ -896,7 +896,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Say yes and receive each condition fully before responding to any`, consequence: `The conditions are: that you study Arabic seriously for two years; that you visit Dakar every year; that any children learn Wolof before they learn French. All three are possible. None are easy. All three are the right conditions. You accept.`, flag: `success` },
           { text: `Ask if you can discuss each condition as it is stated`, consequence: `Her father's brother says: 'You can discuss after you have heard all three.' You wait. You hear all three. Then you discuss. The discussion takes two hours and ends in mutual agreement that contains more than either side began with.`, flag: `negotiated_success` },
-          { text: `Ask what they have observed over the three days that brought them to these specific conditions`, consequence: `Her father speaks. He tells you what he has seen. What he has noticed. What Fatou has told him. And then he says: 'The conditions come from what this family has learned it needs. Not from doubt about you.' The conversation that follows is the most honest one you have had in the entire arc.`, flag: `understanding_the_why` },
+          { text: `Ask what they have observed over the three days that brought them to these specific conditions`, consequence: `Her father speaks. He tells you what he has seen. What he has noticed. What Fatou has told him. And then he says: 'The conditions come from what this family has learned it needs. Not from doubt about you.' The conversation that follows is the most honest one you have had in the entire arc.`, flag: `cultural_fail` },
         ],
       },
     ,
@@ -906,7 +906,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Tell her you respect the tradition and want to understand it`, consequence: `She begins teaching you about the Tijaniyya. The teaching deepens the correspondence. She is more open about her family and her spiritual life than any subject has opened her before.`, flag: "tradition_respected" },
           { text: `Ask her what role the marabout plays specifically`, consequence: `She explains. The marabout is a spiritual guide whose counsel is taken seriously in all family matters including marriage. His assessment of you will carry significant weight.`, flag: "marabout_understood" },
-          { text: `Ask if there is any way to communicate with the marabout's community directly`, consequence: `She is surprised. She asks her father. Her father is more interested in you than he was before. A man who asks about the marabout rather than around him has understood something.`, flag: "marabout_direct" },
+          { text: `Ask if there is any way to communicate with the marabout's community directly`, consequence: `She is surprised. She asks her father. Her father is more interested in you than he was before. A man who asks about the marabout rather than around him has understood something.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -915,7 +915,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Ask what each item represents before asking about the monetary equivalent`, consequence: `The uncle is pleased. He has had to explain this to men before and watched them skip to the number. You went to the meaning first. He explains at length.`, flag: "meaning_first" },
           { text: `Tell him you want to honor the tradition correctly — ask what you need to know`, consequence: `He teaches you. The list includes fabrics, kola nuts, and a formal gathering of witnesses. The monetary discussion comes after the ceremonial requirements are understood.`, flag: "tradition_first" },
-          { text: `Ask for the full list of what is expected`, consequence: `He provides it with explanations. You receive it all at once. The total is more than you expected. You respond with respectful engagement rather than hesitation.`, flag: "full_list" },
+          { text: `Ask for the full list of what is expected`, consequence: `He provides it with explanations. You receive it all at once. The total is more than you expected. You respond with respectful engagement rather than hesitation.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -924,7 +924,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Walk through the neighborhood with awareness and dignity — greet people you make eye contact with`, consequence: `The neighborhood receives this. By the time you reach her family's compound the word has already traveled: 'He greets people.' This is the first test and you passed it on the street.`, flag: "neighborhood_greeted" },
           { text: `Follow her uncle's lead exactly — he has come to meet you`, consequence: `Her uncle takes you through the neighborhood deliberately. He is introducing you as much as guiding you. The route is not the fastest way to the compound.`, flag: "uncle_led" },
-          { text: `Ask the uncle about the neighborhood as you walk — its history, its community`, consequence: `He talks for twenty minutes. The neighborhood reveals itself through his telling. You arrive at the compound knowing more than you would have known in a month of observation.`, flag: "neighborhood_asked" },
+          { text: `Ask the uncle about the neighborhood as you walk — its history, its community`, consequence: `He talks for twenty minutes. The neighborhood reveals itself through his telling. You arrive at the compound knowing more than you would have known in a month of observation.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -933,7 +933,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Sit quietly and receive the gathering — you are the guest in this context`, consequence: `The men talk around you and to you in turns. The disciple watches your comfort with silence. Comfort with silence in this context is a mark of depth.`, flag: "silence_received" },
           { text: `Greet each man individually as your presence is acknowledged`, consequence: `The formality of individual greeting is noted. Her father watches who you greet in which order. The order matters.`, flag: "greetings_ordered" },
-          { text: `Ask the disciple about the marabout's community when the opportunity arises`, consequence: `The disciple is pleased to be asked. He speaks at length. Her father listens to you listening. The quality of your listening is being assessed.`, flag: "disciple_asked" },
+          { text: `Ask the disciple about the marabout's community when the opportunity arises`, consequence: `The disciple is pleased to be asked. He speaks at length. Her father listens to you listening. The quality of your listening is being assessed.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -942,7 +942,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Ask Fatou what her father said`, consequence: `She does not know exactly. She knows it was about how you sat with the men in the compound. 'He said you were comfortable with not performing.' This is what the marabout wanted to see himself.`, flag: "father_word" },
           { text: `Go to the meeting without preparation — you cannot prepare for a spiritual elder`, consequence: `The marabout is old and precise. He asks you one question. You answer it honestly. He is quiet. Then he says something to the disciple. The disciple translates: 'He says you told the truth without decoration.' He rises. The meeting is over. This was a passing grade.`, flag: "undecorated_truth" },
-          { text: `Ask the disciple how to show respect when you enter`, consequence: `He teaches you. The greeting, the posture, the pace of the conversation. You arrive prepared to receive, not to impress. The marabout notices the difference.`, flag: "marabout_prepared" },
+          { text: `Ask the disciple how to show respect when you enter`, consequence: `He teaches you. The greeting, the posture, the pace of the conversation. You arrive prepared to receive, not to impress. The marabout notices the difference.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -951,7 +951,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Participate in the ceremony with full presence and dignity`, consequence: `The community receives this. A man who participates in the tradition fully has committed to something beyond the individual relationship. The community understands this.`, flag: "ceremony_full" },
           { text: `Follow the uncle's cues exactly — he is guiding you through the sequence`, consequence: `He guides well. You follow precisely. Her father watches the following — not the items. A man who can follow with dignity is a man who can be trusted.`, flag: "uncle_followed" },
-          { text: `After the ceremony, say something brief to the gathered community`, consequence: `No one expected this. The uncle translates. You say: you have come from far away to do things the right way because the right way is the only way that honors what you are receiving. The marabout's disciple nods.`, flag: "community_addressed" },
+          { text: `After the ceremony, say something brief to the gathered community`, consequence: `No one expected this. The uncle translates. You say: you have come from far away to do things the right way because the right way is the only way that honors what you are receiving. The marabout's disciple nods.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -960,7 +960,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `SUCCESS: Fatou — Dakar, Senegal.`, consequence: `SUCCESS: The marabout's meeting, the compound, the neighborhood, the bride price ceremony — all of it was the path. Sub-Saharan Africa arc — complete.`, flag: "success" },
           { text: `SUCCESS: You did things the right way.`, consequence: `SUCCESS: The community witnessed it. That matters in a culture where community is the primary unit of reality.`, flag: "success" },
-          { text: `SUCCESS: Arc complete.`, consequence: `SUCCESS: Fatou — Dakar, Senegal. Complete.`, flag: "success" },
+          { text: `SUCCESS: Arc complete.`, consequence: `SUCCESS: Fatou — Dakar, Senegal. Complete.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -969,7 +969,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `SUCCESS: The marabout sent a blessing to your home.`, consequence: `SUCCESS: Honor what arrived. Sub-Saharan Africa arc — complete.`, flag: "success" },
           { text: `SUCCESS: Arc complete.`, consequence: `SUCCESS: Senegal — complete.`, flag: "success" },
-          { text: `SUCCESS: Fatou — complete.`, consequence: `SUCCESS: Everything you learned here applies throughout the Sub-Saharan Africa arc.`, flag: "success" },
+          { text: `SUCCESS: Fatou — complete.`, consequence: `SUCCESS: Everything you learned here applies throughout the Sub-Saharan Africa arc.`, flag: "cultural_fail" },
         ],
       }
     ],
@@ -986,7 +986,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Express sympathy and ask how she is holding up`, consequence: `She opens up. Her father was forced to leave Lebanon in 2019. The family has been separated. Her warmth is real — her care for her family is genuine. The question is what that care will require.`, flag: `empathetic` },
           { text: `Note the timing of the mention and ask a direct question: 'Is leaving Lebanon something you want, or something you need?'`, consequence: `Long pause. Then: 'I have asked myself that question. I do not have a clean answer. I think both are true. I am still deciding which is more true.' This is the most honest thing she has said.`, flag: `direct_question` },
-          { text: `Respond to the financial mention neutrally and steer the conversation back to her as a person`, consequence: `She follows your lead. The financial subject does not return for two weeks. When it does it arrives differently — as a test of how you receive it, not as information.`, flag: `neutral` },
+          { text: `Respond to the financial mention neutrally and steer the conversation back to her as a person`, consequence: `She follows your lead. The financial subject does not return for two weeks. When it does it arrives differently — as a test of how you receive it, not as information.`, flag: `cultural_fail` },
         ],
       },
       {
@@ -995,7 +995,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Ask it exactly that way and wait for the full answer`, consequence: `She goes quiet for a full day. When she answers it is long and specific and beautiful — and the things she lists are almost entirely in Beirut. The city, the people, the language, the sea. You have learned something important.`, flag: `learned` },
           { text: `Ask it but give her examples first — help her with the question`, consequence: `She answers your examples rather than going deeper. You receive a partial answer. The real answer is still hidden.`, flag: `partial` },
-          { text: `Ask what she imagines her life looking like in five years instead`, consequence: `Every element of her five-year vision is in America or Europe. Beirut appears once, as a place to visit. You have your answer about what is driving this.`, flag: `future_focused` },
+          { text: `Ask what she imagines her life looking like in five years instead`, consequence: `Every element of her five-year vision is in America or Europe. Beirut appears once, as a place to visit. You have your answer about what is driving this.`, flag: `cultural_fail` },
         ],
       },
       {
@@ -1004,7 +1004,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Speak with him and pay attention to how he frames the conversation`, consequence: `He speaks warmly about America, about opportunity, about stability. He never once asks what you are like as a man. He asks three times about your financial situation. The conversation tells you everything about what this is.`, flag: `father_revealing` },
           { text: `Tell Hessa you want to speak with her longer before involving families — you need to know her better first`, consequence: `She agrees easily. Too easily. The conversation continues but you notice she redirects questions about her life in Beirut toward questions about your life in America.`, flag: `delayed_revealing` },
-          { text: `Ask her to tell you more about what her father means by 'a good thing' before the call`, consequence: `She pauses. Then answers honestly: 'He means that I would be safe and stable. He means that I would not have to worry the way we have worried.' This is the most important thing she has told you.`, flag: `honest_about_motive` },
+          { text: `Ask her to tell you more about what her father means by 'a good thing' before the call`, consequence: `She pauses. Then answers honestly: 'He means that I would be safe and stable. He means that I would not have to worry the way we have worried.' This is the most important thing she has told you.`, flag: `cultural_fail` },
         ],
       },
       {
@@ -1013,7 +1013,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Ask her directly: 'Are you looking for a husband or an exit?'`, consequence: `She is hurt by the framing. Then, after a silence: 'That is not fair. Both things can be true. I can want to leave and also want a real marriage.' She is right. But the order matters.`, flag: `confronted` },
           { text: `Tell her what you have observed and ask her to help you understand it correctly`, consequence: `She listens carefully. She does not deflect. 'You are not wrong. But you are seeing one part of something larger. Can I explain the other part?' You say yes. The conversation is the most real one you have had.`, flag: `open_conversation` },
-          { text: `Tell her you would move forward if she can show you that the marriage would be the destination, not the vehicle`, consequence: `She is quiet for a long time. 'I do not know if I can show you that yet. I do not know if it is true yet.' This is honesty. It is not the answer you wanted. It is the correct answer.`, flag: `honest_uncertainty` },
+          { text: `Tell her you would move forward if she can show you that the marriage would be the destination, not the vehicle`, consequence: `She is quiet for a long time. 'I do not know if I can show you that yet. I do not know if it is true yet.' This is honesty. It is not the answer you wanted. It is the correct answer.`, flag: `cultural_fail` },
         ],
       },
       {
@@ -1022,7 +1022,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Watch how she moves through the city — what she lights up around, what she avoids`, consequence: `She lights up everywhere. The sea, the neighborhoods, the language, the food, the chaos. For three days she is the most alive version of herself you have seen. On the last night she is quieter than she has been. You both know what that means.`, flag: `observant` },
           { text: `Ask her to show you the Beirut she loves most — not the tourist version`, consequence: `She takes you to her grandmother's building, to the market where her mother used to shop, to the cafe where she wrote her thesis. She is crying twice and does not explain it. She does not need to.`, flag: `intimate` },
-          { text: `Spend the visit evaluating logistics — neighborhoods, cost of living, family proximity`, consequence: `She notices. She does not say anything but she notices. On the second day she is performing warmth rather than feeling it. The visit has become a presentation rather than a meeting.`, flag: `missed_the_point` },
+          { text: `Spend the visit evaluating logistics — neighborhoods, cost of living, family proximity`, consequence: `She notices. She does not say anything but she notices. On the second day she is performing warmth rather than feeling it. The visit has become a presentation rather than a meeting.`, flag: `cultural_fail` },
         ],
       },
       {
@@ -1041,7 +1041,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Engage the disagreement — you appreciate the directness`, consequence: `The conversation becomes real faster than any other arc. She says: 'Most men are uncomfortable when I disagree. You are not.' The foundation deepens.`, flag: "disagreement_engaged" },
           { text: `Receive the disagreement gracefully without yielding your position`, consequence: `She notes both things — that you heard her and that you held your ground. 'You are not trying to win. You are trying to understand.' This is correct.`, flag: "ground_held" },
-          { text: `Soften your position to avoid conflict`, consequence: `She notices. 'You changed your answer. Why?' She has put her finger on exactly what happened. This will come up again.`, flag: "position_softened" },
+          { text: `Soften your position to avoid conflict`, consequence: `She notices. 'You changed your answer. Why?' She has put her finger on exactly what happened. This will come up again.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -1050,7 +1050,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Acknowledge the weight of what her family has survived before asking anything about yourself`, consequence: `She is quiet a moment. Then: 'You did not rush past it.' The other men she has spoken with have acknowledged the trauma briefly and moved on. You did not move on.`, flag: "weight_acknowledged" },
           { text: `Ask her how the explosions affected her family specifically`, consequence: `She tells you. For the first time she tells someone outside her family what those days were. At the end: 'I do not know why I told you that.' You do not explain why. You simply receive it.`, flag: "depth_received" },
-          { text: `Share something of your own that required survival`, consequence: `She listens. Then: 'You understand what it costs.' The conversation enters a register that most platform correspondence never reaches.`, flag: "own_survival_shared" },
+          { text: `Share something of your own that required survival`, consequence: `She listens. Then: 'You understand what it costs.' The conversation enters a register that most platform correspondence never reaches.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -1059,7 +1059,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Ask her what you said that landed wrong`, consequence: `She explains. Your framework assumed a model of marriage that does not fit her family's structure or her own self-understanding. You receive it and revise your thinking genuinely.`, flag: "misread_corrected" },
           { text: `Explain what you meant — you were not saying what she heard`, consequence: `She hears the clarification. Then: 'I understand what you meant. I want you to also understand what I heard.' Both things are true. The conversation requires both.`, flag: "clarified" },
-          { text: `Hold your position — you have a right to your view on this`, consequence: `She does not argue. She simply says: 'Then we should understand this clearly.' She is not angry. She is accurate. This is a real incompatibility if neither of you moves.`, flag: "position_held" },
+          { text: `Hold your position — you have a right to your view on this`, consequence: `She does not argue. She simply says: 'Then we should understand this clearly.' She is not angry. She is accurate. This is a real incompatibility if neither of you moves.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -1068,7 +1068,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Answer with knowledge and genuine engagement`, consequence: `He writes back the next week. The response is warm and surprised. He had asked this question of other men. This is the first substantive answer he has received.`, flag: "political_engaged" },
           { text: `Answer carefully without taking a position`, consequence: `He reads the carefulness. His response is brief and polite. He noted the avoidance. He does not raise the subject again but the door he opened is now slightly less open.`, flag: "political_avoided" },
-          { text: `Ask her to help you understand the question more deeply before answering`, consequence: `She teaches you. Your answer is informed by her context. Her father reads it and asks Hessa: 'Did he write this himself?' She says yes. He asks her one more question and then calls you.`, flag: "informed_by_hessa" },
+          { text: `Ask her to help you understand the question more deeply before answering`, consequence: `She teaches you. Your answer is informed by her context. Her father reads it and asks Hessa: 'Did he write this himself?' She says yes. He asks her one more question and then calls you.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -1077,7 +1077,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Let him show you the city without agenda — absorb what he chooses to show you`, consequence: `He shows you the port area. He is quiet there. You are quiet with him. He says: 'Most people look away. You looked at it.' This is not about sightseeing.`, flag: "city_witnessed" },
           { text: `Ask him what he wants you to understand about Lebanon before you meet his family`, consequence: `He thinks. Then he talks for twenty minutes. The family meeting will be easier because of those twenty minutes.`, flag: "brother_asked" },
-          { text: `Talk about yourself — your background, your intentions, why you came`, consequence: `He listens carefully. He asks one clarifying question. At the end: 'My sister said you listen. I wanted to see if you also speak clearly.' You have done both.`, flag: "spoke_clearly" },
+          { text: `Talk about yourself — your background, your intentions, why you came`, consequence: `He listens carefully. He asks one clarifying question. At the end: 'My sister said you listen. I wanted to see if you also speak clearly.' You have done both.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -1086,7 +1086,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Answer honestly: because Hessa is in Lebanon — and what you know about Lebanon now that you did not know before`, consequence: `He listens to all of it. The honest answer about Hessa. The earned answer about Lebanon. He calls his wife in before you have finished. She sits and also listens.`, flag: "father_honest" },
           { text: `Answer with what you know about Lebanon's culture and history`, consequence: `He is pleased you know. He is more pleased when you say you came here to learn what you could not know from the outside. He calls his wife after twenty minutes.`, flag: "father_cultural" },
-          { text: `Ask him what the question is really asking`, consequence: `He pauses. Then: 'It is asking whether you chose Lebanon or whether you happened to find a Lebanese woman and called it a choice.' You understand the difference. Your answer reflects this.`, flag: "father_meta" },
+          { text: `Ask him what the question is really asking`, consequence: `He pauses. Then: 'It is asking whether you chose Lebanon or whether you happened to find a Lebanese woman and called it a choice.' You understand the difference. Your answer reflects this.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -1095,7 +1095,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Agree and begin planning the family meeting`, consequence: `He is pleased the agreement was immediate. 'No negotiation on this point.' You were not going to negotiate. The planning begins.`, flag: "agreement_immediate" },
           { text: `Ask what the family meeting would involve logistically`, consequence: `He explains. It is a video meeting first, then an in-person meeting if things go well. The structure is clear and reasonable. You agree.`, flag: "logistics_asked" },
-          { text: `Offer to bring your family to Beirut`, consequence: `He is surprised. He discusses it with his wife. The offer changes the weight of the conversation. He accepts. This is the highest possible response you could have given.`, flag: "family_offered" },
+          { text: `Offer to bring your family to Beirut`, consequence: `He is surprised. He discusses it with his wife. The offer changes the weight of the conversation. He accepts. This is the highest possible response you could have given.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -1104,7 +1104,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `SUCCESS: Hessa — Beirut, Lebanon.`, consequence: `SUCCESS: Lebanon required political awareness, cultural precision, and the willingness to witness rather than look away. You did all three. Middle East arc — complete.`, flag: "success" },
           { text: `SUCCESS: The family survived a great deal. Now they have trusted you.`, consequence: `SUCCESS: Honor that trust in everything that follows.`, flag: "success" },
-          { text: `SUCCESS: Arc complete.`, consequence: `SUCCESS: Hessa — Beirut, Lebanon. Complete.`, flag: "success" },
+          { text: `SUCCESS: Arc complete.`, consequence: `SUCCESS: Hessa — Beirut, Lebanon. Complete.`, flag: "cultural_fail" },
         ],
       }
     ],
@@ -1121,7 +1121,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Answer the family questions fully and ask about hers in return`, consequence: `She responds at length about her family. The warmth is real. By the end of the first week you feel as though you already know the names of her brothers. This is her intention.`, flag: `family_first` },
           { text: `Answer but keep family details light — you are still vetting`, consequence: `She notes the lightness. She does not push. But the correspondence stays at a certain depth and does not go deeper.`, flag: `guarded` },
-          { text: `Ask her directly: 'When you say family is everything, what does that mean practically in a marriage?'`, consequence: `She pauses. Then: 'It means they are not separate from my life. It means they are part of it. It means a husband who loves me also makes room for them.' She is answering a question you have not fully asked yet.`, flag: `practical_question` },
+          { text: `Ask her directly: 'When you say family is everything, what does that mean practically in a marriage?'`, consequence: `She pauses. Then: 'It means they are not separate from my life. It means they are part of it. It means a husband who loves me also makes room for them.' She is answering a question you have not fully asked yet.`, flag: `cultural_fail` },
         ],
       },
       {
@@ -1130,7 +1130,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Ask how long this has been the arrangement and whether she expects it to continue in a marriage`, consequence: `She says: 'I expect it to continue until it is no longer needed. I do not know when that will be.' She is not apologizing. She is informing you.`, flag: `direct_question` },
           { text: `Tell her you respect her commitment to her family`, consequence: `She says: 'Thank you. But I want to make sure you understand what you are respecting. I am not going to stop.' She is making certain you are not performing acceptance.`, flag: `tested` },
-          { text: `Ask about her father's condition and what the prognosis looks like`, consequence: `She tells you. It is not simple and it is not short-term. You are sitting with the actual shape of what you would be entering. She watches how you receive this.`, flag: `fully_informed` },
+          { text: `Ask about her father's condition and what the prognosis looks like`, consequence: `She tells you. It is not simple and it is not short-term. You are sitting with the actual shape of what you would be entering. She watches how you receive this.`, flag: `cultural_fail` },
         ],
       },
       {
@@ -1139,7 +1139,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Take twenty-four hours before responding — give the information the weight it deserves`, consequence: `She receives the pause with anxiety and then with respect. When you respond she says: 'Most men either disappear or say something immediately that they do not mean. You took time. That tells me something.'`, flag: `measured_response` },
           { text: `Respond immediately with acceptance — you will not let her worry`, consequence: `She appreciates the speed but asks: 'Have you thought about what it actually means? To be a step-father? I need you to have thought about it, not just felt about it.'`, flag: `feeling_not_thinking` },
-          { text: `Ask her about her son — his name, his personality, what he is like`, consequence: `She was not expecting this question first. She answers with the specific warmth that only a mother has. After ten minutes of talking about him she says: 'You asked about him first. Not about what it means for you. That matters to me.'`, flag: `child_first` },
+          { text: `Ask her about her son — his name, his personality, what he is like`, consequence: `She was not expecting this question first. She answers with the specific warmth that only a mother has. After ten minutes of talking about him she says: 'You asked about him first. Not about what it means for you. That matters to me.'`, flag: `cultural_fail` },
         ],
       },
       {
@@ -1148,7 +1148,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Ask her directly what she needs from a step-father — not what she hopes for but what she needs`, consequence: `She thinks for a long time. 'I need someone who shows up consistently. Not perfectly — consistently. He has had one person disappear already. I will not expose him to another.' This is the actual requirement.`, flag: `direct_need` },
           { text: `Tell her honestly that you are not sure you are ready to be a step-father and ask if she can give you time to understand what it requires`, consequence: `She receives this with more grace than you expected. 'Honesty about not being ready is better than false readiness. I would rather know now than after.' The conversation continues. It is harder but it is real.`, flag: `honest_uncertainty` },
-          { text: `Tell her you will love her son as your own — because you feel this`, consequence: `She looks at you carefully. 'Love is real. But love without understanding the specific child and the specific history and the specific shape of what he needs is not enough. Tell me what you understand about what he has been through.'`, flag: `feeling_not_knowing` },
+          { text: `Tell her you will love her son as your own — because you feel this`, consequence: `She looks at you carefully. 'Love is real. But love without understanding the specific child and the specific history and the specific shape of what he needs is not enough. Tell me what you understand about what he has been through.'`, flag: `cultural_fail` },
         ],
       },
       {
@@ -1157,7 +1157,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Get down to his level — sit on the floor if necessary, be small`, consequence: `The grandmother says something in Cebuano to Jasmine. Jasmine translates later: 'She said: he knows how to meet a child.' Her father, who has been quiet, nods once.`, flag: `instinctive_right` },
           { text: `Let him come to you — do not push, just be present and available`, consequence: `He approaches ten minutes later. He touches your hand with one finger and then retreats. His grandmother laughs softly. You have passed the test you did not know you were taking.`, flag: `patient_right` },
-          { text: `Focus on the parents first — they are the ones who need to trust you`, consequence: `Her son watches you ignore him. He retreats to his grandmother. She does not say anything. But Jasmine notices and the visit carries something slightly unresolved.`, flag: `misordered` },
+          { text: `Focus on the parents first — they are the ones who need to trust you`, consequence: `Her son watches you ignore him. He retreats to his grandmother. She does not say anything. But Jasmine notices and the visit carries something slightly unresolved.`, flag: `cultural_fail` },
         ],
       },
       {
@@ -1166,7 +1166,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Decide yes — and tell her specifically what you can carry and what you will need help with`, consequence: `She receives this with the specific warmth of someone who has been waiting to be told the truth rather than the ideal. 'Knowing what you need help with tells me more than someone who claims to need nothing.'`, flag: `success` },
           { text: `Tell her honestly that you care deeply but are not yet sure you can carry all of it`, consequence: `She receives it. 'I would rather know this now. Can we talk about what specifically you are uncertain about?' The conversation is the most honest one you have had. It may become the foundation or the ending.`, flag: `honest_uncertainty` },
-          { text: `Tell her you are in — fully — without qualification`, consequence: `She looks at you steadily. 'Tell me what being fully in means when it is three in the morning and he is sick and my mother calls that same night and there is no money left in the account.' She needs the specific answer, not the general one.`, flag: `tested` },
+          { text: `Tell her you are in — fully — without qualification`, consequence: `She looks at you steadily. 'Tell me what being fully in means when it is three in the morning and he is sick and my mother calls that same night and there is no money left in the account.' She needs the specific answer, not the general one.`, flag: `cultural_fail` },
         ],
       },
     ,
@@ -1176,7 +1176,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Be honest about your faith and your genuine respect for hers`, consequence: `She receives the honesty. She asks one clarifying question. Then: 'I can work with honesty. I cannot work with performance.'`, flag: "honest_faith" },
           { text: `Emphasize the areas of overlap between your faith and Catholicism`, consequence: `She notes the effort. She also notes that you have not told her anything she could not have predicted. She asks a deeper question.`, flag: "overlap_emphasized" },
-          { text: `Ask her what faith means to her practically — how it shapes her daily life`, consequence: `She talks for twenty minutes. This is the most personal conversation of the first two months. She says: 'No one has ever asked that.'`, flag: "faith_asked" },
+          { text: `Ask her what faith means to her practically — how it shapes her daily life`, consequence: `She talks for twenty minutes. This is the most personal conversation of the first two months. She says: 'No one has ever asked that.'`, flag: "cultural_fail" },
         ],
       },
       {
@@ -1185,7 +1185,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Do nothing — it is too early and you have not met her family yet`, consequence: `The roof gets fixed by her brother. The subject closes. You have held the line correctly.`, flag: "no_action" },
           { text: `Ask her directly about the family's financial situation and expectations`, consequence: `She is surprised but not offended. She explains what is normal and what is not. The conversation produces clarity that most men in this arc never get.`, flag: "direct_financial" },
-          { text: `Offer to help with the roof`, consequence: `She declines. Then: 'You offered. That matters.' She does not ask again. The offer registered without becoming a transaction.`, flag: "offer_declined" },
+          { text: `Offer to help with the roof`, consequence: `She declines. Then: 'You offered. That matters.' She does not ask again. The offer registered without becoming a transaction.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -1194,7 +1194,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Receive this as normal and observe`, consequence: `You watch how Jasmine is with her mother. You learn more about who Jasmine is in those interruptions than in the planned conversations.`, flag: "observe_relationship" },
           { text: `Ask to say hello to her mother one day during an interruption`, consequence: `Jasmine pauses. Then puts her mother on. Her mother speaks. Jasmine translates. The mother's first question is about your mother. She wants to know about your mother.`, flag: "met_mother" },
-          { text: `Gently ask Jasmine if there is a time of day that is protected for your calls`, consequence: `She laughs. She admits her mother calls at specific times intentionally. 'She is testing whether you can handle the interruption.' You both agree on a time window.`, flag: "time_protected" },
+          { text: `Gently ask Jasmine if there is a time of day that is protected for your calls`, consequence: `She laughs. She admits her mother calls at specific times intentionally. 'She is testing whether you can handle the interruption.' You both agree on a time window.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -1203,7 +1203,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Comment on the house genuinely — it is well kept and clearly loved`, consequence: `He nods. He has been waiting to see if you see the house or just the destination. You saw the house.`, flag: "house_seen" },
           { text: `Ask him about the neighborhood, how long the family has lived here`, consequence: `He talks. Slowly. The family has been here three generations. His father built part of the original structure. The house is the family in physical form.`, flag: "history_asked" },
-          { text: `Thank him for the welcome and wait for him to lead`, consequence: `He leads. He takes you inside. Her mother is already in the kitchen. The father's job was to show you the outside. The mother's job is the inside.`, flag: "father_led" },
+          { text: `Thank him for the welcome and wait for him to lead`, consequence: `He leads. He takes you inside. Her mother is already in the kitchen. The father's job was to show you the outside. The mother's job is the inside.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -1212,7 +1212,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Welcome the meeting — approach it as a conversation, not an examination`, consequence: `The priest is warm and intelligent. He asks about your faith journey specifically. He asks what you understand marriage to require of a man. He asks if you have read anything about marriage from a spiritual perspective. You have.`, flag: "priest_welcomed" },
           { text: `Ask Jasmine what the priest needs to hear`, consequence: `She tells you what she knows. She also tells you: 'Do not try to give him what he needs. He will know.' You understand.`, flag: "priest_prepared" },
-          { text: `Approach it as a formality that must be completed`, consequence: `The priest is perceptive. He closes the formal examination early and asks you one off-script question: 'Do you believe this meeting matters?' Your answer reveals everything about your approach.`, flag: "priest_off_script" },
+          { text: `Approach it as a formality that must be completed`, consequence: `The priest is perceptive. He closes the formal examination early and asks you one off-script question: 'Do you believe this meeting matters?' Your answer reveals everything about your approach.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -1221,7 +1221,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Ask what the condition is directly`, consequence: `The condition: Jasmine comes home once a year, minimum. And her mother will visit once in the first two years. You agree to both immediately.`, flag: "condition_accepted" },
           { text: `Tell the mother you were expecting a condition and that you respect her right to set one`, consequence: `She stops. She looks at Jasmine. She says something. Jasmine translates: 'She says you think like a parent.' She agrees before you formally agree.`, flag: "condition_anticipated" },
-          { text: `Ask Jasmine privately if she agrees with the condition before you accept it`, consequence: `Jasmine says yes — she already knew the condition before it was stated. She helped shape it. You accept on behalf of both of you.`, flag: "condition_joint" },
+          { text: `Ask Jasmine privately if she agrees with the condition before you accept it`, consequence: `Jasmine says yes — she already knew the condition before it was stated. She helped shape it. You accept on behalf of both of you.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -1230,7 +1230,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Speak simply and sincerely — tell them what brought you here and what you found`, consequence: `The room is warm. Jasmine's mother wipes her eyes at one point. Her father, who has said almost nothing to you all week, finds you afterward and shakes your hand with both hands.`, flag: "speech_sincere" },
           { text: `Speak briefly — express gratitude and let the moment belong to the family`, consequence: `The brevity is respected. You have not made the celebration about yourself. Several people approach you afterward. They remember you because you were brief.`, flag: "speech_brief" },
-          { text: `Say something directly to her mother in the speech`, consequence: `Her mother was not expecting to be addressed directly. She responds in Cebuano. Someone translates: she is blessing the union.`, flag: "mother_addressed" },
+          { text: `Say something directly to her mother in the speech`, consequence: `Her mother was not expecting to be addressed directly. She responds in Cebuano. Someone translates: she is blessing the union.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -1239,7 +1239,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `SUCCESS: Jasmine — Cebu, Philippines.`, consequence: `SUCCESS: The mother, the priest, the community, the father's quiet witnessing — all of it was the path. Asia arc — complete.`, flag: "success" },
           { text: `SUCCESS: The father's photographs arrived every month for nine months.`, consequence: `SUCCESS: On the day she landed, the final photograph arrived. It was of the front door. Open.`, flag: "success" },
-          { text: `SUCCESS: Arc complete.`, consequence: `SUCCESS: Jasmine — Cebu, Philippines. Complete.`, flag: "success" },
+          { text: `SUCCESS: Arc complete.`, consequence: `SUCCESS: Jasmine — Cebu, Philippines. Complete.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -1248,7 +1248,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `SUCCESS: She brought her home with her.`, consequence: `SUCCESS: Honor what arrived with her. The community she came from is part of what you married. Asia arc — complete.`, flag: "success" },
           { text: `SUCCESS: Arc complete.`, consequence: `SUCCESS: Philippines — complete.`, flag: "success" },
-          { text: `SUCCESS: Jasmine — complete.`, consequence: `SUCCESS: Everything you learned here applies throughout the Asia arc.`, flag: "success" },
+          { text: `SUCCESS: Jasmine — complete.`, consequence: `SUCCESS: Everything you learned here applies throughout the Asia arc.`, flag: "cultural_fail" },
         ],
       }
     ],
@@ -1266,7 +1266,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Answer every question fully and add that you understand why he asks them`, consequence: `He passes your message with a note to her: 'He answered without resistance and seemed to understand why the questions were asked.' She responds nine days later. One paragraph. She asks what you have read recently.`, flag: `respectful` },
           { text: `Answer the questions but also ask about her — you want this to feel like a mutual introduction`, consequence: `He notes that you asked about her. He tells her. She finds this unusual in a way she cannot categorize as negative or positive. She responds. Her message is slightly warmer than the first draft she wrote.`, flag: `curious` },
-          { text: `Ask to correspond with her directly rather than through her brother`, consequence: `He declines. 'This is how it works in our family. If this does not suit you, that is useful information for both of us.' He is not harsh. He has simply told you the terms.`, flag: `impatient` },
+          { text: `Ask to correspond with her directly rather than through her brother`, consequence: `He declines. 'This is how it works in our family. If this does not suit you, that is useful information for both of us.' He is not harsh. He has simply told you the terms.`, flag: `cultural_fail` },
         ],
       },
       {
@@ -1275,7 +1275,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Answer honestly — translation mostly, but you are studying`, consequence: `She responds: 'Honest. The ones who lie about this are easy to expose.' She asks what Arabic you have studied. The conversation is now about language as character.`, flag: `honest` },
           { text: `Tell her you read in Arabic and reference a text you have actually studied`, consequence: `She asks a specific question about that text that only someone who read it carefully would know how to answer. If you actually read it, this is a door opening. If you did not, it closes immediately.`, flag: `tested` },
-          { text: `Ask why she is asking — you want to understand what the question is really measuring`, consequence: `She says: 'Because how a man relates to language tells me how he relates to precision and to patience.' You now understand what the entire conversation has been measuring.`, flag: `meta_understanding` },
+          { text: `Ask why she is asking — you want to understand what the question is really measuring`, consequence: `She says: 'Because how a man relates to language tells me how he relates to precision and to patience.' You now understand what the entire conversation has been measuring.`, flag: `cultural_fail` },
         ],
       },
       {
@@ -1284,7 +1284,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Answer him honestly about what you have observed in her — her precision, her depth, her refusal to perform warmth she does not feel`, consequence: `Long silence. 'You have been paying attention.' He asks one more question: 'If she requires a man who can match her intellectually for the rest of their lives, are you that man?' Answer carefully.`, flag: `honest_observation` },
           { text: `Tell him what you intend — marriage, respect, provision, a stable home`, consequence: `He receives it. 'Those are intentions. I asked about capacity.' He is not dismissing you. He is asking you to go deeper.`, flag: `surface_answer` },
-          { text: `Ask him what she has told him about why she is continuing`, consequence: `He says: 'She said you are the first man who answered her questions as though the questions mattered.' He pauses. 'They do matter. Everything she asks matters. I hope you understand that.'`, flag: `understanding` },
+          { text: `Ask him what she has told him about why she is continuing`, consequence: `He says: 'She said you are the first man who answered her questions as though the questions mattered.' He pauses. 'They do matter. Everything she asks matters. I hope you understand that.'`, flag: `cultural_fail` },
         ],
       },
       {
@@ -1293,7 +1293,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Tell her which poem moved you most and why`, consequence: `She goes quiet for a week. When she writes it is the longest message she has sent. She says: 'No one outside my family has read it who was not assigned to.' Something in the correspondence has shifted permanently.`, flag: `breakthrough` },
           { text: `Tell her you read it and ask her which poem she would most want a husband to understand`, consequence: `She pauses. 'That is not a question I have ever been asked.' Her answer arrives four days later. It is a poem about distance — not geographic distance, but the distance between what a person is and what the world decides to see.`, flag: `deep_question` },
-          { text: `Reference the book generally without specifying — you want her to know you found it without making it a performance`, consequence: `She asks which poem you read. You realize she is testing whether you actually read it or are performing having read it. The specific answer matters.`, flag: `tested_again` },
+          { text: `Reference the book generally without specifying — you want her to know you found it without making it a performance`, consequence: `She asks which poem you read. You realize she is testing whether you actually read it or are performing having read it. The specific answer matters.`, flag: `cultural_fail` },
         ],
       },
       {
@@ -1302,7 +1302,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Accept the terms completely and arrive prepared to be evaluated without performing`, consequence: `The aunt asks you two questions. One about your family. One about what you believe education owes a person. You answer both from what you actually believe. Maryam hears your answers from another room. The brother tells you this later.`, flag: `authentic` },
           { text: `Ask through the brother whether Maryam has any questions she would like you to answer during the visit`, consequence: `The brother passes the request. She sends three questions. You prepare answers for all three. When the visit happens, the aunt asks two of the three questions as though they are her own. You understand Maryam has been directing from inside the room.`, flag: `collaborative` },
-          { text: `Bring a gift for the household — something that requires having paid attention to what they value`, consequence: `You bring a new edition of a classical Arabic text she referenced in her poetry. The aunt receives it. An hour into the visit she brings it to the brother and says something in Arabic too quiet to hear. He nods once.`, flag: `thoughtful` },
+          { text: `Bring a gift for the household — something that requires having paid attention to what they value`, consequence: `You bring a new edition of a classical Arabic text she referenced in her poetry. The aunt receives it. An hour into the visit she brings it to the brother and says something in Arabic too quiet to hear. He nods once.`, flag: `cultural_fail` },
         ],
       },
       {
@@ -1311,7 +1311,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Answer yes — and explain what you mean by yes`, consequence: `She is quiet. Then: 'That is the right answer. I will tell my brother.' The mahr is discussed the following week. The nikah is performed in Irbid.`, flag: `success` },
           { text: `Tell her you do not know but you want to try — and explain what trying looks like to you`, consequence: `She says: 'Not knowing and wanting to try is more honest than certainty. I can work with that.' The mahr is discussed the following week.`, flag: `success` },
-          { text: `Ask her the same question back before answering`, consequence: `Silence. Then, quietly: 'Yes. I have been asking it about you for four months.' She puts her brother back on. He says: 'I think you both have your answer.'`, flag: `success` },
+          { text: `Ask her the same question back before answering`, consequence: `Silence. Then, quietly: 'Yes. I have been asking it about you for four months.' She puts her brother back on. He says: 'I think you both have your answer.'`, flag: `cultural_fail` },
         ],
       },
     ,
@@ -1321,7 +1321,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Answer the question she asked before asking one of your own`, consequence: `She notes the sequence. Most men answer their question and then ask five of their own. You answered hers. She writes back in four days with a longer message.`, flag: "question_first" },
           { text: `Answer her question and ask two thoughtful questions in return`, consequence: `She answers one. The other she holds for later. She is managing the pace of disclosure. This is a woman who knows what she is doing.`, flag: "paced_response" },
-          { text: `Answer her question and share something about yourself she did not ask`, consequence: `She receives it without comment. A week later she references it. She had been thinking about it. She does not collect information quickly.`, flag: "voluntary_disclosure" },
+          { text: `Answer her question and share something about yourself she did not ask`, consequence: `She receives it without comment. A week later she references it. She had been thinking about it. She does not collect information quickly.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -1330,7 +1330,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Do not press it — let her bring it when she is ready`, consequence: `Three weeks later she tells you the full story. The engagement was broken by the man's family, not the man. The wound is about the family, not the person. This distinction matters.`, flag: "patient_disclosure" },
           { text: `Gently acknowledge what you heard: 'You mentioned something earlier — I am not pressing, just want you to know I heard it'`, consequence: `She is quiet two days. Then she tells you. The telling is careful and complete. She has been waiting for a context that felt safe enough.`, flag: "gentle_acknowledgment" },
-          { text: `Ask her directly about the previous engagement`, consequence: `She closes. Not permanently — but the directness was too fast for the depth of the subject. She redirects and does not return to it for another month.`, flag: "too_direct" },
+          { text: `Ask her directly about the previous engagement`, consequence: `She closes. Not permanently — but the directness was too fast for the depth of the subject. She redirects and does not return to it for another month.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -1339,7 +1339,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Ask to speak with her mother as soon as Maryam thinks it is appropriate`, consequence: `Maryam is surprised by the directness of the request. Then: 'Most men want to avoid the mother as long as possible.' She arranges a call with her mother the following month.`, flag: "mother_requested" },
           { text: `Ask Maryam to tell you what her mother values most`, consequence: `She tells you three things: patience, steadiness, and a man who does not need to be managed. You file this and let it shape everything that follows.`, flag: "mother_understood" },
-          { text: `Ask if her mother has concerns about an American man specifically`, consequence: `Maryam is thoughtful. She says yes — her mother worries about distance, about cultural drift, about her daughter becoming someone she no longer recognizes. These are real concerns that deserve real answers.`, flag: "mother_concerns_known" },
+          { text: `Ask if her mother has concerns about an American man specifically`, consequence: `Maryam is thoughtful. She says yes — her mother worries about distance, about cultural drift, about her daughter becoming someone she no longer recognizes. These are real concerns that deserve real answers.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -1348,7 +1348,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Answer the third question with the truth — what you saw in Maryam that you have not seen elsewhere`, consequence: `The brother translates. The mother is quiet. She speaks to her son. He translates: 'She wants to know what you saw.' You tell her specifically. She is quiet again. Then she says something. He translates: 'She believes you.'`, flag: "mother_convinced" },
           { text: `Answer all three questions thoroughly and honestly`, consequence: `The call runs forty minutes. The mother asks follow-up questions through her son. At the end she speaks directly to Maryam — not to you. The call ends. Maryam writes you ten minutes later: 'She said you are serious.'`, flag: "mother_thorough" },
-          { text: `Ask the mother one question of your own through the brother`, consequence: `The room shifts. The mother had not expected a question. She thinks. She answers at length. The brother translates. The question and the mother's answer become the foundation of everything that follows.`, flag: "mother_questioned" },
+          { text: `Ask the mother one question of your own through the brother`, consequence: `The room shifts. The mother had not expected a question. She thinks. She answers at length. The brother translates. The question and the mother's answer become the foundation of everything that follows.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -1357,7 +1357,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Welcome it — this is exactly the right conversation to have`, consequence: `He is direct and fair. He asks about your financial situation specifically. You answer honestly. He asks about your previous relationships. You answer honestly. At the end: 'I respect the honesty. Most men perform in this conversation.'`, flag: "brother_welcomed" },
           { text: `Tell him you prefer all family conversations to include Maryam`, consequence: `He respects the position but notes it. He tells Maryam. She tells you: 'He says you are protective of me. He also says you may be hiding something.' You need to address this.`, flag: "brother_declined" },
-          { text: `Ask him what he needs to know to be able to support his sister's decision`, consequence: `He pauses. Then: 'That is the right question.' He asks what he needs to ask. You answer what he needs answered. The conversation ends with him saying: 'I will tell my mother you are real.'`, flag: "brother_right_question" },
+          { text: `Ask him what he needs to know to be able to support his sister's decision`, consequence: `He pauses. Then: 'That is the right question.' He asks what he needs to ask. You answer what he needs answered. The conversation ends with him saying: 'I will tell my mother you are real.'`, flag: "cultural_fail" },
         ],
       },
       {
@@ -1366,7 +1366,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Wait for her to speak first`, consequence: `She says something in Arabic. The brother translates: 'She says you have good eyes.' She is not speaking about the color. She goes inside. You follow.`, flag: "mother_reading" },
           { text: `Greet her formally with the Arabic greeting Maryam taught you`, consequence: `She responds in Arabic, longer than the greeting you gave. The brother translates: 'She is saying the greeting back but also welcoming you into her home specifically.' The detail of the welcome is specific and intentional.`, flag: "arabic_greeting" },
-          { text: `Thank her for having you in her home — sincerely, not formally`, consequence: `She listens to the translation. Then she takes your arm and brings you inside. The formality is over before it started.`, flag: "sincere_thanks" },
+          { text: `Thank her for having you in her home — sincerely, not formally`, consequence: `She listens to the translation. Then she takes your arm and brings you inside. The formality is over before it started.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -1375,7 +1375,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Agree without qualification`, consequence: `She studies your face. The agreement was immediate and complete. She says something. The brother translates: 'She says you did not hesitate. She wanted to see if you would hesitate.' You did not.`, flag: "agreement_immediate" },
           { text: `Ask what happens if circumstances make travel impossible in a given year`, consequence: `She considers the question. She names an alternative — a video gathering with the family that is formal and full, not a casual call. The condition has a contingency. Both of you can live with it.`, flag: "agreement_contingency" },
-          { text: `Tell her that promise is something you would want Maryam to also agree to`, consequence: `The mother looks at Maryam. Maryam says: 'I already told him I want to come home.' The mother is satisfied. The agreement is made between all three of you simultaneously.`, flag: "agreement_trilateral" },
+          { text: `Tell her that promise is something you would want Maryam to also agree to`, consequence: `The mother looks at Maryam. Maryam says: 'I already told him I want to come home.' The mother is satisfied. The agreement is made between all three of you simultaneously.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -1384,7 +1384,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `SUCCESS: Maryam — Irbid, Jordan.`, consequence: `SUCCESS: The mother's word was final. You earned it. Middle East arc — complete.`, flag: "success" },
           { text: `SUCCESS: You received what the mother told you about her daughter.`, consequence: `SUCCESS: Carry it forward.`, flag: "success" },
-          { text: `SUCCESS: Arc complete.`, consequence: `SUCCESS: Maryam — Irbid, Jordan. Complete.`, flag: "success" },
+          { text: `SUCCESS: Arc complete.`, consequence: `SUCCESS: Maryam — Irbid, Jordan. Complete.`, flag: "cultural_fail" },
         ],
       }
     ],
@@ -1401,7 +1401,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Wait the full eleven days without following up`, consequence: `On the twelfth day: three sentences in formal French. She thanks you. She asks what you believe a student owes a teacher. You understand this is also a question about you.`, flag: `patient` },
           { text: `Send a follow-up after three days — persistence signals interest`, consequence: `No reply. The second message pushed her back. You will not hear from her for three weeks, and when she writes it will be shorter than it would have been.`, flag: `impatient` },
-          { text: `Write your second message in Arabic instead of French`, consequence: `She replies in four days. In Arabic. She says: 'You surprised me.' Her father asks to review the correspondence that week.`, flag: `cultural_effort` },
+          { text: `Write your second message in Arabic instead of French`, consequence: `She replies in four days. In Arabic. She says: 'You surprised me.' Her father asks to review the correspondence that week.`, flag: `cultural_fail` },
         ],
       },
       {
@@ -1410,7 +1410,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Answer honestly from your own experience and failures`, consequence: `She reads it twice. She tells you she read it twice. The conversation shifts register. Something opens.`, flag: `honest` },
           { text: `Answer from Islamic principles — you have been studying`, consequence: `She responds with a follow-up that only someone who read more than the surface would know to ask. She is testing the depth of your study.`, flag: `studied` },
-          { text: `Ask her the same question first — you want to understand her expectations`, consequence: `She pauses a week. Then answers with precision. Then: 'Now you.' She wants to see if your answer changes now that you know hers.`, flag: `reciprocal` },
+          { text: `Ask her the same question first — you want to understand her expectations`, consequence: `She pauses a week. Then answers with precision. Then: 'Now you.' She wants to see if your answer changes now that you know hers.`, flag: `cultural_fail` },
         ],
       },
       {
@@ -1419,7 +1419,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Tell her you are ready whenever he chooses — no conditions`, consequence: `He calls six days later. He asks about your family, your work, your faith, and one question you did not expect: 'What do you know about loss?'`, flag: `available` },
           { text: `Ask her what he values most so you can prepare honestly`, consequence: `She tells you. You prepare. When he calls, he asks questions you expected. He also asks one you did not. You handle it because you are not trying to perform.`, flag: `prepared` },
-          { text: `Ask if you can write to him first — you want to introduce yourself on your own terms`, consequence: `She consults him. He agrees. Your letter takes you four days. His response arrives in two. He has scheduled the call.`, flag: `formal` },
+          { text: `Ask if you can write to him first — you want to introduce yourself on your own terms`, consequence: `She consults him. He agrees. Your letter takes you four days. His response arrives in two. He has scheduled the call.`, flag: `cultural_fail` },
         ],
       },
       {
@@ -1428,7 +1428,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Answer from genuine self-examination — including what you are still working on`, consequence: `Another long silence. Then: 'A man who knows what he does not yet know is more trustworthy than one who claims completion.' He says he will speak with his family.`, flag: `self_aware` },
           { text: `Answer with your accomplishments and your intentions`, consequence: `He receives it. He says he will be in touch. His tone is neutral. You cannot read it.`, flag: `confident` },
-          { text: `Tell him the honest truth: that meeting his daughter's profile made you reconsider what you had been settling for`, consequence: `He laughs — once, quietly. 'That is the most honest thing anyone has said to me in this process.' The call continues another forty minutes.`, flag: `disarming` },
+          { text: `Tell him the honest truth: that meeting his daughter's profile made you reconsider what you had been settling for`, consequence: `He laughs — once, quietly. 'That is the most honest thing anyone has said to me in this process.' The call continues another forty minutes.`, flag: `cultural_fail` },
         ],
       },
       {
@@ -1437,7 +1437,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Go as yourself — you have been honest throughout and will not change now`, consequence: `The first dinner is three hours. You are asked about your mother twice. You listen more than you speak. On the third day her father's brother says to her father, in Arabic, not knowing you understand: 'He is paying attention.'`, flag: `authentic` },
           { text: `Research every protocol — dress, greeting, table conduct, religious observance — and execute it precisely`, consequence: `Your preparation is visible and appreciated. But in one unguarded moment you say something that reveals how much of it was performance rather than character. The father notices. He does not raise it. He stores it.`, flag: `performed` },
-          { text: `Bring a gift for the family — something that required research and genuine thought`, consequence: `You bring a rare edition of a Moroccan calligraphy text for the father. He holds it for a long time. He does not say much. That night Nadia sends one message: 'He showed it to his brother.'`, flag: `thoughtful` },
+          { text: `Bring a gift for the family — something that required research and genuine thought`, consequence: `You bring a rare edition of a Moroccan calligraphy text for the father. He holds it for a long time. He does not say much. That night Nadia sends one message: 'He showed it to his brother.'`, flag: `cultural_fail` },
         ],
       },
       {
@@ -1446,7 +1446,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Answer with a specific and honest plan — community, practice, boundaries you will hold together`, consequence: `He says: 'Come back to Fez. We will discuss the mahr.' The nikah is performed four months later.`, flag: `success` },
           { text: `Tell him you cannot make that promise with certainty but you will make it with sincerity`, consequence: `Long silence. 'Sincerity is not the same as a plan. Think about this and call me in two weeks.' He is giving you a chance. Use it.`, flag: `needs_work` },
-          { text: `Ask him what he has seen in other marriages that made him ask this question`, consequence: `He tells you about his own marriage. About what he has protected and what he has failed to protect. This conversation lasts two hours. At the end he says: 'Call me next week.'`, flag: `success` },
+          { text: `Ask him what he has seen in other marriages that made him ask this question`, consequence: `He tells you about his own marriage. About what he has protected and what he has failed to protect. This conversation lasts two hours. At the end he says: 'Call me next week.'`, flag: `cultural_fail` },
         ],
       },
     ,
@@ -1456,7 +1456,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Book the flight within the week — no hesitation`, consequence: `She tells her father that same day. He calls to discuss your accommodations. The family is preparing.`, flag: "decisive" },
           { text: `Ask for two more months of correspondence before committing to travel`, consequence: `She goes quiet for ten days. When she writes again, her language is cooler. 'Two more months' is what a man who is not sure says. She is sure. She needed you to be.`, flag: "hesitant" },
-          { text: `Ask what the visit protocol is — you want to arrive correctly`, consequence: `She appreciates the question. She walks you through the family's expectations: staying at a hotel, meeting the family formally first, no physical contact, modest dress. You take notes.`, flag: "protocol_aware" },
+          { text: `Ask what the visit protocol is — you want to arrive correctly`, consequence: `She appreciates the question. She walks you through the family's expectations: staying at a hotel, meeting the family formally first, no physical contact, modest dress. You take notes.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -1465,7 +1465,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Engage the brother directly — ask him about himself, his studies, his life`, consequence: `He loosens. By the time you reach the riad he has told you about his engineering program and his plans. He texts his sister: 'He asked about me first.' This lands well.`, flag: "brother_rapport" },
           { text: `Be respectful and quiet — let him lead, follow his pace`, consequence: `He respects the restraint. He calls his sister when you are settled: 'He is serious. He does not perform.' She passes this to her father.`, flag: "restrained" },
-          { text: `Try to give him money as a gesture of thanks for picking you up`, consequence: `He refuses. It is an insult wrapped in generosity. He is polite about it but the dynamic shifts. He does not mention it to his sister. He mentions it to his father.`, flag: "misread_culture" },
+          { text: `Try to give him money as a gesture of thanks for picking you up`, consequence: `He refuses. It is an insult wrapped in generosity. He is polite about it but the dynamic shifts. He does not mention it to his sister. He mentions it to his father.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -1474,7 +1474,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Eat what you are given, compliment the food specifically and genuinely`, consequence: `Her mother glows. Her father notices. A man who eats well at a Moroccan table and thanks the cook by name is a man who was raised right.`, flag: "table_grace" },
           { text: `Ask her father a question about his work or his history in Fez`, consequence: `He speaks for twenty minutes. His wife watches him. His sons watch you. You have given him the floor and he has taken it. This is the correct move.`, flag: "father_engaged" },
-          { text: `Speak mostly to Nadia during the meal — she is the one you came for`, consequence: `Her father notices. Her brothers notice. In this context a man who orients toward the daughter at the family table rather than toward the family has signaled something about what he values. It is not the right signal.`, flag: "family_ignored" },
+          { text: `Speak mostly to Nadia during the meal — she is the one you came for`, consequence: `Her father notices. Her brothers notice. In this context a man who orients toward the daughter at the family table rather than toward the family has signaled something about what he values. It is not the right signal.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -1483,7 +1483,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Receive the figure respectfully — ask what it represents to the family before responding`, consequence: `He explains. The number carries meaning. You negotiate respectfully and reach an agreement that honors the tradition. He calls his wife in afterward. Something has been decided.`, flag: "mahr_honored" },
           { text: `Counter with a lower figure immediately`, consequence: `His expression does not change but something behind it does. He says he will think about it. The meeting ends in eleven minutes. The damage is real.`, flag: "mahr_lowballed" },
-          { text: `Agree to the full amount without negotiation`, consequence: `He pauses. Then: 'You did not ask what it represents.' He explains anyway. He adjusts the figure downward slightly. 'The agreement is about understanding, not the number.' This surprises you.`, flag: "mahr_accepted" },
+          { text: `Agree to the full amount without negotiation`, consequence: `He pauses. Then: 'You did not ask what it represents.' He explains anyway. He adjusts the figure downward slightly. 'The agreement is about understanding, not the number.' This surprises you.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -1492,7 +1492,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Tell her to ask it — you are not afraid of the question`, consequence: `She asks: 'Are you looking for a wife or are you looking for what a wife looks like?' You understand the difference. Your answer takes four minutes. She is quiet afterward. She says: 'I will pray on this tonight.'`, flag: "direct_question_met" },
           { text: `Tell her you already know what your answer is to any question she could ask`, consequence: `She shakes her head. 'That is confidence. I am not asking for confidence. I am asking for honesty.' She is sharper than you expected. This is not a performance.`, flag: "overconfident" },
-          { text: `Ask her what prompted the question`, consequence: `She says her father told her something you said in the private meeting. She wanted to hear it from you directly. When you repeat it, it matches. Her aunt nods.`, flag: "consistent" },
+          { text: `Ask her what prompted the question`, consequence: `She says her father told her something you said in the private meeting. She wanted to hear it from you directly. When you repeat it, it matches. Her aunt nods.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -1501,7 +1501,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Tell her yes — you spoke to your family before you came to Fez`, consequence: `She relays this. Her father respects the sequence: a man who consulted his family before traveling is a man who is operating within the correct protocol.`, flag: "family_consulted" },
           { text: `Tell her honestly that you have not yet spoken to your family`, consequence: `She is quiet a day. Then: 'He will want to speak with someone from your family. Not immediately, but before a final answer.' You understand what this means for the timeline.`, flag: "family_not_consulted" },
-          { text: `Ask her what her father is actually concerned about — you want to address it directly`, consequence: `She says something that surprises you. It is not about your family. It is about your faith practice specifically. You address it in a letter to her father. He responds in a week.`, flag: "direct_concern" },
+          { text: `Ask her what her father is actually concerned about — you want to address it directly`, consequence: `She says something that surprises you. It is not about your family. It is about your faith practice specifically. You address it in a letter to her father. He responds in a week.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -1510,7 +1510,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Accept the date and the condition without modification`, consequence: `He says: 'I expected you to negotiate the date.' You tell him the date works. He is quiet a moment. Then: 'Good.' The call ends in seven minutes. Nadia calls two minutes later.`, flag: "accepted_terms" },
           { text: `Ask if the ceremony can happen sooner — you are ready now`, consequence: `He considers. He moves the date forward six weeks. 'If you are ready now, we are ready.' The timeline compresses in your favor.`, flag: "pressed_forward" },
-          { text: `Ask for clarification on what the betrothal ceremony involves`, consequence: `He explains fully. You ask good questions. He answers them. At the end: 'Most men do not ask. I am glad you did.' The call runs twenty-two minutes.`, flag: "ceremony_understood" },
+          { text: `Ask for clarification on what the betrothal ceremony involves`, consequence: `He explains fully. You ask good questions. He answers them. At the end: 'Most men do not ask. I am glad you did.' The call runs twenty-two minutes.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -1519,7 +1519,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Greet her formally — this is a formal occasion and she deserves the ceremony of it`, consequence: `She holds the formality with you. Later, outside, she tells you: 'You understood what this day was.' Her father, watching from across the room, allows himself a small expression.`, flag: "ceremony_honored" },
           { text: `Allow yourself one genuine moment of emotion — this is real`, consequence: `Her mother sees it. Her mother says something in Darija that makes her daughter laugh. You do not understand the words but the room changes.`, flag: "genuine_moment" },
-          { text: `Ask her father what comes next — you want to begin the process correctly`, consequence: `He walks you through the visa timeline, the second visit requirements, the documentation. He has already begun preparing some of it. He was ready before you asked.`, flag: "process_ready" },
+          { text: `Ask her father what comes next — you want to begin the process correctly`, consequence: `He walks you through the visa timeline, the second visit requirements, the documentation. He has already begun preparing some of it. He was ready before you asked.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -1528,7 +1528,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `You went and found what you came to find. The real work begins here.`, consequence: `SUCCESS: You married within 48 hours of her arrival. Her father called on the wedding day. Her mother sent three recipes the following week. The family meeting next year will be in Fez.`, flag: "success" },
           { text: `You proceeded correctly at every decision point. This is what preparation produces.`, consequence: `SUCCESS: The certificate belongs to the man who was patient, culturally aware, and honest when it cost something. You were that man.`, flag: "success" },
-          { text: `Everything you learned brought you here.`, consequence: `SUCCESS: North Africa — complete. The knowledge you built here applies in every region. The next arc will require different knowledge. It will be worth learning.`, flag: "success" },
+          { text: `Everything you learned brought you here.`, consequence: `SUCCESS: North Africa — complete. The knowledge you built here applies in every region. The next arc will require different knowledge. It will be worth learning.`, flag: "cultural_fail" },
         ],
       }
     ],
@@ -1546,7 +1546,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Tell her honestly that you have not thought about it carefully enough and ask her to tell you what she needs`, consequence: `She respects the honesty. She tells you. The conversation becomes a negotiation of mutual expectations from the very beginning — the most honest kind of courtship.`, flag: `honest_ignorance` },
           { text: `Tell her you support her fully in her work — whatever she wants`, consequence: `She follows up: 'That is not an answer. That is permission. I am not asking for your permission.' She is testing whether you understand the difference between support and permission.`, flag: `permission_not_support` },
-          { text: `Answer from what you actually believe, including the parts that are complicated`, consequence: `She asks a follow-up that reveals she has thought about this in more dimensions than your answer covered. 'What about when it is inconvenient? What about when her work requires something that complicates yours?'`, flag: `tested_deeper` },
+          { text: `Answer from what you actually believe, including the parts that are complicated`, consequence: `She asks a follow-up that reveals she has thought about this in more dimensions than your answer covered. 'What about when it is inconvenient? What about when her work requires something that complicates yours?'`, flag: `cultural_fail` },
         ],
       },
       {
@@ -1555,7 +1555,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Tell her you understand and that her presence here is their loss`, consequence: `She receives this with quiet appreciation but says: 'Understanding is good. But I need something more specific from you. I need to know you can accept not just that I have a career but what that career will demand.'`, flag: `appreciation_not_enough` },
           { text: `Ask her to tell you what her work actually demands — the specific reality of it`, consequence: `She tells you. It is demanding. It requires travel, late hours, decisions, and the kind of intellectual absorption that means she will sometimes be fully occupied with something that has nothing to do with you. 'Can you be with a woman who is fully occupied?'`, flag: `specific_reality` },
-          { text: `Ask her what she has learned about herself from the fact that the men in her community could not accept her`, consequence: `Long pause. 'I have learned that I require a particular kind of man. One who is not threatened by a woman who is more accomplished in certain areas than he is. That requirement eliminates most men.' She is telling you who she needs. Are you that man?`, flag: `self_knowledge` },
+          { text: `Ask her what she has learned about herself from the fact that the men in her community could not accept her`, consequence: `Long pause. 'I have learned that I require a particular kind of man. One who is not threatened by a woman who is more accomplished in certain areas than he is. That requirement eliminates most men.' She is telling you who she needs. Are you that man?`, flag: `cultural_fail` },
         ],
       },
       {
@@ -1564,7 +1564,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Tell her that you cannot prove a future but you can describe the specific conditions under which you become uncomfortable and then demonstrate you are working on those conditions`, consequence: `She takes this to her father. He calls you. 'You gave a specific answer rather than a reassuring one. Specific answers are more trustworthy.' The conversation continues.`, flag: `specific_answer` },
           { text: `Tell her your track record with women speaks for itself and ask her to trust you`, consequence: `She says: 'Track records from previous relationships do not transfer. I need something from this relationship.' She is right. Try again.`, flag: `wrong_evidence` },
-          { text: `Ask her father's concern back to her with different framing: 'What would I need to do over time for his concern to be disproven?'`, consequence: `She brings this question to her father. He calls and answers it in detail. He is giving you the rubric. Use it.`, flag: `smart_question` },
+          { text: `Ask her father's concern back to her with different framing: 'What would I need to do over time for his concern to be disproven?'`, consequence: `She brings this question to her father. He calls and answers it in detail. He is giving you the rubric. Use it.`, flag: `cultural_fail` },
         ],
       },
       {
@@ -1573,7 +1573,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Answer from genuine belief — including the parts where you are still developing your thinking`, consequence: `He says: 'A man who is still developing his thinking is more honest than one who has arrived at all his conclusions. What are you developing toward?'`, flag: `honest_development` },
           { text: `Give him a principled answer about partnership and mutual support`, consequence: `He follows up: 'Those are principles. I asked about obligations. What specifically do you owe her ambition?' He is asking for the concrete version of the principle.`, flag: `principle_not_concrete` },
-          { text: `Tell him you believe he owes her the same thing she owes his: full presence and practical support, regardless of inconvenience`, consequence: `He is quiet. Then: 'That is the most accurate answer I have received to that question.' Her mother laughs softly. Something in the call changes.`, flag: `right_answer` },
+          { text: `Tell him you believe he owes her the same thing she owes his: full presence and practical support, regardless of inconvenience`, consequence: `He is quiet. Then: 'That is the most accurate answer I have received to that question.' Her mother laughs softly. Something in the call changes.`, flag: `cultural_fail` },
         ],
       },
       {
@@ -1582,7 +1582,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Listen fully and ask questions about the work itself — show her you can engage with what she has built`, consequence: `She talks for two hours. By the end she says: 'You are the first person who asked me about the work and not about how I feel about losing the work. Both matter. But the work matters too.' You have passed something important.`, flag: `engaged_with_work` },
           { text: `Focus on her feelings — be present with the grief of it`, consequence: `She appreciates this. But she also needs someone who understands why the work matters, not just that she is sad about it. The response is partly right.`, flag: `feelings_only` },
-          { text: `Offer to help solve the problem — you have ideas about the bureaucratic obstacle`, consequence: `She says: 'I am not asking for solutions.' But she listens. And two of your ideas are actually useful. She is surprised and then not surprised. 'You actually understand what I do,' she says.`, flag: `solution_oriented` },
+          { text: `Offer to help solve the problem — you have ideas about the bureaucratic obstacle`, consequence: `She says: 'I am not asking for solutions.' But she listens. And two of your ideas are actually useful. She is surprised and then not surprised. 'You actually understand what I do,' she says.`, flag: `cultural_fail` },
         ],
       },
       {
@@ -1591,7 +1591,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Answer from your specific self — not what a good husband is, but what you specifically are`, consequence: `She listens. At the end she says: 'That is the only answer to that question that works. It has to be specific. It has to be you.' She gives you her answer.`, flag: `success` },
           { text: `Tell her you will spend the next ten years finding out — together`, consequence: `She says: 'That is a beautiful answer and it is also a way of not answering. I need the specific version.' She is not closing the door. She is asking you to walk through it.`, flag: `evasion` },
-          { text: `Ask her the same question back before answering`, consequence: `She answers without hesitation. Specifically. Fully. Then waits. 'Now you.' The stakes of what you say next are very clear.`, flag: `reciprocal` },
+          { text: `Ask her the same question back before answering`, consequence: `She answers without hesitation. Specifically. Fully. Then waits. 'Now you.' The stakes of what you say next are very clear.`, flag: `cultural_fail` },
         ],
       },
     ,
@@ -1601,7 +1601,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Answer honestly from your actual position — not from what you think she wants to hear`, consequence: `She receives it carefully. She has one follow-up question. The answer to that question determines whether the conversation continues at depth or stays on the surface.`, flag: "honest_position" },
           { text: `Ask her what the question is really asking before you answer`, consequence: `She says: 'I need to know if you are looking for a partner or a possession.' You understand the distinction. Your answer is the most important thing you have said to anyone on this platform.`, flag: "real_question" },
-          { text: `Tell her you support whatever she needs — you are flexible`, consequence: `She is quiet. Then: 'Flexible is not an answer. I have worked hard for something real. I need to know if you will respect it specifically, not generically.'`, flag: "flexible_answer" },
+          { text: `Tell her you support whatever she needs — you are flexible`, consequence: `She is quiet. Then: 'Flexible is not an answer. I have worked hard for something real. I need to know if you will respect it specifically, not generically.'`, flag: "cultural_fail" },
         ],
       },
       {
@@ -1610,7 +1610,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Ask her to prepare you for those questions`, consequence: `She walks you through what her parents value: intellectual seriousness, financial stability, and evidence that you have thought about marriage as a practice rather than a destination.`, flag: "prepared" },
           { text: `Tell her you are ready for whatever questions they have`, consequence: `She tests this. She asks you three questions as a proxy for her parents. Your answers calibrate the next phase of the correspondence.`, flag: "tested" },
-          { text: `Ask what differentiates a marriage as a practice from a marriage as a destination`, consequence: `She stops. Then: 'You understood the distinction without me explaining it. That is rare.' The conversation enters a new register.`, flag: "distinction_understood" },
+          { text: `Ask what differentiates a marriage as a practice from a marriage as a destination`, consequence: `She stops. Then: 'You understood the distinction without me explaining it. That is rare.' The conversation enters a new register.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -1619,7 +1619,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Take the two weeks and write careful, thorough responses`, consequence: `He responds within four days. His response is warm and substantive. He has questions about your second answer specifically. You have passed the first test.`, flag: "thorough_response" },
           { text: `Respond in three days — you have already been thinking about these things`, consequence: `He notes the speed. He asks if you prepared for these questions in advance. You tell him yes — that Nurul helped you understand what her parents value. He tells Nurul: 'He was honest about the preparation. That is as important as the answers.'`, flag: "quick_honest_response" },
-          { text: `Ask Nurul for guidance on the Bangladesh question specifically`, consequence: `She teaches you for a week. Your response on Bangladesh is the most specific and informed answer her father has received from any man who has written to his family. He calls her after reading it.`, flag: "bangladesh_researched" },
+          { text: `Ask Nurul for guidance on the Bangladesh question specifically`, consequence: `She teaches you for a week. Your response on Bangladesh is the most specific and informed answer her father has received from any man who has written to his family. He calls her after reading it.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -1628,7 +1628,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Listen more than you speak — you are the learner in this room`, consequence: `The aunt notices this. She says something to Nurul in Bengali. Nurul translates later: 'She said you know your place in the conversation. That is not common in young men.'`, flag: "listener_role" },
           { text: `Engage the room — ask questions, contribute perspectives, match the energy`, consequence: `Her father draws you into a discussion about something he has written. You have read it — Nurul gave it to you months ago. The table shifts when you demonstrate this.`, flag: "engaged" },
-          { text: `Direct your attention primarily to her father and mother and let the others observe`, consequence: `The brother approaches you after dinner. 'You understood the hierarchy of the room.' He has been waiting to say this.`, flag: "hierarchy_understood" },
+          { text: `Direct your attention primarily to her father and mother and let the others observe`, consequence: `The brother approaches you after dinner. 'You understood the hierarchy of the room.' He has been waiting to say this.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -1637,7 +1637,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Answer honestly: you do not know why she chose to continue the conversation — only that you are grateful she did`, consequence: `The aunt is surprised by the humility. She asks a second question. Then a third. By the end she has told you something about Nurul that Nurul has not told you herself.`, flag: "honest_humility" },
           { text: `Tell her what you bring — your character, your seriousness, your preparation`, consequence: `She listens. Then: 'Those are the things a man who has thought about himself would say. I am asking why Nurul specifically chose you.' The question is different from what you answered.`, flag: "missed_question" },
-          { text: `Ask the aunt what she sees in Nurul that the other men missed`, consequence: `She is very still. Then she smiles. Then she answers at length. It is the most useful information you have received in this entire process.`, flag: "aunt_asked" },
+          { text: `Ask the aunt what she sees in Nurul that the other men missed`, consequence: `She is very still. Then she smiles. Then she answers at length. It is the most useful information you have received in this entire process.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -1646,7 +1646,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Agree immediately and ask how you can support the project`, consequence: `Her father pauses. The question surprises him. His approval deepens. He had expected negotiation about the timeline.`, flag: "support_offered" },
           { text: `Agree and tell him you respect that her work is part of who she is`, consequence: `He tells Nurul something. She translates: 'He says you said the right thing. He has been watching to see if you see her or only the destination.' You saw her.`, flag: "work_respected" },
-          { text: `Ask Nurul privately if eight months is what she wants`, consequence: `She says yes — she was the one who set the condition. Her father was honoring her timeline. You understand that the real decision has always been hers.`, flag: "nurul_decision" },
+          { text: `Ask Nurul privately if eight months is what she wants`, consequence: `She says yes — she was the one who set the condition. Her father was honoring her timeline. You understand that the real decision has always been hers.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -1655,7 +1655,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `SUCCESS: Nurul — Dhaka, Bangladesh.`, consequence: `SUCCESS: The professor's letters, the aunt's question, the brother from London, the eight months — all of it was the path. Asia arc — complete.`, flag: "success" },
           { text: `SUCCESS: She finished her work. Now she begins her life.`, consequence: `SUCCESS: The man who waits for a woman to complete what she has built has understood something that most men miss. Arc complete.`, flag: "success" },
-          { text: `SUCCESS: Arc complete.`, consequence: `SUCCESS: Bangladesh — complete. Everything you learned here applies throughout the Asia arc.`, flag: "success" },
+          { text: `SUCCESS: Arc complete.`, consequence: `SUCCESS: Bangladesh — complete. Everything you learned here applies throughout the Asia arc.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -1664,7 +1664,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `SUCCESS: A professor sent you his life's work to keep.`, consequence: `SUCCESS: Honor what that means. Nurul — Bangladesh — complete.`, flag: "success" },
           { text: `SUCCESS: Arc complete.`, consequence: `SUCCESS: Asia arc — complete.`, flag: "success" },
-          { text: `SUCCESS: Nurul — complete.`, consequence: `SUCCESS: The patience, the research, the aunt, the eight months — all of it earned this.`, flag: "success" },
+          { text: `SUCCESS: Nurul — complete.`, consequence: `SUCCESS: The patience, the research, the aunt, the eight months — all of it earned this.`, flag: "cultural_fail" },
         ],
       }
     ],
@@ -1681,7 +1681,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Answer the question directly and at length — it deserves a real answer`, consequence: `She reads it twice. She tells you she read it twice. The conversation shifts into something more substantive than you expected for a first exchange.`, flag: `direct` },
           { text: `Turn the question back to her — ask what a good wife looks like to her first`, consequence: `She pauses. Then answers. Then: 'You still have not answered my question.' She is not hostile. She is paying attention.`, flag: `deflected` },
-          { text: `Keep your answer short and ask if you can speak on video instead`, consequence: `She declines the video call. 'I would like to know more before I let you see my face.' This is information about how she operates. Receive it.`, flag: `paced` },
+          { text: `Keep your answer short and ask if you can speak on video instead`, consequence: `She declines the video call. 'I would like to know more before I let you see my face.' This is information about how she operates. Receive it.`, flag: `time_waster` },
         ],
       },
       {
@@ -1690,7 +1690,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Ask what she learned from those experiences about what she needs`, consequence: `She tells you. What she needs is not complicated. It is specific. A man who does not disappear. A man whose family he has actually spoken to about his intentions. A man who finishes.`, flag: `listening` },
           { text: `Tell her you will not do what those men did — make it a promise`, consequence: `She receives it quietly. Then: 'Everyone says that. The ones who left said something like that too. I believe you mean it. Meaning it is the beginning, not the proof.'`, flag: `reassured` },
-          { text: `Ask her directly: have you spoken to your parents about me yet?`, consequence: `Long pause. 'No. Not yet. I need to know more before I bring someone to my father's attention.' This is useful. She is protecting herself. Respect it.`, flag: `honest_question` },
+          { text: `Ask her directly: have you spoken to your parents about me yet?`, consequence: `Long pause. 'No. Not yet. I need to know more before I bring someone to my father's attention.' This is useful. She is protecting herself. Respect it.`, flag: `time_waster` },
         ],
       },
       {
@@ -1699,7 +1699,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Ask to speak with her father directly and formally — you want him to know your intentions are serious`, consequence: `He calls three days later. Forty minutes. He asks about your income, your family, whether you have been married before, and what your plan is for the distance. The last question is the real question.`, flag: `formal_approach` },
           { text: `Send a written introduction to the family before any call — let your words land before your voice does`, consequence: `Her mother reads it first. She tells Sara: 'He writes like a man who thinks before he speaks.' The call that follows is warmer than it would have been.`, flag: `written_first` },
-          { text: `Ask Sara what her father's main concern is so you can address it head-on`, consequence: `She tells you: distance. He has watched other daughters go abroad. He has watched what happens to the marriages and to the daughters. This is not a bureaucratic question. It is a father's wound.`, flag: `informed` },
+          { text: `Ask Sara what her father's main concern is so you can address it head-on`, consequence: `She tells you: distance. He has watched other daughters go abroad. He has watched what happens to the marriages and to the daughters. This is not a bureaucratic question. It is a father's wound.`, flag: `time_waster` },
         ],
       },
       {
@@ -1708,7 +1708,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Answer with a specific plan: how often you will bring her home, how you will maintain the connection`, consequence: `He asks how you will fund this over time. He is testing whether you have thought past the intention to the logistics. You have. The conversation continues.`, flag: `specific_plan` },
           { text: `Tell him you understand his fear and that you will earn his trust through action not words`, consequence: `He receives this. 'Action is correct. But I need to understand what the actions will be.' He is not closing the door. He is asking for the plan behind the principle.`, flag: `principle_only` },
-          { text: `Invite him and his wife to visit America — all expenses covered — before any final decision`, consequence: `Long silence. This has not been offered before. He says he will discuss it with his wife. Two weeks later Sara says: 'My mother wants to come.'`, flag: `generous` },
+          { text: `Invite him and his wife to visit America — all expenses covered — before any final decision`, consequence: `Long silence. This has not been offered before. He says he will discuss it with his wife. Two weeks later Sara says: 'My mother wants to come.'`, flag: `time_waster` },
         ],
       },
       {
@@ -1717,7 +1717,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Call immediately — not to fix anything, just to be present with her in it`, consequence: `She does not expect the call. She is surprised and then not surprised. She tells her mother that night. Her mother tells her father. This moment matters more than any conversation you have had.`, flag: `present` },
           { text: `Send flowers to the hospital — you cannot be there but you want her to feel you`, consequence: `She receives them. She sends a photo. Her roommate in the ward asks who sent them. She says your name. This is the first time she has said your name to a stranger as though it belongs there.`, flag: `gesture` },
-          { text: `Give her space — she is downplaying it because she does not want you to worry, so respect that`, consequence: `She appreciates the restraint. But when she is home she says: 'I was a little disappointed you did not call.' She says it gently. Receive it.`, flag: `misstep` },
+          { text: `Give her space — she is downplaying it because she does not want you to worry, so respect that`, consequence: `She appreciates the restraint. But when she is home she says: 'I was a little disappointed you did not call.' She says it gently. Receive it.`, flag: `time_waster` },
         ],
       },
       {
@@ -1726,7 +1726,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Tell him yes — you spoke to your family weeks ago and they are in support`, consequence: `He exhales. 'Good. A man who involves his family is a man who understands what marriage is.' He asks to speak with your mother.`, flag: `success` },
           { text: `Tell him honestly that you have not yet but will do so this week`, consequence: `Pause. 'This should have happened already. Please do it before we proceed. She is not a decision you make alone.' He is right. You call your family that night.`, flag: `delayed_but_honest` },
-          { text: `Tell him your family relationship is complicated and explain why`, consequence: `He listens fully. 'I understand. But Sara will be entering your family as well as leaving mine. I need to understand what she is entering.' This is fair. You owe him the full picture.`, flag: `complicated_but_honest` },
+          { text: `Tell him your family relationship is complicated and explain why`, consequence: `He listens fully. 'I understand. But Sara will be entering your family as well as leaving mine. I need to understand what she is entering.' This is fair. You owe him the full picture.`, flag: `time_waster` },
         ],
       },
     ,
@@ -1736,7 +1736,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Tell her this is exactly the kind of family structure you are looking for`, consequence: `She shows him your response. He calls her that evening. She tells you the next morning: 'He wants to know more about you.'`, flag: "transparency_welcomed" },
           { text: `Ask her how this works practically — does he read in real time?`, consequence: `She explains the family's rhythm. He reviews correspondence weekly, not in real time. She tells him what she decides to tell him outside of that. The structure is clear.`, flag: "structure_understood" },
-          { text: `Express mild concern about privacy`, consequence: `She receives this without judgment but without softening: 'This is my family. If you cannot accept this, this is important information for both of us.' She is not issuing an ultimatum. She is stating a fact.`, flag: "privacy_concern" },
+          { text: `Express mild concern about privacy`, consequence: `She receives this without judgment but without softening: 'This is my family. If you cannot accept this, this is important information for both of us.' She is not issuing an ultimatum. She is stating a fact.`, flag: "time_waster" },
         ],
       },
       {
@@ -1745,7 +1745,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Answer honestly and with knowledge — you have been paying attention`, consequence: `He writes back within two days. The response is warm and substantive. He has found a man who is paying attention. This matters to him.`, flag: "political_aware" },
           { text: `Answer carefully — express concern without taking a strong political position`, consequence: `He reads the carefulness. He responds briefly and moves on. He noted the avoidance. He does not raise the subject again but he does not forget it.`, flag: "political_careful" },
-          { text: `Tell him you would rather focus on the personal relationship than political matters`, consequence: `He does not respond for ten days. When he does, it is Sara who writes, not him: 'My father says the personal and the political are not separate in our family.' You now understand what you missed.`, flag: "political_avoided" },
+          { text: `Tell him you would rather focus on the personal relationship than political matters`, consequence: `He does not respond for ten days. When he does, it is Sara who writes, not him: 'My father says the personal and the political are not separate in our family.' You now understand what you missed.`, flag: "time_waster" },
         ],
       },
       {
@@ -1754,7 +1754,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Ask directly what happened`, consequence: `She tells you. A family matter — serious, private, resolved. She was not ready to include you in it. She says: 'I did not want you to see the difficulty before you had seen the stability.'`, flag: "absence_explained" },
           { text: `Receive her return without pressing`, consequence: `She notices the restraint. A week later she tells you what happened anyway. 'You did not push. My father said a man who does not push when a woman goes quiet is a man who trusts.'`, flag: "absence_received" },
-          { text: `Tell her the silence concerned you and you need more consistency`, consequence: `She hears it. She explains. She also notes that in her family, periods of withdrawal are normal during difficulty. She asks if you can live with that rhythm. This is an important question.`, flag: "consistency_requested" },
+          { text: `Tell her the silence concerned you and you need more consistency`, consequence: `She hears it. She explains. She also notes that in her family, periods of withdrawal are normal during difficulty. She asks if you can live with that rhythm. This is an important question.`, flag: "time_waster" },
         ],
       },
       {
@@ -1763,7 +1763,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Ask the brother about his father — what does he need to see from you?`, consequence: `The brother considers. Then: 'He needs to see that you are not performing. He has seen many performances.' This is the most useful thing anyone could have told you.`, flag: "brother_consulted" },
           { text: `Use the evening to observe — ask few questions, absorb everything`, consequence: `The brother notices the observation mode. At the end of the evening: 'You are paying attention.' This is a compliment in this context.`, flag: "observer_mode" },
-          { text: `Talk about yourself — your background, your goals, why you came`, consequence: `The brother listens. He asks one or two questions. The evening ends pleasantly. He has gathered information without giving you guidance. Tomorrow you will be on your own.`, flag: "talked_about_self" },
+          { text: `Talk about yourself — your background, your goals, why you came`, consequence: `The brother listens. He asks one or two questions. The evening ends pleasantly. He has gathered information without giving you guidance. Tomorrow you will be on your own.`, flag: "time_waster" },
         ],
       },
       {
@@ -1772,7 +1772,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Answer honestly: love, respect, continued relationship — the marriage does not sever the family`, consequence: `He nods. He asks a second question immediately: 'And what does a husband owe his wife's father?' You understand that these two questions are the whole conversation.`, flag: "family_answer" },
           { text: `Ask him what he believes before answering`, consequence: `He pauses. Then: 'You want to know my standard before you answer. That is either wisdom or avoidance.' You tell him which one. He listens.`, flag: "standard_asked" },
-          { text: `Answer from Islamic principles — a wife's first obligation is to her husband, but the father is owed respect always`, consequence: `He leans forward. He has heard this answer before. He asks what happens when the husband and the father disagree. This is the real question.`, flag: "islamic_answer" },
+          { text: `Answer from Islamic principles — a wife's first obligation is to her husband, but the father is owed respect always`, consequence: `He leans forward. He has heard this answer before. He asks what happens when the husband and the father disagree. This is the real question.`, flag: "time_waster" },
         ],
       },
       {
@@ -1781,7 +1781,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Address it directly with him — ask what would make the distance more bearable`, consequence: `He names two things: regular visits to Jordan and a phone call with him monthly. Not demands — a request from a father. You agree to both. He tells Sara that evening.`, flag: "distance_addressed" },
           { text: `Tell Sara you understand his concern and will work to honor it`, consequence: `She carries this to her father. He responds: 'Let him tell me.' He needs to hear it from you, not through her.`, flag: "through_sara" },
-          { text: `Propose that Sara visit Jordan every year`, consequence: `Her father had already assumed this. The proposal itself is expected. He is waiting to see if you will add something he did not assume.`, flag: "annual_visit_proposed" },
+          { text: `Propose that Sara visit Jordan every year`, consequence: `Her father had already assumed this. The proposal itself is expected. He is waiting to see if you will add something he did not assume.`, flag: "time_waster" },
         ],
       },
       {
@@ -1790,7 +1790,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Ask Sara how to respond to her father's trust in a way that is appropriate`, consequence: `She teaches you the phrase. You call him back the next day and say it. He is quiet a moment. Then he thanks you for calling.`, flag: "trust_honored" },
           { text: `Write him a letter formally accepting the responsibility`, consequence: `He reads it with his wife. Sara tells you her mother cried. This was the right move for this family.`, flag: "letter_written" },
-          { text: `Begin preparing the visa documentation immediately`, consequence: `Her father learns you have already begun. He calls Sara: 'He is not waiting.' This is the highest form of respect to him.`, flag: "visa_begun" },
+          { text: `Begin preparing the visa documentation immediately`, consequence: `Her father learns you have already begun. He calls Sara: 'He is not waiting.' This is the highest form of respect to him.`, flag: "time_waster" },
         ],
       },
       {
@@ -1799,7 +1799,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `SUCCESS: Sara — Amman, Jordan.`, consequence: `SUCCESS: The father's test, the brother's observation, the political question, the distance conversation — all of it was the path. You walked it correctly.`, flag: "success" },
           { text: `SUCCESS: Middle East arc — complete.`, consequence: `SUCCESS: Jordan required a different kind of preparation than Morocco. The family structure is similar but the registers are different. You learned the difference.`, flag: "success" },
-          { text: `SUCCESS: The certificate is earned.`, consequence: `SUCCESS: Take what you learned here into every subsequent arc.`, flag: "success" },
+          { text: `SUCCESS: The certificate is earned.`, consequence: `SUCCESS: Take what you learned here into every subsequent arc.`, flag: "time_waster" },
         ],
       },
       {
@@ -1808,7 +1808,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `SUCCESS: You understand what was given to you.`, consequence: `SUCCESS: Jordan — complete. The father trusted you with what he loved most. Honor that trust in everything that follows.`, flag: "success" },
           { text: `SUCCESS: This is where the real work begins.`, consequence: `SUCCESS: The preparation is over. The life is starting.`, flag: "success" },
-          { text: `SUCCESS: Arc complete.`, consequence: `SUCCESS: Sara — Amman, Jordan. Complete.`, flag: "success" },
+          { text: `SUCCESS: Arc complete.`, consequence: `SUCCESS: Sara — Amman, Jordan. Complete.`, flag: "time_waster" },
         ],
       }
     ],
@@ -1826,7 +1826,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Tell her: because honesty about uncertainty is rarer than certainty and more trustworthy`, consequence: `She is quiet for a moment. Then: 'That is a good answer. I want to know if it is true or if it is just a good answer.' She is testing whether you mean it or whether you are fluent in the language of what women want to hear.`, flag: `tested` },
           { text: `Tell her the honest reason — her profile was the most real thing you had read on the platform`, consequence: `Long pause. Then: 'Tell me what made it feel real.' The conversation that begins is the most substantive first exchange in the entire course.`, flag: `specific_honest` },
-          { text: `Ask her what she expected people to do with that line — ignore it, or respond to it?`, consequence: `She says: 'I expected most to ignore it. I wrote it to filter for the ones who would not.' Pause. 'You are the third person who responded. The first two disappointed me. I am telling you this so you know the bar.'`, flag: `bar_set` },
+          { text: `Ask her what she expected people to do with that line — ignore it, or respond to it?`, consequence: `She says: 'I expected most to ignore it. I wrote it to filter for the ones who would not.' Pause. 'You are the third person who responded. The first two disappointed me. I am telling you this so you know the bar.'`, flag: `cultural_fail` },
         ],
       },
       {
@@ -1835,7 +1835,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Research the Ethiopian Orthodox tradition before your next message and respond with specific understanding`, consequence: `She is surprised. 'You studied it.' She asks three questions that test whether you went to the surface or the depth. Your answers reveal your preparation. The correspondence deepens.`, flag: `prepared` },
           { text: `Tell her honestly that you know very little and ask her to teach you what she needs you to understand`, consequence: `'The willingness to be taught is the correct posture.' She begins teaching you over the following weeks. The teaching is also a form of courtship — she is giving you her world and watching whether you receive it with curiosity or reluctance.`, flag: `willing_student` },
-          { text: `Tell her you respect her faith and would never ask her to compromise it`, consequence: `She says: 'Respect and understanding are different. What I need from a husband is not that he respects my faith the way one respects a foreign custom. I need him to understand it from the inside. That is a different thing.'`, flag: `respect_not_enough` },
+          { text: `Tell her you respect her faith and would never ask her to compromise it`, consequence: `She says: 'Respect and understanding are different. What I need from a husband is not that he respects my faith the way one respects a foreign custom. I need him to understand it from the inside. That is a different thing.'`, flag: `cultural_fail` },
         ],
       },
       {
@@ -1844,7 +1844,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Thank her for the honesty and ask what her father needs to see to overcome his preference`, consequence: `She tells you. It is specific. He needs to see that you are not asking her to become less Ethiopian. He needs to see that you understand what you are entering and are choosing to enter it fully.`, flag: `practical_understanding` },
           { text: `Tell her that you understand this and that you will earn his confidence through what you know and how you engage, not through ethnic background`, consequence: `She says: 'That is the right attitude. But you should know that he is not unreasonable — he is specific. His concern is not about race. It is about whether his daughter's life will be protected or diluted. That is a father's concern.'`, flag: `right_frame` },
-          { text: `Ask her whether she herself prefers an Ethiopian man — you want to know her preference, not just her father's`, consequence: `Long pause. 'I have asked myself this question. My honest answer is that I prefer a man who can enter my world fully. Whether he is Ethiopian or not is secondary to whether he is willing and capable of that entering.' This is the most important thing she has said.`, flag: `her_own_answer` },
+          { text: `Ask her whether she herself prefers an Ethiopian man — you want to know her preference, not just her father's`, consequence: `Long pause. 'I have asked myself this question. My honest answer is that I prefer a man who can enter my world fully. Whether he is Ethiopian or not is secondary to whether he is willing and capable of that entering.' This is the most important thing she has said.`, flag: `cultural_fail` },
         ],
       },
       {
@@ -1853,7 +1853,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Answer the ordinary Wednesday in specific detail — including the liturgical calendar, the fasting days, the community obligations`, consequence: `Long silence. Then: 'You know about the calendar.' He asks how you know. You tell him you studied and that Tigist has been teaching you. He says: 'A man who allows himself to be taught by her is a man who understands how to be married to her.'`, flag: `specific_ordinary` },
           { text: `Ask him to describe what the ordinary Wednesday looks like so you can respond accurately`, consequence: `He describes it. When he finishes he says: 'Now you tell me how you fit into that.' The question is now more specific than it was. Your answer is also more accurate.`, flag: `asked_first` },
-          { text: `Tell him the ordinary Wednesday would be built together over time — you cannot know it exactly before you live it`, consequence: `He says: 'That is true. But a man who has no idea how Wednesday works is a man who has not thought about what he is asking. I want to see some thought, even if it is incomplete.' Try again.`, flag: `insufficient` },
+          { text: `Tell him the ordinary Wednesday would be built together over time — you cannot know it exactly before you live it`, consequence: `He says: 'That is true. But a man who has no idea how Wednesday works is a man who has not thought about what he is asking. I want to see some thought, even if it is incomplete.' Try again.`, flag: `cultural_fail` },
         ],
       },
       {
@@ -1862,7 +1862,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Be fully present in the service even though you understand nothing of the language`, consequence: `After the service she says: 'You were not pretending. You were not performing tolerance. You were actually there.' She says it as though she is noting something she did not expect.`, flag: `genuinely_present` },
           { text: `Follow her lead through everything — let her guide every interaction`, consequence: `Her mother, who has come to the service, watches you follow Tigist's lead for two hours. Afterward she says something to Tigist in Amharic. Tigist translates: 'She said you trusted me to lead you. That tells her something about the marriage.'`, flag: `trusted_her_guidance` },
-          { text: `Ask Tigist questions during the service about what is happening`, consequence: `She answers quietly. But her mother and her aunt — who are seated nearby — notice that she is explaining and you are receiving. This is also observed. Afterward her aunt says: 'He asks questions. That is good. Empty men do not ask questions.'`, flag: `asking_as_learning` },
+          { text: `Ask Tigist questions during the service about what is happening`, consequence: `She answers quietly. But her mother and her aunt — who are seated nearby — notice that she is explaining and you are receiving. This is also observed. Afterward her aunt says: 'He asks questions. That is good. Empty men do not ask questions.'`, flag: `cultural_fail` },
         ],
       },
       {
@@ -1871,7 +1871,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Tell her specifically what you have seen in her — not the tradition, but her, specifically — that you are choosing`, consequence: `She listens carefully. When you finish she is still for a long time. Then: 'You named specific things. Not the tradition — me. That is the answer.' She gives you her answer.`, flag: `success` },
           { text: `Tell her honestly that you cannot be completely certain it is not both things but that what you are certain of is that the specific person matters to you beyond the idea`, consequence: `She says: 'Both things can be true. What I needed to know is that the specific person is also real to you and not just the idea of the tradition.' She pauses. 'You answered that.' She gives you her answer.`, flag: `success` },
-          { text: `Ask her the same question back — you want to know if she is choosing you specifically or an idea of what a foreign husband represents`, consequence: `She is quiet. Then: 'That is a fair question. I am choosing you specifically. I decided this three months ago. I have been waiting to see if you would also arrive at a specific choice.' She gives you her answer.`, flag: `success` },
+          { text: `Ask her the same question back — you want to know if she is choosing you specifically or an idea of what a foreign husband represents`, consequence: `She is quiet. Then: 'That is a fair question. I am choosing you specifically. I decided this three months ago. I have been waiting to see if you would also arrive at a specific choice.' She gives you her answer.`, flag: `cultural_fail` },
         ],
       },
     ,
@@ -1881,7 +1881,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Tell her honestly: very little — and ask her to teach you`, consequence: `She begins teaching. It takes months and she is still teaching when the arc ends. The teaching is the relationship.`, flag: "honest_ignorance" },
           { text: `Research before answering — come back with what you found`, consequence: `She receives it, corrects three significant misunderstandings, and says: 'You tried before you answered. Most men just answer.' The correction deepens the respect.`, flag: "research_first" },
-          { text: `Ask her what you would need to understand to be welcomed by her family`, consequence: `She lists four things. They take six months to understand genuinely. She knows you understand them when you stop asking the questions you were asking at the beginning.`, flag: "learning_list" },
+          { text: `Ask her what you would need to understand to be welcomed by her family`, consequence: `She lists four things. They take six months to understand genuinely. She knows you understand them when you stop asking the questions you were asking at the beginning.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -1890,7 +1890,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Answer honestly about your capacity and your willingness to learn the practice`, consequence: `She receives the honesty. She says: 'I do not need you to have the practice. I need you to honor the household that has it.' The distinction is important.`, flag: "honest_capacity" },
           { text: `Tell her you would want the household to be shaped by what she brings to it`, consequence: `She is quiet a moment. Then: 'That is the right answer. But I need to know if you mean it when it is inconvenient.' The follow-up is the real test.`, flag: "household_answer" },
-          { text: `Ask what honoring the fast looks like practically in the household`, consequence: `She explains specifically. You understand what you are agreeing to before you agree to it. She says: 'You asked. Most men agree first and understand later when it is a problem.'`, flag: "fast_understood" },
+          { text: `Ask what honoring the fast looks like practically in the household`, consequence: `She explains specifically. You understand what you are agreeing to before you agree to it. She says: 'You asked. Most men agree first and understand later when it is a problem.'`, flag: "cultural_fail" },
         ],
       },
       {
@@ -1899,7 +1899,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Honor the sequence — speak about your faith first, your intentions second`, consequence: `He receives the sequence with satisfaction. 'You answered in the correct order. Most men reverse it.' He moves to your intentions with openness.`, flag: "sequence_honored" },
           { text: `Tell him honestly about your faith journey — including the gaps and the questions`, consequence: `He is a deacon. He has heard confessions. He knows what honesty about faith sounds like. He says: 'A man who is still searching is better than a man who has stopped.' He moves forward.`, flag: "faith_honest" },
-          { text: `Ask him to share his faith with you before sharing yours with him`, consequence: `He is very still. Then he speaks for a long time. When he is done: 'You listened to all of it. Now I will listen to yours.' The most open conversation of the arc begins.`, flag: "father_faith_first" },
+          { text: `Ask him to share his faith with you before sharing yours with him`, consequence: `He is very still. Then he speaks for a long time. When he is done: 'You listened to all of it. Now I will listen to yours.' The most open conversation of the arc begins.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -1908,7 +1908,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Match the directness — you are ready to be received by the family`, consequence: `He notes the readiness. He says one thing during the drive: 'My father has been asking about you since the first month.' You understand that the deacon has been evaluating you for longer than you knew.`, flag: "direct_ready" },
           { text: `Ask the brother one question during the drive: what does his father need to see?`, consequence: `He considers. Then: 'He needs to see that you have not come to take his daughter out of her world. He needs to see that you understand her world will come with her.' This is the central insight of the entire arc.`, flag: "brother_key_insight" },
-          { text: `Be quiet during the drive — observe the city, prepare yourself`, consequence: `The brother notices the preparation in the stillness. He says: 'You are not afraid.' It is not a question. He is confirming something he saw.`, flag: "quiet_preparation" },
+          { text: `Be quiet during the drive — observe the city, prepare yourself`, consequence: `The brother notices the preparation in the stillness. He says: 'You are not afraid.' It is not a question. He is confirming something he saw.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -1917,7 +1917,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Receive the blessing with genuine respect — bow your head`, consequence: `He places his hand briefly on your head. He says something. Tigist translates later: 'He said you received the blessing correctly. You did not perform it and you did not deflect it.'`, flag: "blessing_received" },
           { text: `Thank him and tell him what the blessing meant to you`, consequence: `He listens to the translation. Then he asks Tigist if you understood what he said. She says yes. He nods once. The welcome is complete.`, flag: "blessing_thanked" },
-          { text: `Ask Tigist to teach you the response in Amharic before the visit — deliver it yourself`, consequence: `He stops. He looks at you for a long moment. He speaks to Tigist. She translates: 'He says the pronunciation was wrong but the intention was correct. This is the same as prayer.' He is smiling.`, flag: "amharic_attempted" },
+          { text: `Ask Tigist to teach you the response in Amharic before the visit — deliver it yourself`, consequence: `He stops. He looks at you for a long moment. He speaks to Tigist. She translates: 'He says the pronunciation was wrong but the intention was correct. This is the same as prayer.' He is smiling.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -1935,7 +1935,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Agree to the condition sincerely — this is his grandchild and his tradition`, consequence: `He stands. He places his hand on your shoulder. He speaks. Tigist translates: 'He says you agreed without asking what it costs you. That is the kind of man who can raise a child in this tradition.' The agreement is made.`, flag: "condition_accepted" },
           { text: `Tell him you need to speak with Tigist about this before agreeing`, consequence: `He nods. He was expecting this. He sends you and Tigist outside for twenty minutes. You discuss. You come back. You agree together. He says: 'Good. You decided together. That is how it should be done.'`, flag: "condition_joint" },
-          { text: `Ask him to tell you about the baptism tradition so you can receive it fully`, consequence: `He teaches you for an hour. By the end you have agreed to something you understand. He says: 'That is better than agreeing to something you will discover later.'`, flag: "baptism_understood" },
+          { text: `Ask him to tell you about the baptism tradition so you can receive it fully`, consequence: `He teaches you for an hour. By the end you have agreed to something you understand. He says: 'That is better than agreeing to something you will discover later.'`, flag: "cultural_fail" },
         ],
       },
       {
@@ -1944,7 +1944,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `SUCCESS: Tigist — Addis Ababa, Ethiopia.`, consequence: `SUCCESS: The deacon's blessing, the fasting household, the 250 days, the baptism condition, the Amharic you attempted — all of it was the path. Sub-Saharan Africa arc — complete.`, flag: "success" },
           { text: `SUCCESS: She carries the church with her.`, consequence: `SUCCESS: Honor what she carries. Arc complete.`, flag: "success" },
-          { text: `SUCCESS: Arc complete.`, consequence: `SUCCESS: Tigist — Addis Ababa, Ethiopia. Complete. Sub-Saharan Africa arc — complete.`, flag: "success" },
+          { text: `SUCCESS: Arc complete.`, consequence: `SUCCESS: Tigist — Addis Ababa, Ethiopia. Complete. Sub-Saharan Africa arc — complete.`, flag: "cultural_fail" },
         ],
       }
     ],
@@ -1961,7 +1961,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Answer from your actual life and your actual failures — not your ideals`, consequence: `She reads it twice. 'Most men tell me what they want to be. You told me something true about yourself. I want to keep talking.' The conversation changes register.`, flag: `honest_self` },
           { text: `Answer with values — principles, intentions, beliefs`, consequence: `She responds: 'Those are things you believe. I asked about what you do.' She is precise about the difference between belief and action.`, flag: `principle_not_action` },
-          { text: `Ask her the same question before answering`, consequence: `She answers. Specifically. From her own experience. Including the broken engagement and what she learned from it. Then: 'Now you.' She wants to see if your answer changes now that you know hers.`, flag: `reciprocal` },
+          { text: `Ask her the same question before answering`, consequence: `She answers. Specifically. From her own experience. Including the broken engagement and what she learned from it. Then: 'Now you.' She wants to see if your answer changes now that you know hers.`, flag: `time_waster` },
         ],
       },
       {
@@ -1970,7 +1970,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Ask how the experience changed what she is looking for`, consequence: `She answers carefully. She has thought about this. The experience made her more discerning rather than more desperate. She describes what she learned to look for. You are being told exactly what you need to be.`, flag: `listening` },
           { text: `Tell her his loss is your gain — make her feel that the pain had a purpose`, consequence: `She looks at you carefully. 'You cannot know that yet. You do not know me well enough to know if I am someone's gain.' She is right. Walk it back.`, flag: `premature` },
-          { text: `Ask what she would have done differently`, consequence: `She says: 'I would have paid attention to what he did when things were inconvenient rather than what he promised when they were not.' This is not just history. It is the rubric she is applying to you.`, flag: `rubric_revealed` },
+          { text: `Ask what she would have done differently`, consequence: `She says: 'I would have paid attention to what he did when things were inconvenient rather than what he promised when they were not.' This is not just history. It is the rubric she is applying to you.`, flag: `time_waster` },
         ],
       },
       {
@@ -1979,7 +1979,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Ask her what her father observed about her ex that she missed`, consequence: `She tells you. The specific tells. How he treated people who were not watching. How he spoke about men he considered beneath him. How he received gratitude — with discomfort rather than ease. 'He was not comfortable being thanked,' she says. 'That should have told me something.'`, flag: `learning_the_tells` },
           { text: `Ask how you can ensure her father sees you as you actually are`, consequence: `She says: 'You cannot ensure it. If you try to manage what he sees, he will see that you are managing. Just be yourself.' Then, after a pause: 'But be your best self. There is a difference.'`, flag: `guidance_received` },
-          { text: `Tell her you are not going to perform for her father — you will simply be who you are`, consequence: `She receives this. 'Good. That is the only version of you that will work with him. He has a very good sense for the gap between who someone is and who someone is performing to be.'`, flag: `commitment_to_authenticity` },
+          { text: `Tell her you are not going to perform for her father — you will simply be who you are`, consequence: `She receives this. 'Good. That is the only version of you that will work with him. He has a very good sense for the gap between who someone is and who someone is performing to be.'`, flag: `time_waster` },
         ],
       },
       {
@@ -1988,7 +1988,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Be genuinely curious about the family — ask real questions, listen to the answers`, consequence: `The family friend says something quietly to her brother at the end of the dinner. Her father nods. You learn later what was said: 'He listened more than he spoke. That is not common.'`, flag: `listening_noted` },
           { text: `Focus your energy on impressing the father directly`, consequence: `The father is polite and warm. But the energy of the room tells you something is slightly off. You aimed at the target and missed the mark. The target was not the father — it was the table.`, flag: `wrong_focus` },
-          { text: `Pay full attention to how you treat the people who are not the focus of the evening — the server, the youngest brother, the family friend`, consequence: `Her father watches this for two hours. At the end of the dinner he says one sentence to her in Spanish. She translates for you later: 'He said you know how to be in a room.'`, flag: `peripheral_attention` },
+          { text: `Pay full attention to how you treat the people who are not the focus of the evening — the server, the youngest brother, the family friend`, consequence: `Her father watches this for two hours. At the end of the dinner he says one sentence to her in Spanish. She translates for you later: 'He said you know how to be in a room.'`, flag: `time_waster` },
         ],
       },
       {
@@ -1997,7 +1997,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Stand where you are, calm and present, without displaying jealousy or impatience`, consequence: `When the man leaves she turns to you and studies your face for a moment. Then: 'You did not move.' She says it as though it is significant. It is.`, flag: `composure` },
           { text: `Walk closer to signal your presence — not aggressively, but visibly`, consequence: `She notices. She does not say anything in the moment. That night she says: 'You felt the need to mark the territory.' It is said without judgment. But it is information.`, flag: `territorial` },
-          { text: `After he leaves, ask her who he was`, consequence: `She tells you. She watches how you receive the information. 'You are not angry,' she says. 'Most men would be angry.' You say: 'Should I be?' She says: 'No.'`, flag: `secure` },
+          { text: `After he leaves, ask her who he was`, consequence: `She tells you. She watches how you receive the information. 'You are not angry,' she says. 'Most men would be angry.' You say: 'Should I be?' She says: 'No.'`, flag: `time_waster` },
         ],
       },
       {
@@ -2006,7 +2006,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Tell her to tell you what she has seen — no defense, full reception`, consequence: `She tells you. Some of it is difficult to hear. Some of it is more generous than you expected. When she finishes she says: 'Did I see correctly?' The answer you give will determine whether this becomes a marriage.`, flag: `open_reception` },
           { text: `Tell her what you have seen in her at the same time — make it mutual`, consequence: `She nods once, accepting the mutual framing. 'Fine. You first.' You describe her. Specifically. Accurately. Including the things that are demanding. She listens without flinching. Then she tells you what she has seen. This is the foundation.`, flag: `mutual_seeing` },
-          { text: `Ask her what she needs to know before she can give you her answer`, consequence: `She says: 'I do not need to know anything more. I need to tell you what I have decided. But I wanted to check my seeing first.' This sentence — I wanted to check my seeing first — tells you everything about who she is.`, flag: `her_method` },
+          { text: `Ask her what she needs to know before she can give you her answer`, consequence: `She says: 'I do not need to know anything more. I need to tell you what I have decided. But I wanted to check my seeing first.' This sentence — I wanted to check my seeing first — tells you everything about who she is.`, flag: `time_waster` },
         ],
       },
     ,
@@ -2016,7 +2016,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Name the pattern directly: 'I notice we agree on next steps but never plan them'`, consequence: `She laughs. She says you are right. She says she gets nervous about the future and retreats into the present. She proposes a date for the family meeting. You put it in your calendar.`, flag: "pattern_named" },
           { text: `Let it continue another month and see if she initiates movement`, consequence: `She does not. Another month of warmth, another month of warmth that does not move. The pattern is now established.`, flag: "pattern_continued" },
-          { text: `Ask her directly: 'Do you see this relationship becoming a marriage?'`, consequence: `She says yes — of course, absolutely, without hesitation. Then the conversation moves somewhere else. Yes is not a plan.`, flag: "yes_without_plan" },
+          { text: `Ask her directly: 'Do you see this relationship becoming a marriage?'`, consequence: `She says yes — of course, absolutely, without hesitation. Then the conversation moves somewhere else. Yes is not a plan.`, flag: "time_waster" },
         ],
       },
       {
@@ -2025,7 +2025,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Propose a fourth date and watch what happens`, consequence: `The fourth date: her father is traveling for work. He will be back in three weeks. She is deeply apologetic. The apologizing is real. The pattern is also real.`, flag: "fourth_proposed" },
           { text: `Name what you are seeing without accusation: 'Four attempts. Four obstacles. Help me understand this.'`, consequence: `She goes quiet two days. Then a long message. She admits she is afraid. Her last relationship ended badly when she introduced the man to her family. She is protecting herself by protecting the introduction.`, flag: "pattern_named_gently" },
-          { text: `Tell her you are not willing to continue without meeting her family`, consequence: `She hears this as an ultimatum. She is upset. The conversation is difficult. But through the difficulty something honest surfaces that four months of warmth had not produced.`, flag: "boundary_set" },
+          { text: `Tell her you are not willing to continue without meeting her family`, consequence: `She hears this as an ultimatum. She is upset. The conversation is difficult. But through the difficulty something honest surfaces that four months of warmth had not produced.`, flag: "time_waster" },
         ],
       },
       {
@@ -2034,7 +2034,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Tell her you understand the fear — and ask what would make the introduction feel safe`, consequence: `She thinks. She says: a video call first, just her mother, not the whole family. Lower stakes, earlier in the process. You agree immediately.`, flag: "safe_introduction" },
           { text: `Tell her the fear is valid but cannot be the reason to never move forward`, consequence: `She hears it. She says: 'You are right but knowing that does not make it easier.' She needs something more than truth. She needs a plan that makes the truth manageable.`, flag: "truth_delivered" },
-          { text: `Ask if her family's disapproval of those two men was reasonable in retrospect`, consequence: `She pauses. Then: 'Yes. Both times they saw something I did not want to see.' This is an important thing for her to have said out loud. It changes the dynamic between her and her family's judgment.`, flag: "family_judgment_respected" },
+          { text: `Ask if her family's disapproval of those two men was reasonable in retrospect`, consequence: `She pauses. Then: 'Yes. Both times they saw something I did not want to see.' This is an important thing for her to have said out loud. It changes the dynamic between her and her family's judgment.`, flag: "time_waster" },
         ],
       },
       {
@@ -2043,7 +2043,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Answer the third question specifically and honestly — not with a compliment but with something real`, consequence: `Valentina translates. Her mother is quiet a moment. Then she says something in Spanish. Valentina translates: 'She says you said something true.' The mother stays on the call longer than expected.`, flag: "mother_impressed" },
           { text: `Answer all three questions through Valentina with warmth and care`, consequence: `The mother is warm in return. The call ends pleasantly. Valentina writes afterward: 'She said you have good energy.' This is not the highest approval but it is real.`, flag: "mother_warm" },
-          { text: `Ask Valentina to translate one question to her mother from you`, consequence: `You ask: 'What would you need to see to know your daughter is safe with me?' Valentina translates. The mother is quiet. Then she speaks for two minutes. Valentina translates. It is the most useful thing anyone has said to you about this family.`, flag: "mother_asked" },
+          { text: `Ask Valentina to translate one question to her mother from you`, consequence: `You ask: 'What would you need to see to know your daughter is safe with me?' Valentina translates. The mother is quiet. Then she speaks for two minutes. Valentina translates. It is the most useful thing anyone has said to you about this family.`, flag: "time_waster" },
         ],
       },
       {
@@ -2052,7 +2052,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Come to the call prepared — know something about his work, his city, his world`, consequence: `He mentions his work early in the call. You ask a specific question. He stops. He looks at you. 'You researched.' You tell him you wanted to know who he was before you asked for his daughter's hand. The call runs forty minutes.`, flag: "father_researched" },
           { text: `Let the call unfold naturally — no preparation script`, consequence: `The call is pleasant and surface-level. He is polite. He does not warm or cool. He tells Valentina later: 'He seems fine.' Fine is not the goal.`, flag: "father_natural" },
-          { text: `Ask him directly at some point: 'What do you need to see from me?'`, consequence: `He is surprised by the directness. He thinks. He says: 'Come here. Meet me in person. Everything you want to ask, ask me face to face.' The video call has produced an invitation.`, flag: "father_direct" },
+          { text: `Ask him directly at some point: 'What do you need to see from me?'`, consequence: `He is surprised by the directness. He thinks. He says: 'Come here. Meet me in person. Everything you want to ask, ask me face to face.' The video call has produced an invitation.`, flag: "time_waster" },
         ],
       },
       {
@@ -2061,7 +2061,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Eat with the family, follow the rhythm of the meal, say little until spoken to`, consequence: `Her father watches you at the table the way her father described in the video call — he is watching for what is real. You eat well. You compliment the food to the mother directly. Her father sees this.`, flag: "meal_correct" },
           { text: `Engage the family warmly during the meal — stories, questions, laughter`, consequence: `Her mother loves it. Her father observes. He is less warm than the mother but no less attentive. The warmth during the meal is natural, not performed. He notices the difference.`, flag: "meal_warm" },
-          { text: `Ask her father when he would like to speak — you do not want to intrude on the family's pace`, consequence: `He raises an eyebrow. 'After the coffee.' You have shown him you know how to wait. This matters to him more than he shows.`, flag: "meal_patient" },
+          { text: `Ask her father when he would like to speak — you do not want to intrude on the family's pace`, consequence: `He raises an eyebrow. 'After the coffee.' You have shown him you know how to wait. This matters to him more than he shows.`, flag: "time_waster" },
         ],
       },
       {
@@ -2105,7 +2105,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Offer to help — it feels right and the amounts are small`, consequence: `She is grateful. The amounts increase. A month later the requests are no longer small and no longer framed as crises — they are framed as investments in your future together.`, flag: `compromised` },
           { text: `Express sympathy each time but offer nothing financial`, consequence: `She pivots immediately each time. The crises resolve on their own. She never mentions them again. The pattern reveals itself as a script.`, flag: `observant` },
-          { text: `Name what you are seeing directly — 'I've noticed a pattern I want to ask you about'`, consequence: `She goes quiet for two days. Then returns warmer than ever. The crises stop. But you now know what the silence meant.`, flag: `direct` },
+          { text: `Name what you are seeing directly — 'I've noticed a pattern I want to ask you about'`, consequence: `She goes quiet for two days. Then returns warmer than ever. The crises stop. But you now know what the silence meant.`, flag: `early_detect` },
         ],
       },
       {
@@ -2114,7 +2114,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Insist on the spontaneous call — you need to see her unguarded`, consequence: `She declines. She needs thirty minutes. When the call comes the background has changed. Something in the timing does not settle.`, flag: `suspicious` },
           { text: `Accept the thirty minutes and observe the background carefully when she calls`, consequence: `The background is a room you have not seen before. The lighting is arranged. She is beautiful and composed. You ask about a detail in the background. She hesitates one second too long.`, flag: `analyzing` },
-          { text: `Ask her to show you her current surroundings right now — just pan the camera around`, consequence: `She laughs and does it. You see a room. In the background, briefly, a man's jacket on a chair. She does not notice you noticed.`, flag: `evidence` },
+          { text: `Ask her to show you her current surroundings right now — just pan the camera around`, consequence: `She laughs and does it. You see a room. In the background, briefly, a man's jacket on a chair. She does not notice you noticed.`, flag: `early_detect` },
         ],
       },
       {
@@ -2151,7 +2151,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Receive the warmth but internally note the pace — six weeks is six weeks`, consequence: `You keep your responses genuine but measured. She matches your pace. The relationship deepens at a speed that can be trusted.`, flag: "pace_controlled" },
           { text: `Match her energy — you feel it too`, consequence: `The intimacy accelerates. By week eight she is discussing your future children's names. Something in you needs to slow this down and examine it.`, flag: "pace_accelerated" },
-          { text: `Name the pace directly — 'I am enjoying this but I want us to build something real, not fast'`, consequence: `She pauses two days. Then: 'You are right. I sometimes mistake speed for depth.' The conversation resets at a healthier pace.`, flag: "pace_named" },
+          { text: `Name the pace directly — 'I am enjoying this but I want us to build something real, not fast'`, consequence: `She pauses two days. Then: 'You are right. I sometimes mistake speed for depth.' The conversation resets at a healthier pace.`, flag: "early_detect" },
         ],
       },
       {
@@ -2160,7 +2160,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Ask her to clarify naturally — 'I thought your mother was in Casablanca?'`, consequence: `She explains immediately and without defensiveness. Her mother has two residences — she stays with her sister in Rabat for months at a time. The inconsistency was real but the explanation is plausible.`, flag: "inconsistency_clarified" },
           { text: `Watch for more inconsistencies before raising anything`, consequence: `You find two more over the next two weeks. Her father's profession shifts. Her neighborhood changes. This is no longer a pattern of casual error.`, flag: "pattern_watched" },
-          { text: `Do a reverse image search of her photos`, consequence: `The photos return results under a different name on a different platform. The account is two years older than the one you are corresponding with. You now have the information you need.`, flag: "image_searched" },
+          { text: `Do a reverse image search of her photos`, consequence: `The photos return results under a different name on a different platform. The account is two years older than the one you are corresponding with. You now have the information you need.`, flag: "early_detect" },
         ],
       },
       {
@@ -2169,7 +2169,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Do not send money — express care but hold the line`, consequence: `She is upset. She goes quiet three days. When she returns the sister's condition has apparently resolved. No further mention of the procedure. No gratitude for the concern you expressed. The subject simply closes.`, flag: "money_refused" },
           { text: `Send the money — she is in need and you care about her`, consequence: `She thanks you warmly. Three weeks later her cousin needs help with school fees. The pattern has started. You have taught the system that it works.`, flag: "money_sent" },
-          { text: `Offer to pay a medical provider directly — no cash transfers`, consequence: `She says she will ask about it. She goes quiet four days. When she returns she says the situation has been handled another way. She does not raise money again for two months.`, flag: "direct_payment_offered" },
+          { text: `Offer to pay a medical provider directly — no cash transfers`, consequence: `She says she will ask about it. She goes quiet four days. When she returns she says the situation has been handled another way. She does not raise money again for two months.`, flag: "early_detect" },
         ],
       },
       {
@@ -2178,7 +2178,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Ask her casually where she is`, consequence: `She says she is visiting a friend in another city. She names the city. You check later — the sign matches. The inconsistency has a plausible explanation but you are more alert than before.`, flag: "location_questioned" },
           { text: `Screenshot the background and research the sign later`, consequence: `The sign belongs to a neighborhood in a city six hours from Casablanca. She has never mentioned being there. This is data.`, flag: "background_investigated" },
-          { text: `End the call normally and say nothing — you are watching`, consequence: `You review the call recording. The street, the accent of a passerby in the background, the time of the call — all of it is slightly wrong. Not dramatically. Slightly. You are watching now.`, flag: "silent_alert" },
+          { text: `End the call normally and say nothing — you are watching`, consequence: `You review the call recording. The street, the accent of a passerby in the background, the time of the call — all of it is slightly wrong. Not dramatically. Slightly. You are watching now.`, flag: "early_detect" },
         ],
       },
       {
@@ -2205,7 +2205,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Document what you learned — write it down so it becomes a standard, not a memory`, consequence: `You have now built a personal fraud detection protocol from direct experience. This is more valuable than any list you could have read.`, flag: "lesson_documented" },
           { text: `Move to the next profile immediately — you do not want the experience to make you cold`, consequence: `The next woman receives a version of you that is more discerning and less cold than you feared. The experience calibrated rather than damaged you.`, flag: "returned_calibrated" },
-          { text: `Take a week before engaging again — let the emotional cost settle`, consequence: `The week is necessary. You return clearer. The next profile receives the full version of you rather than the raw version.`, flag: "reset_taken" },
+          { text: `Take a week before engaging again — let the emotional cost settle`, consequence: `The week is necessary. You return clearer. The next profile receives the full version of you rather than the raw version.`, flag: "early_detect" },
         ],
       },
       {
@@ -2241,7 +2241,7 @@ const DEEP_SCENARIOS = {
         choices: [
         { text: `Answer specifically — what this platform represents that others do not`, consequence: `She writes back the same evening. Longer this time. She says: 'That is the first answer I have received that was not about my photos.' The conversation begins in earnest.`, flag: "specific_answer" },
         { text: `Answer generally — you are looking for a serious woman with good values`, consequence: `She responds: 'That describes every platform. What makes this one different to you?' She is giving you a second chance. Take it.`, flag: "general_answer" },
-        { text: `Turn it back — ask her the same question`, consequence: `She appreciates the redirect. She answers specifically. Then: 'Now you answer it.' She was testing whether you would deflect. You did not deflect — you went first by going second. She notes this.`, flag: "redirected" },
+        { text: `Turn it back — ask her the same question`, consequence: `She appreciates the redirect. She answers specifically. Then: 'Now you answer it.' She was testing whether you would deflect. You did not deflect — you went first by going second. She notes this.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -2250,7 +2250,7 @@ const DEEP_SCENARIOS = {
         choices: [
         { text: `Tell her you welcome her father's involvement — that is exactly what you are looking for`, consequence: `She goes quiet for a day. Then: 'Most men say that and then struggle when it actually happens. I am going to hold you to it.' She is not a test you pass once.`, flag: "father_welcomed" },
         { text: `Ask about her father — who he is, what he built, what he stands for`, consequence: `She opens. Her father has been in the community for forty years. What she tells you about him tells you everything you need to know about what she expects from a man.`, flag: "father_asked" },
-        { text: `Tell her you respect it but want to build the relationship with her first before involving family`, consequence: `She is direct: 'In my family there is no relationship that builds before family involvement. That is not how we do this.' She has told you the terms. They are not negotiable.`, flag: "family_avoided" },
+        { text: `Tell her you respect it but want to build the relationship with her first before involving family`, consequence: `She is direct: 'In my family there is no relationship that builds before family involvement. That is not how we do this.' She has told you the terms. They are not negotiable.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -2259,7 +2259,7 @@ const DEEP_SCENARIOS = {
         choices: [
         { text: `Answer honestly — what you actually practice, including what you are still working on`, consequence: `She receives the honesty with more respect than she would have received a perfect answer. 'I can work with a man who is honest about where he is. I cannot work with a man who performs what he is not.'`, flag: "honest_practice" },
         { text: `Answer with what your practice is at its best`, consequence: `She listens. She asks one follow-up question that reveals she can tell the difference between a man's best days and his average days. Your answer was about your best days. She knows.`, flag: "best_practice" },
-        { text: `Ask her what her practice looks like before answering`, consequence: `She tells you. It is detailed and consistent and clearly the product of a lifetime, not a recent decision. Then she asks again. Your answer now has to meet what she just described.`, flag: "her_practice_first" },
+        { text: `Ask her what her practice looks like before answering`, consequence: `She tells you. It is detailed and consistent and clearly the product of a lifetime, not a recent decision. Then she asks again. Your answer now has to meet what she just described.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -2268,7 +2268,7 @@ const DEEP_SCENARIOS = {
         choices: [
         { text: `Tell her you understand — and ask what being part of the community actually requires`, consequence: `She explains specifically. The Friday prayers, the community events, the relationships with the brothers her father knows. You are not joining a building — you are joining a network of relationships that goes back decades.`, flag: "community_understood" },
         { text: `Tell her you have your own community and you hope the two can coexist`, consequence: `She is quiet. Then: 'Coexist is not the word I used. I said he becomes part of it. If your community is healthy that should not be a problem.' She is precise with language. Pay attention.`, flag: "community_coexist" },
-        { text: `Ask if her father's approval of a man depends on community membership`, consequence: `She says yes — not formally, but practically. A man her father does not know and cannot vouch for within the community starts at a deficit. You are now thinking about this correctly.`, flag: "community_father_link" },
+        { text: `Ask if her father's approval of a man depends on community membership`, consequence: `She says yes — not formally, but practically. A man her father does not know and cannot vouch for within the community starts at a deficit. You are now thinking about this correctly.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -2277,7 +2277,7 @@ const DEEP_SCENARIOS = {
         choices: [
         { text: `Name it directly but without accusation: 'I noticed the silence — is everything alright?'`, consequence: `She tells you. A family matter she was not ready to share. She appreciates that you asked without demanding. 'You noticed and you asked right. That is not nothing.'`, flag: "silence_named" },
         { text: `Say nothing — receive her return and continue`, consequence: `She continues. But she has noted the pattern of your non-response. Two weeks later she tells you: 'I went quiet twice to see if you would say anything. You did not. I need a man who notices.'`, flag: "silence_ignored" },
-        { text: `Tell her directly that consistency matters to you and silences without explanation are difficult`, consequence: `She respects the boundary. She explains the family matter. She also says: 'My father will want to know you can hold a standard. You just showed me you can.' The boundary landed correctly.`, flag: "consistency_named" },
+        { text: `Tell her directly that consistency matters to you and silences without explanation are difficult`, consequence: `She respects the boundary. She explains the family matter. She also says: 'My father will want to know you can hold a standard. You just showed me you can.' The boundary landed correctly.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -2286,7 +2286,7 @@ const DEEP_SCENARIOS = {
         choices: [
         { text: `Answer from your actual experience — not theology, your experience`, consequence: `He listens without interruption. When you finish he says: 'That is the answer of a man who has actually been somewhere with this deen.' He asks the second question.`, flag: "authentic_answer" },
         { text: `Answer with correct Islamic language and theology`, consequence: `He listens. Then: 'I asked about your relationship, not your knowledge. Try again.' He is not harsh. He is precise. You understand what he is asking now.`, flag: "theology_answer" },
-        { text: `Ask him to clarify what he means by relationship`, consequence: `He pauses. Then he smiles — you hear it. 'Good. A man who asks for clarification before answering is a man who thinks before he speaks.' He explains. Your answer is better for having asked.`, flag: "clarified_first" },
+        { text: `Ask him to clarify what he means by relationship`, consequence: `He pauses. Then he smiles — you hear it. 'Good. A man who asks for clarification before answering is a man who thinks before he speaks.' He explains. Your answer is better for having asked.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -2295,7 +2295,7 @@ const DEEP_SCENARIOS = {
         choices: [
         { text: `Answer from knowledge of the specific history — the NOI, the community's origins, the political context`, consequence: `He is forward in his seat. You can hear it. He asks a follow-up. The conversation runs forty minutes past the three questions. Aisha is quiet the whole time. Afterward she tells you: 'He called me after the call. He never calls me after.'`, flag: "history_known" },
         { text: `Answer honestly that you are still learning this history but name what you do know`, consequence: `He respects the honesty. 'A man who knows what he does not know is further along than a man who thinks he knows everything.' He continues with the third question.`, flag: "honest_gap" },
-        { text: `Ask him what he thinks it means — you want to hear it from him`, consequence: `He speaks for twenty minutes. What he says becomes the foundation for everything you understand about Aisha and what she was raised inside. You received the teaching. He does not forget that you asked.`, flag: "father_taught" },
+        { text: `Ask him what he thinks it means — you want to hear it from him`, consequence: `He speaks for twenty minutes. What he says becomes the foundation for everything you understand about Aisha and what she was raised inside. You received the teaching. He does not forget that you asked.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -2304,7 +2304,7 @@ const DEEP_SCENARIOS = {
         choices: [
         { text: `Answer honestly: you do not know yet — but you intend to find out and to prove it through what you do`, consequence: `Silence on the line. Then: 'That is the only honest answer to that question.' He calls Aisha by name. He says something to her in Arabic. She is crying when she answers.`, flag: "honest_humility" },
         { text: `Answer with your qualities, your preparation, your seriousness`, consequence: `He listens. Then: 'Those are things you have done. I asked what makes you believe you deserve my daughter.' The question is different from what you answered. He gives you another chance.`, flag: "qualities_listed" },
-        { text: `Tell him you do not believe any man deserves a woman — a man earns the right to try`, consequence: `He is very still. Then: 'Say that again.' You say it again. He says: 'Aisha, did you hear that?' She had heard it the first time. The call ends thirty minutes later. Her father has made his decision.`, flag: "earning_framed" },
+        { text: `Tell him you do not believe any man deserves a woman — a man earns the right to try`, consequence: `He is very still. Then: 'Say that again.' You say it again. He says: 'Aisha, did you hear that?' She had heard it the first time. The call ends thirty minutes later. Her father has made his decision.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -2313,7 +2313,7 @@ const DEEP_SCENARIOS = {
         choices: [
         { text: `Move through the community with dignity — greet everyone, introduce yourself clearly`, consequence: `Her father watches how you move. After the prayers he says to the man standing next to him something you cannot hear. The man nods. You have passed something you did not know you were being tested on.`, flag: "community_dignity" },
         { text: `Stay close to her father — let him lead the introductions`, consequence: `He introduces you to three specific men. The order of introduction matters. You understand later that he was showing you to the people whose opinion he values most. You were being presented.`, flag: "father_led" },
-        { text: `Ask her father afterward who the men were that he introduced you to`, consequence: `He tells you. He also tells you why he introduced you in that order. The information tells you more about the community's structure than three months of correspondence could have.`, flag: "introductions_asked" },
+        { text: `Ask her father afterward who the men were that he introduced you to`, consequence: `He tells you. He also tells you why he introduced you in that order. The information tells you more about the community's structure than three months of correspondence could have.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -2322,7 +2322,7 @@ const DEEP_SCENARIOS = {
         choices: [
         { text: `Speak to her the way you spoke to her husband — honestly, without performance`, consequence: `She listens for twenty minutes. Then: 'You speak to me the same way you spoke to my husband. A man who performs changes register when the audience changes.' She has been watching for this.`, flag: "consistent_register" },
         { text: `Ask her what she needs to know that her husband did not ask`, consequence: `She pauses. Then she asks three things her husband did not ask. They are more personal and more precise. She is asking about your capacity for the daily work of a marriage, not its public face.`, flag: "mother_questions" },
-        { text: `Tell her what you told her husband and ask if she has questions`, consequence: `She has questions. Five of them. Each one goes somewhere her husband's questions did not go. By the end she says: 'You passed my husband's test. Mine is different.' She tells you if you passed.`, flag: "mother_test" },
+        { text: `Tell her what you told her husband and ask if she has questions`, consequence: `She has questions. Five of them. Each one goes somewhere her husband's questions did not go. By the end she says: 'You passed my husband's test. Mine is different.' She tells you if you passed.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -2331,7 +2331,7 @@ const DEEP_SCENARIOS = {
         choices: [
         { text: `Receive the teaching, ask what the figure represents to the family, then respond`, consequence: `He explains the meaning in full. Your response reflects that you heard the meaning, not just the number. He says: 'You are the first man who asked what it means before asking if it is negotiable.'`, flag: "mahr_meaning" },
         { text: `Agree to the figure without negotiation`, consequence: `He pauses. 'Do you understand what you agreed to?' You tell him yes and explain what you understood. He adjusts one component and explains why. He wanted to see if you would engage or simply comply.`, flag: "mahr_agreed" },
-        { text: `Ask what is customary in the community for a mahr`, consequence: `He tells you the range. He also tells you what the number he named represents above the customary amount — and why. This conversation teaches you more about what Aisha's family values than anything else.`, flag: "mahr_customary" },
+        { text: `Ask what is customary in the community for a mahr`, consequence: `He tells you the range. He also tells you what the number he named represents above the customary amount — and why. This conversation teaches you more about what Aisha's family values than anything else.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -2340,7 +2340,7 @@ const DEEP_SCENARIOS = {
         choices: [
         { text: `Arrive early, in correct dress, and receive whatever the imam needs to ask`, consequence: `The imam is direct and learned. He asks about your understanding of the nikah contract specifically — not marriage generally, the contract. You have studied it. The meeting runs ninety minutes. He calls her father that evening.`, flag: "imam_prepared" },
         { text: `Ask Aisha what the imam will want to know so you can prepare`, consequence: `She tells you what she knows. She also says: 'He will ask you something I cannot prepare you for. He always does.' The meeting happens. He asks the unprepared question. Your honest answer is better than any prepared one would have been.`, flag: "imam_partially_prepared" },
-        { text: `Approach the meeting as a conversation rather than an examination`, consequence: `The imam receives this approach. He says at the end: 'Most men come to be approved. You came to be known. That is different.' He calls her father.`, flag: "imam_conversation" },
+        { text: `Approach the meeting as a conversation rather than an examination`, consequence: `The imam receives this approach. He says at the end: 'Most men come to be approved. You came to be known. That is different.' He calls her father.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -2349,7 +2349,7 @@ const DEEP_SCENARIOS = {
         choices: [
         { text: `Speak clearly and without hesitation — this moment deserves your full presence`, consequence: `Her father exhales. You hear it. Her mother makes a sound. The room responds. Aisha, behind the partition, hears everything.`, flag: "nikah_present" },
         { text: `Let the weight of the moment be felt — you speak slowly and with full awareness`, consequence: `The imam looks at you when you finish. He says one word in Arabic that her father later translates: it means witnessed. The community has witnessed something real.`, flag: "nikah_weight" },
-        { text: `Speak directly to the commitment — not to the room, to Allah`, consequence: `The imam stops after you finish. He says: 'That is how it should be done.' Her father stands. The room follows.`, flag: "nikah_directed" },
+        { text: `Speak directly to the commitment — not to the room, to Allah`, consequence: `The imam stops after you finish. He says: 'That is how it should be done.' Her father stands. The room follows.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -2358,7 +2358,7 @@ const DEEP_SCENARIOS = {
         choices: [
         { text: `SUCCESS: Aisha — Atlanta, Georgia.`, consequence: `SUCCESS: Her father said: 'Welcome to the family.' Four words. Forty years of standards behind them. US Region — complete.`, flag: "success" },
         { text: `SUCCESS: The community received you.`, consequence: `SUCCESS: You did not enter a building. You entered a forty-year network of relationships built on a specific standard. You met that standard. Arc complete.`, flag: "success" },
-        { text: `SUCCESS: Arc complete.`, consequence: `SUCCESS: Aisha — Black American Muslim — complete. The US region is the same standard as every other region. You held it.`, flag: "success" },
+        { text: `SUCCESS: Arc complete.`, consequence: `SUCCESS: Aisha — Black American Muslim — complete. The US region is the same standard as every other region. You held it.`, flag: "cultural_fail" },
         ],
       },
     ],
@@ -2378,7 +2378,7 @@ const DEEP_SCENARIOS = {
         choices: [
         { text: `Tell her you respect the standard and want to understand what it looks like in practice`, consequence: `She is surprised by the response. She expected either a dismissal or a performance of enthusiasm. You gave her neither. She begins to explain.`, flag: "standard_respected" },
         { text: `Tell her you share a similar commitment to the law and ask which community she is affiliated with`, consequence: `She answers. She also asks about your community. The conversation enters a register most of her platform interactions never reach.`, flag: "community_asked" },
-        { text: `Tell her you are not Hebrew Israelite but are serious and open`, consequence: `She receives the honesty. 'Open is a starting point. I need to know what open means to you practically.' She is not closing the door. She is measuring the opening.`, flag: "honest_difference" },
+        { text: `Tell her you are not Hebrew Israelite but are serious and open`, consequence: `She receives the honesty. 'Open is a starting point. I need to know what open means to you practically.' She is not closing the door. She is measuring the opening.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -2387,7 +2387,7 @@ const DEEP_SCENARIOS = {
         choices: [
         { text: `Tell her you appreciate her being clear about the rhythm upfront`, consequence: `She says: 'The men who struggled with it always found a reason to reach out during that window. Then we would have a problem. I am telling you now so we do not have that problem later.'`, flag: "rhythm_accepted" },
         { text: `Ask her what the Sabbath looks like for her — what she does, what it means`, consequence: `She teaches you for thirty minutes. By the end you understand that the Sabbath is not an absence — it is the center of her week, not the interruption of it. This reframes everything.`, flag: "sabbath_learned" },
-        { text: `Tell her you will respect it and that you may have questions as you learn the practice`, consequence: `'Questions are welcome. Violations are not.' She says this warmly but precisely. The distinction is important and she has made it clear.`, flag: "questions_welcomed" },
+        { text: `Tell her you will respect it and that you may have questions as you learn the practice`, consequence: `'Questions are welcome. Violations are not.' She says this warmly but precisely. The distinction is important and she has made it clear.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -2396,7 +2396,7 @@ const DEEP_SCENARIOS = {
         choices: [
         { text: `Agree without hesitation`, consequence: `She notes the speed of agreement. 'You did not ask what the elder will do or say.' You tell her: whatever he needs to know, you will tell him. She goes quiet a moment. This was the right answer.`, flag: "elder_agreed" },
         { text: `Ask what the elder's role is and what he will assess`, consequence: `She explains. He assesses character, not knowledge. He has seen men perform knowledge for decades. He is looking for something knowledge cannot manufacture. She says you will know what it is when he asks his question.`, flag: "elder_role_understood" },
-        { text: `Ask if the elder's assessment is final or advisory`, consequence: `She thinks. 'It is final in the sense that I will not proceed against his counsel. But he is wise enough not to counsel based on surface. He will take his time.' You understand the weight.`, flag: "elder_weight_understood" },
+        { text: `Ask if the elder's assessment is final or advisory`, consequence: `She thinks. 'It is final in the sense that I will not proceed against his counsel. But he is wise enough not to counsel based on surface. He will take his time.' You understand the weight.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -2405,7 +2405,7 @@ const DEEP_SCENARIOS = {
         choices: [
         { text: `Tell her honestly what you know, what you respect, and what you are still learning`, consequence: `She receives this as the most honest answer she has gotten. 'I can build with honest. I cannot build with performance.' She continues.`, flag: "honest_household" },
         { text: `Tell her you believe in the law and want to keep it`, consequence: `She asks a specific question about the law that a man who keeps it would know immediately. The question is not a trap — it is a calibration. Your answer tells her where you actually are.`, flag: "law_claimed" },
-        { text: `Tell her the household standard is hers to set and you will honor it`, consequence: `She is quiet. Then: 'That is almost right. The household standard is set by the Most High. I keep it. I need a man who keeps it with me — not a man who tolerates what I keep.' The distinction matters.`, flag: "household_standard" },
+        { text: `Tell her the household standard is hers to set and you will honor it`, consequence: `She is quiet. Then: 'That is almost right. The household standard is set by the Most High. I keep it. I need a man who keeps it with me — not a man who tolerates what I keep.' The distinction matters.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -2414,7 +2414,7 @@ const DEEP_SCENARIOS = {
         choices: [
         { text: `Ask her how she navigates it herself — what has kept the relationship strong across the difference`, consequence: `She talks for twenty minutes about her father. The love between them is real and the difference is real and neither has eliminated the other. You understand what she needs from a man: the capacity to hold complexity without resolving it artificially.`, flag: "complexity_understood" },
         { text: `Tell her you have experience navigating family members with different beliefs`, consequence: `She asks for a specific example. You give one. She listens carefully. 'You did not try to convert them or dismiss them. Good.' She has been watching for this.`, flag: "experience_shared" },
-        { text: `Ask if her father will be involved in the marriage process despite the religious difference`, consequence: `She says yes — fully. 'He is my father. The religious difference does not change what he means to this family or what he means to me.' You have learned something important about her.`, flag: "father_role_understood" },
+        { text: `Ask if her father will be involved in the marriage process despite the religious difference`, consequence: `She says yes — fully. 'He is my father. The religious difference does not change what he means to this family or what he means to me.' You have learned something important about her.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -2423,7 +2423,7 @@ const DEEP_SCENARIOS = {
         choices: [
         { text: `Be fully present in the place she chose — ask her why she chose it`, consequence: `She tells you. The place has meaning in the community's history. You listen to the full meaning. She says: 'You listened to all of it. Most men wait for me to finish.'`, flag: "place_received" },
         { text: `Observe everything and let her lead`, consequence: `She notices the quality of your observation. She has brought men here before. She says: 'You see things. That is not as common as it should be.'`, flag: "observation_quality" },
-        { text: `Ask her what the city means to her community specifically`, consequence: `She teaches you for an hour while you walk. By the time you meet the family you understand the geography of her life in a way that will be visible in how you speak.`, flag: "city_learned" },
+        { text: `Ask her what the city means to her community specifically`, consequence: `She teaches you for an hour while you walk. By the time you meet the family you understand the geography of her life in a way that will be visible in how you speak.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -2432,7 +2432,7 @@ const DEEP_SCENARIOS = {
         choices: [
         { text: `Speak from your actual identity — not your resume, who you are when no one is watching`, consequence: `He listens without moving. When you finish he says: 'You told me something true.' He asks one follow-up question. The meeting runs two hours.`, flag: "identity_spoken" },
         { text: `Ask him what the distinction means to him — between who you are and what you do`, consequence: `He smiles. 'Good. You asked before you answered.' He explains the distinction at length. Your answer is shaped by what he taught you. He receives it as the product of a man who listens.`, flag: "distinction_asked" },
-        { text: `Start with your spiritual foundation and build outward from there`, consequence: `He nods as you begin. 'Start there. Always start there.' He receives the rest of your answer in the context of where you started.`, flag: "spirit_first" },
+        { text: `Start with your spiritual foundation and build outward from there`, consequence: `He nods as you begin. 'Start there. Always start there.' He receives the rest of your answer in the context of where you started.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -2441,7 +2441,7 @@ const DEEP_SCENARIOS = {
         choices: [
         { text: `Greet him with respect and let the look land without deflecting it`, consequence: `He nods once. He releases the handshake. He shows you to the table. Her mother comes out of the kitchen. The evening begins.`, flag: "look_received" },
         { text: `Speak to him directly about who you are before he has to ask`, consequence: `He is surprised. He was preparing his questions. You answered them before they were asked. He recalibrates. The conversation that follows is between two men who are both being direct.`, flag: "direct_with_father" },
-        { text: `Greet her mother first — she is in the kitchen and has been cooking for this dinner`, consequence: `Her father watches you go to the kitchen first. He says something to Deborah quietly. She tells you later: 'He said you knew who did the work for this dinner.' Her mother was the right first greeting.`, flag: "mother_first" },
+        { text: `Greet her mother first — she is in the kitchen and has been cooking for this dinner`, consequence: `Her father watches you go to the kitchen first. He says something to Deborah quietly. She tells you later: 'He said you knew who did the work for this dinner.' Her mother was the right first greeting.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -2450,7 +2450,7 @@ const DEEP_SCENARIOS = {
         choices: [
         { text: `Tell him you will walk beside her on her path — not ahead of it, not pulling her from it`, consequence: `He is quiet. Then: 'That is the right answer. Now I need to know if you mean it.' He asks you a specific question about the Sabbath. The test is not theological — it is practical. Do you understand what you are agreeing to?`, flag: "path_answer" },
         { text: `Tell him you are committed to the household she has built — and that it is a household worth being committed to`, consequence: `He looks at you a long time. 'You said something about her household that most men do not see.' He shifts the conversation. He is not finished but something has been established.`, flag: "household_valued" },
-        { text: `Ask him what pulling her off the path would look like — you want to know what to avoid specifically`, consequence: `He tells you. Specifically. The list is precise and personal and built from watching his daughter for twenty-nine years. It is the most useful information anyone has given you in this entire arc.`, flag: "father_specific" },
+        { text: `Ask him what pulling her off the path would look like — you want to know what to avoid specifically`, consequence: `He tells you. Specifically. The list is precise and personal and built from watching his daughter for twenty-nine years. It is the most useful information anyone has given you in this entire arc.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -2459,7 +2459,7 @@ const DEEP_SCENARIOS = {
         choices: [
         { text: `Ask Deborah what 'can be taught' means to the elder specifically`, consequence: `She explains. A man who already knows everything stops learning. A man who can be taught keeps growing. The elder values trajectory over position. You are now thinking about your growth as your most important quality.`, flag: "elder_word_understood" },
         { text: `Tell Deborah the elder's assessment humbles you and motivates you`, consequence: `She is quiet. Then: 'He will want to know you said that.' She tells him. He sends word back: 'Good.' One word from the elder carries the weight of a paragraph from anyone else.`, flag: "humble_response" },
-        { text: `Ask to send the elder a formal acknowledgment of his time and counsel`, consequence: `Deborah pauses. 'No one has asked to do that before.' She arranges it. The elder receives the acknowledgment. He tells the community he met a man who knows how to receive counsel. This reaches her father.`, flag: "elder_acknowledged" },
+        { text: `Ask to send the elder a formal acknowledgment of his time and counsel`, consequence: `Deborah pauses. 'No one has asked to do that before.' She arranges it. The elder receives the acknowledgment. He tells the community he met a man who knows how to receive counsel. This reaches her father.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -2468,7 +2468,7 @@ const DEEP_SCENARIOS = {
         choices: [
         { text: `Receive the blessing and ask the condition before agreeing to it`, consequence: `His condition: you will never use the religious difference between you and him as a wedge. You and he may walk different paths but you will always walk toward each other as family. You agree. He extends his hand.`, flag: "condition_received" },
         { text: `Tell him you accept the blessing and any condition he names`, consequence: `He names the condition. He watches your face when he names it. He is watching for hesitation. There is none. He nods.`, flag: "condition_accepted" },
-        { text: `Thank him for the blessing and tell him the condition is already how you intend to live`, consequence: `He looks at Deborah. She is already crying. He says: 'He said it before I finished.' Her mother stands and goes to the kitchen. The sounds from the kitchen are celebratory.`, flag: "condition_anticipated" },
+        { text: `Thank him for the blessing and tell him the condition is already how you intend to live`, consequence: `He looks at Deborah. She is already crying. He says: 'He said it before I finished.' Her mother stands and goes to the kitchen. The sounds from the kitchen are celebratory.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -2477,7 +2477,7 @@ const DEEP_SCENARIOS = {
         choices: [
         { text: `SUCCESS: Deborah — Washington D.C.`, consequence: `SUCCESS: She arranged the ceremony to honor both worlds her family lives in. You married a woman who already knew how to hold complexity with love. US Region — complete.`, flag: "success" },
         { text: `SUCCESS: The elder and the pastor stood in the same room.`, consequence: `SUCCESS: Because Deborah made them. That is who you married. Arc complete.`, flag: "success" },
-        { text: `SUCCESS: Arc complete.`, consequence: `SUCCESS: Deborah — Black American Hebrew Israelite — complete.`, flag: "success" },
+        { text: `SUCCESS: Arc complete.`, consequence: `SUCCESS: Deborah — Black American Hebrew Israelite — complete.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -2486,7 +2486,7 @@ const DEEP_SCENARIOS = {
         choices: [
         { text: `SUCCESS: You tell him: I will.`, consequence: `SUCCESS: Two words back. He holds the handshake one moment longer. Then he releases it and goes to find his wife. The arc is complete.`, flag: "success" },
         { text: `SUCCESS: Arc complete.`, consequence: `SUCCESS: Deborah — complete.`, flag: "success" },
-        { text: `SUCCESS: The US region holds the same standard as every other region on this platform.`, consequence: `SUCCESS: You held it. Certificate of Commission — US region stamp earned.`, flag: "success" },
+        { text: `SUCCESS: The US region holds the same standard as every other region on this platform.`, consequence: `SUCCESS: You held it. Certificate of Commission — US region stamp earned.`, flag: "cultural_fail" },
         ],
       },
     ,
@@ -2496,7 +2496,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Tell her you understand why staying was the choice that made her who she is`, consequence: `She is quiet. Then: 'You understood it without me explaining the theology.' She had been preparing to explain. You already knew. The call ends shortly after. Tomorrow she will carry this forward.`, flag: "staying_understood" },
           { text: `Ask her what made her stay`, consequence: `She tells you. The answer is the most complete picture of her character you have received in the entire arc. The call runs ninety minutes. By the end you know exactly who you are marrying and why.`, flag: "staying_asked" },
-          { text: `Tell her you are glad she stayed — and that you can see why it cost something`, consequence: `She says: 'That is the right thing to say.' Then: 'I mean it is actually right, not just kind.' You know the difference. She knows you know.`, flag: "cost_named" },
+          { text: `Tell her you are glad she stayed — and that you can see why it cost something`, consequence: `She says: 'That is the right thing to say.' Then: 'I mean it is actually right, not just kind.' You know the difference. She knows you know.`, flag: "cultural_fail" },
         ],
       }
     ],
@@ -2516,7 +2516,7 @@ const DEEP_SCENARIOS = {
         choices: [
         { text: `Tell her what you actually believe — starting with what you are certain of and honest about what you are not`, consequence: `She is quiet for a day. Then: 'That is the first honest answer I have received on any platform. Most men perform certainty they do not have.' The conversation begins.`, flag: "honest_belief" },
         { text: `Ask her what she believes first — you want to hear her before she hears you`, consequence: `She goes first. By the time she finishes you understand exactly what she is looking for and what she is not looking for. Your answer is shaped by that understanding.`, flag: "her_belief_first" },
-        { text: `Tell her your faith background and practice`, consequence: `She listens. She asks one follow-up. 'You told me what you do. I asked what you believe.' She is precise. The distinction matters to her.`, flag: "practice_not_belief" },
+        { text: `Tell her your faith background and practice`, consequence: `She listens. She asks one follow-up. 'You told me what you do. I asked what you believe.' She is precise. The distinction matters to her.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -2525,7 +2525,7 @@ const DEEP_SCENARIOS = {
         choices: [
         { text: `Tell her you welcome it`, consequence: `'You said that fast.' She notes the speed. 'The men who struggled with it always hesitated first.' You did not hesitate. She moves forward.`, flag: "pastor_welcomed" },
         { text: `Ask what her pastor is like`, consequence: `She describes him. What she describes tells you everything about what she values in leadership, in wisdom, and in a man. You are taking notes.`, flag: "pastor_described" },
-        { text: `Ask if her pastor has ever disapproved of a man she was considering`, consequence: `She pauses. 'Once.' She tells you why. The reason is precise and correct and the disapproval was right. She trusted his judgment then. She is telling you she will trust it again.`, flag: "pastor_history" },
+        { text: `Ask if her pastor has ever disapproved of a man she was considering`, consequence: `She pauses. 'Once.' She tells you why. The reason is precise and correct and the disapproval was right. She trusted his judgment then. She is telling you she will trust it again.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -2534,7 +2534,7 @@ const DEEP_SCENARIOS = {
         choices: [
         { text: `Ask her to tell you the standard explicitly`, consequence: `She names five things. They are not complicated. They are consistent. She has been clear about them her whole adult life and the men who struggled with them struggled because they were not honest about who they were from the beginning.`, flag: "standard_named" },
         { text: `Tell her you appreciate the transparency`, consequence: `'Transparency is the floor, not the ceiling.' She is warm but precise. She continues.`, flag: "transparency_floor" },
-        { text: `Tell her you will hold the standard`, consequence: `She says: 'I need to know you have a standard of your own before I need you to hold mine.' She is looking for a man with his own foundation, not a man who borrows hers.`, flag: "own_standard" },
+        { text: `Tell her you will hold the standard`, consequence: `She says: 'I need to know you have a standard of your own before I need you to hold mine.' She is looking for a man with his own foundation, not a man who borrows hers.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -2543,7 +2543,7 @@ const DEEP_SCENARIOS = {
         choices: [
         { text: `Let the silence be what it is — match his pace`, consequence: `Halfway there he says one thing: 'She has not brought anyone home in three years.' You understand what that means. You say: 'I understand why.' He nods once.`, flag: "silence_matched" },
         { text: `Initiate conversation — ask him about himself`, consequence: `He answers briefly. He asks you one question. Your answer to his one question tells him more than twenty questions would have. He calls his mother from the car. He says: 'He is real.'`, flag: "brother_engaged" },
-        { text: `Thank him for coming to get you`, consequence: `He nods. The rest of the drive is quiet. When you arrive he introduces you to his mother before his father. You understand later this was intentional — his mother's read of you goes first.`, flag: "brother_thanked" },
+        { text: `Thank him for coming to get you`, consequence: `He nods. The rest of the drive is quiet. When you arrive he introduces you to his mother before his father. You understand later this was intentional — his mother's read of you goes first.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -2552,7 +2552,7 @@ const DEEP_SCENARIOS = {
         choices: [
         { text: `Follow her to the table and eat what she made with genuine appreciation`, consequence: `She watches you eat. Her husband watches her watch you. Her brother watches all of it. The meal becomes a conversation that runs two hours past the food.`, flag: "meal_genuine" },
         { text: `Help her in the kitchen before sitting down`, consequence: `She stops. She looks at Kezia. Kezia is looking at the wall. Her mother says: 'He can stay.' She is only half joking.`, flag: "kitchen_help" },
-        { text: `Ask her about the food — specifically, not generically`, consequence: `She lights up. She explains the dish. Its history in her family. Who taught her. The conversation begins in the kitchen and does not end until after the dishes are done.`, flag: "food_asked" },
+        { text: `Ask her about the food — specifically, not generically`, consequence: `She lights up. She explains the dish. Its history in her family. Who taught her. The conversation begins in the kitchen and does not end until after the dishes are done.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -2561,7 +2561,7 @@ const DEEP_SCENARIOS = {
         choices: [
         { text: `Answer from scripture and from your own conviction`, consequence: `He listens completely. He asks a follow-up. Your follow-up answer is better than your first. He says: 'A man who improves on his first answer is a man who is actually thinking.' He stands and extends his hand.`, flag: "scripture_conviction" },
         { text: `Answer from your own understanding before going to scripture`, consequence: `He notes the order. 'You answered from yourself first. Then from the word. That is the right order for a man who actually lives it.' He continues.`, flag: "own_understanding_first" },
-        { text: `Ask him what he believes a husband owes a wife before answering`, consequence: `He smiles. 'I am asking you.' You answer. Then you ask him. He answers for twenty minutes. What he says is the foundation of what Kezia was raised inside. You needed to hear it.`, flag: "father_asked_back" },
+        { text: `Ask him what he believes a husband owes a wife before answering`, consequence: `He smiles. 'I am asking you.' You answer. Then you ask him. He answers for twenty minutes. What he says is the foundation of what Kezia was raised inside. You needed to hear it.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -2570,7 +2570,7 @@ const DEEP_SCENARIOS = {
         choices: [
         { text: `Walk with him wherever he leads`, consequence: `He takes you around the building. He shows you things. He tells you the history of the church. He is not talking about the building — he is talking about what Kezia grew up inside. By the time you are outside he has told you who she is in this community.`, flag: "pastor_walk" },
         { text: `Tell him it is an honor to be in the service`, consequence: `He receives it. Then: 'Tell me about yourself. Not your background. Yourself.' He has the same precision Kezia has. You understand where she learned it.`, flag: "honor_expressed" },
-        { text: `Ask him how long he has known Kezia's family`, consequence: `He says thirty years. He tells you one story about Kezia as a child. The story tells you what she was before the world got to her. You carry this through the rest of the arc.`, flag: "pastor_history" },
+        { text: `Ask him how long he has known Kezia's family`, consequence: `He says thirty years. He tells you one story about Kezia as a child. The story tells you what she was before the world got to her. You carry this through the rest of the arc.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -2579,7 +2579,7 @@ const DEEP_SCENARIOS = {
         choices: [
         { text: `Tell Kezia the pastor's standard is the right standard — consistency over time is all that matters`, consequence: `She says: 'That is exactly what he would say if I told him what you just said.' The alignment is not performed — it is real. She notices.`, flag: "consistency_understood" },
         { text: `Ask Kezia what genuine means to the pastor specifically`, consequence: `She thinks. 'He uses that word for men who are the same in the room as they are outside of it.' You understand. You ask her if she has seen that in you. She says yes. So far.`, flag: "genuine_defined" },
-        { text: `Ask what it would take to demonstrate consistency to him over time`, consequence: `She says: 'He will see it without you demonstrating it. That is the point.' You understand. Consistency is not performed for the pastor. It is lived and he will know.`, flag: "consistency_lived" },
+        { text: `Ask what it would take to demonstrate consistency to him over time`, consequence: `She says: 'He will see it without you demonstrating it. That is the point.' You understand. Consistency is not performed for the pastor. It is lived and he will know.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -2588,7 +2588,7 @@ const DEEP_SCENARIOS = {
         choices: [
         { text: `Receive the blessing with genuine gratitude — name specifically what it means to you`, consequence: `Her father nods at each thing you name. Her mother reaches over and touches your arm briefly. Her brother, still holding the handshake, tightens his grip once.`, flag: "blessing_named" },
         { text: `Thank each person in the room individually`, consequence: `Her father says: 'He thanked each of us.' He says it to her mother. As if he needed to confirm it happened. Her mother says: 'I know.' She had been watching.`, flag: "individual_thanks" },
-        { text: `Ask her father if there is anything else he needs from you before you proceed`, consequence: `He thinks. 'Just keep being what you have been this weekend.' He stands. The meeting is over. It was the shortest and most complete answer he could have given.`, flag: "father_asked" },
+        { text: `Ask her father if there is anything else he needs from you before you proceed`, consequence: `He thinks. 'Just keep being what you have been this weekend.' He stands. The meeting is over. It was the shortest and most complete answer he could have given.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -2597,7 +2597,7 @@ const DEEP_SCENARIOS = {
         choices: [
         { text: `SUCCESS: Kezia — Houston, Texas.`, consequence: `SUCCESS: Her brother stepped forward. The quiet man who watched everything chose to stand beside you. US Region — complete.`, flag: "success" },
         { text: `SUCCESS: The pastor said 'consistent.' You were.`, consequence: `SUCCESS: Arc complete. Kezia — Black American Christian — complete.`, flag: "success" },
-        { text: `SUCCESS: Arc complete.`, consequence: `SUCCESS: Houston — complete.`, flag: "success" },
+        { text: `SUCCESS: Arc complete.`, consequence: `SUCCESS: Houston — complete.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -2606,7 +2606,7 @@ const DEEP_SCENARIOS = {
         choices: [
         { text: `SUCCESS: You tell him: I will not.`, consequence: `SUCCESS: He holds your gaze one moment. He believes you. Arc complete.`, flag: "success" },
         { text: `SUCCESS: Arc complete.`, consequence: `SUCCESS: Kezia — complete.`, flag: "success" },
-        { text: `SUCCESS: The US region — complete.`, consequence: `SUCCESS: Certificate of Commission — US region stamp earned.`, flag: "success" },
+        { text: `SUCCESS: The US region — complete.`, consequence: `SUCCESS: Certificate of Commission — US region stamp earned.`, flag: "cultural_fail" },
         ],
       },
     ,
@@ -2616,7 +2616,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Listen completely`, consequence: `He says: 'She has not been happy in a long time. Whatever you are doing, keep doing it.' He goes back inside. He has said everything he needed to say.`, flag: "brother_spoke" },
           { text: `Tell him you appreciate him watching and ask what he saw`, consequence: `He looks at you. 'I saw you eat without performing. I saw you ask my mother about the food before you complimented it. I saw you look at my sister when she was not looking at you.' He goes inside. You understand what he was watching for.`, flag: "brother_saw" },
-          { text: `Tell him you intend to make his sister happy`, consequence: `He nods once. 'I know. That is why I am talking to you instead of not talking to you.' He goes inside. The bar was set correctly and you passed it.`, flag: "brother_nod" },
+          { text: `Tell him you intend to make his sister happy`, consequence: `He nods once. 'I know. That is why I am talking to you instead of not talking to you.' He goes inside. The bar was set correctly and you passed it.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -2625,7 +2625,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Be fully present in the service — not performing worship, but not standing apart from it either`, consequence: `Kezia notices. Afterward: 'You were there. You were not just sitting there.' The difference matters to her more than she can explain.`, flag: "service_present" },
           { text: `Follow the family's lead throughout the service`, consequence: `Her father notices you following rather than leading in a context where you do not know the form. He tells her mother: 'He knows how to follow when it is not his territory.' Her mother says: 'That will matter later.'`, flag: "service_following" },
-          { text: `Find something genuine to connect with in the service`, consequence: `The music. You let the music be what it is. Kezia sees your face during one particular song. She tells you later: 'That song was my grandmother's song. I watched your face when it played.' You had not known that.`, flag: "service_genuine" },
+          { text: `Find something genuine to connect with in the service`, consequence: `The music. You let the music be what it is. Kezia sees your face during one particular song. She tells you later: 'That song was my grandmother's song. I watched your face when it played.' You had not known that.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -2634,7 +2634,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Receive it — eat what he made and tell him specifically what is good about it`, consequence: `He sits across from you while you eat. He watches you the way he watched Kezia grow up — with the specific attention of a man who is paying close attention to something that matters to him. The breakfast is the goodbye.`, flag: "breakfast_received" },
           { text: `Ask him why he cooked this morning`, consequence: `He thinks. Then: 'I wanted to do something for the person my daughter chose.' He says it simply. It is the most direct thing he has said to you all weekend. Her mother wipes her eyes in the doorway.`, flag: "breakfast_asked" },
-          { text: `Thank him and her mother together before you leave`, consequence: `He nods. Her mother hugs you — the first time. She says one thing: 'Come back soon.' Not for a visit. Come back. You are already family.`, flag: "parents_thanked" },
+          { text: `Thank him and her mother together before you leave`, consequence: `He nods. Her mother hugs you — the first time. She says one thing: 'Come back soon.' Not for a visit. Come back. You are already family.`, flag: "cultural_fail" },
         ],
       }
     ],
@@ -2654,7 +2654,7 @@ const DEEP_SCENARIOS = {
         choices: [
         { text: `Answer specifically and from your actual experience of home`, consequence: `She responds the same day. Her answer is longer than her question. The conversation enters a register that most opening exchanges never reach.`, flag: "home_specific" },
         { text: `Ask her what prompted the question`, consequence: `She explains. Home is the thing she is most careful about — a man who does not know what home means to him cannot build one. Your answer after her explanation is shaped by knowing what she is actually asking.`, flag: "question_prompted" },
-        { text: `Answer and then ask the same question back`, consequence: `She answers. What she describes is built on three generations of women who kept a home that held everything together. You are now understanding what you are being considered for.`, flag: "home_reciprocal" },
+        { text: `Answer and then ask the same question back`, consequence: `She answers. What she describes is built on three generations of women who kept a home that held everything together. You are now understanding what you are being considered for.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -2663,7 +2663,7 @@ const DEEP_SCENARIOS = {
         choices: [
         { text: `Ask to hear about her grandmother — who she is, what she built`, consequence: `Marisol speaks for forty minutes without stopping. The grandmother is the clearest picture of who Marisol is becoming. You have just received the most important briefing of this arc.`, flag: "grandmother_asked" },
         { text: `Tell Marisol you look forward to meeting her grandmother`, consequence: `She goes quiet. Then: 'You said that like it is a given.' You tell her it is. She says: 'Most men avoid the grandmother.' You are not most men.`, flag: "grandmother_anticipated" },
-        { text: `Ask if her grandmother approves of who Marisol speaks to on the platform`, consequence: `She laughs. 'My grandmother does not know what a platform is. But she knows everything that matters. She will know about you within twenty-four hours of you meeting her.'`, flag: "grandmother_dynamic" },
+        { text: `Ask if her grandmother approves of who Marisol speaks to on the platform`, consequence: `She laughs. 'My grandmother does not know what a platform is. But she knows everything that matters. She will know about you within twenty-four hours of you meeting her.'`, flag: "cultural_fail" },
         ],
       },
       {
@@ -2672,7 +2672,7 @@ const DEEP_SCENARIOS = {
         choices: [
         { text: `Answer honestly about your spiritual life and its foundation`, consequence: `She listens completely. Then: 'You did not apologize for what you are or perform what you are not. That is what I needed to hear.' The conversation deepens.`, flag: "spiritual_honest" },
         { text: `Ask what the two generations cost the family — you want to understand what she is protecting against`, consequence: `She tells you. The story is specific and painful and important. What she is protecting against is not absence of Catholicism — it is absence of spiritual foundation. You understand the distinction.`, flag: "cost_understood" },
-        { text: `Tell her your spiritual foundation and ask if it is compatible with her family's life`, consequence: `She thinks carefully. 'Compatible is not the same as identical. My grandmother married a man who shared nothing and it broke something. I am not asking for identical. I am asking for real.' You hear the difference.`, flag: "compatible_not_identical" },
+        { text: `Tell her your spiritual foundation and ask if it is compatible with her family's life`, consequence: `She thinks carefully. 'Compatible is not the same as identical. My grandmother married a man who shared nothing and it broke something. I am not asking for identical. I am asking for real.' You hear the difference.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -2681,7 +2681,7 @@ const DEEP_SCENARIOS = {
         choices: [
         { text: `Trust the order she has chosen — she knows her family`, consequence: `The grandmother's house smells like everything good. The grandmother is small and precise and her eyes miss nothing. She speaks to Marisol in Spanish. Marisol translates: 'She says you have good posture. She believes posture tells you everything.'`, flag: "order_trusted" },
         { text: `Ask Marisol on the way why the grandmother comes first`, consequence: `She explains. The grandmother's read of a man is final. Her parents have learned to wait for it. If the grandmother does not approve the parents do not proceed. The order is not custom — it is protocol.`, flag: "order_explained" },
-        { text: `Prepare yourself on the walk to the door — whatever this is, be present for it`, consequence: `The grandmother opens the door before you knock. She looks at you for a long moment. She says one word to Marisol. Marisol squeezes your arm.`, flag: "prepared_presence" },
+        { text: `Prepare yourself on the walk to the door — whatever this is, be present for it`, consequence: `The grandmother opens the door before you knock. She looks at you for a long moment. She says one word to Marisol. Marisol squeezes your arm.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -2690,7 +2690,7 @@ const DEEP_SCENARIOS = {
         choices: [
         { text: `Answer honestly — what your prayer practice is and what it means to you`, consequence: `The grandmother listens to the translation. She is quiet a long time. Then she speaks. Marisol translates with tears forming: 'She says a man who prays honestly is a man who can be trusted with what she loves.'`, flag: "prayer_honest" },
         { text: `Ask the grandmother what prayer means to her — before you answer`, consequence: `The grandmother looks at Marisol. She speaks. Marisol translates: 'She says you asked the right question.' She answers at length. Your answer comes after. It is shaped by hers.`, flag: "grandmother_prayer_first" },
-        { text: `Answer in a way that honors her tradition and your own simultaneously`, consequence: `The grandmother listens to the translation. She speaks one sentence. Marisol translates: 'She says you held both things at once. That is a man who can hold a family.'`, flag: "both_honored" },
+        { text: `Answer in a way that honors her tradition and your own simultaneously`, consequence: `The grandmother listens to the translation. She speaks one sentence. Marisol translates: 'She says you held both things at once. That is a man who can hold a family.'`, flag: "cultural_fail" },
         ],
       },
       {
@@ -2699,7 +2699,7 @@ const DEEP_SCENARIOS = {
         choices: [
         { text: `Thank him for receiving you`, consequence: `He says: 'My mother does not call for men she does not approve of. You are the third man Marisol has brought here and the first my mother called about.' He takes you inside.`, flag: "father_warm" },
         { text: `Ask him what his mother said`, consequence: `He laughs. 'She said his posture is good and he knows how to pray.' He looks at you. 'From my mother, that is a full endorsement.' Her mother comes from the kitchen.`, flag: "mother_word_asked" },
-        { text: `Greet him and let him lead`, consequence: `He leads you through the house. He shows you photographs. He is narrating the family history through the photographs. You are receiving an orientation. You give it the attention it deserves.`, flag: "father_led" },
+        { text: `Greet him and let him lead`, consequence: `He leads you through the house. He shows you photographs. He is narrating the family history through the photographs. You are receiving an orientation. You give it the attention it deserves.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -2708,7 +2708,7 @@ const DEEP_SCENARIOS = {
         choices: [
         { text: `Hear the request before agreeing to it`, consequence: `His request: bring her to Chicago for the grandmother's birthday every year. As long as the grandmother lives. You agree immediately. He says: 'You did not hesitate.' You tell him there was nothing to hesitate about.`, flag: "request_heard" },
         { text: `Tell him you accept the blessing and his request before he names it`, consequence: `He stops. 'I have not told you what it is.' You tell him whatever connects Marisol to her grandmother will never be negotiated away by you. He looks at his wife. His wife looks at Marisol.`, flag: "request_anticipated" },
-        { text: `Ask if the grandmother will be part of the ceremony`, consequence: `He is surprised by the question. He had not thought to ask. He looks at his wife. She immediately begins making calls. The grandmother will be present. Her father thanks you for asking.`, flag: "grandmother_ceremony_asked" },
+        { text: `Ask if the grandmother will be part of the ceremony`, consequence: `He is surprised by the question. He had not thought to ask. He looks at his wife. She immediately begins making calls. The grandmother will be present. Her father thanks you for asking.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -2717,7 +2717,7 @@ const DEEP_SCENARIOS = {
         choices: [
         { text: `SUCCESS: Marisol — Chicago, Illinois.`, consequence: `SUCCESS: The grandmother saved something for this day. US Region — complete.`, flag: "success" },
         { text: `SUCCESS: The posture and the prayer were enough.`, consequence: `SUCCESS: The grandmother's standard was precise and complete. You met it. Arc complete.`, flag: "success" },
-        { text: `SUCCESS: Arc complete.`, consequence: `SUCCESS: Marisol — Latina Catholic — complete.`, flag: "success" },
+        { text: `SUCCESS: Arc complete.`, consequence: `SUCCESS: Marisol — Latina Catholic — complete.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -2726,7 +2726,7 @@ const DEEP_SCENARIOS = {
         choices: [
         { text: `SUCCESS: You tell her: I will.`, consequence: `SUCCESS: She pats your face once and lets go. She turns to find someone to sit with. Arc complete.`, flag: "success" },
         { text: `SUCCESS: Arc complete.`, consequence: `SUCCESS: Marisol — complete.`, flag: "success" },
-        { text: `SUCCESS: US Region — complete.`, consequence: `SUCCESS: Certificate of Commission — US region stamp earned.`, flag: "success" },
+        { text: `SUCCESS: US Region — complete.`, consequence: `SUCCESS: Certificate of Commission — US region stamp earned.`, flag: "cultural_fail" },
         ],
       },
     ,
@@ -2736,7 +2736,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Meet the handshake fully and let the look happen`, consequence: `He nods. He takes you to show you something he built in the basement of the house — a piece of furniture he made for Marisol when she was ten. He is showing you something without explaining it.`, flag: "father_handshake" },
           { text: `Ask him about his work`, consequence: `He talks for twenty minutes. His work is his life in the way that most people's lives are not their work. By the time he stops talking you understand what hands-built-things mean in this family and what a man who uses his hands is worth in their estimation.`, flag: "father_work" },
-          { text: `Tell him the house is well built — you noticed specific things`, consequence: `He stops. He looks at you. 'You said specific things.' He calls his wife from the kitchen. He says something in Spanish. She responds from the kitchen. He smiles.`, flag: "father_specific" },
+          { text: `Tell him the house is well built — you noticed specific things`, consequence: `He stops. He looks at you. 'You said specific things.' He calls his wife from the kitchen. He says something in Spanish. She responds from the kitchen. He smiles.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -2745,7 +2745,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Listen completely even though you do not understand the words — your attention is the answer`, consequence: `When she finishes she says one thing in English, clearly: 'Good. You listened to what you could not understand. That is what marriage is.' She calls Marisol back in.`, flag: "grandmother_listened" },
           { text: `Ask her at the end what she told you`, consequence: `She has Marisol translate. What she said was the history of the family — the full version, the one she has never told a man before. She tells Marisol: 'He earned it by staying present.'`, flag: "grandmother_history" },
-          { text: `Tell her through Marisol afterward that the conversation meant something even without the words`, consequence: `The grandmother hears the translation. She says something. Marisol's eyes fill. She translates: 'My grandmother says that is the right understanding of what a family teaches a man before it receives him.'`, flag: "grandmother_teaching" },
+          { text: `Tell her through Marisol afterward that the conversation meant something even without the words`, consequence: `The grandmother hears the translation. She says something. Marisol's eyes fill. She translates: 'My grandmother says that is the right understanding of what a family teaches a man before it receives him.'`, flag: "cultural_fail" },
         ],
       },
       {
@@ -2754,7 +2754,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Ask about each place she shows you — what it means, what happened there`, consequence: `She tells stories for two hours. By the end you know the neighborhood the way someone who grew up there knows it. She says: 'You asked about everything. Most people just walk through.'`, flag: "neighborhood_asked" },
           { text: `Let the showing happen without narrating — receive what she shows you`, consequence: `She notices the quality of your reception. At the end: 'You did not try to say something smart about everything I showed you. You just received it.' This is a form of respect she needed to see.`, flag: "neighborhood_received" },
-          { text: `Tell her something you noticed that she did not point out`, consequence: `She stops. She looks at what you noticed. 'I have walked this street a thousand times and never seen that.' You saw something she did not. She calls her mother from the street.`, flag: "neighborhood_noticed" },
+          { text: `Tell her something you noticed that she did not point out`, consequence: `She stops. She looks at what you noticed. 'I have walked this street a thousand times and never seen that.' You saw something she did not. She calls her mother from the street.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -2763,7 +2763,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Receive the public blessing with full presence — this is a ceremony even if it does not feel like one`, consequence: `Her father stands when the grandmother finishes. He speaks briefly. Marisol translates: 'He says the grandmother's word is the family's word.' He extends his hand again. This handshake is different from the first one.`, flag: "public_blessing" },
           { text: `Thank the grandmother publicly — in front of the family, directly`, consequence: `The grandmother was not expecting to be thanked in front of the family. She looks at Marisol. She says something. Marisol laughs through tears. Translation: 'She says most men thank the father. You thanked her. She approves.'`, flag: "grandmother_thanked" },
-          { text: `Ask the grandmother what she wants you to carry forward from this family`, consequence: `She thinks for a long time. Then she names one thing. It is not a rule — it is a value. The value is specific to this family and to what they have built over three generations. You receive it. You will carry it.`, flag: "grandmother_value" },
+          { text: `Ask the grandmother what she wants you to carry forward from this family`, consequence: `She thinks for a long time. Then she names one thing. It is not a rule — it is a value. The value is specific to this family and to what they have built over three generations. You receive it. You will carry it.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -2772,7 +2772,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `SUCCESS: Marisol — Chicago, Illinois.`, consequence: `SUCCESS: The grandmother saved the dress. The priest has known her since her baptism. The neighborhood, the market, the thirty years, the hands that built the furniture — all of it was the context you were received into. US Region — complete.`, flag: "success" },
           { text: `SUCCESS: The grandmother's second meeting was the real ceremony.`, consequence: `SUCCESS: Everything after that was confirmation. Arc complete.`, flag: "success" },
-          { text: `SUCCESS: Arc complete.`, consequence: `SUCCESS: Marisol — Latina Catholic — complete.`, flag: "success" },
+          { text: `SUCCESS: Arc complete.`, consequence: `SUCCESS: Marisol — Latina Catholic — complete.`, flag: "cultural_fail" },
         ],
       }
     ],
@@ -2792,7 +2792,7 @@ const DEEP_SCENARIOS = {
         choices: [
         { text: `Receive it without drama — ask what the four years have been like`, consequence: `She exhales. 'You did not ask why I converted. Everyone asks why. You asked what the four years have been like.' She tells you. The four years are the most important part.`, flag: "four_years_asked" },
         { text: `Tell her you respect what it costs to choose a faith against your family's current`, consequence: `She is quiet. Then: 'You understood the cost without me explaining it.' She continues.`, flag: "cost_understood" },
-        { text: `Ask about her family's specific concerns about her conversion`, consequence: `She tells you. They are not theological — they are cultural. They are afraid of losing her to something foreign. She has spent four years proving that she is still herself. The faith deepened her, it did not replace her.`, flag: "family_concerns" },
+        { text: `Ask about her family's specific concerns about her conversion`, consequence: `She tells you. They are not theological — they are cultural. They are afraid of losing her to something foreign. She has spent four years proving that she is still herself. The faith deepened her, it did not replace her.`, flag: "early_detect" },
         ],
       },
       {
@@ -2801,7 +2801,7 @@ const DEEP_SCENARIOS = {
         choices: [
         { text: `Tell her you have thought about this and ask her how she navigates it herself`, consequence: `She teaches you for an hour. The skill she has developed — holding her faith fully while remaining fully present in her family — is a skill she needs a husband to also have. You are taking notes.`, flag: "navigation_learned" },
         { text: `Tell her you can navigate it and ask what specifically it requires`, consequence: `She names three things. They are not complicated. They require consistency and respect and the willingness to not make her family the enemy. You can do all three.`, flag: "navigation_specific" },
-        { text: `Ask her whether her family's position has softened in four years`, consequence: `She says yes — slowly. Her mother now asks about Ramadan. Her father has stopped saying things that hurt. Her brother started saying salaam when he leaves. These are small things. To her they are everything.`, flag: "family_softening" },
+        { text: `Ask her whether her family's position has softened in four years`, consequence: `She says yes — slowly. Her mother now asks about Ramadan. Her father has stopped saying things that hurt. Her brother started saying salaam when he leaves. These are small things. To her they are everything.`, flag: "early_detect" },
         ],
       },
       {
@@ -2810,7 +2810,7 @@ const DEEP_SCENARIOS = {
         choices: [
         { text: `Tell her your practice honestly — what you do and where you are still growing`, consequence: `She receives it. 'I would rather a man tell me where he is than where he thinks he should be.' The conversation establishes a real baseline.`, flag: "practice_honest" },
         { text: `Ask her how she maintained the practice without a community around her initially`, consequence: `She tells you. The first year she prayed alone in her apartment. She found a masjid in her second year. The discipline she built before community is different from what most people build. You are listening to someone who did the hard thing first.`, flag: "practice_solo" },
-        { text: `Tell her you respect the consistency and ask what she needs from a husband to maintain it`, consequence: `She is specific. She needs a household that does not make her practice feel like an interruption. She needs a husband who at minimum understands the prayer times. She needs Ramadan to be honored in the home. These are clear and manageable.`, flag: "practice_needs" },
+        { text: `Tell her you respect the consistency and ask what she needs from a husband to maintain it`, consequence: `She is specific. She needs a household that does not make her practice feel like an interruption. She needs a husband who at minimum understands the prayer times. She needs Ramadan to be honored in the home. These are clear and manageable.`, flag: "early_detect" },
         ],
       },
       {
@@ -2819,7 +2819,7 @@ const DEEP_SCENARIOS = {
         choices: [
         { text: `Tell her you see both — the city she is from and who she is becoming`, consequence: `She looks at you for a moment. 'You heard the sentence correctly.' She takes you through the neighborhood she grew up in. The tour is an orientation to her full self.`, flag: "both_seen" },
         { text: `Ask her what the difference is — between who she is from and who she is becoming`, consequence: `She thinks. 'The city made me who I am. The deen is making me who I will be. They are not fighting. They are adding.' This is one of the most precise things anyone has said to you in this platform.`, flag: "difference_asked" },
-        { text: `Let her lead the time before the family — follow her pace through the city`, consequence: `She takes two hours. By the time you reach her family's neighborhood you know the city she grew up in, the block she ran on, the school she went to. You are not meeting a woman. You are meeting a history.`, flag: "city_received" },
+        { text: `Let her lead the time before the family — follow her pace through the city`, consequence: `She takes two hours. By the time you reach her family's neighborhood you know the city she grew up in, the block she ran on, the school she went to. You are not meeting a woman. You are meeting a history.`, flag: "early_detect" },
         ],
       },
       {
@@ -2828,7 +2828,7 @@ const DEEP_SCENARIOS = {
         choices: [
         { text: `Speak to her the way you would speak to anyone whose daughter you respect — directly and without performance`, consequence: `She listens. When you are done she says in Spanish something to Samira. Samira translates: 'She says you talk like you mean it.' Her mother brings you into the kitchen.`, flag: "direct_with_mother" },
         { text: `Address her concern about Samira's faith directly — you have been thinking about how her family feels`, consequence: `The mother stops. She was not expecting this. She sits down. She tells you what four years of watching her daughter choose something foreign to her has been like. You needed to hear it. You receive it without defending anything.`, flag: "mother_concern_addressed" },
-        { text: `Ask her mother what she needs to know to feel at ease about this`, consequence: `She names three things. They are not about religion. They are about her daughter specifically — her happiness, her connection to the family, her safety. You address each one. She calls her husband from the other room.`, flag: "mother_needs_asked" },
+        { text: `Ask her mother what she needs to know to feel at ease about this`, consequence: `She names three things. They are not about religion. They are about her daughter specifically — her happiness, her connection to the family, her safety. You address each one. She calls her husband from the other room.`, flag: "early_detect" },
         ],
       },
       {
@@ -2837,7 +2837,7 @@ const DEEP_SCENARIOS = {
         choices: [
         { text: `Tell him yes — and that his coming back after eight months tells you something about who he is`, consequence: `He is very still. No one has said that to him before. He looks at his hands. Then: 'I came back because she is my daughter. The faith does not change that.' You tell him: 'That is exactly what I needed to know about you.' He shakes your hand differently after that.`, flag: "father_return_named" },
         { text: `Tell him you can say the same — and ask what it looks like to him for a man to respect his daughter's faith`, consequence: `He thinks. He names four things. They are practical and loving and specific to Samira. You have received the manual from the man who knows her best.`, flag: "father_specific" },
-        { text: `Tell him you respect his daughter completely — including what she has chosen`, consequence: `He nods. 'Including.' He repeats the word. 'Most men say they respect her. You said including what she chose. That word matters.' He continues.`, flag: "including_noticed" },
+        { text: `Tell him you respect his daughter completely — including what she has chosen`, consequence: `He nods. 'Including.' He repeats the word. 'Most men say they respect her. You said including what she chose. That word matters.' He continues.`, flag: "early_detect" },
         ],
       },
       {
@@ -2846,7 +2846,7 @@ const DEEP_SCENARIOS = {
         choices: [
         { text: `Thank them for the blessing and specifically for choosing to give it together`, consequence: `Her mother puts her hand on her husband's arm. Her father covers her hand with his. They did not plan this. You named something that made it real.`, flag: "together_named" },
         { text: `Tell them what their blessing means to Samira even if she has not said it`, consequence: `Samira makes a sound in the other room. She heard. Her mother goes to her. Her father looks at you: 'How did you know she needed to hear that?' You tell him: because she told you what the four years were like.`, flag: "samira_needs_named" },
-        { text: `Accept the blessing with gratitude and ask if there is anything more they need from you`, consequence: `Her father says: 'Keep Sunday calls going. Whatever day you observe. Keep calling.' The request is about connection. You agree.`, flag: "sunday_calls" },
+        { text: `Accept the blessing with gratitude and ask if there is anything more they need from you`, consequence: `Her father says: 'Keep Sunday calls going. Whatever day you observe. Keep calling.' The request is about connection. You agree.`, flag: "early_detect" },
         ],
       },
       {
@@ -2855,7 +2855,7 @@ const DEEP_SCENARIOS = {
         choices: [
         { text: `SUCCESS: Samira — Miami, Florida.`, consequence: `SUCCESS: Her mother wore the quinceañera dress. The faith did not replace who she was. It added. US Region — complete.`, flag: "success" },
         { text: `SUCCESS: She prayed alone before she found community. She found community. Now she has a family.`, consequence: `SUCCESS: Arc complete. Samira — Latina Muslim revert — complete.`, flag: "success" },
-        { text: `SUCCESS: Arc complete.`, consequence: `SUCCESS: Miami — complete.`, flag: "success" },
+        { text: `SUCCESS: Arc complete.`, consequence: `SUCCESS: Miami — complete.`, flag: "early_detect" },
         ],
       },
       {
@@ -2864,7 +2864,7 @@ const DEEP_SCENARIOS = {
         choices: [
         { text: `SUCCESS: Tell her: it is not difficult to love someone who is this real.`, consequence: `SUCCESS: She squeezes your hand and lets go. She goes to find Samira. Arc complete.`, flag: "success" },
         { text: `SUCCESS: Arc complete.`, consequence: `SUCCESS: Samira — complete.`, flag: "success" },
-        { text: `SUCCESS: US Region — complete.`, consequence: `SUCCESS: Certificate of Commission — US region stamp earned.`, flag: "success" },
+        { text: `SUCCESS: US Region — complete.`, consequence: `SUCCESS: Certificate of Commission — US region stamp earned.`, flag: "early_detect" },
         ],
       },
     ,
@@ -2874,7 +2874,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Enter with the appropriate respect — this space means something specific to her`, consequence: `She watches you enter. You remove your shoes without being asked. You do not speak immediately. She says nothing for two minutes. Then: 'This is where I found it. After I lost everything else.'`, flag: "masjid_respect" },
           { text: `Ask her about the masjid — how she found it, what it gave her`, consequence: `She tells you the story of her second year. The first Jumu'ah she attended alone. The woman who sat next to her and asked her name. The slow building of something real. The space holds the whole story.`, flag: "masjid_story" },
-          { text: `Tell her what you feel in the space`, consequence: `She is surprised. She had not expected you to say anything about the feeling of the place. What you say is honest and specific. She says: 'You felt it. Not everyone does.'`, flag: "masjid_felt" },
+          { text: `Tell her what you feel in the space`, consequence: `She is surprised. She had not expected you to say anything about the feeling of the place. What you say is honest and specific. She says: 'You felt it. Not everyone does.'`, flag: "early_detect" },
         ],
       },
       {
@@ -2883,7 +2883,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Tell him you know — and ask him how he knows her`, consequence: `He tells you. He has been at this masjid for fifteen years. He watched Samira arrive four years ago and stay when most people who arrive alone do not stay. He says: 'A woman who stays alone is a woman who is serious.' You agree.`, flag: "man_asked" },
           { text: `Tell him you are here because of her and ask what the community thinks of her`, consequence: `He smiles. 'The community? She is the community now. She teaches the new sisters.' You did not know this. She has not mentioned it. You understand something new about her.`, flag: "community_standing" },
-          { text: `Thank him for the information and introduce yourself properly`, consequence: `He gives you his name. He tells you his family name. He says: 'Come back next week.' You understand that you have been invited into something.`, flag: "proper_introduction" },
+          { text: `Thank him for the information and introduce yourself properly`, consequence: `He gives you his name. He tells you his family name. He says: 'Come back next week.' You understand that you have been invited into something.`, flag: "early_detect" },
         ],
       },
       {
@@ -2892,7 +2892,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Tell her it is not credentials — it is who she became`, consequence: `She is quiet. Then: 'That is exactly what it is.' She has been trying to articulate this for a year. You said it in one sentence. The conversation that follows is the most real of the arc.`, flag: "who_she_became" },
           { text: `Ask her what she teaches specifically`, consequence: `She tells you. The practical aspects of reversion that no book covers. The cultural navigation. The family dynamics. The loneliness of the first year. She teaches everything she needed and did not have. You are listening to someone who turned her wound into a tool.`, flag: "teaching_content" },
-          { text: `Tell her you are proud of her — specifically, for this`, consequence: `She laughs. Then she gets quiet. 'No one who was not in my community has said that to me.' Her family does not see this as something to be proud of. You do. She carries this forward.`, flag: "pride_named" },
+          { text: `Tell her you are proud of her — specifically, for this`, consequence: `She laughs. Then she gets quiet. 'No one who was not in my community has said that to me.' Her family does not see this as something to be proud of. You do. She carries this forward.`, flag: "early_detect" },
         ],
       },
       {
@@ -2901,7 +2901,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Receive the nod as the opening it is`, consequence: `He sits down. He asks you three questions in English. They are the questions of a protective brother: income, intentions, and what you know about Puerto Rican culture. You answer all three directly.`, flag: "brother_nod_received" },
           { text: `Ask him what he said to his sister`, consequence: `She translates: 'He asked if I was happy. I told him yes.' Her brother looks at you: 'That is the only question that matters.' The rest of the visit is warm.`, flag: "brother_question" },
-          { text: `Speak to him in Spanish — whatever you know`, consequence: `He stops. He looks at Samira. She looks at you. He switches to Spanish. You manage. He switches back to English when the vocabulary runs out. He is smiling. 'You tried.' In this family, trying in Spanish means something.`, flag: "brother_spanish" },
+          { text: `Speak to him in Spanish — whatever you know`, consequence: `He stops. He looks at Samira. She looks at you. He switches to Spanish. You manage. He switches back to English when the vocabulary runs out. He is smiling. 'You tried.' In this family, trying in Spanish means something.`, flag: "early_detect" },
         ],
       },
       {
@@ -2910,7 +2910,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `SUCCESS: Samira — Miami, Florida.`, consequence: `SUCCESS: The imam watched her build something real. You are what it grew into. US Region — complete.`, flag: "success" },
           { text: `SUCCESS: Her mother wore the quinceañera dress. The faith added — it did not replace.`, consequence: `SUCCESS: Arc complete. Samira — Latina Muslim revert — complete.`, flag: "success" },
-          { text: `SUCCESS: Arc complete.`, consequence: `SUCCESS: Miami — complete.`, flag: "success" },
+          { text: `SUCCESS: Arc complete.`, consequence: `SUCCESS: Miami — complete.`, flag: "early_detect" },
         ],
       }
     ],
@@ -2930,7 +2930,7 @@ const DEEP_SCENARIOS = {
         choices: [
         { text: `Tell her you know what it means — and name what you know`, consequence: `She responds in an hour. 'You knew. Most men say they know and then demonstrate they do not. Tell me more about what you know.' The conversation begins at a level of specificity most platform exchanges never reach.`, flag: "knows_what_it_means" },
         { text: `Tell her honestly you are still learning — and ask her to tell you what she means specifically`, consequence: `She respects the honesty. She tells you. What she describes is a family structure where marriage is a family decision, not a personal one. She is telling you the terms before you sign anything.`, flag: "honest_learning" },
-        { text: `Ask her what most men get wrong when they say they know`, consequence: `She lists three things. They are precise. The men who got them wrong did so because they thought they were marrying an individual. She is not separable from her family. Neither is the decision.`, flag: "common_mistakes" },
+        { text: `Ask her what most men get wrong when they say they know`, consequence: `She lists three things. They are precise. The men who got them wrong did so because they thought they were marrying an individual. She is not separable from her family. Neither is the decision.`, flag: "time_waster" },
         ],
       },
       {
@@ -2939,7 +2939,7 @@ const DEEP_SCENARIOS = {
         choices: [
         { text: `Tell her you welcome the call — ask when her father is available`, consequence: `She says: 'He is available when I tell him you are ready.' She is giving you the agency to set the pace while making clear that the call will happen. You set a date.`, flag: "father_call_welcomed" },
         { text: `Ask her what her father already knows about you and what he is likely to ask`, consequence: `She tells you what she shared. She tells you the three questions he asks every man. You prepare. Not to perform — to be ready to answer honestly.`, flag: "father_prepared" },
-        { text: `Ask Nour what she told him — you want to make sure your answers match what she has shared`, consequence: `She tells you. Then: 'You want to make sure there is no contradiction. Good. Inconsistency is the first thing he looks for.' You are already thinking correctly.`, flag: "consistency_checked" },
+        { text: `Ask Nour what she told him — you want to make sure your answers match what she has shared`, consequence: `She tells you. Then: 'You want to make sure there is no contradiction. Good. Inconsistency is the first thing he looks for.' You are already thinking correctly.`, flag: "time_waster" },
         ],
       },
       {
@@ -2948,7 +2948,7 @@ const DEEP_SCENARIOS = {
         choices: [
         { text: `Answer fully — your family structure, your relationships, what family means to you`, consequence: `He listens without interruption. He asks one follow-up. Your follow-up answer tells him more than your first. He says: 'A man who adds to his first answer is honest.' He asks the second question.`, flag: "family_full" },
         { text: `Answer and ask about his family — you want to know the structure you would be entering`, consequence: `He is pleased by the question. He describes his family. By the time he finishes you understand exactly what entering this family would require. He asks the second question in a different register than he had planned.`, flag: "family_reciprocal" },
-        { text: `Answer directly and with appropriate detail — not too much, not too little`, consequence: `He notes the calibration. 'You answered what I asked. Not more, not less. Good.' He asks the second question.`, flag: "calibrated_answer" },
+        { text: `Answer directly and with appropriate detail — not too much, not too little`, consequence: `He notes the calibration. 'You answered what I asked. Not more, not less. Good.' He asks the second question.`, flag: "time_waster" },
         ],
       },
       {
@@ -2957,7 +2957,7 @@ const DEEP_SCENARIOS = {
         choices: [
         { text: `Answer both honestly — income specifically, and the third question from genuine reflection`, consequence: `He receives both answers. The income answer he checks internally against what he knows is required. The third answer he measures against what he has heard before. Yours is different from what he has heard before. He calls Nour after the call.`, flag: "both_honest" },
         { text: `Answer the third question first — it is the one that matters most`, consequence: `He stops. 'You answered the third first.' You tell him the third is the one that deserves the most care. He agrees. He lets you answer the second after. The order told him something.`, flag: "third_first" },
-        { text: `Ask him if his daughter has explained what brought her to the platform — your answer to the third question connects to hers`, consequence: `He pauses. He asks Nour something off the call. He comes back. 'She said you are the first man who wanted to make sure the stories matched.' He answers the question for you and asks if he got it right. He did.`, flag: "stories_matched" },
+        { text: `Ask him if his daughter has explained what brought her to the platform — your answer to the third question connects to hers`, consequence: `He pauses. He asks Nour something off the call. He comes back. 'She said you are the first man who wanted to make sure the stories matched.' He answers the question for you and asks if he got it right. He did.`, flag: "time_waster" },
         ],
       },
       {
@@ -2966,7 +2966,7 @@ const DEEP_SCENARIOS = {
         choices: [
         { text: `Meet his directness with your own`, consequence: `He relaxes slightly. 'You did not soften yourself for me.' He takes you through the neighborhood. He is showing you what Nour grew up inside. By the time you reach the family home you understand the environment.`, flag: "directness_matched" },
         { text: `Ask him directly what he needs to know about you`, consequence: `He says three things. They are practical and honest and you answer all three before you reach the family home. He calls ahead. Her father is at the door when you arrive.`, flag: "brother_direct" },
-        { text: `Ask him about the neighborhood — you want to understand what he is showing you`, consequence: `He tells you. The neighborhood is thirty years of community built by people who came from the same region of Lebanon. Nour was raised inside that community. He is showing you what you are being considered for.`, flag: "neighborhood_asked" },
+        { text: `Ask him about the neighborhood — you want to understand what he is showing you`, consequence: `He tells you. The neighborhood is thirty years of community built by people who came from the same region of Lebanon. Nour was raised inside that community. He is showing you what you are being considered for.`, flag: "time_waster" },
         ],
       },
       {
@@ -2975,7 +2975,7 @@ const DEEP_SCENARIOS = {
         choices: [
         { text: `Let the gathering receive you — be present for all of it`, consequence: `You are introduced to twenty people in forty minutes. You remember names. You ask questions. Her father watches you move through the room. An uncle says something to him. Her father nods.`, flag: "gathering_received" },
         { text: `Stay close to her father and let him make the introductions`, consequence: `He introduces you to specific people in a specific order. The order is not random. He is showing you to the people whose opinion shapes his own. You are being presented to a council.`, flag: "father_introductions" },
-        { text: `Find the oldest person in the room and greet them first`, consequence: `Her father sees you move toward his mother — a woman in her eighties in the corner of the room. He says something to his wife. His wife touches his arm. You have done something without being told to.`, flag: "eldest_first" },
+        { text: `Find the oldest person in the room and greet them first`, consequence: `Her father sees you move toward his mother — a woman in her eighties in the corner of the room. He says something to his wife. His wife touches his arm. You have done something without being told to.`, flag: "time_waster" },
         ],
       },
       {
@@ -2984,7 +2984,7 @@ const DEEP_SCENARIOS = {
         choices: [
         { text: `Tell her honestly what you know and what you are still learning`, consequence: `She nods at the honesty. Then she teaches you for thirty minutes over tea. What she teaches you is more useful than anything you read or studied. She ends with: 'You listened to all of it. That is all I needed to see.'`, flag: "mother_teaching" },
         { text: `Tell her you know it means you are marrying a family, not just a woman`, consequence: `She stops. She looks at you. 'Who told you that?' You tell her it was obvious from the moment you spoke with Nour. She calls her husband into the kitchen. She repeats what you said. He says: 'Good.'`, flag: "family_not_individual" },
-        { text: `Ask her to tell you what you need to know that no one else will tell you`, consequence: `She is quiet a moment. Then she tells you three things. They are specific to her daughter and specific to this family. They are not warnings — they are gifts. She is giving you what you need to succeed.`, flag: "mother_gifts" },
+        { text: `Ask her to tell you what you need to know that no one else will tell you`, consequence: `She is quiet a moment. Then she tells you three things. They are specific to her daughter and specific to this family. They are not warnings — they are gifts. She is giving you what you need to succeed.`, flag: "time_waster" },
         ],
       },
       {
@@ -2993,7 +2993,7 @@ const DEEP_SCENARIOS = {
         choices: [
         { text: `Receive the silence as the answer it is`, consequence: `Her father says: 'Then it is done.' He uses the Arabic phrase. Her brother translates it for you. It is a phrase that means it is witnessed. Not agreed — witnessed. The distinction is important.`, flag: "silence_received" },
         { text: `Thank the family for the gathering and for the witness`, consequence: `Her father is surprised you used the word witness. 'Nour did not tell you that word.' You tell him you have been paying attention. He looks at his wife. His wife is smiling.`, flag: "witness_named" },
-        { text: `Ask what comes next in the process`, consequence: `Her father explains the next steps in the Lebanese tradition — the formal engagement, the mahr, the nikah timeline. He has been waiting to say this. The question gave him the opening.`, flag: "process_asked" },
+        { text: `Ask what comes next in the process`, consequence: `Her father explains the next steps in the Lebanese tradition — the formal engagement, the mahr, the nikah timeline. He has been waiting to say this. The question gave him the opening.`, flag: "time_waster" },
         ],
       },
       {
@@ -3002,7 +3002,7 @@ const DEEP_SCENARIOS = {
         choices: [
         { text: `SUCCESS: Nour — Dearborn, Michigan.`, consequence: `SUCCESS: The imam said her father told him about you. Her father does not tell him about most men. US Region — complete.`, flag: "success" },
         { text: `SUCCESS: Dearborn is Beirut relocated. You navigated it correctly.`, consequence: `SUCCESS: Arc complete. Nour — Arab-American Muslim — complete.`, flag: "success" },
-        { text: `SUCCESS: Arc complete.`, consequence: `SUCCESS: Dearborn — complete.`, flag: "success" },
+        { text: `SUCCESS: Arc complete.`, consequence: `SUCCESS: Dearborn — complete.`, flag: "time_waster" },
         ],
       },
       {
@@ -3011,7 +3011,7 @@ const DEEP_SCENARIOS = {
         choices: [
         { text: `SUCCESS: Receive it with both hands and with genuine gratitude.`, consequence: `SUCCESS: She nods. She goes back to her family. You are now her family. Arc complete.`, flag: "success" },
         { text: `SUCCESS: Arc complete.`, consequence: `SUCCESS: Nour — complete.`, flag: "success" },
-        { text: `SUCCESS: US Region — complete.`, consequence: `SUCCESS: Certificate of Commission — US region stamp earned.`, flag: "success" },
+        { text: `SUCCESS: US Region — complete.`, consequence: `SUCCESS: Certificate of Commission — US region stamp earned.`, flag: "time_waster" },
         ],
       },
     ,
@@ -3021,7 +3021,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Ask him if he would be willing to teach you over time`, consequence: `He is very still. Then he calls his wife. He says something in Arabic. She comes into the room. He repeats what you said. She looks at you. She says in English: 'No one has asked him that.' He has already agreed.`, flag: "arabic_asked" },
           { text: `Tell him you intend to learn — not for the family, for Nour`, consequence: `He receives the distinction. 'For her. Not for us.' He says it as confirmation. 'The right reason.' He asks when you intend to start. You tell him you already have a resource. He names a better one.`, flag: "arabic_intention" },
-          { text: `Tell him you understand why that matters to him and that you respect it`, consequence: `He says: 'Most men tell me they understand and then do nothing. We will see.' He is not hostile — he is accurate. His accuracy is more trustworthy than easy warmth would have been.`, flag: "arabic_respected" },
+          { text: `Tell him you understand why that matters to him and that you respect it`, consequence: `He says: 'Most men tell me they understand and then do nothing. We will see.' He is not hostile — he is accurate. His accuracy is more trustworthy than easy warmth would have been.`, flag: "time_waster" },
         ],
       },
       {
@@ -3030,7 +3030,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Give him your full attention for the forty minutes`, consequence: `He stops. He looks at you. 'You listened to all of it.' He calls to Nour's father across the table. He says something in Arabic. Her father raises his glass. You do not need a translation.`, flag: "elder_listened" },
           { text: `Ask him questions throughout — you want to understand what he is telling you`, consequence: `He is pleased by the questions. He speaks for longer than he intended. At the end: 'You asked about the things that matter. Not the things that are easy to ask about.' He finds Nour's father after dinner.`, flag: "elder_questioned" },
-          { text: `Introduce yourself properly when there is a pause — he has not asked your name`, consequence: `He stops. He looks at you. 'You waited for the right moment.' He receives the introduction formally. He gives you his full name and his village of origin in Lebanon. This is a significant disclosure.`, flag: "elder_introduced" },
+          { text: `Introduce yourself properly when there is a pause — he has not asked your name`, consequence: `He stops. He looks at you. 'You waited for the right moment.' He receives the introduction formally. He gives you his full name and his village of origin in Lebanon. This is a significant disclosure.`, flag: "time_waster" },
         ],
       },
       {
@@ -3039,7 +3039,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Tell her you have already started and show her`, consequence: `She looks at your phone. The app, the notes, the words you have written down from the dinner conversations. She puts the phone down. She says: 'You started before I asked.' You tell her her father gave you a resource the first day. Her eyes fill.`, flag: "arabic_started" },
           { text: `Tell her you understand why it is non-negotiable and commit to it specifically`, consequence: `She says: 'Specifically.' You tell her the plan — how, what timeline, what measure of progress. She listens to the plan. 'You gave me a plan, not a promise.' She knows the difference.`, flag: "arabic_committed" },
-          { text: `Ask her what genuine looks like to her specifically`, consequence: `She describes it. A conversation with her father. A bedtime story for a child. A prayer said correctly. She is not asking for fluency. She is asking for effort that is real and continuous. You can give her that.`, flag: "arabic_genuine" },
+          { text: `Ask her what genuine looks like to her specifically`, consequence: `She describes it. A conversation with her father. A bedtime story for a child. A prayer said correctly. She is not asking for fluency. She is asking for effort that is real and continuous. You can give her that.`, flag: "time_waster" },
         ],
       },
       {
@@ -3048,7 +3048,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `SUCCESS: Nour — Dearborn, Michigan.`, consequence: `SUCCESS: Her father's voice when he gave consent. Thirty years of this masjid behind it. US Region — complete.`, flag: "success" },
           { text: `SUCCESS: You committed to the Arabic. Start tomorrow.`, consequence: `SUCCESS: Arc complete. Nour — Arab-American Muslim — complete.`, flag: "success" },
-          { text: `SUCCESS: Arc complete.`, consequence: `SUCCESS: Dearborn — complete.`, flag: "success" },
+          { text: `SUCCESS: Arc complete.`, consequence: `SUCCESS: Dearborn — complete.`, flag: "time_waster" },
         ],
       }
     ],
@@ -3068,7 +3068,7 @@ const DEEP_SCENARIOS = {
         choices: [
         { text: `Respond warmly and ask her about her journey`, consequence: `She talks about the journey for two weeks. It is genuine and moving and full of detail. What she has not mentioned: her family, her community connections, her support structure. You are starting to notice what is absent.`, flag: "journey_received" },
         { text: `Note the word 'community' — ask her what she is looking for specifically on this platform`, consequence: `She pauses. Then: 'A husband, ultimately. But also people who understand what I have chosen.' The honest answer reveals something. She needs community first. She knows it and is telling you.`, flag: "community_noted" },
-        { text: `Ask her about her support system — who is around her in her practice`, consequence: `She goes quiet a moment. 'I am still building that.' The answer is simple and significant. She has the faith and not yet the infrastructure.`, flag: "support_asked" },
+        { text: `Ask her about her support system — who is around her in her practice`, consequence: `She goes quiet a moment. 'I am still building that.' The answer is simple and significant. She has the faith and not yet the infrastructure.`, flag: "not_yet" },
         ],
       },
       {
@@ -3077,7 +3077,7 @@ const DEEP_SCENARIOS = {
         choices: [
         { text: `Acknowledge both things — that it is hard and that it is right — and ask what the building looks like practically`, consequence: `She describes it. One class at the masjid per week. One woman she has connected with there. A lot of time alone with books. The infrastructure is real but thin. A marriage would need to carry more weight than it should.`, flag: "building_assessed" },
         { text: `Tell her you respect what she is doing and ask how you can support the building`, consequence: `She is moved by the offer. She names several things. They are all things a community would normally provide. She is looking for them in a potential husband. This is the pattern that concerns you.`, flag: "support_offered" },
-        { text: `Ask her what her life looks like on a regular Tuesday`, consequence: `She tells you. The picture is of a woman who is sincere and isolated and working hard to build something alone. The faith is real. The foundation is thin. A marriage into thin foundation is a weight the foundation cannot bear.`, flag: "tuesday_asked" },
+        { text: `Ask her what her life looks like on a regular Tuesday`, consequence: `She tells you. The picture is of a woman who is sincere and isolated and working hard to build something alone. The faith is real. The foundation is thin. A marriage into thin foundation is a weight the foundation cannot bear.`, flag: "not_yet" },
         ],
       },
       {
@@ -3086,7 +3086,7 @@ const DEEP_SCENARIOS = {
         choices: [
         { text: `Name what you are noticing: 'You are thinking about our future before your present is fully built'`, consequence: `She is quiet a long time. Then: 'I know.' She says it simply. 'I know. I am doing it because the future feels more manageable than the present.' This is the most honest thing she has said.`, flag: "present_named" },
         { text: `Engage the future conversations — she needs someone to hold the vision with her`, consequence: `The conversations are warm and detailed and feel real. But they are building a house on a foundation that is not yet poured. You are contributing to a structure that cannot yet support itself.`, flag: "future_engaged" },
-        { text: `Ask her what her life needs to look like in the next twelve months before marriage makes sense`, consequence: `She thinks. She names several things. Then: 'I have not thought about it that way. I have been thinking about marriage as the thing that stabilizes the twelve months.' You have arrived at the center of the arc.`, flag: "twelve_months_asked" },
+        { text: `Ask her what her life needs to look like in the next twelve months before marriage makes sense`, consequence: `She thinks. She names several things. Then: 'I have not thought about it that way. I have been thinking about marriage as the thing that stabilizes the twelve months.' You have arrived at the center of the arc.`, flag: "not_yet" },
         ],
       },
       {
@@ -3095,7 +3095,7 @@ const DEEP_SCENARIOS = {
         choices: [
         { text: `Say it and give her the full space to respond`, consequence: `She is quiet for three days. When she comes back she says: 'You are right. I know you are right. I have known it and I did not want to look at it.' The honesty from her is the beginning of the right thing.`, flag: "space_given" },
         { text: `Say it and offer to help her think through what building the foundation looks like`, consequence: `She receives both. The naming and the offer. She says: 'You are the first person who told me the truth and offered to help at the same time.' You tell her the help you are offering is not as a husband. Not yet.`, flag: "truth_and_help" },
-        { text: `Say it gently — she is sincere and does not need harshness`, consequence: `She receives the gentleness and the truth together. She says: 'I needed someone to say that who was not trying to dismiss me.' You were not dismissing her. You were being honest about the timing.`, flag: "gentle_truth" },
+        { text: `Say it gently — she is sincere and does not need harshness`, consequence: `She receives the gentleness and the truth together. She says: 'I needed someone to say that who was not trying to dismiss me.' You were not dismissing her. You were being honest about the timing.`, flag: "not_yet" },
         ],
       },
       {
@@ -3104,7 +3104,7 @@ const DEEP_SCENARIOS = {
         choices: [
         { text: `Tell her specifically: two years in the community, family reconciliation work, a support network that exists outside of a marriage`, consequence: `She writes it down. You can tell she writes it down. She says: 'Two years.' You say: 'At least.' She says: 'Will you still be here in two years?' You tell her that is the wrong question. The right question is whether she will do the two years regardless.`, flag: "two_years_named" },
         { text: `Tell her what you have observed — what is strong and what is thin — and let her draw her own conclusion`, consequence: `She draws it. She names it herself. 'I need community before I need a husband.' She said it. You did not say it for her. That matters.`, flag: "conclusion_hers" },
-        { text: `Ask her what she thinks she needs — she already knows`, consequence: `She does know. She tells you. The list is correct and complete. She has been carrying it and not looking at it. 'I needed someone to make it safe to say it out loud.' You gave her that.`, flag: "she_knows" },
+        { text: `Ask her what she thinks she needs — she already knows`, consequence: `She does know. She tells you. The list is correct and complete. She has been carrying it and not looking at it. 'I needed someone to make it safe to say it out loud.' You gave her that.`, flag: "not_yet" },
         ],
       },
       {
@@ -3113,7 +3113,7 @@ const DEEP_SCENARIOS = {
         choices: [
         { text: `Say it and mean it`, consequence: `She says: 'You are the first man who has told me no in a way that felt like respect.' You tell her it is not no — it is not yet. She understands the difference.`, flag: "not_yet" },
         { text: `Say it and give her specific markers — what the two years should produce`, consequence: `She asks for them. You give four. They are concrete. She writes them down. She says: 'I am going to do this.' You believe her. The arc does not end in failure. It ends in the only right answer for where she is.`, flag: "markers_given" },
-        { text: `Say it and tell her what you will be doing with the two years yourself`, consequence: `She asks. You tell her. She says: 'You are not asking me to wait for you. You are telling me what you are both doing with the time.' She understands. This is not abandonment. This is the right architecture.`, flag: "parallel_growth" },
+        { text: `Say it and tell her what you will be doing with the two years yourself`, consequence: `She asks. You tell her. She says: 'You are not asking me to wait for you. You are telling me what you are both doing with the time.' She understands. This is not abandonment. This is the right architecture.`, flag: "not_yet" },
         ],
       },
       {
@@ -3141,7 +3141,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Name what you are hearing: the foundation is thinner than last month`, consequence: `She is quiet. Then: 'I know.' She says it without defense. This is the honesty that makes her reachable. It also confirms what you are seeing.`, flag: "thinning_named" },
           { text: `Encourage her to go anyway — belonging comes through showing up`, consequence: `She hears it. She goes the following week. She texts you afterward: 'I went.' Two words. The effort it took to send them is visible in the simplicity.`, flag: "encouraged" },
-          { text: `Ask her what belonging would look like if she had it`, consequence: `She thinks for a long time. Then she describes it. What she describes is attainable. But it requires time and presence and repetition — none of which a marriage provides as a substitute.`, flag: "belonging_described" },
+          { text: `Ask her what belonging would look like if she had it`, consequence: `She thinks for a long time. Then she describes it. What she describes is attainable. But it requires time and presence and repetition — none of which a marriage provides as a substitute.`, flag: "not_yet" },
         ],
       },
       {
@@ -3150,7 +3150,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Tell her the text is a door and she should walk through it`, consequence: `She says: 'I am afraid of what is on the other side.' You tell her the door is better than the wall. She calls her mother the following day. She does not tell you what was said. She tells you she called.`, flag: "door_named" },
           { text: `Ask her what she wants to do with the contact`, consequence: `She says she does not know. You sit with that answer without trying to resolve it. She says: 'You did not tell me what to do.' You tell her it is not yours to tell. She calls her mother three days later.`, flag: "contact_hers" },
-          { text: `Tell her reconciliation work is one of the things the foundation needs`, consequence: `She hears it as part of the larger conversation you have been having. 'You keep coming back to the foundation.' You tell her yes. The foundation is what holds everything else. She texts her mother that evening.`, flag: "reconciliation_named" },
+          { text: `Tell her reconciliation work is one of the things the foundation needs`, consequence: `She hears it as part of the larger conversation you have been having. 'You keep coming back to the foundation.' You tell her yes. The foundation is what holds everything else. She texts her mother that evening.`, flag: "not_yet" },
         ],
       },
       {
@@ -3159,7 +3159,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Receive the correction — she has earned the right to push back`, consequence: `You tell her she is right. You name specifically what she has done that you may have undervalued. She goes quiet. Then: 'Thank you for saying that.' The conversation becomes more equal.`, flag: "correction_received" },
           { text: `Tell her you hear her and ask what you missed`, consequence: `She tells you. What she names is real effort that deserved acknowledgment. You give the acknowledgment. The conversation resets at a more honest baseline.`, flag: "missed_acknowledged" },
-          { text: `Agree and revise: the foundation is real, the question is whether it is ready for this specific weight`, consequence: `She thinks. Then: 'That is a different question than the one you have been asking.' You agree. The revised question is more accurate and she can engage with it more honestly.`, flag: "revised_question" },
+          { text: `Agree and revise: the foundation is real, the question is whether it is ready for this specific weight`, consequence: `She thinks. Then: 'That is a different question than the one you have been asking.' You agree. The revised question is more accurate and she can engage with it more honestly.`, flag: "not_yet" },
         ],
       },
       {
@@ -3168,7 +3168,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Give her the specific markers: consistent masjid attendance for six months, one reconciled family relationship, two women in the community she calls sisters`, consequence: `She writes it down. 'That is specific.' You tell her specific is the only kind of honest answer to her question. She asks if the markers are final. You tell her they are a floor, not a ceiling. She says: 'I can do that.' You believe her.`, flag: "markers_specific" },
           { text: `Tell her she already knows what it takes — she named it herself weeks ago`, consequence: `She goes back to what she said. She reads it back to you. Then: 'I said it and did not hold myself to it.' The accountability is hers. You gave it back to her correctly.`, flag: "her_own_words" },
-          { text: `Tell her you will know it when you see it and ask her to keep showing you`, consequence: `She receives this. 'You are not walking away.' You tell her no. You are waiting for the building to be ready. She says: 'Okay.' It is the most committed she has sounded.`, flag: "not_walking_away" },
+          { text: `Tell her you will know it when you see it and ask her to keep showing you`, consequence: `She receives this. 'You are not walking away.' You tell her no. You are waiting for the building to be ready. She says: 'Okay.' It is the most committed she has sounded.`, flag: "not_yet" },
         ],
       },
       {
@@ -3177,7 +3177,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `Receive what she sent and tell her you are ready to meet`, consequence: `NOT YET becomes YES: The foundation is built. The markers are met. The two years she was asked to build — she built them in eighteen months. The arc does not end in deferral. It ends in arrival.`, flag: "arrival" },
           { text: `Ask her one question before you answer: 'What did the building cost you?'`, consequence: `She answers. The cost was real and specific and worth naming before moving forward. When she finishes she says: 'Now I know I am ready because I can tell you what it cost without needing you to make it better.' That is the answer.`, flag: "cost_asked" },
-          { text: `Tell her you see what she built and you are coming`, consequence: `NOT YET becomes YES: She built it. You saw it. The deferral was not rejection — it was the most honest form of respect. The arc completes correctly. Rachel — complete.`, flag: "arrival" },
+          { text: `Tell her you see what she built and you are coming`, consequence: `NOT YET becomes YES: She built it. You saw it. The deferral was not rejection — it was the most honest form of respect. The arc completes correctly. Rachel — complete.`, flag: "not_yet" },
         ],
       },
       {
@@ -3186,7 +3186,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `YES — Rachel. Portland, Oregon.`, consequence: `SUCCESS: She built what needed to be built. The deferral was not the ending — it was the beginning of the right preparation. A man who can defer with respect and wait with patience has demonstrated what this platform exists to teach. US Region — complete.`, flag: "success" },
           { text: `SUCCESS: The most instructive arc in the US region.`, consequence: `SUCCESS: Not because she is the most complex woman. Because the correct answer changed over time — from not yet to yes — and the man who stayed present through the change earned both answers. Arc complete.`, flag: "success" },
-          { text: `SUCCESS: Arc complete.`, consequence: `SUCCESS: Rachel — complete. US Region — complete. Certificate of Commission — US region stamp earned.`, flag: "success" },
+          { text: `SUCCESS: Arc complete.`, consequence: `SUCCESS: Rachel — complete. US Region — complete. Certificate of Commission — US region stamp earned.`, flag: "not_yet" },
         ],
       }
     ],
@@ -3314,7 +3314,7 @@ export default function CoursePage() {
   const handleChoice = (choice) => {
     const newHistory = [...choiceHistory, choice];
     setChoiceHistory(newHistory);
-    setLastConsequence(choice.consequence);
+    setLastConsequence(choice.consequence || choice.outcome || "");
     const womanData = DEEP_SCENARIOS[woman.id] || {};
     const scenes = womanData.scenes || [];
     const nextScene = sceneIndex + 1;
@@ -3354,9 +3354,59 @@ export default function CoursePage() {
       if (sheNoCount >= 2) { setOutcome("she_no"); setOutcomeText("SHE SAID NO: She was genuine. You were serious. The combination still did not produce a match. Her no was not about your value — it was about fit. Some arcs end here. The man who receives a woman's honest no with dignity has demonstrated something that few men demonstrate. Move forward without bitterness."); setPhase("outcome"); return; }
       if (culturalCount >= 3) { setOutcome("cultural_mismatch"); setOutcomeText("CULTURAL MISMATCH: The connection was real but the cultural preparation was insufficient. The missteps accumulated. The family saw a man who cared but did not know. In some families knowing matters as much as caring. Study the Cultural Intelligence module before your next attempt in this region."); setPhase("outcome"); return; }
 
-      // 3. Default: success
-      setOutcome("success");
-      setOutcomeText("SUCCESS: You navigated this arc correctly. The patience, the cultural preparation, the family engagement, the honest answers at the moments when honest answers cost something — all of it was the path. The certificate of commission is not given for completing the course. It is given for completing the course with the kind of discernment that makes the real journey possible.");
+      // 3. Real-world probability outcome based on accumulated bad flag ratio
+      const badFlagSet = new Set([
+        'cultural_fail', 'early_detect', 'fraud_detected', 'time_waster',
+        'walkaway', 'money_sent', 'pace_accelerated', 'pattern_continued',
+        'yes_without_plan', 'family_ignored', 'hotel_requested',
+        'missed_question', 'time_waster_revealed', 'time_waster_pattern',
+        'impatient', 'performed', 'overconfident', 'surface_answer',
+        'fraud_pre', 'fraud_post', 'genuine_wrong', 'compromised',
+        'position_softened', 'too_direct', 'flexible_answer', 'needs_work',
+        'fully_engaged', 'deflected', 'wrong_approach', 'missed_structure',
+        'focused_wrong', 'missed_community', 'researched_not_felt',
+        'answered_not_asked', 'performed_well', 'confident_answer',
+        'surface_answer', 'impatient_exit', 'let_it_go',
+      ]);
+      const totalFlags = flags.length;
+      const badCount = flags.filter(f => badFlagSet.has(f)).length;
+      const badRatio = totalFlags > 0 ? badCount / totalFlags : 0;
+
+      const womanType = woman.type || 'genuine';
+
+      if (womanType === 'fraud') {
+        // Fraud: mostly early_detect unless user missed all signals
+        if (badRatio <= 0.35) {
+          setOutcome("early_detect");
+          setOutcomeText("FRAUD DETECTED: You caught it. The signals were present and you read them correctly. The emotional investment was real even when the relationship was not. You leave this arc with your discernment intact. Apply what you learned here to every arc that follows.");
+        } else {
+          setOutcome("fraud_pre");
+          setOutcomeText("FRAUD INCOMPLETE DETECTION: You caught some signals but not all. The deception was partially successful. The most important question is not what she was — it is which signals you saw and which you chose not to see. The next fraud arc will reward the discernment you build from this one.");
+        }
+      } else if (womanType === 'time_waster' || womanType === 'genuine_wrong') {
+        if (badRatio <= 0.30) {
+          setOutcome("early_detect");
+          setOutcomeText("CORRECT WALKAWAY: You recognized the pattern early and exited with dignity. The warmth was real. The structure was wrong. Knowing the difference and acting on it is the skill this arc developed.");
+        } else {
+          setOutcome("cultural_fail");
+          setOutcomeText("CULTURAL MISNAVIGATION: The woman was real. The match was not right. The accumulated choices revealed a gap between what she required and what you brought. This is the most common outcome in international courtship. The man who learns from it is better prepared for what comes next.");
+        }
+      } else {
+        // Genuine women: real world ratios
+        // 20% success (badRatio <= 0.25)
+        // 30% early detect (0.25 < badRatio <= 0.45)
+        // 50% cultural fail (badRatio > 0.45)
+        if (badRatio <= 0.25) {
+          setOutcome("success");
+          setOutcomeText("SUCCESS: You navigated this arc correctly. The patience, the cultural preparation, the family engagement, the honest answers at the moments when honest answers cost something — all of it was the path. The certificate of commission is not given for completing the course. It is given for completing the course with the kind of discernment that makes the real journey possible.");
+        } else if (badRatio <= 0.45) {
+          setOutcome("early_detect");
+          setOutcomeText("CORRECT WALKAWAY: You read the signals and exited cleanly before the damage accumulated further. The woman was real. The approach was not sufficient for what she required. Walking away with clarity and without bitterness is itself a form of success. Apply what you learned here.");
+        } else {
+          setOutcome("cultural_fail");
+          setOutcomeText("CULTURAL MISNAVIGATION: The preparation was insufficient for the depth this arc required. The woman was genuine. The family was real. The cultural intelligence required exceeded what you brought. Study the relevant resource module and return. This outcome is more common than success in the real world. That is the point.");
+        }
+      }
       setPhase("outcome");
     }
   };
