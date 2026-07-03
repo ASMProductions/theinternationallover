@@ -2694,7 +2694,7 @@ function ProfileCard({ woman, selected, onSelect, revealed }) {
           <div style={{ fontSize:9, color:"#5a4e32", fontFamily:"sans-serif", marginTop:2 }}>{woman.platform}</div>
         </div>
       </div>
-      <div style={{ fontSize:10, color:"#c8b890", lineHeight:1.65, fontFamily:"sans-serif", fontStyle:"italic", borderTop:"0.5px solid #1e3a6e", paddingTop:8 }}>"{woman.profileText.slice(0,120)}..."</div>
+      <div style={{ fontSize:10, color:"#c8b890", lineHeight:1.65, fontFamily:"sans-serif", fontStyle:"italic", borderTop:"0.5px solid #1e3a6e", paddingTop:8 }}>"{(woman.profileText || woman.bio || "").slice(0,120)}..."</div>
       {revealed && (
         <div style={{ marginTop:10, padding:8, background:"rgba(139,26,26,0.15)", border:"0.5px solid #8b1a1a" }}>
           <div style={{ fontSize:8, color:"#8b1a1a", letterSpacing:"0.1em", fontFamily:"sans-serif", marginBottom:4 }}>INTELLIGENCE FILE</div>
@@ -2714,6 +2714,29 @@ function ScenarioCard({ choice, onSelect }) {
       <div style={{ fontSize:13, color:"#f0e6cc", lineHeight:1.6 }}>{choice.text}</div>
     </button>
   );
+}
+
+class CourseErrorBoundary extends React.Component {
+  constructor(props) { super(props); this.state = { error: null }; }
+  static getDerivedStateFromError(error) { return { error: error.message || String(error) }; }
+  render() {
+    if (this.state.error) {
+      return (
+        <div style={{ minHeight:"100vh", background:"#091a35", color:"#f0e6cc", fontFamily:"Georgia,serif", display:"flex", alignItems:"center", justifyContent:"center", padding:"2rem" }}>
+          <div style={{ maxWidth:600, width:"100%", textAlign:"center" }}>
+            <div style={{ fontSize:9, letterSpacing:"0.3em", color:"#8b1a1a", fontFamily:"sans-serif", marginBottom:12 }}>COURSE ERROR — PLEASE COPY AND REPORT</div>
+            <div style={{ background:"#0f2347", border:"1px solid #8b1a1a", padding:"1.5rem", marginBottom:"1.5rem", textAlign:"left", fontFamily:"sans-serif", fontSize:12, color:"#c8b890", lineHeight:1.7, wordBreak:"break-all" }}>
+              {this.state.error}
+            </div>
+            <button onClick={() => { this.setState({ error: null }); this.props.onReset(); }} style={{ padding:"12px 28px", background:"#b8963e", color:"#0f2347", border:"none", cursor:"pointer", fontSize:12, fontWeight:700, fontFamily:"sans-serif", borderRadius:"20px" }}>
+              Return to Map
+            </button>
+          </div>
+        </div>
+      );
+    }
+    return this.props.children;
+  }
 }
 
 function CourseView({ onBack }) {
