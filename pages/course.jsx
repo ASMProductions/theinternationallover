@@ -551,7 +551,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `You proceed as though the incompatibility will resolve itself.`, consequence: `She received your answer. The gap it does not address is still there.`, flag: "cultural_fail" },
           { text: `You accept another month of warmth from the father without naming the stall.`, consequence: `You minimized what she said she requires. She did not minimize it.`, flag: "success" },
-          { text: `You proceed as though the incompatibility will resolve itself.`, consequence: `What she described as essential is not something you possess.`, flag: "cultural_fail" },
+          { text: `Romanticize her directness and ambition without asking where they are pointed`, consequence: `Her directness is real. Where it points is not where you assumed. The assumption is the failure.`, flag: "cultural_fail" },
         ],
       }
     ],
@@ -830,8 +830,8 @@ const DEEP_SCENARIOS = {
         setup: `Nine months later. The K-1 is approved. She lands on a Tuesday. Her father texted you the night before: three words in Arabic. You know what they mean.`,
         choices: [
           { text: `You continue without naming the pattern or demanding clarity.`, consequence: `She agrees warmly. No specific date follows.`, flag: "time_waster" },
-          { text: `You continue without naming the pattern or demanding clarity.`, consequence: `The warmth continues. The movement does not.`, flag: "time_waster" },
-          { text: `You continue without naming the pattern or demanding clarity.`, consequence: `You are extending a pattern, not resolving one.`, flag: "time_waster" },
+          { text: `Give the process one more month without naming what will happen if nothing changes`, consequence: `One more month passes. Nothing changes. The pattern is now complete.`, flag: "time_waster" },
+          { text: `Accept that the process cannot produce a result and stop engaging without a formal exit`, consequence: `CULTURAL FAIL: You stopped without naming what stopped. The father does not know you have left. The door remains technically open. This is not an exit — it is a fade.`, flag: "cultural_fail" },
         ],
       }
     ],
@@ -1237,7 +1237,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `You agree to marry into the full family structure without understanding what that requires.`, consequence: `You have agreed to something you do not yet understand the full weight of.`, flag: "cultural_fail" },
           { text: `You proceed as though the incompatibility will resolve itself.`, consequence: `The incompatibility is still present. You chose not to see it.`, flag: "cultural_fail" },
-          { text: `You proceed as though the incompatibility will resolve itself.`, consequence: `What she described as essential is not something you possess.`, flag: "cultural_fail" },
+          { text: `Tell yourself love is enough to bridge any gap — proceed without examining what the gap actually is`, consequence: `Love is not the gap. The gap is practical and structural. Love does not close it.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -1245,8 +1245,8 @@ const DEEP_SCENARIOS = {
         setup: `She arrives in the fall. Her mother sent a package with her — a rosary, a bottle of hot sauce, a small statue that has been in the family for forty years. A photograph of the family outside the house. The door is open in the photograph.`,
         choices: [
           { text: `You proceed as though the incompatibility will resolve itself.`, consequence: `She received your answer. The gap it does not address is still there.`, flag: "cultural_fail" },
-          { text: `You proceed as though the incompatibility will resolve itself.`, consequence: `You minimized what she said she requires. She did not minimize it.`, flag: "cultural_fail" },
-          { text: `You proceed as though the incompatibility will resolve itself.`, consequence: `You minimized what she said she requires.`, flag: "cultural_fail" },
+          { text: `Tell yourself the weight will become manageable once you are inside it`, consequence: `The weight does not become manageable. It becomes more specific. The specificity is what you did not examine.`, flag: "cultural_fail" },
+          { text: `Accept the weight of what you committed to without having examined it`, consequence: `CULTURAL FAIL: The weight arrived after the commitment. The family structure was real. The commitment preceded the understanding of it. This is the most common failure in this arc.`, flag: "cultural_fail" },
         ],
       }
     ],
@@ -1794,7 +1794,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `You accept her warmth and continue without pressing for movement toward marriage.`, consequence: `She agrees warmly. No specific date follows.`, flag: "time_waster" },
           { text: `You continue without naming the pattern or demanding clarity.`, consequence: `The warmth continues. The movement does not.`, flag: "time_waster" },
-          { text: `You continue without naming the pattern or demanding clarity.`, consequence: `Another month of connection without progression.`, flag: "time_waster" },
+          { text: `Tell her the pattern is clear and you are choosing to exit rather than wait further`, consequence: `She receives it honestly. She says: I think you are right. This is the most honest thing she has said in months.`, flag: "time_waster" },
         ],
       },
       {
@@ -1802,8 +1802,8 @@ const DEEP_SCENARIOS = {
         setup: `She arrives in the fall. Her father texted you a photograph the morning she left — the two of them in the airport. He is holding her hand. She is smiling at him. You saved the photograph.`,
         choices: [
           { text: `You continue without naming the pattern or demanding clarity.`, consequence: `She says she understands. The family is not quite ready.`, flag: "time_waster" },
-          { text: `You continue without naming the pattern or demanding clarity.`, consequence: `Another month passes. The warmth is unchanged. The progress is unchanged.`, flag: "time_waster" },
-          { text: `You continue without naming the pattern or demanding clarity.`, consequence: `You are extending a pattern, not resolving one.`, flag: "time_waster" },
+          { text: `Accept her explanation for the latest delay and wait without asking when it will end`, consequence: `The delay extends. The warmth does not dim. The marriage does not come closer.`, flag: "time_waster" },
+          { text: `Accept the situation as it is and stop engaging — you have nothing left to say`, consequence: `CULTURAL FAIL: You faded rather than exited. The pattern continues because you never named it clearly enough to close it.`, flag: "cultural_fail" },
         ],
       }
     ],
@@ -2833,7 +2833,7 @@ const DEEP_SCENARIOS = {
         title: `The Agreement`,
         setup: `Her parents together. Her mother speaks first this time. She says she has watched Samira choose something hard and maintain it. She says a man who can stand beside that deserves to stand beside her daughter. Her father nods. They give their blessing together — the first decision they have made together about Samira's faith since the shahada.`,
         choices: [
-        { text: `Thank them for the blessing and specifically for choosing to give it together`, consequence: `Her mother puts her hand on her husband's arm. Her father covers her hand with his. They did not plan this. You named something that made it real.`, flag: "together_named" },
+        { text: `Thank them for the blessing and specifically for choosing to give it together`, consequence: `She receives the gratitude warmly. Her warmth has been consistent. So has the pattern beneath it.`, flag: "together_named" },
         { text: `Tell them what their blessing means to Samira even if she has not said it`, consequence: `Samira makes a sound in the other room. She heard. Her mother goes to her. Her father looks at you: 'How did you know she needed to hear that?' You tell him: because she told you what the four years were like.`, flag: "samira_needs_named" },
         { text: `Accept the blessing with gratitude and ask if there is anything more they need from you`, consequence: `Her father says: 'Keep Sunday calls going. Whatever day you observe. Keep calling.' The request is about connection. You agree.`, flag: "early_detect" },
         ],
@@ -2842,18 +2842,18 @@ const DEEP_SCENARIOS = {
         title: `The Nikah`,
         setup: `Five months. The requests have escalated. The first was $180. The last was $800. Each is framed as temporary. Each is framed as urgent. Each arrives at an emotional peak — after a vulnerable conversation, after she has shared something that moved you.`,
         choices: [
-        { text: `You send the money. It is not much and she needs it.`, consequence: `The gratitude is immediate and specific. The next request will be larger.`, flag: "money_sent" },
-        { text: `You accept the situation without pressing further.`, consequence: `She adjusts her approach based on what she learned about you just now.`, flag: "fully_engaged" },
-        { text: `You accept the situation without pressing further.`, consequence: `The exit was available. You did not take it.`, flag: "early_detect" },
+          { text: `You send the money — the amount is small and she needs it`, consequence: `The gratitude is immediate and specific. The next request will be larger.`, flag: "money_sent" },
+          { text: `You tell her you prefer to send it directly to the pharmacy — ask for the name and address`, consequence: `Long pause. Then: the pharmacy prefers cash. You say you can do a direct transfer. The subject changes. The mother's illness is not mentioned again.`, flag: "early_detect" },
+          { text: `You decline without explanation and watch what happens next`, consequence: `She is wounded. The warmth cools briefly. Three days later she is warmer than ever and the medication has apparently been handled another way. The architecture continues.`, flag: "early_detect" },
         ],
       },
       {
         title: `After`,
         setup: `You tell her you are not going to send more money. The response arrives in four minutes. It is warm and understanding and slightly wounded. She says she understands completely. She says she would never want money to come between you. The response took four minutes to compose.`,
         choices: [
-        { text: `You accept the situation without pressing further.`, consequence: `You stayed in the warmth. She notes that you stayed.`, flag: "fully_engaged" },
-        { text: `You accept the situation without pressing further.`, consequence: `The explanation lands because you needed it to. The signal remains.`, flag: "fully_engaged" },
-        { text: `You accept the situation without pressing further.`, consequence: `You prioritized the connection over the evidence.`, flag: "early_detect" },
+          { text: `End the conversation and do not follow up — watch whether she follows up and how`, consequence: `She follows up three times over the next week. Each message is warm and confused. The follow-up itself is a pattern — designed to make you feel you made a mistake.`, flag: "early_detect" },
+          { text: `Tell her directly what you observed: the requests, the timing, the four-minute response`, consequence: `She has an explanation for every point. The explanations are good. They are also the explanations of someone who has done this before. The quality of the explanation is itself evidence.`, flag: "early_detect" },
+          { text: `Accept her explanation and continue — you do not want to be suspicious of someone sincere`, consequence: `The next request arrives eleven days later. The amount is $1,200. The framing is slightly different. The architecture is the same.`, flag: "fully_engaged" },
         ],
       },
     ,
@@ -2897,9 +2897,9 @@ const DEEP_SCENARIOS = {
         title: `The Nikah`,
         setup: `The arc is complete. You have the full picture now. The warmth was real enough to build on. The faith narrative was specific enough to land. The financial requests were small enough to seem reasonable. The architecture was deliberate. You have what you need.`,
         choices: [
-          { text: `You accept the situation without pressing further.`, consequence: `She files your response. The next scene uses what she learned here.`, flag: "fully_engaged" },
-          { text: `You ignore the inconsistency in her story — you do not want to be the kind of man who interrogates.`, consequence: `You gave her what she needed without requiring what you need.`, flag: "fully_engaged" },
-          { text: `You accept the situation without pressing further.`, consequence: `The fraud is more complete because of this choice.`, flag: "early_detect" },
+          { text: `Study every signal you missed and identify the earliest exit point`, consequence: `FRAUD DETECTED: Scene one — the precision of her first message. Scene three — the financial narrative building before any request. Scene five — the smooth explanation for the voice in the background. The earliest exit was scene three. You now know what to look for.`, flag: "early_detect" },
+          { text: `Accept that some fraud is undetectable and move on without reviewing the arc`, consequence: `FRAUD COMPLETE: This fraud was detectable. Accepting it as undetectable means you will not do the work to detect the next one. The next one will cost more.`, flag: "fully_engaged" },
+          { text: `Share what you learned with a man you know who is about to use a matrimonial platform`, consequence: `FRAUD DETECTED: He avoids a similar situation because of what you told him. Your loss produced something useful. Carry the signals into every arc that follows.`, flag: "early_detect" },
         ],
       }
     ],
@@ -2991,7 +2991,7 @@ const DEEP_SCENARIOS = {
         choices: [
         { text: `You raise the timeline directly: you need to know when the family will be ready to formally proceed.`, consequence: `She agrees warmly. No specific date follows.`, flag: "time_waster" },
         { text: `You continue without naming the pattern or demanding clarity.`, consequence: `The warmth continues. The movement does not.`, flag: "time_waster" },
-        { text: `You continue without naming the pattern or demanding clarity.`, consequence: `You are extending a pattern, not resolving one.`, flag: "time_waster" },
+        { text: `Give her a specific ultimatum: a date for the formal process or you will move on`, consequence: `She says she needs to speak with her family first. She has said this for four months.`, flag: "time_waster" },
         ],
       },
       {
@@ -3000,7 +3000,7 @@ const DEEP_SCENARIOS = {
         choices: [
         { text: `You ask her directly: is there a specific reason the formal process has not begun after six months?`, consequence: `She says she understands. The family is not quite ready.`, flag: "time_waster" },
         { text: `You continue without naming the pattern or demanding clarity.`, consequence: `Another month passes. The warmth is unchanged. The progress is unchanged.`, flag: "time_waster" },
-        { text: `You continue without naming the pattern or demanding clarity.`, consequence: `Agreement and progress are not the same thing.`, flag: "time_waster" },
+        { text: `Tell her you have decided to move on — you care about her but you cannot wait indefinitely`, consequence: `She asks for one more month. You have heard this before. The decision belongs to you.`, flag: "time_waster" },
         ],
       },
     ,
@@ -3175,7 +3175,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `YES — Rachel. Portland, Oregon.`, consequence: `She receives your pursuit warmly. The foundation has not changed.`, flag: "success" },
           { text: `You pursue the relationship despite the signals that she is not ready.`, consequence: `You are building something on ground that is not yet ready.`, flag: "pursued_unready" },
-          { text: `You pursue the relationship despite the signals that she is not ready.`, consequence: `Sincerity without foundation will not hold.`, flag: "not_yet" },
+          { text: `Stay in the correspondence telling yourself your patience will build what time alone must build`, consequence: `WRONG OUTCOME: Patience inside a relationship cannot build what a community and time must build outside one. The foundation remains insufficient.`, flag: "cultural_fail" },
         ],
       }
     ],
