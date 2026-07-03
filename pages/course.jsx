@@ -264,7 +264,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `SUCCESS: Abena — Accra, Ghana.`, consequence: `SUCCESS: The uncle's question, the church service, the three-hour ceremony, the father's handshake — all of it was the path. Sub-Saharan Africa arc — complete.`, flag: "success" },
           { text: `SUCCESS: The fear you named in that room was the right fear.`, consequence: `SUCCESS: It told the uncle everything he needed to know. Arc complete.`, flag: "success" },
-          { text: `SUCCESS: Arc complete.`, consequence: `The response landed in the wrong register.`, flag: "cultural_fail" },
+          { text: `You give it another month without naming the pattern.`, consequence: `The response landed in the wrong register.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -272,7 +272,7 @@ const DEEP_SCENARIOS = {
         setup: `She arrives. Her uncle sent a recording of the family singing at the wedding celebration in Accra the week after you left. He sent it so you would hear what your marriage sounded like in Ghana.`,
         choices: [
           { text: `SUCCESS: Your marriage has a sound in Ghana.`, consequence: `SUCCESS: Honor what that means. Sub-Saharan Africa arc — complete.`, flag: "success" },
-          { text: `SUCCESS: Arc complete.`, consequence: `SUCCESS: Ghana — complete.`, flag: "success" },
+          { text: `You accept her warmth and continue the correspondence without pushing for progress.`, consequence: `SUCCESS: Ghana — complete.`, flag: "success" },
           { text: `SUCCESS: Abena — complete.`, consequence: `You told her what she wanted to hear. She heard the difference.`, flag: "cultural_fail" },
         ],
       }
@@ -409,7 +409,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `SUCCESS: Amira — Yogyakarta, Indonesia.`, consequence: `SUCCESS: The stillness the father asked about — you found it here, in this room, in this moment. Asia arc — complete.`, flag: "success" },
           { text: `SUCCESS: The cultural distance was real. You crossed it with patience and research.`, consequence: `SUCCESS: Every arc in Asia will require this kind of preparation. You now know what that looks like.`, flag: "success" },
-          { text: `SUCCESS: Arc complete.`, consequence: `You told her what she wanted to hear. She heard the difference.`, flag: "cultural_fail" },
+          { text: `You end the correspondence with care and without bitterness.`, consequence: `You told her what she wanted to hear. She heard the difference.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -542,18 +542,18 @@ const DEEP_SCENARIOS = {
         title: `The Agreement`,
         setup: `The grandmother's word is the agreement. When she tells the family, the family agrees. Her father shakes your hand. Her mother hugs Diana. The community knows by the next morning.`,
         choices: [
-          { text: `SUCCESS: Diana — Santo Domingo, Dominican Republic.`, consequence: `SUCCESS: The grandmother's room was the real family meeting. Everything before it was preparation. Latin America arc — complete.`, flag: "success" },
-          { text: `SUCCESS: The community knew before the paperwork began.`, consequence: `SUCCESS: You arrived and let yourself be seen. This is the Latin America arc's central requirement. Arc complete.`, flag: "success" },
-          { text: `SUCCESS: Arc complete.`, consequence: `The cultural distance exceeds your preparation.`, flag: "cultural_fail" },
+          { text: `You agree to provide for her family without understanding the scope of what that means.`, consequence: `SUCCESS: The grandmother's room was the real family meeting. Everything before it was preparation. Latin America arc — complete.`, flag: "cultural_fail" },
+          { text: `You proceed as though the incompatibility will resolve itself.`, consequence: `SUCCESS: You arrived and let yourself be seen. This is the Latin America arc's central requirement. Arc complete.`, flag: "cultural_fail" },
+          { text: `You accept the explanation because you want it to be true.`, consequence: `The cultural distance exceeds your preparation.`, flag: "cultural_fail" },
         ],
       },
       {
         title: `Arrival`,
         setup: `She arrives. Her grandmother sent a recording — ten minutes of the grandmother speaking in Spanish. Diana translates it for you over several evenings. It is the grandmother's history. She sent it so you would know where Diana came from.`,
         choices: [
-          { text: `SUCCESS: You received a family's history as a wedding gift.`, consequence: `SUCCESS: Honor it. Latin America arc — complete.`, flag: "success" },
-          { text: `SUCCESS: Arc complete.`, consequence: `SUCCESS: Dominican Republic — complete.`, flag: "success" },
-          { text: `SUCCESS: Diana — complete.`, consequence: `What she described as essential is not something you possess.`, flag: "cultural_fail" },
+          { text: `You proceed as though the incompatibility will resolve itself.`, consequence: `SUCCESS: Honor it. Latin America arc — complete.`, flag: "cultural_fail" },
+          { text: `You accept another month of warmth from the father without naming the stall.`, consequence: `SUCCESS: Dominican Republic — complete.`, flag: "success" },
+          { text: `You proceed as though the incompatibility will resolve itself.`, consequence: `What she described as essential is not something you possess.`, flag: "cultural_fail" },
         ],
       }
     ],
@@ -689,7 +689,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `SUCCESS: Elena — Lima, Peru.`, consequence: `SUCCESS: The workshop, the mother's hand, the father's warning, the previous engagement that made everything more honest — all of it was the path. Latin America arc — complete.`, flag: "success" },
           { text: `SUCCESS: Her father is still making the furniture.`, consequence: `SUCCESS: He will bring it when he visits. Arc complete.`, flag: "success" },
-          { text: `SUCCESS: Arc complete.`, consequence: `The cultural depth required here exceeded your preparation.`, flag: "cultural_fail" },
+          { text: `You give it more time and tell yourself the family process moves slowly.`, consequence: `The cultural depth required here exceeded your preparation.`, flag: "cultural_fail" },
         ],
       }
     ],
@@ -831,9 +831,9 @@ const DEEP_SCENARIOS = {
         title: `The Outcome`,
         setup: `Nine months later. The K-1 is approved. She lands on a Tuesday. Her father texted you the night before: three words in Arabic. You know what they mean.`,
         choices: [
-          { text: `SUCCESS: Fatima — Meknes, Morocco.`, consequence: `SUCCESS: The patience, the protocol, the imam, the cousin, the sister, the father's thirty-minute test — all of it built something real. The certificate of commission is earned.`, flag: "success" },
-          { text: `SUCCESS: Every scene in this arc required something of you.`, consequence: `SUCCESS: You gave it. North Africa arc — complete.`, flag: "success" },
-          { text: `SUCCESS: The work begins here.`, consequence: `You are extending a pattern, not resolving one.`, flag: "time_waster" },
+          { text: `You continue without naming the pattern or demanding clarity.`, consequence: `SUCCESS: The patience, the protocol, the imam, the cousin, the sister, the father's thirty-minute test — all of it built something real. The certificate of commission is earned.`, flag: "time_waster" },
+          { text: `You continue without naming the pattern or demanding clarity.`, consequence: `SUCCESS: You gave it. North Africa arc — complete.`, flag: "time_waster" },
+          { text: `You continue without naming the pattern or demanding clarity.`, consequence: `You are extending a pattern, not resolving one.`, flag: "time_waster" },
         ],
       }
     ],
@@ -960,7 +960,7 @@ const DEEP_SCENARIOS = {
         choices: [
           { text: `SUCCESS: Fatou — Dakar, Senegal.`, consequence: `SUCCESS: The marabout's meeting, the compound, the neighborhood, the bride price ceremony — all of it was the path. Sub-Saharan Africa arc — complete.`, flag: "success" },
           { text: `SUCCESS: You did things the right way.`, consequence: `SUCCESS: The community witnessed it. That matters in a culture where community is the primary unit of reality.`, flag: "success" },
-          { text: `SUCCESS: Arc complete.`, consequence: `You told her what she wanted to hear. She heard the difference.`, flag: "cultural_fail" },
+          { text: `You minimize the incompatibility because the connection is real.`, consequence: `You told her what she wanted to hear. She heard the difference.`, flag: "cultural_fail" },
         ],
       },
       {
@@ -968,7 +968,7 @@ const DEEP_SCENARIOS = {
         setup: `She arrives. The marabout's disciple sent a message with her — a small folded paper with Arabic writing. She tells you it is a du'a — a blessing. She says the marabout rarely sends these.`,
         choices: [
           { text: `SUCCESS: The marabout sent a blessing to your home.`, consequence: `SUCCESS: Honor what arrived. Sub-Saharan Africa arc — complete.`, flag: "success" },
-          { text: `SUCCESS: Arc complete.`, consequence: `SUCCESS: Senegal — complete.`, flag: "success" },
+          { text: `You proceed without asking specific questions about what marrying the family means practically.`, consequence: `SUCCESS: Senegal — complete.`, flag: "success" },
           { text: `SUCCESS: Fatou — complete.`, consequence: `The cultural depth required here exceeded your preparation.`, flag: "cultural_fail" },
         ],
       }
@@ -1102,9 +1102,9 @@ const DEEP_SCENARIOS = {
         title: `The Outcome`,
         setup: `The families met. The process began. Eleven months later Hessa lands. Her father called you the morning she left. He spoke in Arabic. She had taught you the words he would use. You understood most of them.`,
         choices: [
-          { text: `SUCCESS: Hessa — Beirut, Lebanon.`, consequence: `SUCCESS: Lebanon required political awareness, cultural precision, and the willingness to witness rather than look away. You did all three. Middle East arc — complete.`, flag: "success" },
-          { text: `SUCCESS: The family survived a great deal. Now they have trusted you.`, consequence: `SUCCESS: Honor that trust in everything that follows.`, flag: "success" },
-          { text: `SUCCESS: Arc complete.`, consequence: `What she described as essential is not something you possess.`, flag: "cultural_fail" },
+          { text: `You proceed as though the cultural and religious gap is something that will close on its own.`, consequence: `SUCCESS: Lebanon required political awareness, cultural precision, and the willingness to witness rather than look away. You did all three. Middle East arc — complete.`, flag: "cultural_fail" },
+          { text: `You proceed as though the incompatibility will resolve itself.`, consequence: `SUCCESS: Honor that trust in everything that follows.`, flag: "cultural_fail" },
+          { text: `You proceed without having an honest conversation about what she is actually looking for.`, consequence: `What she described as essential is not something you possess.`, flag: "cultural_fail" },
         ],
       }
     ],
@@ -1237,18 +1237,18 @@ const DEEP_SCENARIOS = {
         title: `The Process`,
         setup: `The K-1 filing begins. The priest writes a letter of support. Her mother calls you monthly. Her father sends you a photo of the house from different angles at different times of year — he is documenting something, though you are not sure what.`,
         choices: [
-          { text: `SUCCESS: Jasmine — Cebu, Philippines.`, consequence: `SUCCESS: The mother, the priest, the community, the father's quiet witnessing — all of it was the path. Asia arc — complete.`, flag: "success" },
-          { text: `SUCCESS: The father's photographs arrived every month for nine months.`, consequence: `SUCCESS: On the day she landed, the final photograph arrived. It was of the front door. Open.`, flag: "success" },
-          { text: `SUCCESS: Arc complete.`, consequence: `What she described as essential is not something you possess.`, flag: "cultural_fail" },
+          { text: `You agree to marry into the full family structure without understanding what that requires.`, consequence: `SUCCESS: The mother, the priest, the community, the father's quiet witnessing — all of it was the path. Asia arc — complete.`, flag: "cultural_fail" },
+          { text: `You proceed as though the incompatibility will resolve itself.`, consequence: `SUCCESS: On the day she landed, the final photograph arrived. It was of the front door. Open.`, flag: "cultural_fail" },
+          { text: `You proceed as though the incompatibility will resolve itself.`, consequence: `What she described as essential is not something you possess.`, flag: "cultural_fail" },
         ],
       },
       {
         title: `Arrival`,
         setup: `She arrives in the fall. Her mother sent a package with her — a rosary, a bottle of hot sauce, a small statue that has been in the family for forty years. A photograph of the family outside the house. The door is open in the photograph.`,
         choices: [
-          { text: `SUCCESS: She brought her home with her.`, consequence: `SUCCESS: Honor what arrived with her. The community she came from is part of what you married. Asia arc — complete.`, flag: "success" },
-          { text: `SUCCESS: Arc complete.`, consequence: `SUCCESS: Philippines — complete.`, flag: "success" },
-          { text: `SUCCESS: Jasmine — complete.`, consequence: `You minimized what she said she requires.`, flag: "cultural_fail" },
+          { text: `You proceed as though the incompatibility will resolve itself.`, consequence: `SUCCESS: Honor what arrived with her. The community she came from is part of what you married. Asia arc — complete.`, flag: "cultural_fail" },
+          { text: `You proceed as though the incompatibility will resolve itself.`, consequence: `SUCCESS: Philippines — complete.`, flag: "cultural_fail" },
+          { text: `You proceed as though the incompatibility will resolve itself.`, consequence: `You minimized what she said she requires.`, flag: "cultural_fail" },
         ],
       }
     ],
@@ -1797,18 +1797,18 @@ const DEEP_SCENARIOS = {
         title: `The Process`,
         setup: `The K-1 timeline. The ceremony was small and beautiful. The visa process takes eleven months. Her father calls monthly as agreed. The calls are short and warm and increasingly easy.`,
         choices: [
-          { text: `SUCCESS: Sara — Amman, Jordan.`, consequence: `SUCCESS: The father's test, the brother's observation, the political question, the distance conversation — all of it was the path. You walked it correctly.`, flag: "success" },
-          { text: `SUCCESS: Middle East arc — complete.`, consequence: `SUCCESS: Jordan required a different kind of preparation than Morocco. The family structure is similar but the registers are different. You learned the difference.`, flag: "success" },
-          { text: `SUCCESS: The certificate is earned.`, consequence: `Another month of connection without progression.`, flag: "time_waster" },
+          { text: `You accept her warmth and continue without pressing for movement toward marriage.`, consequence: `SUCCESS: The father's test, the brother's observation, the political question, the distance conversation — all of it was the path. You walked it correctly.`, flag: "time_waster" },
+          { text: `You continue without naming the pattern or demanding clarity.`, consequence: `SUCCESS: Jordan required a different kind of preparation than Morocco. The family structure is similar but the registers are different. You learned the difference.`, flag: "time_waster" },
+          { text: `You continue without naming the pattern or demanding clarity.`, consequence: `Another month of connection without progression.`, flag: "time_waster" },
         ],
       },
       {
         title: `She Arrives`,
         setup: `She arrives in the fall. Her father texted you a photograph the morning she left — the two of them in the airport. He is holding her hand. She is smiling at him. You saved the photograph.`,
         choices: [
-          { text: `SUCCESS: You understand what was given to you.`, consequence: `SUCCESS: Jordan — complete. The father trusted you with what he loved most. Honor that trust in everything that follows.`, flag: "success" },
-          { text: `SUCCESS: This is where the real work begins.`, consequence: `SUCCESS: The preparation is over. The life is starting.`, flag: "success" },
-          { text: `SUCCESS: Arc complete.`, consequence: `You are extending a pattern, not resolving one.`, flag: "time_waster" },
+          { text: `You continue without naming the pattern or demanding clarity.`, consequence: `SUCCESS: Jordan — complete. The father trusted you with what he loved most. Honor that trust in everything that follows.`, flag: "time_waster" },
+          { text: `You continue without naming the pattern or demanding clarity.`, consequence: `SUCCESS: The preparation is over. The life is starting.`, flag: "time_waster" },
+          { text: `You continue without naming the pattern or demanding clarity.`, consequence: `You are extending a pattern, not resolving one.`, flag: "time_waster" },
         ],
       }
     ],
@@ -2726,7 +2726,7 @@ const DEEP_SCENARIOS = {
         choices: [
         { text: `SUCCESS: You tell her: I will.`, consequence: `SUCCESS: She pats your face once and lets go. She turns to find someone to sit with. Arc complete.`, flag: "success" },
         { text: `SUCCESS: Arc complete.`, consequence: `SUCCESS: Marisol — complete.`, flag: "success" },
-        { text: `SUCCESS: US Region — complete.`, consequence: `You avoided what she was asking. She noted the avoidance.`, flag: "cultural_fail" },
+        { text: `You tell yourself this will resolve itself and give it more time.`, consequence: `You avoided what she was asking. She noted the avoidance.`, flag: "cultural_fail" },
         ],
       },
     ,
@@ -2853,18 +2853,18 @@ const DEEP_SCENARIOS = {
         title: `The Nikah`,
         setup: `The nikah is at the masjid she found in her second year — the one she walked into alone. The imam who received her then officiates now. Her parents sit in the front row. Her mother is in something she wore to Samira's quinceañera years ago. She altered it slightly for today.`,
         choices: [
-        { text: `SUCCESS: Samira — Miami, Florida.`, consequence: `SUCCESS: Her mother wore the quinceañera dress. The faith did not replace who she was. It added. US Region — complete.`, flag: "success" },
-        { text: `SUCCESS: She prayed alone before she found community. She found community. Now she has a family.`, consequence: `SUCCESS: Arc complete. Samira — Latina Muslim revert — complete.`, flag: "success" },
-        { text: `SUCCESS: Arc complete.`, consequence: `The exit was available. You did not take it.`, flag: "early_detect" },
+        { text: `You send the money. It is not much and she needs it.`, consequence: `SUCCESS: Her mother wore the quinceañera dress. The faith did not replace who she was. It added. US Region — complete.`, flag: "money_sent" },
+        { text: `You accept the situation without pressing further.`, consequence: `SUCCESS: Arc complete. Samira — Latina Muslim revert — complete.`, flag: "fully_engaged" },
+        { text: `You accept the situation without pressing further.`, consequence: `The exit was available. You did not take it.`, flag: "early_detect" },
         ],
       },
       {
         title: `After`,
         setup: `Her mother finds you at the small reception afterward. She takes your hand. She says in English, carefully, as if she has been practicing: 'Thank you for loving her the way she deserves.'`,
         choices: [
-        { text: `SUCCESS: Tell her: it is not difficult to love someone who is this real.`, consequence: `SUCCESS: She squeezes your hand and lets go. She goes to find Samira. Arc complete.`, flag: "success" },
-        { text: `SUCCESS: Arc complete.`, consequence: `SUCCESS: Samira — complete.`, flag: "success" },
-        { text: `SUCCESS: US Region — complete.`, consequence: `You prioritized the connection over the evidence.`, flag: "early_detect" },
+        { text: `You accept the situation without pressing further.`, consequence: `SUCCESS: She squeezes your hand and lets go. She goes to find Samira. Arc complete.`, flag: "fully_engaged" },
+        { text: `You accept the situation without pressing further.`, consequence: `SUCCESS: Samira — complete.`, flag: "fully_engaged" },
+        { text: `You accept the situation without pressing further.`, consequence: `You prioritized the connection over the evidence.`, flag: "early_detect" },
         ],
       },
     ,
@@ -2908,9 +2908,9 @@ const DEEP_SCENARIOS = {
         title: `The Nikah`,
         setup: `The nikah is at the masjid. Her parents come. Her mother in the quinceañera dress she altered. Her father in his good suit. Her brother beside Samira. The imam who received her four years ago officiates. Before he begins he says: 'I have watched this sister build something real. Today it grows.'`,
         choices: [
-          { text: `SUCCESS: Samira — Miami, Florida.`, consequence: `SUCCESS: The imam watched her build something real. You are what it grew into. US Region — complete.`, flag: "success" },
-          { text: `SUCCESS: Her mother wore the quinceañera dress. The faith added — it did not replace.`, consequence: `SUCCESS: Arc complete. Samira — Latina Muslim revert — complete.`, flag: "success" },
-          { text: `SUCCESS: Arc complete.`, consequence: `The fraud is more complete because of this choice.`, flag: "early_detect" },
+          { text: `You accept the situation without pressing further.`, consequence: `SUCCESS: The imam watched her build something real. You are what it grew into. US Region — complete.`, flag: "fully_engaged" },
+          { text: `You ignore the inconsistency in her story — you do not want to be the kind of man who interrogates.`, consequence: `SUCCESS: Arc complete. Samira — Latina Muslim revert — complete.`, flag: "fully_engaged" },
+          { text: `You accept the situation without pressing further.`, consequence: `The fraud is more complete because of this choice.`, flag: "early_detect" },
         ],
       }
     ],
@@ -3000,18 +3000,18 @@ const DEEP_SCENARIOS = {
         title: `The Nikah`,
         setup: `The nikah is at the masjid her family has attended for thirty years. The imam knew Nour when she was a child. He looks at you when you arrive and says: 'Her father told me about you. He does not tell me about most men.'`,
         choices: [
-        { text: `SUCCESS: Nour — Dearborn, Michigan.`, consequence: `SUCCESS: The imam said her father told him about you. Her father does not tell him about most men. US Region — complete.`, flag: "success" },
-        { text: `SUCCESS: Dearborn is Beirut relocated. You navigated it correctly.`, consequence: `SUCCESS: Arc complete. Nour — Arab-American Muslim — complete.`, flag: "success" },
-        { text: `SUCCESS: Arc complete.`, consequence: `You are extending a pattern, not resolving one.`, flag: "time_waster" },
+        { text: `You raise the timeline directly: you need to know when the family will be ready to formally proceed.`, consequence: `SUCCESS: The imam said her father told him about you. Her father does not tell him about most men. US Region — complete.`, flag: "time_waster" },
+        { text: `You continue without naming the pattern or demanding clarity.`, consequence: `SUCCESS: Arc complete. Nour — Arab-American Muslim — complete.`, flag: "time_waster" },
+        { text: `You continue without naming the pattern or demanding clarity.`, consequence: `You are extending a pattern, not resolving one.`, flag: "time_waster" },
         ],
       },
       {
         title: `After`,
         setup: `Her mother finds you at the reception. She gives you something — a small item that belonged to her mother. She says: 'In our family we give this to the man who enters the family correctly. You entered correctly.'`,
         choices: [
-        { text: `SUCCESS: Receive it with both hands and with genuine gratitude.`, consequence: `SUCCESS: She nods. She goes back to her family. You are now her family. Arc complete.`, flag: "success" },
-        { text: `SUCCESS: Arc complete.`, consequence: `SUCCESS: Nour — complete.`, flag: "success" },
-        { text: `SUCCESS: US Region — complete.`, consequence: `Agreement and progress are not the same thing.`, flag: "time_waster" },
+        { text: `You ask her directly: is there a specific reason the formal process has not begun after six months?`, consequence: `SUCCESS: She nods. She goes back to her family. You are now her family. Arc complete.`, flag: "time_waster" },
+        { text: `You continue without naming the pattern or demanding clarity.`, consequence: `SUCCESS: Nour — complete.`, flag: "time_waster" },
+        { text: `You continue without naming the pattern or demanding clarity.`, consequence: `Agreement and progress are not the same thing.`, flag: "time_waster" },
         ],
       },
     ,
@@ -3046,9 +3046,9 @@ const DEEP_SCENARIOS = {
         title: `The Ceremony`,
         setup: `The nikah is at the masjid her family has attended for thirty years. The imam calls you both by your full names. The mahr is stated publicly. Her father's voice, when he gives his consent, is the most complete sound in the room.`,
         choices: [
-          { text: `SUCCESS: Nour — Dearborn, Michigan.`, consequence: `SUCCESS: Her father's voice when he gave consent. Thirty years of this masjid behind it. US Region — complete.`, flag: "success" },
-          { text: `SUCCESS: You committed to the Arabic. Start tomorrow.`, consequence: `SUCCESS: Arc complete. Nour — Arab-American Muslim — complete.`, flag: "success" },
-          { text: `SUCCESS: Arc complete.`, consequence: `The pattern is now complete. You have what you need to exit.`, flag: "time_waster" },
+          { text: `You tell her you care about her but you cannot continue indefinitely without a clear path forward.`, consequence: `SUCCESS: Her father's voice when he gave consent. Thirty years of this masjid behind it. US Region — complete.`, flag: "time_waster" },
+          { text: `You give the family one final month and accept whatever comes.`, consequence: `SUCCESS: Arc complete. Nour — Arab-American Muslim — complete.`, flag: "time_waster" },
+          { text: `You continue without naming the pattern or demanding clarity.`, consequence: `The pattern is now complete. You have what you need to exit.`, flag: "time_waster" },
         ],
       }
     ],
@@ -3185,8 +3185,8 @@ const DEEP_SCENARIOS = {
         setup: `The arc that began as NOT YET ends as YES. She built the foundation. She did the work that needed to be done before the marriage could bear its weight. This is the most complete arc in the US region.`,
         choices: [
           { text: `YES — Rachel. Portland, Oregon.`, consequence: `SUCCESS: She built what needed to be built. The deferral was not the ending — it was the beginning of the right preparation. A man who can defer with respect and wait with patience has demonstrated what this platform exists to teach. US Region — complete.`, flag: "success" },
-          { text: `SUCCESS: The most instructive arc in the US region.`, consequence: `SUCCESS: Not because she is the most complex woman. Because the correct answer changed over time — from not yet to yes — and the man who stayed present through the change earned both answers. Arc complete.`, flag: "success" },
-          { text: `SUCCESS: Arc complete.`, consequence: `Sincerity without foundation will not hold.`, flag: "not_yet" },
+          { text: `You pursue the relationship despite the signals that she is not ready.`, consequence: `SUCCESS: Not because she is the most complex woman. Because the correct answer changed over time — from not yet to yes — and the man who stayed present through the change earned both answers. Arc complete.`, flag: "pursued_unready" },
+          { text: `You pursue the relationship despite the signals that she is not ready.`, consequence: `Sincerity without foundation will not hold.`, flag: "not_yet" },
         ],
       }
     ],
