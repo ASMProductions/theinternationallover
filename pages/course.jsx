@@ -542,8 +542,8 @@ const DEEP_SCENARIOS = {
         title: `The Agreement`,
         setup: `The grandmother's word is the agreement. When she tells the family, the family agrees. Her father shakes your hand. Her mother hugs Diana. The community knows by the next morning.`,
         choices: [
-          { text: `You agree to provide for her family without understanding the scope of what that means.`, consequence: `SUCCESS: The grandmother's room was the real family meeting. Everything before it was preparation. Latin America arc — complete.`, flag: "cultural_fail" },
-          { text: `You proceed as though the incompatibility will resolve itself.`, consequence: `SUCCESS: You arrived and let yourself be seen. This is the Latin America arc's central requirement. Arc complete.`, flag: "cultural_fail" },
+          { text: `You agree to provide for her family without understanding the scope of what that means.`, consequence: `You have agreed to something you do not yet understand the full weight of.`, flag: "cultural_fail" },
+          { text: `You proceed as though the incompatibility will resolve itself.`, consequence: `The incompatibility is still present. You chose not to see it.`, flag: "cultural_fail" },
           { text: `You accept the explanation because you want it to be true.`, consequence: `The cultural distance exceeds your preparation.`, flag: "cultural_fail" },
         ],
       },
@@ -551,8 +551,8 @@ const DEEP_SCENARIOS = {
         title: `Arrival`,
         setup: `She arrives. Her grandmother sent a recording — ten minutes of the grandmother speaking in Spanish. Diana translates it for you over several evenings. It is the grandmother's history. She sent it so you would know where Diana came from.`,
         choices: [
-          { text: `You proceed as though the incompatibility will resolve itself.`, consequence: `SUCCESS: Honor it. Latin America arc — complete.`, flag: "cultural_fail" },
-          { text: `You accept another month of warmth from the father without naming the stall.`, consequence: `SUCCESS: Dominican Republic — complete.`, flag: "success" },
+          { text: `You proceed as though the incompatibility will resolve itself.`, consequence: `She received your answer. The gap it does not address is still there.`, flag: "cultural_fail" },
+          { text: `You accept another month of warmth from the father without naming the stall.`, consequence: `You minimized what she said she requires. She did not minimize it.`, flag: "success" },
           { text: `You proceed as though the incompatibility will resolve itself.`, consequence: `What she described as essential is not something you possess.`, flag: "cultural_fail" },
         ],
       }
@@ -802,7 +802,7 @@ const DEEP_SCENARIOS = {
       },
       {
         title: `The Imam`,
-        setup: `Fatima's father wants an imam from the local mosque to be present at the next meeting. Not to perform a ceremony — to provide a witness and a perspective. This is the family's tradition. The imam will ask you about your faith practice specifically.`,
+        setup: `Nine months. Her father says the imam he wanted is traveling and the meeting must wait. You ask when the imam returns. Her father says he is not certain. You ask what meeting would happen if the imam were not involved. Her father says the imam is important.`,
         choices: [
           { text: `Welcome the imam's presence — this is their tradition and you respect it`, consequence: `The imam is direct and learned. He asks about your prayer practice, your understanding of the nikah contract, and your position on a wife's right to education and work. You answer honestly. He nods at each answer.`, flag: "imam_welcomed" },
           { text: `Ask what the imam's role will be exactly`, consequence: `Her father explains. The imam witnesses and offers counsel. He does not have veto power but his assessment carries weight. You prepare accordingly.`, flag: "imam_role_understood" },
@@ -811,7 +811,7 @@ const DEEP_SCENARIOS = {
       },
       {
         title: `The Nikah Discussion`,
-        setup: `The families are aligned. The mahr has been agreed upon. The nikah date is being discussed. Her father proposes a date three months away. He wants the process done in Meknes, in the mosque, with both families present.`,
+        setup: `Ten months. You name it directly to her father: the families have been aligned for four months. The mahr was discussed six months ago. There is no date. You need a date or you need to understand why there cannot be one.`,
         choices: [
           { text: `Agree to the date and the location`, consequence: `Planning begins. Her mother sends you a list of what you will need to prepare. The list is detailed and warm.`, flag: "nikah_agreed" },
           { text: `Ask about the civil registration requirement and how it connects to the religious ceremony`, consequence: `Her father explains the Moroccan civil process. You understand that both are required. He has a lawyer who handles this regularly. The question impressed him.`, flag: "civil_asked" },
@@ -820,7 +820,7 @@ const DEEP_SCENARIOS = {
       },
       {
         title: `The Nikah`,
-        setup: `You return to Meknes. Both families are present. The nikah is performed in the mosque. The mahr is publicly acknowledged. Fatima is in another room with the women. The imam asks you a question in Arabic. You have prepared for this.`,
+        setup: `Eleven months. Her father calls you. He is warm. He says the nikah should happen in the spring. He says this in November. He said the same thing in the spring. You understand now what spring means in this context.`,
         choices: [
           { text: `Answer in Arabic — imperfectly but genuinely`, consequence: `The room responds. Her father translates for the family members who did not hear the preparation that went into this moment. The imam places his hand briefly on your shoulder.`, flag: "arabic_answered" },
           { text: `Answer in English and let the imam translate`, consequence: `This is acceptable. The imam translates carefully. The family receives your words. Fatima hears them from the next room through her sister.`, flag: "english_answered" },
@@ -831,8 +831,8 @@ const DEEP_SCENARIOS = {
         title: `The Outcome`,
         setup: `Nine months later. The K-1 is approved. She lands on a Tuesday. Her father texted you the night before: three words in Arabic. You know what they mean.`,
         choices: [
-          { text: `You continue without naming the pattern or demanding clarity.`, consequence: `SUCCESS: The patience, the protocol, the imam, the cousin, the sister, the father's thirty-minute test — all of it built something real. The certificate of commission is earned.`, flag: "time_waster" },
-          { text: `You continue without naming the pattern or demanding clarity.`, consequence: `SUCCESS: You gave it. North Africa arc — complete.`, flag: "time_waster" },
+          { text: `You continue without naming the pattern or demanding clarity.`, consequence: `She agrees warmly. No specific date follows.`, flag: "time_waster" },
+          { text: `You continue without naming the pattern or demanding clarity.`, consequence: `The warmth continues. The movement does not.`, flag: "time_waster" },
           { text: `You continue without naming the pattern or demanding clarity.`, consequence: `You are extending a pattern, not resolving one.`, flag: "time_waster" },
         ],
       }
@@ -1102,8 +1102,8 @@ const DEEP_SCENARIOS = {
         title: `The Outcome`,
         setup: `The families met. The process began. Eleven months later Hessa lands. Her father called you the morning she left. He spoke in Arabic. She had taught you the words he would use. You understood most of them.`,
         choices: [
-          { text: `You proceed as though the cultural and religious gap is something that will close on its own.`, consequence: `SUCCESS: Lebanon required political awareness, cultural precision, and the willingness to witness rather than look away. You did all three. Middle East arc — complete.`, flag: "cultural_fail" },
-          { text: `You proceed as though the incompatibility will resolve itself.`, consequence: `SUCCESS: Honor that trust in everything that follows.`, flag: "cultural_fail" },
+          { text: `You proceed as though the cultural and religious gap is something that will close on its own.`, consequence: `You have agreed to something you do not yet understand the full weight of.`, flag: "cultural_fail" },
+          { text: `You proceed as though the incompatibility will resolve itself.`, consequence: `The incompatibility is still present. You chose not to see it.`, flag: "cultural_fail" },
           { text: `You proceed without having an honest conversation about what she is actually looking for.`, consequence: `What she described as essential is not something you possess.`, flag: "cultural_fail" },
         ],
       }
@@ -1237,8 +1237,8 @@ const DEEP_SCENARIOS = {
         title: `The Process`,
         setup: `The K-1 filing begins. The priest writes a letter of support. Her mother calls you monthly. Her father sends you a photo of the house from different angles at different times of year — he is documenting something, though you are not sure what.`,
         choices: [
-          { text: `You agree to marry into the full family structure without understanding what that requires.`, consequence: `SUCCESS: The mother, the priest, the community, the father's quiet witnessing — all of it was the path. Asia arc — complete.`, flag: "cultural_fail" },
-          { text: `You proceed as though the incompatibility will resolve itself.`, consequence: `SUCCESS: On the day she landed, the final photograph arrived. It was of the front door. Open.`, flag: "cultural_fail" },
+          { text: `You agree to marry into the full family structure without understanding what that requires.`, consequence: `You have agreed to something you do not yet understand the full weight of.`, flag: "cultural_fail" },
+          { text: `You proceed as though the incompatibility will resolve itself.`, consequence: `The incompatibility is still present. You chose not to see it.`, flag: "cultural_fail" },
           { text: `You proceed as though the incompatibility will resolve itself.`, consequence: `What she described as essential is not something you possess.`, flag: "cultural_fail" },
         ],
       },
@@ -1246,8 +1246,8 @@ const DEEP_SCENARIOS = {
         title: `Arrival`,
         setup: `She arrives in the fall. Her mother sent a package with her — a rosary, a bottle of hot sauce, a small statue that has been in the family for forty years. A photograph of the family outside the house. The door is open in the photograph.`,
         choices: [
-          { text: `You proceed as though the incompatibility will resolve itself.`, consequence: `SUCCESS: Honor what arrived with her. The community she came from is part of what you married. Asia arc — complete.`, flag: "cultural_fail" },
-          { text: `You proceed as though the incompatibility will resolve itself.`, consequence: `SUCCESS: Philippines — complete.`, flag: "cultural_fail" },
+          { text: `You proceed as though the incompatibility will resolve itself.`, consequence: `She received your answer. The gap it does not address is still there.`, flag: "cultural_fail" },
+          { text: `You proceed as though the incompatibility will resolve itself.`, consequence: `You minimized what she said she requires. She did not minimize it.`, flag: "cultural_fail" },
           { text: `You proceed as though the incompatibility will resolve itself.`, consequence: `You minimized what she said she requires.`, flag: "cultural_fail" },
         ],
       }
@@ -1786,7 +1786,7 @@ const DEEP_SCENARIOS = {
       },
       {
         title: `The Agreement`,
-        setup: `Her father has given his agreement. The mahr is settled. A small ceremony is planned for six weeks from now. He calls you himself to tell you. The call lasts four minutes. At the end he says one sentence in Arabic that Sara translates for you later: 'Take care of what I am trusting you with.'`,
+        setup: `Eight months in. Sara says her father is ready to give his agreement — but needs one more conversation with you first. This is the fourth conversation he has needed. Each one has been warm. None has produced the next step.`,
         choices: [
           { text: `Ask Sara how to respond to her father's trust in a way that is appropriate`, consequence: `She teaches you the phrase. You call him back the next day and say it. He is quiet a moment. Then he thanks you for calling.`, flag: "trust_honored" },
           { text: `Write him a letter formally accepting the responsibility`, consequence: `He reads it with his wife. Sara tells you her mother cried. This was the right move for this family.`, flag: "letter_written" },
@@ -1795,10 +1795,10 @@ const DEEP_SCENARIOS = {
       },
       {
         title: `The Process`,
-        setup: `The K-1 timeline. The ceremony was small and beautiful. The visa process takes eleven months. Her father calls monthly as agreed. The calls are short and warm and increasingly easy.`,
+        setup: `Ten months. The agreement has been given twice and then complicated twice. Sara is warm and apologetic each time. You have begun to understand that the warmth and the apologetics are the pattern, not the exceptions to it.`,
         choices: [
-          { text: `You accept her warmth and continue without pressing for movement toward marriage.`, consequence: `SUCCESS: The father's test, the brother's observation, the political question, the distance conversation — all of it was the path. You walked it correctly.`, flag: "time_waster" },
-          { text: `You continue without naming the pattern or demanding clarity.`, consequence: `SUCCESS: Jordan required a different kind of preparation than Morocco. The family structure is similar but the registers are different. You learned the difference.`, flag: "time_waster" },
+          { text: `You accept her warmth and continue without pressing for movement toward marriage.`, consequence: `She agrees warmly. No specific date follows.`, flag: "time_waster" },
+          { text: `You continue without naming the pattern or demanding clarity.`, consequence: `The warmth continues. The movement does not.`, flag: "time_waster" },
           { text: `You continue without naming the pattern or demanding clarity.`, consequence: `Another month of connection without progression.`, flag: "time_waster" },
         ],
       },
@@ -1806,8 +1806,8 @@ const DEEP_SCENARIOS = {
         title: `She Arrives`,
         setup: `She arrives in the fall. Her father texted you a photograph the morning she left — the two of them in the airport. He is holding her hand. She is smiling at him. You saved the photograph.`,
         choices: [
-          { text: `You continue without naming the pattern or demanding clarity.`, consequence: `SUCCESS: Jordan — complete. The father trusted you with what he loved most. Honor that trust in everything that follows.`, flag: "time_waster" },
-          { text: `You continue without naming the pattern or demanding clarity.`, consequence: `SUCCESS: The preparation is over. The life is starting.`, flag: "time_waster" },
+          { text: `You continue without naming the pattern or demanding clarity.`, consequence: `She says she understands. The family is not quite ready.`, flag: "time_waster" },
+          { text: `You continue without naming the pattern or demanding clarity.`, consequence: `Another month passes. The warmth is unchanged. The progress is unchanged.`, flag: "time_waster" },
           { text: `You continue without naming the pattern or demanding clarity.`, consequence: `You are extending a pattern, not resolving one.`, flag: "time_waster" },
         ],
       }
@@ -2851,19 +2851,19 @@ const DEEP_SCENARIOS = {
       },
       {
         title: `The Nikah`,
-        setup: `The nikah is at the masjid she found in her second year — the one she walked into alone. The imam who received her then officiates now. Her parents sit in the front row. Her mother is in something she wore to Samira's quinceañera years ago. She altered it slightly for today.`,
+        setup: `Five months. The requests have escalated. The first was $180. The last was $800. Each is framed as temporary. Each is framed as urgent. Each arrives at an emotional peak — after a vulnerable conversation, after she has shared something that moved you.`,
         choices: [
-        { text: `You send the money. It is not much and she needs it.`, consequence: `SUCCESS: Her mother wore the quinceañera dress. The faith did not replace who she was. It added. US Region — complete.`, flag: "money_sent" },
-        { text: `You accept the situation without pressing further.`, consequence: `SUCCESS: Arc complete. Samira — Latina Muslim revert — complete.`, flag: "fully_engaged" },
+        { text: `You send the money. It is not much and she needs it.`, consequence: `The gratitude is immediate and specific. The next request will be larger.`, flag: "money_sent" },
+        { text: `You accept the situation without pressing further.`, consequence: `She adjusts her approach based on what she learned about you just now.`, flag: "fully_engaged" },
         { text: `You accept the situation without pressing further.`, consequence: `The exit was available. You did not take it.`, flag: "early_detect" },
         ],
       },
       {
         title: `After`,
-        setup: `Her mother finds you at the small reception afterward. She takes your hand. She says in English, carefully, as if she has been practicing: 'Thank you for loving her the way she deserves.'`,
+        setup: `You tell her you are not going to send more money. The response arrives in four minutes. It is warm and understanding and slightly wounded. She says she understands completely. She says she would never want money to come between you. The response took four minutes to compose.`,
         choices: [
-        { text: `You accept the situation without pressing further.`, consequence: `SUCCESS: She squeezes your hand and lets go. She goes to find Samira. Arc complete.`, flag: "fully_engaged" },
-        { text: `You accept the situation without pressing further.`, consequence: `SUCCESS: Samira — complete.`, flag: "fully_engaged" },
+        { text: `You accept the situation without pressing further.`, consequence: `You stayed in the warmth. She notes that you stayed.`, flag: "fully_engaged" },
+        { text: `You accept the situation without pressing further.`, consequence: `The explanation lands because you needed it to. The signal remains.`, flag: "fully_engaged" },
         { text: `You accept the situation without pressing further.`, consequence: `You prioritized the connection over the evidence.`, flag: "early_detect" },
         ],
       },
@@ -2906,10 +2906,10 @@ const DEEP_SCENARIOS = {
       },
       {
         title: `The Nikah`,
-        setup: `The nikah is at the masjid. Her parents come. Her mother in the quinceañera dress she altered. Her father in his good suit. Her brother beside Samira. The imam who received her four years ago officiates. Before he begins he says: 'I have watched this sister build something real. Today it grows.'`,
+        setup: `The arc is complete. You have the full picture now. The warmth was real enough to build on. The faith narrative was specific enough to land. The financial requests were small enough to seem reasonable. The architecture was deliberate. You have what you need.`,
         choices: [
-          { text: `You accept the situation without pressing further.`, consequence: `SUCCESS: The imam watched her build something real. You are what it grew into. US Region — complete.`, flag: "fully_engaged" },
-          { text: `You ignore the inconsistency in her story — you do not want to be the kind of man who interrogates.`, consequence: `SUCCESS: Arc complete. Samira — Latina Muslim revert — complete.`, flag: "fully_engaged" },
+          { text: `You accept the situation without pressing further.`, consequence: `She files your response. The next scene uses what she learned here.`, flag: "fully_engaged" },
+          { text: `You ignore the inconsistency in her story — you do not want to be the kind of man who interrogates.`, consequence: `You gave her what she needed without requiring what you need.`, flag: "fully_engaged" },
           { text: `You accept the situation without pressing further.`, consequence: `The fraud is more complete because of this choice.`, flag: "early_detect" },
         ],
       }
@@ -2998,19 +2998,19 @@ const DEEP_SCENARIOS = {
       },
       {
         title: `The Nikah`,
-        setup: `The nikah is at the masjid her family has attended for thirty years. The imam knew Nour when she was a child. He looks at you when you arrive and says: 'Her father told me about you. He does not tell me about most men.'`,
+        setup: `Eight months in. You have raised the question of timeline three times. Each time she agrees it is important. Each time the conversation ends without a date. Her warmth has not dimmed. The formal process has not begun. Her father is aware of you. He has not called.`,
         choices: [
-        { text: `You raise the timeline directly: you need to know when the family will be ready to formally proceed.`, consequence: `SUCCESS: The imam said her father told him about you. Her father does not tell him about most men. US Region — complete.`, flag: "time_waster" },
-        { text: `You continue without naming the pattern or demanding clarity.`, consequence: `SUCCESS: Arc complete. Nour — Arab-American Muslim — complete.`, flag: "time_waster" },
+        { text: `You raise the timeline directly: you need to know when the family will be ready to formally proceed.`, consequence: `She agrees warmly. No specific date follows.`, flag: "time_waster" },
+        { text: `You continue without naming the pattern or demanding clarity.`, consequence: `The warmth continues. The movement does not.`, flag: "time_waster" },
         { text: `You continue without naming the pattern or demanding clarity.`, consequence: `You are extending a pattern, not resolving one.`, flag: "time_waster" },
         ],
       },
       {
         title: `After`,
-        setup: `Her mother finds you at the reception. She gives you something — a small item that belonged to her mother. She says: 'In our family we give this to the man who enters the family correctly. You entered correctly.'`,
+        setup: `You raise it directly with Nour: nine months have passed. You care about her. You cannot continue indefinitely without a clear path. She listens. She is moved. She says she understands. She says the family is almost ready. Almost has been the word for four months.`,
         choices: [
-        { text: `You ask her directly: is there a specific reason the formal process has not begun after six months?`, consequence: `SUCCESS: She nods. She goes back to her family. You are now her family. Arc complete.`, flag: "time_waster" },
-        { text: `You continue without naming the pattern or demanding clarity.`, consequence: `SUCCESS: Nour — complete.`, flag: "time_waster" },
+        { text: `You ask her directly: is there a specific reason the formal process has not begun after six months?`, consequence: `She says she understands. The family is not quite ready.`, flag: "time_waster" },
+        { text: `You continue without naming the pattern or demanding clarity.`, consequence: `Another month passes. The warmth is unchanged. The progress is unchanged.`, flag: "time_waster" },
         { text: `You continue without naming the pattern or demanding clarity.`, consequence: `Agreement and progress are not the same thing.`, flag: "time_waster" },
         ],
       },
@@ -3044,10 +3044,10 @@ const DEEP_SCENARIOS = {
       },
       {
         title: `The Ceremony`,
-        setup: `The nikah is at the masjid her family has attended for thirty years. The imam calls you both by your full names. The mahr is stated publicly. Her father's voice, when he gives his consent, is the most complete sound in the room.`,
+        setup: `Twelve months. She calls. Her father has set a date — finally. Then calls back two days later to say the date has changed. He is apologetic and warm. She is apologetic and warm. You are twelve months in. You have a decision to make about what you do with that.`,
         choices: [
-          { text: `You tell her you care about her but you cannot continue indefinitely without a clear path forward.`, consequence: `SUCCESS: Her father's voice when he gave consent. Thirty years of this masjid behind it. US Region — complete.`, flag: "time_waster" },
-          { text: `You give the family one final month and accept whatever comes.`, consequence: `SUCCESS: Arc complete. Nour — Arab-American Muslim — complete.`, flag: "time_waster" },
+          { text: `You tell her you care about her but you cannot continue indefinitely without a clear path forward.`, consequence: `She says yes to everything you propose. The yes produces nothing.`, flag: "time_waster" },
+          { text: `You give the family one final month and accept whatever comes.`, consequence: `The conversation is warm. The outcome is the same as last week.`, flag: "time_waster" },
           { text: `You continue without naming the pattern or demanding clarity.`, consequence: `The pattern is now complete. You have what you need to exit.`, flag: "time_waster" },
         ],
       }
@@ -3184,8 +3184,8 @@ const DEEP_SCENARIOS = {
         title: `The Outcome`,
         setup: `The arc that began as NOT YET ends as YES. She built the foundation. She did the work that needed to be done before the marriage could bear its weight. This is the most complete arc in the US region.`,
         choices: [
-          { text: `YES — Rachel. Portland, Oregon.`, consequence: `SUCCESS: She built what needed to be built. The deferral was not the ending — it was the beginning of the right preparation. A man who can defer with respect and wait with patience has demonstrated what this platform exists to teach. US Region — complete.`, flag: "success" },
-          { text: `You pursue the relationship despite the signals that she is not ready.`, consequence: `SUCCESS: Not because she is the most complex woman. Because the correct answer changed over time — from not yet to yes — and the man who stayed present through the change earned both answers. Arc complete.`, flag: "pursued_unready" },
+          { text: `YES — Rachel. Portland, Oregon.`, consequence: `She receives your pursuit warmly. The foundation has not changed.`, flag: "success" },
+          { text: `You pursue the relationship despite the signals that she is not ready.`, consequence: `You are building something on ground that is not yet ready.`, flag: "pursued_unready" },
           { text: `You pursue the relationship despite the signals that she is not ready.`, consequence: `Sincerity without foundation will not hold.`, flag: "not_yet" },
         ],
       }
