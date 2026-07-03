@@ -3180,6 +3180,8 @@ export default function InternationalLover() {
   const [paywallOpen, setPaywallOpen] = useState(false);
   const [leadEmail, setLeadEmail] = useState("");
   const [leadSubmitted, setLeadSubmitted] = useState(false);
+  const [leadMsg, setLeadMsg] = useState("");
+  const [leadSending, setLeadSending] = useState(false);
   const [freePreviewOpen, setFreePreviewOpen] = useState(false);
   const [email, setEmail] = useState("");
   const [code, setCode] = useState("");
@@ -3214,6 +3216,22 @@ export default function InternationalLover() {
   };
 
   const stampRegion = (id) => { if (!stampedRegions.includes(id)) setStampedRegions(p => [...p, id]); };
+
+  const handleLeadSubmit = async () => {
+    if (!leadEmail || !leadEmail.includes("@")) { setLeadMsg("Please enter a valid email address."); return; }
+    setLeadSending(true); setLeadMsg("");
+    try {
+      const res = await fetch("/api/lead-magnet", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: leadEmail }),
+      });
+      const data = await res.json();
+      if (data.ok) { setLeadSubmitted(true); }
+      else { setLeadMsg(data.error || "Something went wrong. Please try again."); }
+    } catch { setLeadMsg("Something went wrong. Please try again."); }
+    setLeadSending(false);
+  };
 
   const handleEmailSubmit = async () => {
     if (!email.trim()) { setMsg("Please enter your email address."); return; }
@@ -3887,16 +3905,20 @@ export default function InternationalLover() {
 
       <section style={{ background:C.navyDeep, padding:"4rem 1.5rem", borderBottom:`1px solid ${C.border}` }}>
         <div style={{ maxWidth:560, margin:"0 auto", textAlign:"center" }}>
-          <Eyebrow>Stay Connected</Eyebrow>
-          <h2 style={{ fontSize:"clamp(17px,2.8vw,22px)", color:C.goldLight, fontWeight:"normal", marginBottom:12 }}>Not ready yet?</h2>
-          <p style={{ fontSize:"clamp(12px,1.7vw,13px)", color:C.creamDim, lineHeight:1.85, marginBottom:"1.75rem", fontFamily:"sans-serif" }}>Enter your email and we will notify you when new content, the matrimonial platform, and community events become available.</p>
+          <Eyebrow>Free Download</Eyebrow>
+          <h2 style={{ fontSize:"clamp(17px,2.8vw,24px)", color:C.goldLight, fontWeight:"normal", marginBottom:12 }}>The Vetting Standard</h2>
+          <p style={{ fontSize:"clamp(12px,1.7vw,14px)", color:C.creamDim, lineHeight:1.85, marginBottom:"1.75rem", fontFamily:"sans-serif", fontStyle:"italic" }}>How to know she is real before you board the plane.</p>
+          <p style={{ fontSize:"clamp(11px,1.5vw,13px)", color:C.muted, lineHeight:1.8, marginBottom:"1.75rem", fontFamily:"sans-serif" }}>Twelve warning signs. Seven vetting tools. Regional intelligence for North Africa, the Middle East, Southeast Asia, Sub-Saharan Africa, and Latin America. Enter your email and receive it now.</p>
           {!leadSubmitted ? (
-            <div style={{ display:"flex", gap:8, maxWidth:440, margin:"0 auto", flexWrap:"wrap", justifyContent:"center" }}>
-              <input type="email" value={leadEmail} onChange={e => setLeadEmail(e.target.value)} onKeyDown={e => { if (e.key==="Enter" && leadEmail.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) { fetch("/api/lead-capture",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:leadEmail.trim().toLowerCase()})}).catch(()=>{}); setLeadSubmitted(true); }}} placeholder="Enter your email address" style={{ flex:1, minWidth:200, padding:"12px 16px", background:C.dark, border:`1px solid ${C.border}`, color:C.cream, fontSize:13, fontFamily:"sans-serif", outline:"none" }} />
-              <button onClick={() => { if (!leadEmail.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) return; fetch("/api/lead-capture",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:leadEmail.trim().toLowerCase()})}).catch(()=>{}); setLeadSubmitted(true); }} style={{ padding:"12px 22px", background:C.gold, color:C.navyDeep, border:"none", cursor:"pointer", fontSize:12, fontWeight:700, letterSpacing:"0.1em", textTransform:"uppercase", fontFamily:"sans-serif" }}>Notify Me</button>
+            <div style={{ display:"flex", flexDirection:"column", gap:8, maxWidth:420, margin:"0 auto" }}>
+              <div style={{ display:"flex", gap:8 }}>
+                <input type="email" value={leadEmail} onChange={e => setLeadEmail(e.target.value)} onKeyDown={e => e.key==="Enter" && handleLeadSubmit()} placeholder="Your email address" style={{ flex:1, padding:"12px 16px", background:C.dark, border:`1px solid ${C.border}`, color:C.cream, fontSize:13, fontFamily:"sans-serif", outline:"none" }} />
+                <button onClick={handleLeadSubmit} disabled={leadSending} style={{ padding:"12px 20px", background:C.gold, color:C.navyDeep, border:"none", cursor:leadSending?"wait":"pointer", fontSize:12, fontWeight:700, letterSpacing:"0.08em", textTransform:"uppercase", fontFamily:"sans-serif", whiteSpace:"nowrap" }}>{leadSending ? "Sending..." : "Get the Guide →"}</button>
+              </div>
+              {leadMsg && <div style={{ fontSize:12, color:"#c08080", fontFamily:"sans-serif" }}>{leadMsg}</div>}
             </div>
           ) : (
-            <div style={{ color:C.green, fontSize:14, fontFamily:"sans-serif" }}>✓ You are on the list. We will be in touch.</div>
+            <div style={{ color:C.gold, fontSize:14, fontFamily:"sans-serif" }}>✓ The guide is on its way to your inbox.</div>
           )}
         </div>
       </section>
