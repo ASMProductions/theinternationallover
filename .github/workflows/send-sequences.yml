@@ -1,0 +1,19 @@
+name: Send IL Email Sequences
+"on":
+  schedule:
+    - cron: "0 2 * * 1,3,5"
+  workflow_dispatch:
+
+jobs:
+  send-sequences:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger email sequence send
+        run: |
+          curl -X POST \
+            -H "Authorization: Bearer ${{ secrets.SEQUENCE_AUTH_TOKEN }}" \
+            -H "Content-Type: application/json" \
+            https://theinternationallover.com/api/sequence/send-emails \
+            -d '{"action":"send"}'
+        env:
+          SEQUENCE_AUTH_TOKEN: ${{ secrets.SEQUENCE_AUTH_TOKEN }}
