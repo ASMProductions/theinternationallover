@@ -1,5 +1,5 @@
 // pages/api/lead-magnet.js
-// Saves email to Redis and sends the Vetting Standard PDF via SMTP.
+// Saves email to Redis, initializes sequence tracking, and sends the Vetting Standard PDF via SMTP.
 
 import nodemailer from "nodemailer";
 
@@ -8,6 +8,7 @@ const REDIS_TOKEN = process.env.UPSTASH_REDIS_REST_TOKEN;
 
 const PDF_URL  = "https://theinternationallover.com/vetting_standard.pdf";
 const LIST_KEY = "leads:vetting-standard";
+const FUNNEL_KEY = "vetting-standard";
 
 async function redisCmd(...args) {
   const r = await fetch(REDIS_URL, {
@@ -86,8 +87,21 @@ export default async function handler(req, res) {
 
   try {
     if (REDIS_URL && REDIS_TOKEN) {
+      // 1) Store in pending set
       await redisCmd("SADD", LIST_KEY, clean);
+
+      // 2) Initialize sequence tracking data
+      const subscriberData = {
+        email: clean,
+        signup_timestamp: Math.floor(Date.now() / 1000),
+        current_step: 0,
+        sent_emails: [0], // Email 1 (step 0) is sent immediately with PDF
+      };
+
+      await redisCmd("SET", `sequence:${FUNNEL_KEY}:data:${clean}`, JSON.stringify(subscriberData));
     }
+
+    // 3) Send the guide email
     await sendGuide(clean);
     return res.status(200).json({ ok: true });
   } catch (err) {
