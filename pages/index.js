@@ -10,7 +10,6 @@ const C = {
 };
 
 const FREE_CODES = { "ILACCESS": true, "ADMINTEST": true };
-const ADMIN_CODES = { "ADMINTEST": true };
 
 const TIMED_CODES = {
   "BUDDYPASS": 24,
@@ -37,7 +36,7 @@ function checkTimedCode(code) {
 
 const TIERS = [
   { id:"course", label:"The Course", sublabel:"Course + Full Resource Library", price:"$497", cycle:"one time · lifetime access", stripe:"https://buy.stripe.com/00w00j1Rrd1s1eEcei77O0k",
-    features:["Complete simulation course — all six regions","Twenty-two virtual women — broad demographic of potential mates","Branching scenarios — visual novel format","Full cultural obstacle modules","Complete resource library — 14 modules","Certificate of The International Lover™"], highlight:false },
+    features:["Complete simulation course — all five regions","Fifteen virtual women — broad demographic of potential mates","Branching scenarios — visual novel format","Full cultural obstacle modules","Complete resource library — 14 modules","Certificate of The International Lover™"], highlight:false },
   { id:"complete", label:"Complete Platform", sublabel:"Everything. Active membership.", price:"$49.99", cycle:"per month · or $397/year", stripe:"https://buy.stripe.com/fZu6oH3Zz8LccXm5PU77O0l", stripeYear:"https://buy.stripe.com/14A8wP9jT2mO8H64LQ77O0m",
     features:["Full book — 17 chapters with read-aloud","Complete simulation course","Full resource library — 14 modules","Certificate of The International Lover™","The Consulate — community forum","All five regional subgroups","Member consultation rates","All future content included"], highlight:true },
   { id:"lifetime", label:"Lifetime Commission", sublabel:"Everything. Permanently.", price:"$997", cycle:"one time · never pay again", stripe:"https://buy.stripe.com/28E5kD3ZzaTke1q0vA77O0n",
@@ -52,7 +51,6 @@ const CONSULTATIONS = [
 ];
 
 const REGIONS = [
-  { id:"us", label:"North America",      desc:"United States — All Backgrounds" },
   { id:"na", label:"North Africa",       desc:"Morocco · Tunisia · Algeria · Egypt" },
   { id:"me", label:"Middle East",        desc:"Jordan · Lebanon · Yemen · Syria" },
   { id:"as", label:"Asia",               desc:"Indonesia · Philippines · Bangladesh" },
@@ -2414,84 +2412,6 @@ const RESOURCE_MODULES = [
 ];
 
 const REGIONS_COURSE = [
-  {
-    id:"us", label:"North America", color:"#a07840", desc:"United States — All Backgrounds",
-    context:"She chose a different standard. Whatever she came from — mosque, church, temple, or simply the decision that the culture around her was not enough — she made a choice that most women around her did not make. This region is about recognizing that choice, meeting her on her terms, and bringing the same preparation to her door that you would bring to a door in Fez or Dakar.",
-    scenarios:[
-      { id:"us_1", title:"The Standard She Chose", setup:"She is on this platform because she made a decision most women around her did not make. Before you approach her, understand what that decision cost her — and what it means that she is still standing on it.", choices:[
-        { text:"Acknowledge what it costs to choose a different standard", outcome:"She receives the acknowledgment. The conversation begins at a level of honesty most platform exchanges never reach.", flag:"cost_acknowledged" },
-        { text:"Ask her what brought her to this platform specifically", outcome:"She tells you. What she describes is not a list of preferences — it is a value system. You are now listening to someone who has decided what she is.", flag:"platform_asked" },
-        { text:"Tell her about yourself first — establish your own standard", outcome:"She listens. Then: 'Now ask me.' She needed to hear you before she would open. The sequence matters.", flag:"self_first" },
-      ]},
-      { id:"us_2", title:"Her Family", setup:"Her family is present in this arc the same way every other region's family is present. The meeting will happen. The standard will be applied. The question is whether you come prepared or whether you come performing.", choices:[
-        { text:"Ask her what her family needs to see", outcome:"She tells you specifically. The list is honest and manageable. You now have a preparation target.", flag:"family_prepared" },
-        { text:"Tell her your family background before asking about hers", outcome:"She listens. She asks one question. The question tells you what she values. Your answer to it sets the tone for the family meeting.", flag:"family_reciprocal" },
-        { text:"Ask when the family meeting will happen", outcome:"She says: 'When I decide you are ready for it.' The timeline is hers. You are building toward readiness, not rushing toward a meeting.", flag:"family_timing" },
-      ]},
-    ],
-    women:[
-      { id:"aisha",   photo:"/women/aisha.jpg",   name:"Aisha",   age:27, city:"Atlanta, Georgia",    religion:"Muslim",          type:"genuine", profileText:"Born Muslim. Her father was one of the first men in his neighborhood to take shahada in the 1980s. She has been waiting for a man who understands what that means.", hidden:"Her father's standing in the community means any man she introduces is immediately visible to forty years of community relationships.", signal:"She asks precise questions and does not accept vague answers.", endings:{ success:"Atlanta — complete." } },
-      { id:"deborah", photo:"/women/deborah.jpg", name:"Deborah", age:29, city:"Washington D.C.",     religion:"Hebrew Israelite", type:"genuine", profileText:"She keeps the law. Not as a cultural inheritance — as a living practice she has chosen as an adult. The Sabbath is not negotiable.", hidden:"Her elder's word is final.", signal:"She keeps the Sabbath. The silence Friday evening is not a problem to solve.", endings:{ success:"D.C. — complete." } },
-      { id:"kezia",   photo:"/women/kezia.jpg",   name:"Kezia",   age:26, city:"Houston, Texas",      religion:"Christian",        type:"genuine", profileText:"Not a cultural Christian. She reads. She fasts. She tithes because she decided to. She is waiting for a man who has a relationship with God that is his own.", hidden:"Her pastor's assessment carries the same weight as her father's.", signal:"Her brother said almost nothing at the airport. A quiet man watching is not passive.", endings:{ success:"Houston — complete." } },
-      { id:"marisol", photo:"/women/marisol.jpg", name:"Marisol", age:28, city:"Chicago, Illinois",   religion:"Catholic",         type:"genuine", profileText:"Mexican-American. Third generation. Her grandmother came from Jalisco and is still the head of this family.", hidden:"The grandmother is the decision. Everyone knows it.", signal:"She mentions her grandmother constantly. This is the most important information she is giving you.", endings:{ success:"Chicago — complete." } },
-      { id:"samira",  photo:"/women/samira.jpg",  name:"Samira",  age:25, city:"Miami, Florida",      religion:"Islam (revert)",   type:"genuine", profileText:"Puerto Rican. Took shahada four years ago. Her faith is real — tested, chosen, maintained against the current of her own culture.", hidden:"She teaches the new sisters at her masjid. She has not mentioned it on the profile.", signal:"She will tell you the cost of her reversion without being asked.", endings:{ success:"Miami — complete." } },
-      { id:"nour_us", photo:"/women/nour-us.jpg", name:"Nour",    age:27, city:"Dearborn, Michigan",  religion:"Islam",            type:"genuine", profileText:"Born in Dearborn. Her parents came from Lebanon. She is American in her fluency and Arab in her framework.", hidden:"The family gathering includes extended community with an unofficial but real vote.", signal:"She asked if you know what marrying into a Lebanese family means. Answer specifically.", endings:{ success:"Dearborn — complete." } },
-      { id:"rachel",  photo:"/women/rachel.jpg",  name:"Rachel",  age:26, city:"Portland, Oregon",    religion:"Islam (revert)",   type:"not_yet", profileText:"Took shahada eighteen months ago. Her practice is sincere. Her foundation is still being built.", hidden:"The correct ending is not yet — followed by yes when the foundation is ready.", signal:"She talks about the future before her present is fully built. This is the signal.", endings:{ not_yet:"Portland — not yet. Come back when the foundation is ready.", success:"She built it. Portland — complete." } },
-    ],
-    women:[
-      { id:"aisha", photo:"/women/aisha.jpg", name:"Aisha", age:27, city:"Atlanta, Georgia", education:"Bachelor's, Education", religion:"Muslim", platform:"theinternationallover.com",
-        profileText:"Born Muslim. My father was one of the first men in his neighborhood to take shahada in the 1980s. I have been waiting for a man who understands what that means — not as a talking point, but as a way of life.",
-        hidden:"Her father's standing in the community means any man she introduces is immediately visible to forty years of community relationships. The Friday Jumu'ah is not optional.",
-        signal:"She asks precise questions and does not accept vague answers. The precision is the standard, not the obstacle.",
-        endings:{ success:"You navigated her father's three questions, the community, and the masjid. Atlanta — complete." }
-      },
-      { id:"deborah", photo:"/women/deborah.jpg", name:"Deborah", age:29, city:"Washington D.C.", education:"Master's, Public Policy", religion:"Hebrew Israelite", platform:"theinternationallover.com",
-        profileText:"I keep the law. Not as a cultural inheritance I tolerate — as a living practice I have chosen as an adult. The Sabbath is not negotiable. The feasts are observed. I am looking for a man who can hold his own ground while respecting the ground I stand on.",
-        hidden:"Her elder's word is final. The community has been watching for decades. A man who comes correctly is received warmly — the warmth is just on the other side of the assessment.",
-        signal:"She keeps the Sabbath. The silence Friday evening is not a problem to solve.",
-        endings:{ success:"The elder said you can be taught. The pastor stood beside the elder. D.C. — complete." }
-      },
-      { id:"kezia", photo:"/women/kezia.jpg", name:"Kezia", age:26, city:"Houston, Texas", education:"Bachelor's, Nursing", religion:"Christian", platform:"theinternationallover.com",
-        profileText:"Not a cultural Christian. I read. I fast. I tithe because I decided to. My church is my community in the way that most people's workplaces are their community — completely. I am waiting for a man who has a relationship with God that is his own, not borrowed from someone else.",
-        hidden:"Her brother is quiet and watching. Her pastor's assessment carries the same weight as her father's. The Sunday service is part of the evaluation.",
-        signal:"Her brother said almost nothing at the airport. A quiet man who is watching is not passive.",
-        endings:{ success:"Her brother stepped forward to stand beside you. The pastor said consistent. Houston — complete." }
-      },
-      { id:"marisol", photo:"/women/marisol.jpg", name:"Marisol", age:28, city:"Chicago, Illinois", education:"Bachelor's, Social Work", religion:"Catholic", platform:"theinternationallover.com",
-        profileText:"Mexican-American. Third generation. My grandmother came from Jalisco and she is still the head of this family. My faith is woven into everything we do. I am not looking for a Catholic man specifically. I am looking for a man who understands what it means to enter a family that has been building something for three generations.",
-        hidden:"The grandmother is the decision. Her parents know it, the family knows it, and the man who comes correctly knows it before he arrives.",
-        signal:"She mentions her grandmother constantly. This is the most important information she is giving you.",
-        endings:{ success:"The grandmother saved the dress. The priest has known her since her baptism. Chicago — complete." }
-      },
-      { id:"samira", photo:"/women/samira.jpg", name:"Samira", age:25, city:"Miami, Florida", education:"Bachelor's, Public Health", religion:"Islam (revert)", platform:"theinternationallover.com",
-        profileText:"Puerto Rican. I took shahada four years ago. My family is Catholic. My faith is real — tested, chosen, and maintained against the current of my own culture. I am not fragile about it. I am the most grounded I have ever been. I teach the new sisters at my masjid because I know what they need and no one was there to give it to me.",
-        hidden:"She teaches at the masjid. She has not mentioned it on the profile. The community knows her standing. A man who discovers this on his own has paid attention.",
-        signal:"She will tell you the cost of her reversion without being asked. That honesty is itself the test.",
-        endings:{ success:"The imam watched her build something real. The quinceañera dress. Miami — complete." }
-      },
-      { id:"nour_us", photo:"/women/nour-us.jpg", name:"Nour", age:27, city:"Dearborn, Michigan", education:"Bachelor's, Business", religion:"Islam", platform:"theinternationallover.com",
-        profileText:"Born in Dearborn. My parents came from Lebanon. I am American in my fluency and Arab in my framework. If you know what a Lebanese family meeting looks like, say so. If you do not, I would rather know now than later.",
-        hidden:"The family gathering includes extended community who have an unofficial but real vote. The elder at the community dinner has known the family for twenty-five years.",
-        signal:"She asked if you know what marrying into a Lebanese family means. Answer specifically — not generically.",
-        endings:{ success:"Her father's voice when he gave consent. Thirty years of that masjid behind it. Dearborn — complete." }
-      },
-      { id:"rachel", photo:"/women/rachel.jpg", name:"Rachel", age:26, city:"Portland, Oregon", education:"Bachelor's, Education", religion:"Islam (revert)", platform:"theinternationallover.com",
-        profileText:"I took shahada eighteen months ago. My practice is sincere. I am building my community. My family has been distant since the conversion. I am on this platform because I am serious about marriage and I am serious about my faith and I believe those two things belong together.",
-        hidden:"The correct ending for this arc is not immediate success. It is deferral — not yet — followed by yes when the foundation is ready. A man who can tell the difference between the right woman at the wrong time and the wrong woman at any time has understood this platform.",
-        signal:"She talks about the future with specificity before her present is fully built. This is the signal. It is not a flaw — it is information.",
-        endings:{ not_yet:"She built the foundation. Eighteen months later she sent the proof. The deferral became yes. Portland — complete.", success:"She built what needed to be built. The correct answer changed over time. Arc complete." }
-      },
-    ],
-    endings:{
-      success:"US Region — complete. The same standard as every other region. You held it.",
-      not_yet:"NOT YET: She was sincere. The foundation was not yet ready. Come back in two years.",
-      genuine_wrong:"NOT YET — Correct Deferral: She was real and sincere. The timing was not right. The man who can see this and defer with respect has demonstrated the highest form of discernment on this platform.",
-      cultural_fail:"US Region — Cultural Misnavigation: The preparation was insufficient. The signals were present. You did not read them. Study the US region resource module before returning.",
-      early_detect:"US Region — Correct Walkaway: You identified the pattern early and exited cleanly. Arc complete.",
-      fraud_pre:"She presented as genuine. The warmth was real enough that you believed it. What was not real was the intention. You caught it before the legal process was complete. The damage was real — time, emotional investment, money in some cases — but the worst outcome was avoided.",
-      fraud_post:"She received citizenship. She left. This ending exists because it has happened to real men who did everything they believed was right. The signals were there. They were subtle and they were present. This is why the platform exists.",
-    }
-  },
   { id:"na", label:"North Africa", color:"#c8963e", desc:"Morocco · Tunisia · Algeria · Egypt",
     context:"North Africa operates on a high-context cultural framework. What is not said carries as much weight as what is. Family honor is structural, not sentimental. A father's silence is not indifference — it is evaluation. Islam governs the rhythm of daily life.",
     women:[
@@ -2528,6 +2448,7 @@ const REGIONS_COURSE = [
       fraud_post:"She received citizenship. She left. There may be a child. This ending exists because it has happened to real men.",
     }
   },
+
   { id:"me", label:"Middle East", color:"#a07830", desc:"Jordan · Lebanon · Yemen · Syria",
     context:"Family is the primary social unit around which everything is organized. A man who courts a woman without courting her family is not a serious man. Religion is not personal — it is communal. A woman's reputation affects not just her but her sisters, her mother, and her father's standing.",
     women:[
@@ -2564,6 +2485,7 @@ const REGIONS_COURSE = [
       fraud_post:"She had a brother she wanted to bring over. The marriage was the instrument. Post-citizenship, the plan executed exactly as it had been designed, long before she met you.",
     }
   },
+
   { id:"as", label:"Asia", color:"#b88a28", desc:"Indonesia · Philippines · Bangladesh",
     context:"Asia in this context spans Southeast Asia and South Asia. The common threads: family embeddedness, high-context communication, and the reality that the economic gap between an American man and her family can be large enough to distort the power dynamic significantly. That last point is the primary source of fraud in this arc — usually not malice but desperation given a direction.",
     women:[
@@ -2600,6 +2522,7 @@ const REGIONS_COURSE = [
       fraud_post:"She was sending money home throughout the marriage. After citizenship, the transfers became larger. Then she was gone. The child remained. This arc ends with a single father and a lesson about the difference between a woman who is committed to the marriage and a woman who is committed to what the marriage provides.",
     }
   },
+
   { id:"la", label:"Latin America", color:"#c8a040", desc:"Colombia · Dominican Republic · Peru",
     context:"Latin America is the arc with the most cultural overlap with American experience and therefore the most dangerous false sense of familiarity. The Latin American woman is often the most immediately accessible — shared cultural references, social warmth that feels like intimacy, English fluency that removes one primary vetting tool. The man who enters this arc thinking he understands it because he has watched Spanish-language television has not begun to understand it.",
     women:[
@@ -2636,6 +2559,7 @@ const REGIONS_COURSE = [
       fraud_post:"The erosion was quiet and cumulative. She was never a villain. She was a woman placed in an environment that constantly offered her an alternative identity. You had not protected the marriage from that environment. By the time you understood what was happening it had already happened.",
     }
   },
+
   { id:"ss", label:"Sub-Saharan Africa", color:"#b07820", desc:"Senegal · Ghana · Ethiopia · Kenya",
     context:"Sub-Saharan Africa is the arc with the greatest internal diversity and the deepest connection to the African American man's ancestral history. Community is the primary unit of reality. The bride price negotiation is not a transaction — it is a covenant between two families. A man who treats it as a fee is immediately revealed as someone who does not understand what he is entering.",
     women:[
@@ -2671,7 +2595,7 @@ const REGIONS_COURSE = [
       fraud_pre:"The post-Green Card period revealed the pattern. The money was moving in directions you had not agreed to. The phone calls to her home country were longer and more frequent than before. You caught it before citizenship with the help of an attorney you consulted before saying anything.",
       fraud_post:"The citizenship was the goal. The marriage was the instrument. After naturalization, the departure was organized and deliberate. The children remained. This ending is documented — not hypothetical. The debrief focuses on the signals that were present from the beginning, available to be read, and not read.",
     }
-  }
+  },
 ];
 
 const COURSE_PHASES = ["intro", "roster", "scenario", "outcome", "debrief", "certificate"];
@@ -2694,7 +2618,7 @@ function ProfileCard({ woman, selected, onSelect, revealed }) {
           <div style={{ fontSize:9, color:"#5a4e32", fontFamily:"sans-serif", marginTop:2 }}>{woman.platform}</div>
         </div>
       </div>
-      <div style={{ fontSize:10, color:"#c8b890", lineHeight:1.65, fontFamily:"sans-serif", fontStyle:"italic", borderTop:"0.5px solid #1e3a6e", paddingTop:8 }}>"{(woman.profileText || woman.bio || "").slice(0,120)}..."</div>
+      <div style={{ fontSize:10, color:"#c8b890", lineHeight:1.65, fontFamily:"sans-serif", fontStyle:"italic", borderTop:"0.5px solid #1e3a6e", paddingTop:8 }}>"{woman.profileText.slice(0,120)}..."</div>
       {revealed && (
         <div style={{ marginTop:10, padding:8, background:"rgba(139,26,26,0.15)", border:"0.5px solid #8b1a1a" }}>
           <div style={{ fontSize:8, color:"#8b1a1a", letterSpacing:"0.1em", fontFamily:"sans-serif", marginBottom:4 }}>INTELLIGENCE FILE</div>
@@ -2716,29 +2640,6 @@ function ScenarioCard({ choice, onSelect }) {
   );
 }
 
-class CourseErrorBoundary extends React.Component {
-  constructor(props) { super(props); this.state = { error: null }; }
-  static getDerivedStateFromError(error) { return { error: error.message || String(error) }; }
-  render() {
-    if (this.state.error) {
-      return (
-        <div style={{ minHeight:"100vh", background:"#091a35", color:"#f0e6cc", fontFamily:"Georgia,serif", display:"flex", alignItems:"center", justifyContent:"center", padding:"2rem" }}>
-          <div style={{ maxWidth:600, width:"100%", textAlign:"center" }}>
-            <div style={{ fontSize:9, letterSpacing:"0.3em", color:"#8b1a1a", fontFamily:"sans-serif", marginBottom:12 }}>COURSE ERROR — PLEASE COPY AND REPORT</div>
-            <div style={{ background:"#0f2347", border:"1px solid #8b1a1a", padding:"1.5rem", marginBottom:"1.5rem", textAlign:"left", fontFamily:"sans-serif", fontSize:12, color:"#c8b890", lineHeight:1.7, wordBreak:"break-all" }}>
-              {this.state.error}
-            </div>
-            <button onClick={() => { this.setState({ error: null }); this.props.onReset(); }} style={{ padding:"12px 28px", background:"#b8963e", color:"#0f2347", border:"none", cursor:"pointer", fontSize:12, fontWeight:700, fontFamily:"sans-serif", borderRadius:"20px" }}>
-              Return to Map
-            </button>
-          </div>
-        </div>
-      );
-    }
-    return this.props.children;
-  }
-}
-
 function CourseView({ onBack }) {
   const [phase, setPhase] = useState("intro");
   const [activeRegion, setActiveRegion] = useState(null);
@@ -2754,36 +2655,21 @@ function CourseView({ onBack }) {
   const region = activeRegion ? REGIONS_COURSE.find(r => r.id === activeRegion) : null;
 
   const handleChoice = (choice) => {
-    if (!choice) return;
-    const newHistory = [...choiceHistory, choice];
-    setChoiceHistory(newHistory);
-
-    if (!region || !selectedWoman) { setScenarioStep(s => s + 1); return; }
-    const woman = (region.women || []).find(w => w.id === selectedWoman);
-    if (!woman) { setScenarioStep(s => s + 1); return; }
-    const choices = (region.scenarios && region.scenarios[0] && region.scenarios[0].choices) || [];
-
-    // Fire outcome once all choices are exhausted
-    if (choices.length > 0 && newHistory.length >= choices.length) {
-      const r = Math.random();
-      let ending;
-      const type = woman.type || "genuine";
-      if (type === "fraud") {
-        if (r < 0.35) ending = "early_detect";
-        else if (r < 0.80) ending = "fraud_pre";
-        else ending = "fraud_post";
-      } else if (type === "genuine_wrong") {
-        ending = r < 0.30 ? "early_detect" : "cultural_fail";
-      } else if (type === "not_yet") {
-        ending = "not_yet";
-      } else {
-        if (r < 0.20) ending = "success";
-        else if (r < 0.50) ending = "early_detect";
-        else ending = "cultural_fail";
+    setChoiceHistory(h => [...h, choice]);
+    // Determine outcome based on selected woman and choices
+    if (region && selectedWoman) {
+      const woman = region.women.find(w => w.id === selectedWoman);
+      // Simple outcome logic based on woman type and choice patterns
+      const newHistory = [...choiceHistory, choice];
+      if (newHistory.length >= 2) {
+        let ending = "success";
+        if (woman.type === "fraud") ending = Math.random() > 0.4 ? "fraud_post" : "fraud_pre";
+        else if (woman.type === "genuine_wrong") ending = Math.random() > 0.5 ? "cultural_fail" : "early_detect";
+        else ending = Math.random() > 0.7 ? "cultural_fail" : "success";
+        setOutcome(ending);
+        setPhase("outcome");
+        return;
       }
-      setOutcome(ending);
-      setPhase("outcome");
-      return;
     }
     setScenarioStep(s => s + 1);
   };
@@ -2834,12 +2720,12 @@ function CourseView({ onBack }) {
         <div style={{ background:"#0f2347", borderBottom:"1px solid #1e3a6e", padding:"1rem 1.5rem", display:"flex", alignItems:"center", justifyContent:"space-between", flexWrap:"wrap", gap:8 }}>
           <button onClick={onBack} style={{ background:"none", border:"1px solid #b8963e", color:"#b8963e", padding:"6px 14px", borderRadius:"20px", cursor:"pointer", fontSize:"13px", fontFamily:"sans-serif" }}>← Library</button>
           <div style={{ color:"#d4af6a", fontSize:15 }}>Select Your Destination</div>
-          <div style={{ fontSize:10, color:"#8a7a5a", fontFamily:"sans-serif" }}>{stampedRegions.length} / 6 regions stamped</div>
+          <div style={{ fontSize:10, color:"#8a7a5a", fontFamily:"sans-serif" }}>{stampedRegions.length} / 5 regions stamped</div>
         </div>
         <div style={{ maxWidth:860, margin:"0 auto", padding:"2.5rem 1.5rem" }}>
           <div style={{ textAlign:"center", marginBottom:"2rem" }}>
             <div style={{ fontSize:9, letterSpacing:"0.3em", color:"#b8963e", fontFamily:"sans-serif", marginBottom:8 }}>THE WORLD MAP</div>
-            <p style={{ fontSize:13, color:"#8a7a5a", fontFamily:"sans-serif", lineHeight:1.7 }}>Six regions. Twenty-two virtual women. Every decision branches the story.<br />You may switch between women at any decision point — but switching has consequences.</p>
+            <p style={{ fontSize:13, color:"#8a7a5a", fontFamily:"sans-serif", lineHeight:1.7 }}>Five regions. Three women per region. Every decision branches the story.<br />You may switch between women at any decision point — but switching has consequences.</p>
           </div>
 
           {/* Passport stamp progress */}
@@ -2852,7 +2738,7 @@ function CourseView({ onBack }) {
                 </div>
               ))}
             </div>
-            {stampedRegions.length === 6 && (
+            {stampedRegions.length === 5 && (
               <button onClick={() => setPhase("certificate")} style={{ marginTop:12, padding:"10px 24px", background:"#b8963e", color:"#0f2347", border:"none", cursor:"pointer", fontSize:12, fontWeight:700, fontFamily:"sans-serif", letterSpacing:"0.1em" }}>
                 Claim Your Certificate →
               </button>
@@ -2918,16 +2804,10 @@ function CourseView({ onBack }) {
 
   // SCENARIO — Branching decision
   if (phase === "scenario" && region && selectedWoman) {
-    const woman = region.women ? region.women.find(w => w.id === selectedWoman) : null;
-    if (!woman) { setPhase("roster"); return null; }
-    const scenarios = region.scenarios || [];
-    const scenario = scenarios[0];
-    if (!scenario) { setPhase("roster"); return null; }
-    const choices = scenario.choices || [];
-    const safeStep = Math.min(scenarioStep, choices.length - 1);
-    const currentChoice = safeStep >= 0 && safeStep < choices.length ? choices[safeStep] : null;
-    const lastChoice = choiceHistory.length > 0 ? choiceHistory[choiceHistory.length - 1] : null;
-    const lastConsequence = lastChoice ? (lastChoice.consequence || lastChoice.outcome || "") : "";
+    const woman = region.women.find(w => w.id === selectedWoman);
+    const scenario = region.scenarios[0];
+    const currentChoice = scenarioStep < scenario.choices.length ? scenario.choices[scenarioStep] : null;
+    const lastChoice = choiceHistory[choiceHistory.length - 1];
 
     return (
       <div style={{ minHeight:"100vh", background:"#091a35", color:"#f0e6cc", fontFamily:"Georgia,serif" }}>
@@ -2935,15 +2815,15 @@ function CourseView({ onBack }) {
           <button onClick={() => setPhase("roster")} style={{ background:"none", border:"1px solid #b8963e", color:"#b8963e", padding:"6px 14px", borderRadius:"20px", cursor:"pointer", fontSize:"13px", fontFamily:"sans-serif" }}>← Roster</button>
           <div style={{ flex:1 }}>
             <div style={{ fontSize:9, color:"#8a7a5a", letterSpacing:"0.15em", textTransform:"uppercase", fontFamily:"sans-serif" }}>{region.label} · {woman.name}</div>
-            <div style={{ fontSize:14, color:"#d4af6a" }}>{scenario.title || "The Arc"}</div>
+            <div style={{ fontSize:14, color:"#d4af6a" }}>{scenario.title}</div>
           </div>
-          <div style={{ fontSize:9, color:"#5a4e32", fontFamily:"sans-serif" }}>Move {choiceHistory.length} of {choices.length}</div>
+          <div style={{ fontSize:9, color:"#5a4e32", fontFamily:"sans-serif" }}>Step {scenarioStep + 1}</div>
         </div>
         <div style={{ maxWidth:680, margin:"0 auto", padding:"2rem 1.5rem" }}>
 
           {/* Dashboard status */}
           <div style={{ display:"flex", gap:8, marginBottom:"1.5rem", flexWrap:"wrap" }}>
-            {(region.women || []).map(w => (
+            {region.women.map(w => (
               <div key={w.id} style={{ padding:"4px 10px", background:w.id===selectedWoman?"rgba(184,150,62,0.15)":"#0f2347", border:`1px solid ${w.id===selectedWoman?"#b8963e":"#1e3a6e"}`, fontSize:9, fontFamily:"sans-serif" }}>
                 <span style={{ color:w.id===selectedWoman?"#d4af6a":"#5a4e32" }}>{w.name}</span>
                 <span style={{ color:w.id===selectedWoman?"#b8963e":"#2a3a5e", marginLeft:6 }}>{w.id===selectedWoman?"● ACTIVE":"○ COOLING"}</span>
@@ -2954,57 +2834,32 @@ function CourseView({ onBack }) {
           {/* Scene setup */}
           <div style={{ background:"#0f2347", border:"1px solid #1e3a6e", borderLeft:"3px solid #b8963e", padding:"1.25rem", marginBottom:"1.5rem" }}>
             <div style={{ fontSize:9, letterSpacing:"0.15em", color:"#b8963e", fontFamily:"sans-serif", marginBottom:8 }}>THE SITUATION</div>
-            <p style={{ fontSize:"clamp(13px,1.8vw,15px)", color:"#c8b890", lineHeight:1.85, fontFamily:"sans-serif", margin:0 }}>{scenario.setup || ""}</p>
+            <p style={{ fontSize:"clamp(13px,1.8vw,15px)", color:"#c8b890", lineHeight:1.85, fontFamily:"sans-serif", margin:0 }}>{scenario.setup}</p>
           </div>
 
           {/* Previous choice consequence */}
-          {lastConsequence ? (
+          {lastChoice && (
             <div style={{ background:"rgba(184,150,62,0.06)", border:"0.5px solid #b8963e", padding:"1rem 1.25rem", marginBottom:"1.5rem" }}>
               <div style={{ fontSize:9, letterSpacing:"0.15em", color:"#7a6228", fontFamily:"sans-serif", marginBottom:6 }}>CONSEQUENCE OF YOUR LAST DECISION</div>
-              <p style={{ fontSize:12, color:"#c8b890", lineHeight:1.75, fontFamily:"sans-serif", margin:0, fontStyle:"italic" }}>{lastConsequence}</p>
+              <p style={{ fontSize:12, color:"#c8b890", lineHeight:1.75, fontFamily:"sans-serif", margin:0, fontStyle:"italic" }}>{lastChoice.consequence}</p>
             </div>
-          ) : null}
+          )}
 
-          {/* Decision point — one choice at a time */}
-          {currentChoice && !outcome ? (
+          {/* Decision point */}
+          {currentChoice ? (
             <div>
-              <div style={{ fontSize:9, letterSpacing:"0.15em", color:"#b8963e", fontFamily:"sans-serif", marginBottom:6 }}>DECISION POINT — What do you do?</div>
-              <div style={{ fontSize:10, color:"#5a4e32", fontFamily:"sans-serif", marginBottom:12 }}>Decision {choiceHistory.length + 1} of {choices.length}</div>
-              <ScenarioCard choice={currentChoice} onSelect={handleChoice} />
+              <div style={{ fontSize:9, letterSpacing:"0.15em", color:"#b8963e", fontFamily:"sans-serif", marginBottom:10 }}>DECISION POINT — What do you do?</div>
+              {scenario.choices.map(choice => (
+                <ScenarioCard key={choice.id} choice={choice} onSelect={handleChoice} />
+              ))}
               <div style={{ marginTop:12, padding:"0.875rem 1rem", background:"#0f2347", border:"0.5px solid #1e3a6e", fontSize:10, color:"#5a4e32", fontFamily:"sans-serif", lineHeight:1.65 }}>
                 You may switch to a different woman at any time. Returning to the roster pauses this scenario.
               </div>
             </div>
-          ) : outcome ? (
-            <div style={{ textAlign:"center", padding:"2rem" }}>
-              <div style={{ fontSize:13, color:"#c8b890", fontFamily:"sans-serif", marginBottom:16 }}>Your decisions have resolved.</div>
-              <button onClick={() => setPhase("outcome")} style={{ padding:"12px 28px", background:"#b8963e", color:"#0f2347", border:"none", cursor:"pointer", fontSize:12, fontWeight:700, fontFamily:"sans-serif", borderRadius:"20px" }}>
-                See Outcome →
-              </button>
-            </div>
           ) : (
             <div style={{ textAlign:"center", padding:"2rem" }}>
-              <div style={{ fontSize:13, color:"#c8b890", fontFamily:"sans-serif", marginBottom:16 }}>All decisions made. Ready to resolve.</div>
-              <button onClick={() => {
-                const r = Math.random();
-                let resolvedOutcome;
-                const type = woman.type || "genuine";
-                if (type === "fraud") {
-                  if (r < 0.35) resolvedOutcome = "early_detect";
-                  else if (r < 0.80) resolvedOutcome = "fraud_pre";
-                  else resolvedOutcome = "fraud_post";
-                } else if (type === "genuine_wrong") {
-                  resolvedOutcome = r < 0.30 ? "early_detect" : "cultural_fail";
-                } else if (type === "not_yet") {
-                  resolvedOutcome = "not_yet";
-                } else {
-                  if (r < 0.20) resolvedOutcome = "success";
-                  else if (r < 0.50) resolvedOutcome = "early_detect";
-                  else resolvedOutcome = "cultural_fail";
-                }
-                setOutcome(resolvedOutcome);
-                setPhase("outcome");
-              }} style={{ padding:"12px 28px", background:"#b8963e", color:"#0f2347", border:"none", cursor:"pointer", fontSize:12, fontWeight:700, fontFamily:"sans-serif", borderRadius:"20px" }}>
+              <div style={{ fontSize:13, color:"#c8b890", fontFamily:"sans-serif", marginBottom:16 }}>Your decisions are unfolding...</div>
+              <button onClick={() => { const endings = Object.keys(region.endings); const ending = endings[Math.floor(Math.random() * endings.length)]; setOutcome(ending); setPhase("outcome"); }} style={{ padding:"12px 28px", background:"#b8963e", color:"#0f2347", border:"none", cursor:"pointer", fontSize:12, fontWeight:700, fontFamily:"sans-serif" }}>
                 See Outcome →
               </button>
             </div>
@@ -3015,33 +2870,22 @@ function CourseView({ onBack }) {
   }
 
   // OUTCOME
-  if (phase === "outcome") {
-    if (!region || !outcome) {
-      // State is inconsistent — reset cleanly rather than showing black
-      setPhase("map"); setActiveRegion(null); setSelectedWoman(null); setOutcome(null); setChoiceHistory([]); setScenarioStep(0);
-      return null;
-    }
-    const woman = region.women.find(w => w.id === selectedWoman);
-    const endingText = (woman && woman.endings && woman.endings[outcome])
-      || (region.endings && region.endings[outcome])
-      || "Arc complete.";
+  if (phase === "outcome" && region && outcome) {
+    const endingText = region.endings[outcome];
     const endingLabels = {
-      success:        "I — Marriage",
-      early_detect:   "II — Correct Walkaway",
-      cultural_fail:  "III — Cultural Misnavigation",
-      fraud_pre:      "IV — Fraud — Caught Before Citizenship",
-      fraud_post:     "V — Fraud — After Citizenship",
-      not_yet:        "II — Correct Deferral",
+      success:"I — Successful Marriage",
+      early_detect:"II — Failed Vetting — Pre-Travel",
+      cultural_fail:"III — Failed Relationship — Cultural Misnavigation",
+      fraud_pre:"IV — Fraudulent Marriage — Pre-Citizenship",
+      fraud_post:"V — Fraudulent Marriage — Post-Citizenship",
     };
     const endingColors = {
-      success:       "#b8963e",
-      early_detect:  "#7a6228",
-      cultural_fail: "#8a7a5a",
-      fraud_pre:     "#8b1a1a",
-      fraud_post:    "#6b0f0f",
-      not_yet:       "#4a7c8a",
+      success:"#b8963e",
+      early_detect:"#7a6228",
+      cultural_fail:"#8a7a5a",
+      fraud_pre:"#8b1a1a",
+      fraud_post:"#6b0f0f",
     };
-    const color = color || "#8a7a5a";
 
     return (
       <div style={{ minHeight:"100vh", background:"#091a35", color:"#f0e6cc", fontFamily:"Georgia,serif" }}>
@@ -3050,11 +2894,11 @@ function CourseView({ onBack }) {
         </div>
         <div style={{ maxWidth:640, margin:"0 auto", padding:"3rem 1.5rem" }}>
           <div style={{ textAlign:"center", marginBottom:"2rem" }}>
-            <div style={{ fontSize:9, letterSpacing:"0.3em", color:color, fontFamily:"sans-serif", marginBottom:8 }}>ENDING</div>
-            <div style={{ fontSize:"clamp(16px,2.5vw,22px)", color:color, fontFamily:"Georgia,serif", marginBottom:16 }}>{endingLabels[outcome]}</div>
-            <div style={{ width:48, height:2, background:color, margin:"0 auto" }} />
+            <div style={{ fontSize:9, letterSpacing:"0.3em", color:endingColors[outcome], fontFamily:"sans-serif", marginBottom:8 }}>ENDING</div>
+            <div style={{ fontSize:"clamp(16px,2.5vw,22px)", color:endingColors[outcome], fontFamily:"Georgia,serif", marginBottom:16 }}>{endingLabels[outcome]}</div>
+            <div style={{ width:48, height:2, background:endingColors[outcome], margin:"0 auto" }} />
           </div>
-          <div style={{ background:"#0f2347", border:`1px solid ${color}`, borderLeft:`4px solid ${color}`, padding:"1.5rem", marginBottom:"1.5rem" }}>
+          <div style={{ background:"#0f2347", border:`1px solid ${endingColors[outcome]}`, borderLeft:`4px solid ${endingColors[outcome]}`, padding:"1.5rem", marginBottom:"1.5rem" }}>
             <p style={{ fontSize:"clamp(13px,1.8vw,15px)", color:"#c8b890", lineHeight:1.9, fontFamily:"sans-serif", margin:0 }}>{endingText}</p>
           </div>
           <div style={{ display:"flex", gap:10, flexWrap:"wrap", justifyContent:"center" }}>
@@ -3117,25 +2961,7 @@ function CourseView({ onBack }) {
     );
   }
 
-  // RECOVERY — catch-all for any unmatched phase/state combination
-  // This should never appear in normal use, but prevents black screens
-  return (
-    <div style={{ minHeight:"100vh", background:"#091a35", color:"#f0e6cc", fontFamily:"Georgia,serif", display:"flex", alignItems:"center", justifyContent:"center" }}>
-      <div style={{ textAlign:"center", padding:"3rem 1.5rem", maxWidth:480 }}>
-        <div style={{ fontSize:9, letterSpacing:"0.3em", color:"#b8963e", fontFamily:"sans-serif", marginBottom:16 }}>THE INTERNATIONAL LOVER™</div>
-        <div style={{ fontSize:18, color:"#d4af6a", marginBottom:12 }}>Something interrupted your session.</div>
-        <p style={{ fontSize:13, color:"#8a7a5a", fontFamily:"sans-serif", lineHeight:1.7, marginBottom:28 }}>Your progress has been preserved. Return to the map to continue from where you left off.</p>
-        <div style={{ display:"flex", gap:12, justifyContent:"center", flexWrap:"wrap" }}>
-          <button onClick={() => { setPhase("map"); setActiveRegion(null); setSelectedWoman(null); setOutcome(null); setChoiceHistory([]); setScenarioStep(0); }} style={{ padding:"12px 24px", background:"#b8963e", color:"#0f2347", border:"none", cursor:"pointer", fontSize:12, fontWeight:700, fontFamily:"sans-serif", borderRadius:"20px" }}>
-            Return to Map →
-          </button>
-          <button onClick={onBack} style={{ padding:"12px 24px", background:"transparent", color:"#b8963e", border:"1px solid #b8963e", cursor:"pointer", fontSize:12, fontFamily:"sans-serif", borderRadius:"20px" }}>
-            ← Library
-          </button>
-        </div>
-      </div>
-    </div>
-  );
+  return null;
 }
 
 
@@ -3180,8 +3006,6 @@ export default function InternationalLover() {
   const [paywallOpen, setPaywallOpen] = useState(false);
   const [leadEmail, setLeadEmail] = useState("");
   const [leadSubmitted, setLeadSubmitted] = useState(false);
-  const [leadMsg, setLeadMsg] = useState("");
-  const [leadSending, setLeadSending] = useState(false);
   const [freePreviewOpen, setFreePreviewOpen] = useState(false);
   const [email, setEmail] = useState("");
   const [code, setCode] = useState("");
@@ -3196,14 +3020,12 @@ export default function InternationalLover() {
 
   useEffect(() => {
     setTimeout(() => setHeroVisible(true), 100);
-    const access = sessionStorage.getItem("il_access");
-    const womenAccess = sessionStorage.getItem("il_women_access");
-    if (access === "true") { setHasAccess(true); setView("library"); }
-    // Women only get matrimonial — redirect them there directly
-    if (womenAccess === "true" && access !== "true") {
-      window.location.replace("/matrimonial");
-      return;
-    }
+    fetch("/api/session")
+      .then(res => res.ok ? res.json() : null)
+      .then(data => {
+        if (data && data.authenticated) { setHasAccess(true); setView("library"); }
+      })
+      .catch(() => {});
     const saved = sessionStorage.getItem("il_progress");
     if (saved) setProgress(JSON.parse(saved));
   }, []);
@@ -3217,32 +3039,13 @@ export default function InternationalLover() {
 
   const stampRegion = (id) => { if (!stampedRegions.includes(id)) setStampedRegions(p => [...p, id]); };
 
-  const handleLeadSubmit = async () => {
-    if (!leadEmail || !leadEmail.includes("@")) { setLeadMsg("Please enter a valid email address."); return; }
-    setLeadSending(true); setLeadMsg("");
-    try {
-      const res = await fetch("/api/lead-magnet", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: leadEmail }),
-      });
-      const data = await res.json();
-      if (data.ok) { setLeadSubmitted(true); }
-      else { setLeadMsg(data.error || "Something went wrong. Please try again."); }
-    } catch { setLeadMsg("Something went wrong. Please try again."); }
-    setLeadSending(false);
-  };
-
   const handleEmailSubmit = async () => {
     if (!email.trim()) { setMsg("Please enter your email address."); return; }
     setSending(true); setMsg("");
     try {
-      const res = await fetch("/api/send-magic-link", { method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify({ email:email.trim().toLowerCase() }) });
+      const res = await fetch("/api/auth", { method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify({ email:email.trim().toLowerCase() }) });
       const data = await res.json();
-      if (data.sent) {
-        if (typeof window !== "undefined") sessionStorage.setItem("il_email", email.trim().toLowerCase());
-        setMsg("Your access link has been sent to " + email + ". Check your inbox.");
-      }
+      if (data.sent) setMsg("Your access link has been sent to " + email + ". Check your inbox.");
       else setMsg(data.error || "No purchase found. Please enroll below or use your access code.");
     } catch { setMsg("Connection error. Please try again."); }
     finally { setSending(false); }
@@ -3250,13 +3053,7 @@ export default function InternationalLover() {
 
   const handleCodeSubmit = async () => {
     const upper = code.trim().toUpperCase();
-    if (FREE_CODES[upper]) {
-      if (ADMIN_CODES[upper] && typeof window !== "undefined") {
-        sessionStorage.setItem("il_admin_session", "true");
-        sessionStorage.setItem("il_email", "amin@theinternationallover.com");
-      }
-      grantAccess(); return;
-    }
+    if (FREE_CODES[upper]) { grantAccess(); return; }
     if (typeof window !== "undefined" && checkTimedCode(upper)) {
       const hours = TIMED_CODES[upper];
       sessionStorage.setItem("il_access", "true");
@@ -3401,16 +3198,13 @@ export default function InternationalLover() {
             <div style={{ display:"flex", alignItems:"center", gap:8 }}>
               <div style={{ color:C.goldLight, fontSize:"16px" }}>Your Library</div>
               {typeof window !== "undefined" && sessionStorage.getItem("il_ambassador") === "true" && (
-                <div style={{ background:C.gold, color:C.navyDeep, fontSize:8, fontWeight:700, padding:"2px 8px", fontFamily:"sans-serif", letterSpacing:"0.1em" }}>AMBASSADOR</div>
+                <div style={{ background:C.gold, color:C.navyDeep, fontSize:8, fontWeight:700, padding:"2px 10px", fontFamily:"sans-serif", letterSpacing:"0.12em" }}>AMBASSADOR</div>
               )}
             </div>
           </div>
-          <div style={{ display:"flex", gap:"0.75rem", flexWrap:"wrap" }}>
+          <div style={{ display:"flex", gap:"0.75rem" }}>
+            <button onClick={() => setView("landing")} style={{ background:"none", border:`1px solid ${C.border}`, color:C.muted, padding:"6px 14px", borderRadius:"20px", cursor:"pointer", fontSize:"12px", fontFamily:"sans-serif" }}>Home</button>
             <a href="/matrimonial" style={{ background:C.gold, color:C.navyDeep, padding:"6px 16px", borderRadius:"20px", cursor:"pointer", fontSize:"12px", fontWeight:700, fontFamily:"sans-serif", textDecoration:"none" }}>Matrimonial</a>
-            {typeof window !== "undefined" && sessionStorage.getItem("il_admin_session") === "true" && (
-              <a href="/matrimonial?admin=1" style={{ background:"none", border:`1px solid ${C.gold}`, color:C.gold, padding:"6px 14px", borderRadius:"20px", cursor:"pointer", fontSize:"12px", fontFamily:"sans-serif", textDecoration:"none" }}>Admin</a>
-            )}
-            <button onClick={() => { sessionStorage.clear(); setHasAccess(false); setView("landing"); }} style={{ background:"none", border:`1px solid ${C.border}`, color:C.muted, padding:"6px 14px", borderRadius:"20px", cursor:"pointer", fontSize:"12px", fontFamily:"sans-serif" }}>Sign Out</button>
           </div>
         </div>
         <div style={{ maxWidth:"900px", margin:"0 auto", padding:"2rem 1.5rem" }}>
@@ -3427,7 +3221,7 @@ export default function InternationalLover() {
             <div style={{ position:"absolute", top:12, right:16, fontSize:20, color:C.gold, opacity:0.4 }}>✦</div>
             <div style={{ fontSize:9, letterSpacing:"0.3em", color:C.gold, fontFamily:"sans-serif", marginBottom:8 }}>THE COURSE</div>
             <div style={{ fontSize:"clamp(20px,3vw,26px)", color:C.goldLight, fontFamily:"Georgia,serif", marginBottom:8 }}>Find Her. Meet Her. Vet Her.</div>
-            <div style={{ fontSize:12, color:C.creamDim, fontFamily:"sans-serif", marginBottom:16, lineHeight:1.65 }}>Six regions · Twenty-two virtual women representing a broad demographic of potential mates · Branching scenarios · All five possible endings · Certificate of Commission</div>
+            <div style={{ fontSize:12, color:C.creamDim, fontFamily:"sans-serif", marginBottom:16, lineHeight:1.65 }}>Five regions · Fifteen virtual women representing a broad demographic of potential mates · Branching scenarios · All five possible endings · Certificate of Commission</div>
             <div style={{ display:"inline-block", padding:"10px 28px", background:C.gold, color:C.navyDeep, fontSize:13, fontWeight:700, letterSpacing:"0.1em", fontFamily:"sans-serif" }}>Enter the Course →</div>
           </div>
 
@@ -3549,7 +3343,7 @@ export default function InternationalLover() {
           </div>
           {[
             { num:"01", title:"The Book", sub:"17 Chapters · Read-Aloud · Full Text", icon:"📖", body:"The complete text of The International Lover — every chapter available with read-aloud. Your orientation. Your briefing. Your first pages. Every man reads it before the course unlocks." },
-            { num:"02", title:"The Course", sub:"Six Regions · Twenty-Two Virtual Women · Branching Scenarios", icon:"🗺", body:"A virtual simulation set on a real world map. Six regions. Twenty-two virtual women representing a broad demographic of potential mates. Every decision branches the story — first contact, the family meeting, fraud detection, the immigration process, life after she arrives. Complete all six regions and earn your certificate." },
+            { num:"02", title:"The Course", sub:"Five Regions · Fifteen Virtual Women · Branching Scenarios", icon:"🗺", body:"A virtual simulation set on a real world map. Five regions. Fifteen virtual women representing a broad demographic of potential mates. Every decision branches the story — first contact, the family meeting, fraud detection, the immigration process, life after she arrives. Complete all five regions and earn your certificate." },
             { num:"03", title:"The Consulate", sub:"Community · Regional Subgroups · Intelligence", icon:"🏛", body:"A private community of men on the same path. Five regional subgroups. Matrimonial site reviews. Country-specific intelligence. Fraud warning threads. Success story archives." },
           ].map((l,i) => (
             <div key={l.num} style={{ display:"flex", gap:24, padding:"2rem", background:C.navyDeep, border:`1px solid ${C.border}`, borderLeft:`3px solid ${C.gold}`, flexWrap:"wrap", marginBottom:i<2?16:0 }}>
@@ -3569,8 +3363,8 @@ export default function InternationalLover() {
         <div style={{ maxWidth:860, margin:"0 auto" }}>
           <div style={{ textAlign:"center", marginBottom:"2.5rem" }}>
             <Eyebrow>The Course</Eyebrow>
-            <h2 style={{ fontSize:"clamp(20px,3vw,28px)", color:C.goldLight, fontWeight:"normal", marginBottom:12 }}>Six destinations. Twenty-two virtual women. One passport.</h2>
-            <p style={{ fontSize:"clamp(12px,1.7vw,14px)", color:C.creamDim, lineHeight:1.85, maxWidth:600, margin:"0 auto", fontFamily:"sans-serif" }}>Twenty-two virtual women representing a broad demographic of potential mates across six regions of the world. Some are genuine. Some are running fraud. Some are genuine and still wrong for you. You will not be told which is which.</p>
+            <h2 style={{ fontSize:"clamp(20px,3vw,28px)", color:C.goldLight, fontWeight:"normal", marginBottom:12 }}>Five destinations. Fifteen virtual women. One passport.</h2>
+            <p style={{ fontSize:"clamp(12px,1.7vw,14px)", color:C.creamDim, lineHeight:1.85, maxWidth:600, margin:"0 auto", fontFamily:"sans-serif" }}>Fifteen virtual women representing a broad demographic of potential mates across five regions of the world. Some are genuine. Some are running fraud. Some are genuine and still wrong for you. You will not be told which is which.</p>
           </div>
           <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit, minmax(150px,1fr))", gap:12, marginBottom:"2rem" }}>
             {REGIONS.map(r => (
@@ -3587,7 +3381,7 @@ export default function InternationalLover() {
               {REGIONS.map(r => <StampRing key={r.id} label={r.label.split(" ").map(w=>w.slice(0,3).toUpperCase()).join(" ")} size={56} active={stampedRegions.includes(r.id)} />)}
             </div>
             <div style={{ fontSize:10, color:C.mutedDark, marginTop:10, fontFamily:"sans-serif" }}>
-              {stampedRegions.length === 6 ? "All six regions certified — certificate unlocked ✦" : stampedRegions.length > 0 ? `${stampedRegions.length} of 5 regions stamped` : "Click a region above to preview your stamp page"}
+              {stampedRegions.length === 5 ? "All five regions certified — certificate unlocked ✦" : stampedRegions.length > 0 ? `${stampedRegions.length} of 5 regions stamped` : "Click a region above to preview your stamp page"}
             </div>
           </div>
         </div>
@@ -3597,33 +3391,8 @@ export default function InternationalLover() {
         <div style={{ maxWidth:1000, margin:"0 auto" }}>
           <div style={{ textAlign:"center", marginBottom:"2.5rem" }}>
             <Eyebrow>The Roster</Eyebrow>
-            <h2 style={{ fontSize:"clamp(20px,3vw,28px)", color:C.goldLight, fontWeight:"normal", marginBottom:12 }}>Twenty-two virtual women. Six regions of the world.</h2>
+            <h2 style={{ fontSize:"clamp(20px,3vw,28px)", color:C.goldLight, fontWeight:"normal", marginBottom:12 }}>Fifteen virtual women. Five regions of the world.</h2>
             <p style={{ fontSize:"clamp(12px,1.7vw,14px)", color:C.creamDim, lineHeight:1.85, maxWidth:580, margin:"0 auto", fontFamily:"sans-serif" }}>Each represents a broad demographic of potential mates. Some are genuine. Some are not. Some are genuine and still wrong for you.</p>
-          </div>
-
-          <div style={{ marginBottom:"2rem" }}>
-            <div style={{ fontSize:9, letterSpacing:"0.25em", color:C.gold, fontFamily:"sans-serif", marginBottom:14, textAlign:"center" }}>NORTH AMERICA</div>
-            <div style={{ display:"grid", gridTemplateColumns:"repeat(3, 1fr)", gap:12 }}>
-              {[
-                { id:"aisha",   photo:"/women/aisha.jpg",   name:"Aisha",   age:27, city:"Atlanta, Georgia" },
-                { id:"deborah", photo:"/women/deborah.jpg", name:"Deborah", age:29, city:"Washington D.C." },
-                { id:"kezia",   photo:"/women/kezia.jpg",   name:"Kezia",   age:26, city:"Houston, Texas" },
-                { id:"marisol", photo:"/women/marisol.jpg", name:"Marisol", age:28, city:"Chicago, Illinois" },
-                { id:"samira",  photo:"/women/samira.jpg",  name:"Samira",  age:25, city:"Miami, Florida" },
-                { id:"nour_us", photo:"/women/nour-us.jpg", name:"Nour",    age:27, city:"Dearborn, Michigan" },
-                { id:"rachel",  photo:"/women/rachel.jpg",  name:"Rachel",  age:26, city:"Portland, Oregon" },
-              ].map(w => (
-                <div key={w.id} style={{ background:C.navyDeep, border:`1px solid ${C.border}`, overflow:"hidden" }}>
-                  <div style={{ height:200, overflow:"hidden" }}>
-                    <img src={w.photo} alt={w.name} style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center top", display:"block" }} />
-                  </div>
-                  <div style={{ padding:"0.75rem" }}>
-                    <div style={{ fontSize:13, color:C.goldLight, fontFamily:"Georgia,serif", marginBottom:2 }}>{w.name}</div>
-                    <div style={{ fontSize:10, color:C.muted, fontFamily:"sans-serif" }}>{w.age} · {w.city}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
           </div>
 
           <div style={{ marginBottom:"2rem" }}>
@@ -3636,7 +3405,7 @@ export default function InternationalLover() {
               ].map(w => (
                 <div key={w.id} style={{ background:C.navyDeep, border:`1px solid ${C.border}`, overflow:"hidden" }}>
                   <div style={{ height:200, overflow:"hidden" }}>
-                    <img src={w.photo || ("/women/" + w.id.replace(/_/g, "-") + ".jpg")} alt={w.name} style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center top", display:"block" }} />
+                    <img src={"/women/" + w.id + ".jpg"} alt={w.name} style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center top", display:"block" }} />
                   </div>
                   <div style={{ padding:"0.75rem" }}>
                     <div style={{ fontSize:13, color:C.goldLight, fontFamily:"Georgia,serif", marginBottom:2 }}>{w.name}</div>
@@ -3655,7 +3424,7 @@ export default function InternationalLover() {
               ].map(w => (
                 <div key={w.id} style={{ background:C.navyDeep, border:`1px solid ${C.border}`, overflow:"hidden" }}>
                   <div style={{ height:200, overflow:"hidden" }}>
-                    <img src={w.photo || ("/women/" + w.id.replace(/_/g, "-") + ".jpg")} alt={w.name} style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center top", display:"block" }} />
+                    <img src={"/women/" + w.id + ".jpg"} alt={w.name} style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center top", display:"block" }} />
                   </div>
                   <div style={{ padding:"0.75rem" }}>
                     <div style={{ fontSize:13, color:C.goldLight, fontFamily:"Georgia,serif", marginBottom:2 }}>{w.name}</div>
@@ -3674,7 +3443,7 @@ export default function InternationalLover() {
               ].map(w => (
                 <div key={w.id} style={{ background:C.navyDeep, border:`1px solid ${C.border}`, overflow:"hidden" }}>
                   <div style={{ height:200, overflow:"hidden" }}>
-                    <img src={w.photo || ("/women/" + w.id.replace(/_/g, "-") + ".jpg")} alt={w.name} style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center top", display:"block" }} />
+                    <img src={"/women/" + w.id + ".jpg"} alt={w.name} style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center top", display:"block" }} />
                   </div>
                   <div style={{ padding:"0.75rem" }}>
                     <div style={{ fontSize:13, color:C.goldLight, fontFamily:"Georgia,serif", marginBottom:2 }}>{w.name}</div>
@@ -3693,7 +3462,7 @@ export default function InternationalLover() {
               ].map(w => (
                 <div key={w.id} style={{ background:C.navyDeep, border:`1px solid ${C.border}`, overflow:"hidden" }}>
                   <div style={{ height:200, overflow:"hidden" }}>
-                    <img src={w.photo || ("/women/" + w.id.replace(/_/g, "-") + ".jpg")} alt={w.name} style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center top", display:"block" }} />
+                    <img src={"/women/" + w.id + ".jpg"} alt={w.name} style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center top", display:"block" }} />
                   </div>
                   <div style={{ padding:"0.75rem" }}>
                     <div style={{ fontSize:13, color:C.goldLight, fontFamily:"Georgia,serif", marginBottom:2 }}>{w.name}</div>
@@ -3712,7 +3481,7 @@ export default function InternationalLover() {
               ].map(w => (
                 <div key={w.id} style={{ background:C.navyDeep, border:`1px solid ${C.border}`, overflow:"hidden" }}>
                   <div style={{ height:200, overflow:"hidden" }}>
-                    <img src={w.photo || ("/women/" + w.id.replace(/_/g, "-") + ".jpg")} alt={w.name} style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center top", display:"block" }} />
+                    <img src={"/women/" + w.id + ".jpg"} alt={w.name} style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center top", display:"block" }} />
                   </div>
                   <div style={{ padding:"0.75rem" }}>
                     <div style={{ fontSize:13, color:C.goldLight, fontFamily:"Georgia,serif", marginBottom:2 }}>{w.name}</div>
@@ -3722,6 +3491,7 @@ export default function InternationalLover() {
               ))}
             </div>
           </div>
+
           <div style={{ textAlign:"center" }}>
             <button onClick={() => setPaywallOpen(true)} style={{ padding:"12px 32px", background:C.gold, color:C.navyDeep, border:"none", cursor:"pointer", fontSize:12, fontWeight:700, letterSpacing:"0.15em", textTransform:"uppercase", fontFamily:"sans-serif" }}>
               Meet Them Inside →
@@ -3809,7 +3579,7 @@ export default function InternationalLover() {
             <Eyebrow>Now Live</Eyebrow>
             <h2 style={{ fontSize:"clamp(20px,3vw,30px)", color:C.goldLight, fontWeight:"normal", marginBottom:12 }}>Matrimonial Platform</h2>
             <p style={{ fontSize:"clamp(13px,1.8vw,15px)", color:C.muted, maxWidth:560, margin:"0 auto", lineHeight:1.8, fontFamily:"sans-serif" }}>
-              A private platform built for serious men who have done the work. Browse profiles from women across six regions. Create your own listing. Connect through verified channels.
+              A private platform built for serious men who have done the work. Browse profiles from women across five regions. Create your own listing. Connect through verified channels.
             </p>
           </div>
           <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit, minmax(220px,1fr))", gap:16, marginBottom:"3rem" }}>
@@ -3905,20 +3675,16 @@ export default function InternationalLover() {
 
       <section style={{ background:C.navyDeep, padding:"4rem 1.5rem", borderBottom:`1px solid ${C.border}` }}>
         <div style={{ maxWidth:560, margin:"0 auto", textAlign:"center" }}>
-          <Eyebrow>Free Download</Eyebrow>
-          <h2 style={{ fontSize:"clamp(17px,2.8vw,24px)", color:C.goldLight, fontWeight:"normal", marginBottom:12 }}>The Vetting Standard</h2>
-          <p style={{ fontSize:"clamp(12px,1.7vw,14px)", color:C.creamDim, lineHeight:1.85, marginBottom:"1.75rem", fontFamily:"sans-serif", fontStyle:"italic" }}>How to know she is real before you board the plane.</p>
-          <p style={{ fontSize:"clamp(11px,1.5vw,13px)", color:C.muted, lineHeight:1.8, marginBottom:"1.75rem", fontFamily:"sans-serif" }}>Twelve warning signs. Seven vetting tools. Regional intelligence for North Africa, the Middle East, Southeast Asia, Sub-Saharan Africa, and Latin America. Enter your email and receive it now.</p>
+          <Eyebrow>Stay Connected</Eyebrow>
+          <h2 style={{ fontSize:"clamp(17px,2.8vw,22px)", color:C.goldLight, fontWeight:"normal", marginBottom:12 }}>Not ready yet?</h2>
+          <p style={{ fontSize:"clamp(12px,1.7vw,13px)", color:C.creamDim, lineHeight:1.85, marginBottom:"1.75rem", fontFamily:"sans-serif" }}>Enter your email and we will notify you when new content, the matrimonial platform, and community events become available.</p>
           {!leadSubmitted ? (
-            <div style={{ display:"flex", flexDirection:"column", gap:8, maxWidth:420, margin:"0 auto" }}>
-              <div style={{ display:"flex", gap:8 }}>
-                <input type="email" value={leadEmail} onChange={e => setLeadEmail(e.target.value)} onKeyDown={e => e.key==="Enter" && handleLeadSubmit()} placeholder="Your email address" style={{ flex:1, padding:"12px 16px", background:C.dark, border:`1px solid ${C.border}`, color:C.cream, fontSize:13, fontFamily:"sans-serif", outline:"none" }} />
-                <button onClick={handleLeadSubmit} disabled={leadSending} style={{ padding:"12px 20px", background:C.gold, color:C.navyDeep, border:"none", cursor:leadSending?"wait":"pointer", fontSize:12, fontWeight:700, letterSpacing:"0.08em", textTransform:"uppercase", fontFamily:"sans-serif", whiteSpace:"nowrap" }}>{leadSending ? "Sending..." : "Get the Guide →"}</button>
-              </div>
-              {leadMsg && <div style={{ fontSize:12, color:"#c08080", fontFamily:"sans-serif" }}>{leadMsg}</div>}
+            <div style={{ display:"flex", gap:8, maxWidth:440, margin:"0 auto", flexWrap:"wrap", justifyContent:"center" }}>
+              <input type="email" value={leadEmail} onChange={e => setLeadEmail(e.target.value)} onKeyDown={e => { if (e.key==="Enter" && leadEmail.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) { fetch("/api/lead-capture",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:leadEmail.trim().toLowerCase()})}).catch(()=>{}); setLeadSubmitted(true); }}} placeholder="Enter your email address" style={{ flex:1, minWidth:200, padding:"12px 16px", background:C.dark, border:`1px solid ${C.border}`, color:C.cream, fontSize:13, fontFamily:"sans-serif", outline:"none" }} />
+              <button onClick={() => { if (!leadEmail.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) return; fetch("/api/lead-capture",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:leadEmail.trim().toLowerCase()})}).catch(()=>{}); setLeadSubmitted(true); }} style={{ padding:"12px 22px", background:C.gold, color:C.navyDeep, border:"none", cursor:"pointer", fontSize:12, fontWeight:700, letterSpacing:"0.1em", textTransform:"uppercase", fontFamily:"sans-serif" }}>Notify Me</button>
             </div>
           ) : (
-            <div style={{ color:C.gold, fontSize:14, fontFamily:"sans-serif" }}>✓ The guide is on its way to your inbox.</div>
+            <div style={{ color:C.green, fontSize:14, fontFamily:"sans-serif" }}>✓ You are on the list. We will be in touch.</div>
           )}
         </div>
       </section>
