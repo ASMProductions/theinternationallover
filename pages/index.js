@@ -3023,7 +3023,7 @@ export default function InternationalLover() {
     fetch("/api/session")
       .then(res => res.ok ? res.json() : null)
       .then(data => {
-        if (data && data.authenticated) { setHasAccess(true); setView("library"); }
+        if (data && data.valid) { setHasAccess(true); setView("library"); }
       })
       .catch(() => {});
     const saved = sessionStorage.getItem("il_progress");
